@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.4
+Phase 1.5A
 
 Completed:
 
@@ -13,12 +13,14 @@ Completed:
 - Python environment initialized
 - Parser interface designed
 - Document schema initialized
+- External tool evaluation framework initialized
 
 Current Goal:
 
-Design unified PDF parser interface and Document Schema
+Establish external tool evaluation framework
 
 Next:
 
-- MinerU integration preparation
-- B01 parser benchmark
+- Select PDF parser candidate
+- Integrate first parser adapter
+- Run B01 benchmark

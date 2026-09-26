@@ -1,0 +1,9 @@
+tools:
+  pdf_parser:
+    status: candidate
+  ocr:
+    status: candidate
+  translation:
+    status: candidate
+  rag:
+    status: candidate
