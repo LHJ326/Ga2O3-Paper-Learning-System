@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-1B-1A
+Phase 1.5D-1B-1B
 
 Completed:
 
@@ -26,14 +26,13 @@ Completed:
 - MinerU raw output contract designed
 - P001 paper registered
 - Metadata structure initialized
+- P001 MinerU raw parsing completed
 
 Current:
 
-- P001 PDF ready
-- MinerU parsing pending
+- Raw output available
+- Adapter conversion pending
 
 Next:
 
-- Run MinerU on P001
-- Inspect raw output
-- Implement MinerU Adapter conversion
+- Implement MinerU Adapter conversion in a separate phase

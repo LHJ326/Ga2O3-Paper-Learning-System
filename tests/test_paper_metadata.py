@@ -16,10 +16,15 @@ def test_p001_metadata_is_readable_and_registered() -> None:
         metadata = yaml.safe_load(metadata_file)
 
     assert metadata["paper_id"] == "P001"
+    assert metadata["pdf_checksum"] == (
+        "468f0b89a752537ef06c11d979c4cd8cf3d9a84492193a5b1daa6235062f2f64"
+    )
+    assert metadata["processing_status"] == "completed"
     assert metadata["parser"] == {
         "name": "MinerU",
         "version": "4.0.7",
-        "status": "pending",
+        "tier": "flash",
+        "status": "completed",
     }
     assert metadata["adapter"]["version"] == "pending"
     assert metadata["schema"]["version"] == "current"

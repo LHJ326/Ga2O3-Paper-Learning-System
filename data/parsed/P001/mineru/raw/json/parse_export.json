@@ -1,0 +1,26 @@
+{
+  "parse": {
+    "sha256": "468f0b89a752537ef06c11d979c4cd8cf3d9a84492193a5b1daa6235062f2f64",
+    "short_id": "468f0b8",
+    "tier": "flash",
+    "page_range": "1-12",
+    "status": "done",
+    "cache_hit": false,
+    "wait_parse_ids": [
+      1,
+      2
+    ],
+    "created_parse_ids": [
+      2
+    ],
+    "reused_parse_ids": [
+      1
+    ],
+    "tip": null
+  },
+  "content": null,
+  "output": {
+    "status": "written",
+    "path": "F:\\Learning\\Ga2O3-Paper-Learning-System\\data\\parsed\\P001\\mineru\\raw\\markdown\\P001.md"
+  }
+}

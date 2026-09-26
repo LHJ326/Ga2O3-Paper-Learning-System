@@ -7,11 +7,14 @@ year: 2025
 journal: Advanced Functional Materials
 
 source_pdf: data/papers/P001.pdf
+pdf_checksum: 468f0b89a752537ef06c11d979c4cd8cf3d9a84492193a5b1daa6235062f2f64
+processing_status: completed
 
 parser:
   name: MinerU
   version: 4.0.7
-  status: pending
+  tier: flash
+  status: completed
 
 adapter:
   version: pending

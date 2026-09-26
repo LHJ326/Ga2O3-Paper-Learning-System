@@ -1,0 +1,141 @@
+{
+  "count": 17,
+  "images": [
+    {
+      "locator": "doc:468f0b8/tier:flash/page:1/block:3",
+      "file": "page_001_block_003.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 5375,
+      "width": 161,
+      "height": 69
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:2/block:6",
+      "file": "page_002_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 65920,
+      "width": 1027,
+      "height": 529
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:3/block:6",
+      "file": "page_003_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 155915,
+      "width": 1169,
+      "height": 898
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:4/block:6",
+      "file": "page_004_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 159873,
+      "width": 1027,
+      "height": 1198
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:5/block:6",
+      "file": "page_005_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 190054,
+      "width": 1027,
+      "height": 1605
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:6/block:8",
+      "file": "page_006_block_008.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 3804,
+      "width": 672,
+      "height": 66
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:6/block:10",
+      "file": "page_006_block_010.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 3580,
+      "width": 672,
+      "height": 65
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:7/block:11",
+      "file": "page_007_block_011.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 3635,
+      "width": 673,
+      "height": 44
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:8/block:6",
+      "file": "page_008_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 91266,
+      "width": 1027,
+      "height": 638
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:8/block:12",
+      "file": "page_008_block_012.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 6513,
+      "width": 671,
+      "height": 93
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:8/block:13",
+      "file": "page_008_block_013.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 6960,
+      "width": 671,
+      "height": 92
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:9/block:6",
+      "file": "page_009_block_006.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 138795,
+      "width": 1027,
+      "height": 914
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:11/block:4",
+      "file": "page_011_block_004.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 6405,
+      "width": 248,
+      "height": 60
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:11/block:35",
+      "file": "page_011_block_035.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 5325,
+      "width": 161,
+      "height": 69
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:11/block:55",
+      "file": "page_011_block_055.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 5615,
+      "width": 625,
+      "height": 51
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:12/block:4",
+      "file": "page_012_block_004.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 6301,
+      "width": 248,
+      "height": 60
+    },
+    {
+      "locator": "doc:468f0b8/tier:flash/page:12/block:9",
+      "file": "page_012_block_009.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 5337,
+      "width": 160,
+      "height": 69
+    }
+  ]
+}

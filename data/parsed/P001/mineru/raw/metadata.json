@@ -1,0 +1,14 @@
+{
+  "paper_id": "P001",
+  "parser_name": "MinerU",
+  "parser_version": "4.0.7",
+  "parser_tier": "flash",
+  "processing_time_seconds": 6.891,
+  "processing_completed_at": "2026-09-27T01:50:50.5626623+08:00",
+  "source_pdf": "data/papers/P001.pdf",
+  "checksum": "468f0b89a752537ef06c11d979c4cd8cf3d9a84492193a5b1daa6235062f2f64",
+  "adapter_version": "pending",
+  "page_range": "1-12",
+  "processing_status": "completed",
+  "command": ".venv-mineru/Scripts/mineru.exe parse data/papers/P001.pdf --tier flash --pages all --wait 1800 --output data/parsed/P001/mineru/raw/markdown/P001.md --json"
+}
