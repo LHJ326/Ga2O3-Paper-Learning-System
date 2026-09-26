@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5C-2C-1
+Phase 1.5C-2C-2B
 
 Completed:
 
@@ -19,14 +19,14 @@ Completed:
 - MinerU evaluation plan prepared
 - MinerU installation requirements checked
 - MinerU isolated environment created
+- MinerU manually installed by user
+- MinerU environment frozen
 
 Current Goal:
 
-Create an isolated MinerU environment without changing the base development environment
+Record and freeze the existing user-installed MinerU environment
 
 Next:
 
-- Install MinerU
-- Verify MinerU CLI
 - Create MinerU adapter
-- Run B01 benchmark
+- Run B01 parser benchmark

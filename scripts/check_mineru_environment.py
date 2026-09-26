@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import sys
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 
@@ -33,6 +34,13 @@ def run_command(command: list[str]) -> str | None:
 def pip_version() -> str:
     output = run_command([sys.executable, "-m", "pip", "--version"])
     return output or "Unavailable"
+
+
+def mineru_version() -> str:
+    try:
+        return version("mineru")
+    except PackageNotFoundError:
+        return "Not installed"
 
 
 def gpu_information() -> str:
@@ -68,7 +76,7 @@ def main() -> None:
     print(f"Python version: {platform.python_version()}")
     print(f"pip version: {pip_version()}")
     print(
-        "Active virtual environment: "
+        "Virtual environment path: "
         + (active_environment or (sys.prefix if in_virtual_environment else "None"))
     )
     print(f"Virtual environment status: {'Active' if in_virtual_environment else 'Inactive'}")
@@ -76,6 +84,7 @@ def main() -> None:
     print(f"CUDA availability: {'Available' if cuda_available else 'Not detected'}")
     print(f"CUDA toolkit version: {toolkit}")
     print(f"GPU information: {gpu}")
+    print(f"MinerU version: {mineru_version()}")
 
 
 if __name__ == "__main__":
