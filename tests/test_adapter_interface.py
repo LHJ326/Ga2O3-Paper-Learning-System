@@ -1,4 +1,4 @@
-"""Tests for parser adapter contracts and Phase 1.5D-1A placeholders."""
+"""Tests for parser adapter contracts and remaining placeholders."""
 
 from pathlib import Path
 
@@ -28,14 +28,16 @@ def test_mineru_adapter_can_be_instantiated() -> None:
     assert isinstance(MinerUAdapter(), ParserAdapter)
 
 
-def test_mineru_adapter_methods_are_placeholders() -> None:
+def test_mineru_adapter_remaining_methods_are_placeholders() -> None:
     adapter = MinerUAdapter()
 
     with pytest.raises(NotImplementedError, match="parsing"):
         adapter.parse(Path("paper.pdf"))
 
-    with pytest.raises(NotImplementedError, match="schema conversion"):
-        adapter.convert(object())
-
     with pytest.raises(NotImplementedError, match="validation"):
         adapter.validate(_document())
+
+
+def test_mineru_adapter_rejects_non_path_conversion_input() -> None:
+    with pytest.raises(TypeError, match="filesystem path"):
+        MinerUAdapter().convert(object())

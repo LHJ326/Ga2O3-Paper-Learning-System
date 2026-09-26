@@ -20,6 +20,6 @@ Document Schema
 
 ## Supported adapters
 
-- MinerU: planned
+- MinerU: first raw-output conversion available
 - Docling: candidate
 - Marker: candidate

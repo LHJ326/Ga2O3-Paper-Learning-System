@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-1B-2A
+Phase 1.5D-1B-2B
 
 Completed:
 
@@ -28,12 +28,14 @@ Completed:
 - Metadata structure initialized
 - P001 MinerU raw parsing completed
 - MinerU P001 output structure analyzed
+- MinerU Adapter first conversion implemented
 
 Current:
 
-- Adapter implementation pending
+- Document conversion available
+- Advanced extraction pending
 
 Next:
 
-- Review the proposed raw-output-to-schema mapping
-- Implement MinerU Adapter conversion in a separate phase
+- Validate conversion quality against B01 requirements
+- Add caption, table, and equation extraction in later phases
