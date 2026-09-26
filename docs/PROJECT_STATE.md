@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-1B-0
+Phase 1.5D-1B-1A
 
 Completed:
 
@@ -24,12 +24,16 @@ Completed:
 - Paper library management plan created
 - Parser adapter interface designed
 - MinerU raw output contract designed
+- P001 paper registered
+- Metadata structure initialized
 
-Current Goal:
+Current:
 
-Define the MinerU raw-output storage and traceability contract
+- P001 PDF ready
+- MinerU parsing pending
 
 Next:
 
-- Implement MinerU adapter conversion
-- Select B01 paper
+- Run MinerU on P001
+- Inspect raw output
+- Implement MinerU Adapter conversion

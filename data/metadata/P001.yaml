@@ -1,0 +1,20 @@
+paper_id: P001
+
+title: Energy-Efficient DUV Light Programming Nonvolatile Memory Based on MoS2-Ga2O3 MLG
+
+year: 2025
+
+journal: Advanced Functional Materials
+
+source_pdf: data/papers/P001.pdf
+
+parser:
+  name: MinerU
+  version: 4.0.7
+  status: pending
+
+adapter:
+  version: pending
+
+schema:
+  version: current
