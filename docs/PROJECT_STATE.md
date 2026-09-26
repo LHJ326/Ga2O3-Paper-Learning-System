@@ -11,15 +11,18 @@ Phase 1.5D-1B-2B completed
 Completed:
 
 - Project initialization
-- Python environment
-- MinerU isolated environment
-- Parser interface
-- Paper library structure
-- MinerU output contract
-- P001 registration
-- P001 MinerU raw parsing
-- MinerU output analysis
-- MinerUAdapter first conversion
+- Python development environment initialized
+- MinerU isolated environment created
+- MinerU 4.0.7 manually installed and verified
+- Parser interface and Document Schema initialized
+- Paper library structure created
+- MinerU raw-output contract defined
+- P001 PDF imported and registered
+- P001 MinerU raw output generated
+- P001 MinerU raw output analyzed
+- MinerUAdapter first conversion implemented
+- Project session handover created
+- AI session memory created
 
 Current Data:
 
@@ -35,7 +38,7 @@ Raw Output:
 
 Document:
 
-Generated through `MinerUAdapter`
+Generated through `MinerUAdapter.convert()`
 
 Current Document Statistics:
 
@@ -45,6 +48,14 @@ Current Document Statistics:
 - Figures: 17
 - Tables: 0
 - Equations: 0
+
+Current Recovery Files:
+
+- `docs/PROJECT_STATE.md`
+- `docs/SESSION_HANDOVER.md`
+- `docs/AI_SESSION_MEMORY.md`
+- `docs/MINERU_P001_OUTPUT_ANALYSIS.md`
+- `docs/MINERU_ADAPTER_DESIGN.md`
 
 Current Limitations:
 
