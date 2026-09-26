@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-0
+Phase 1.5D-1A
 
 Completed:
 
@@ -22,12 +22,13 @@ Completed:
 - MinerU manually installed by user
 - MinerU environment frozen
 - Paper library management plan created
+- Parser adapter interface designed
 
 Current Goal:
 
-Establish a long-term paper data management plan
+Design the MinerU adapter interface without running the external parser
 
 Next:
 
-- Create MinerU adapter
-- Parse first B01 paper
+- Implement MinerU adapter conversion
+- Run B01 benchmark
