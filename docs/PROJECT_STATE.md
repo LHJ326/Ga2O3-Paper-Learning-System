@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-1B-1B
+Phase 1.5D-1B-2A
 
 Completed:
 
@@ -27,12 +27,13 @@ Completed:
 - P001 paper registered
 - Metadata structure initialized
 - P001 MinerU raw parsing completed
+- MinerU P001 output structure analyzed
 
 Current:
 
-- Raw output available
-- Adapter conversion pending
+- Adapter implementation pending
 
 Next:
 
+- Review the proposed raw-output-to-schema mapping
 - Implement MinerU Adapter conversion in a separate phase
