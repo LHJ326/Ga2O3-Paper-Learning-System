@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5C-2A
+Phase 1.5C-2B
 
 Completed:
 
@@ -17,14 +17,15 @@ Completed:
 - B01 parser requirements defined
 - PDF parser decision framework created
 - MinerU evaluation plan prepared
+- MinerU installation requirements checked
 
 Current Goal:
 
-Prepare MinerU testing plan and experiment record framework
+Verify MinerU installation compatibility before environment changes
 
 Next:
 
-- Verify MinerU installation requirements
 - Install MinerU
+- Freeze MinerU version
 - Create MinerU adapter
 - Run B01 benchmark
