@@ -13,7 +13,12 @@ def test_tools_yaml_can_be_read() -> None:
 
     tools = config["tools"]
     assert set(tools) == {"pdf_parser", "ocr", "translation", "rag"}
-    assert tools["pdf_parser"]["status"] == "evaluation_pending"
+    assert tools["pdf_parser"]["candidates"] == ["MinerU", "Docling", "Marker"]
+    assert "selected_for_testing" in tools["pdf_parser"]
+    assert tools["pdf_parser"]["selected_for_testing"] == {
+        "name": "MinerU",
+        "status": "testing",
+    }
     assert all(
         tools[tool_name]["status"] == "candidate"
         for tool_name in ("ocr", "translation", "rag")

@@ -13,4 +13,5 @@ def test_pdf_parser_candidate_configuration_exists() -> None:
 
     pdf_parser = config["tools"]["pdf_parser"]
     assert pdf_parser["candidates"] == ["MinerU", "Docling", "Marker"]
-    assert pdf_parser["status"] == "evaluation_pending"
+    assert pdf_parser["selected_for_testing"]["name"] in pdf_parser["candidates"]
+    assert pdf_parser["selected_for_testing"]["status"] == "testing"

@@ -4,7 +4,9 @@ tools:
       - MinerU
       - Docling
       - Marker
-    status: evaluation_pending
+    selected_for_testing:
+      name: MinerU
+      status: testing
   ocr:
     status: candidate
   translation:

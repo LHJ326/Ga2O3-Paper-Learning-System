@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5C-1
+Phase 1.5C-2A
 
 Completed:
 
@@ -16,14 +16,15 @@ Completed:
 - External tool evaluation framework initialized
 - B01 parser requirements defined
 - PDF parser decision framework created
+- MinerU evaluation plan prepared
 
 Current Goal:
 
-Establish PDF parser selection records and decision process
+Prepare MinerU testing plan and experiment record framework
 
 Next:
 
-- Select first parser candidate
-- Install parser
-- Create parser adapter
+- Verify MinerU installation requirements
+- Install MinerU
+- Create MinerU adapter
 - Run B01 benchmark
