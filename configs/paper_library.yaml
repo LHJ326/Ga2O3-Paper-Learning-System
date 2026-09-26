@@ -1,0 +1,8 @@
+paper_library:
+  external_source:
+    path: "D:/杂/A科研/传感器"
+  internal_structure:
+    papers: data/papers
+    metadata: data/metadata
+    parsed: data/parsed
+    benchmark: data/benchmark

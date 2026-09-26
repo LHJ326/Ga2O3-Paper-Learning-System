@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5C-2C-2B
+Phase 1.5D-0
 
 Completed:
 
@@ -21,12 +21,13 @@ Completed:
 - MinerU isolated environment created
 - MinerU manually installed by user
 - MinerU environment frozen
+- Paper library management plan created
 
 Current Goal:
 
-Record and freeze the existing user-installed MinerU environment
+Establish a long-term paper data management plan
 
 Next:
 
 - Create MinerU adapter
-- Run B01 parser benchmark
+- Parse first B01 paper
