@@ -1,0 +1,5 @@
+benchmark:
+  B01:
+    expected_figures: 4
+    expected_subfigures: 14
+    expected_equations: 7
