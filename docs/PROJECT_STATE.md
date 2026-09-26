@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.3
+Phase 1.4
 
 Completed:
 
@@ -11,12 +11,14 @@ Completed:
 - Equation Ground Truth completed
 - Text Block Ground Truth completed
 - Python environment initialized
+- Parser interface designed
+- Document schema initialized
 
 Current Goal:
 
-Bootstrap reproducible Python development environment
+Design unified PDF parser interface and Document Schema
 
 Next:
 
-- PDF parser integration
-- MinerU benchmark preparation
+- MinerU integration preparation
+- B01 parser benchmark

@@ -1,0 +1,27 @@
+document_schema:
+  version: "0.1"
+  document:
+    identifier: document_id
+    fields:
+      metadata: Metadata
+      pages: list[Page]
+      sections: list[Section]
+      figures: list[Figure]
+      tables: list[Table]
+      equations: list[Equation]
+      text_blocks: list[TextBlock]
+  objects:
+    - Metadata
+    - Page
+    - Section
+    - Figure
+    - Table
+    - Equation
+    - TextBlock
+  shared_object_fields:
+    id: string
+    page_number: integer_or_null
+    content: string
+    source_reference: string
+  evidence_chain:
+    requirement: "Every extracted object must retain a source_reference."
