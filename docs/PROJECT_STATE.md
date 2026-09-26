@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5D-1A
+Phase 1.5D-1B-0
 
 Completed:
 
@@ -23,12 +23,13 @@ Completed:
 - MinerU environment frozen
 - Paper library management plan created
 - Parser adapter interface designed
+- MinerU raw output contract designed
 
 Current Goal:
 
-Design the MinerU adapter interface without running the external parser
+Define the MinerU raw-output storage and traceability contract
 
 Next:
 
 - Implement MinerU adapter conversion
-- Run B01 benchmark
+- Select B01 paper

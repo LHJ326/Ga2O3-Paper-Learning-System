@@ -1,0 +1,13 @@
+pipeline:
+  raw_output:
+    root: data/parsed
+
+  document_output:
+    root: data/parsed
+
+  parser:
+    name: MinerU
+    version: 4.0.7
+
+  adapter:
+    version: planned
