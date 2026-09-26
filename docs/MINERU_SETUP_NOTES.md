@@ -63,3 +63,29 @@ The base path is compatible with the current Python and documented Windows suppo
 Risk:
 
 Exact model size, optional-engine wheel compatibility, 8 GB VRAM behavior, and B01 quality remain unverified. No installation should begin until the MinerU version and model manifest are frozen and storage/download impact is approved.
+
+# Environment Preparation
+
+Base environment:
+
+`.venv`
+
+MinerU environment:
+
+`.venv-mineru`
+
+Python:
+
+3.12.7
+
+Purpose:
+
+Keep MinerU dependencies isolated.
+
+Preparation result:
+
+- Environment path: `F:\Learning\Ga2O3-Paper-Learning-System\.venv-mineru`
+- Initial pip version: 24.2
+- Isolation check: `sys.prefix` points to `.venv-mineru`; `sys.base_prefix` points to the system Python
+- Installed MinerU packages: none
+- Installed PyTorch packages: none
