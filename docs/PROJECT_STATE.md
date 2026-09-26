@@ -1,41 +1,66 @@
 # Project State
 
+Project:
+
+Ga2O3-Paper-Learning-System
+
 Current Phase:
-Phase 1.5D-1B-2B
+
+Phase 1.5D-1B-2B completed
 
 Completed:
 
-- Pilot papers selected
-- B01 benchmark designed
-- Figure Ground Truth completed
-- Equation Ground Truth completed
-- Text Block Ground Truth completed
-- Python environment initialized
-- Parser interface designed
-- Document schema initialized
-- External tool evaluation framework initialized
-- B01 parser requirements defined
-- PDF parser decision framework created
-- MinerU evaluation plan prepared
-- MinerU installation requirements checked
-- MinerU isolated environment created
-- MinerU manually installed by user
-- MinerU environment frozen
-- Paper library management plan created
-- Parser adapter interface designed
-- MinerU raw output contract designed
-- P001 paper registered
-- Metadata structure initialized
-- P001 MinerU raw parsing completed
-- MinerU P001 output structure analyzed
-- MinerU Adapter first conversion implemented
+- Project initialization
+- Python environment
+- MinerU isolated environment
+- Parser interface
+- Paper library structure
+- MinerU output contract
+- P001 registration
+- P001 MinerU raw parsing
+- MinerU output analysis
+- MinerUAdapter first conversion
 
-Current:
+Current Data:
 
-- Document conversion available
-- Advanced extraction pending
+P001:
 
-Next:
+PDF:
 
-- Validate conversion quality against B01 requirements
-- Add caption, table, and equation extraction in later phases
+`data/papers/P001.pdf`
+
+Raw Output:
+
+`data/parsed/P001/mineru/raw/`
+
+Document:
+
+Generated through `MinerUAdapter`
+
+Current Document Statistics:
+
+- Pages: 12
+- Sections: 10
+- TextBlocks: 214
+- Figures: 17
+- Tables: 0
+- Equations: 0
+
+Current Limitations:
+
+- Figure caption association incomplete
+- Equation extraction incomplete
+- Table extraction incomplete
+- `parse()` / `validate()` remain interface placeholders
+
+Next Planned Phase:
+
+Phase 1.5D-1B-3
+
+Improve MinerU Adapter:
+
+- Figure-caption linking
+- Better evidence chain
+- Table handling
+- Equation detection
+- B01 benchmark preparation
