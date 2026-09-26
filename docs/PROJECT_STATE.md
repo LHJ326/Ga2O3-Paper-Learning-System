@@ -1,7 +1,7 @@
 # Project State
 
 Current Phase:
-Phase 1.5B-1
+Phase 1.5C-1
 
 Completed:
 
@@ -15,12 +15,15 @@ Completed:
 - Document schema initialized
 - External tool evaluation framework initialized
 - B01 parser requirements defined
+- PDF parser decision framework created
 
 Current Goal:
 
-Define parser capability requirements from B01 Ground Truth
+Establish PDF parser selection records and decision process
 
 Next:
 
-- Select PDF parser candidate
-- Install first parser
+- Select first parser candidate
+- Install parser
+- Create parser adapter
+- Run B01 benchmark

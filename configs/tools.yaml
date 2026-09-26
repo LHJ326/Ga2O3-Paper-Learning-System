@@ -1,6 +1,10 @@
 tools:
   pdf_parser:
-    status: candidate
+    candidates:
+      - MinerU
+      - Docling
+      - Marker
+    status: evaluation_pending
   ocr:
     status: candidate
   translation:

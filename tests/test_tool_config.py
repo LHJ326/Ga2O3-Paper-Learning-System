@@ -11,9 +11,10 @@ def test_tools_yaml_can_be_read() -> None:
     with TOOLS_CONFIG.open(encoding="utf-8") as config_file:
         config = yaml.safe_load(config_file)
 
-    assert "tools" in config
-    assert set(config["tools"]) == {"pdf_parser", "ocr", "translation", "rag"}
+    tools = config["tools"]
+    assert set(tools) == {"pdf_parser", "ocr", "translation", "rag"}
+    assert tools["pdf_parser"]["status"] == "evaluation_pending"
     assert all(
-        tool_config["status"] == "candidate"
-        for tool_config in config["tools"].values()
+        tools[tool_name]["status"] == "candidate"
+        for tool_name in ("ocr", "translation", "rag")
     )
