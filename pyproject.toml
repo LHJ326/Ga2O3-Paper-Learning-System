@@ -1,0 +1,18 @@
+[project]
+name = "ga2o3-paper-learning-system"
+version = "0.1.0"
+description = "AI learning system for Ga2O3 optoelectronic-device papers"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyyaml",
+    "tqdm",
+    "rich",
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

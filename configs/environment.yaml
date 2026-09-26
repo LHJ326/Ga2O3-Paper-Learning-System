@@ -1,0 +1,4 @@
+python_version: "3.12.7"
+platform: "Microsoft Windows 11 Home Chinese Edition 10.0.26200 (64-bit)"
+cuda_available: true
+gpu: "NVIDIA GeForce RTX 4060 Laptop GPU (8188 MiB, driver 610.74)"
