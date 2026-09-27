@@ -19,7 +19,14 @@ from ..schema.document import Document, DocumentElement
 
 
 FIGURE_CAPTION_RE = re.compile(r"^\s*(?:figure|fig\.)\s*(\d+)\b", re.IGNORECASE)
-LEADING_SECTION_NUMBER_RE = re.compile(r"^\s*\d+(?:\.\d+)*\.?\s*")
+LEADING_SECTION_NUMBER_RE = re.compile(
+    r"^\s*(?:(?:\d+(?:\.\d+)*)|(?:[IVXLCDM]+))\.?\s+",
+    re.IGNORECASE,
+)
+ROMAN_MAIN_SECTION_RE = re.compile(
+    r"^\s*[IVXLCDM]+\.\s+[A-Z][A-Z0-9 &/\-]*$"
+)
+LETTERED_SUBSECTION_RE = re.compile(r"^\s*[A-Z]\.\s+")
 
 
 def _read_yaml(path: Path) -> dict[str, Any]:
@@ -42,12 +49,13 @@ def calculate_metrics(
     ground_truth_count: int,
     predicted_count: int,
     true_positive: int,
-) -> dict[str, int | float]:
+) -> dict[str, int | float | None]:
     """Build count metrics with defined behavior for empty collections.
 
     An empty Ground Truth and empty prediction is treated as a correct absence
-    and receives 1.0 precision, recall, and F1. Other zero denominators resolve
-    to 0.0 without raising division errors.
+    and receives 1.0 precision, recall, and F1. When Ground Truth is non-empty
+    but there are no predictions, precision is not applicable and is serialized
+    as JSON null; recall and F1 remain 0.0 without a division error.
     """
 
     if min(ground_truth_count, predicted_count, true_positive) < 0:
@@ -59,7 +67,7 @@ def calculate_metrics(
     false_negative = ground_truth_count - true_positive
 
     if predicted_count == 0:
-        precision = 1.0 if ground_truth_count == 0 else 0.0
+        precision = 1.0 if ground_truth_count == 0 else None
     else:
         precision = true_positive / predicted_count
 
@@ -68,7 +76,10 @@ def calculate_metrics(
     else:
         recall = true_positive / ground_truth_count
 
-    f1 = 0.0 if precision + recall == 0 else 2 * precision * recall / (precision + recall)
+    if precision is None or precision + recall == 0:
+        f1 = 0.0
+    else:
+        f1 = 2 * precision * recall / (precision + recall)
     return {
         "ground_truth_count": ground_truth_count,
         "predicted_count": predicted_count,
@@ -123,11 +134,171 @@ def _normalize_title(title: str) -> str:
     return " ".join(without_number.casefold().split())
 
 
+def _normalize_subsection_title(title: str) -> str:
+    without_label = LETTERED_SUBSECTION_RE.sub("", title)
+    return " ".join(without_label.casefold().split())
+
+
+def _ground_truth_subsection_titles(ground_truth: dict[str, Any]) -> list[str]:
+    """Return subsection titles from both supported Ground Truth layouts."""
+    titles = [
+        str(item["title"])
+        for item in ground_truth.get("subsections", [])
+    ]
+    titles.extend(
+        str(subsection["title"])
+        for section in ground_truth.get("sections", [])
+        for subsection in section.get("subsections", [])
+    )
+    return list(dict.fromkeys(titles))
+
+
+def _evaluate_sections(
+    ground_truth: dict[str, Any],
+    heading_titles: list[str],
+    body_texts: list[str],
+) -> dict[str, Any]:
+    """Evaluate main sections and subsections without mixing hierarchy levels."""
+    gt_sections = ground_truth.get("sections", [])
+    gt_main_titles = {
+        str(item["title"]): _normalize_title(str(item["title"]))
+        for item in gt_sections
+    }
+    main_normalized = set(gt_main_titles.values())
+    main_candidates = [
+        title
+        for title in heading_titles
+        if _normalize_title(title) in main_normalized
+        or ROMAN_MAIN_SECTION_RE.fullmatch(title) is not None
+    ]
+    predicted_main_normalized = {
+        _normalize_title(title): title for title in main_candidates
+    }
+    matched_main = [
+        title
+        for title, normalized in gt_main_titles.items()
+        if normalized in predicted_main_normalized
+    ]
+    section_metric = calculate_metrics(
+        len(gt_main_titles), len(main_candidates), len(matched_main)
+    )
+    section_metric.update(
+        {
+            "matched_titles": matched_main,
+            "missing_titles": [
+                title for title in gt_main_titles if title not in matched_main
+            ],
+            "extra_titles": [
+                title
+                for title in main_candidates
+                if _normalize_title(title) not in main_normalized
+            ],
+            "all_heading_count": len(heading_titles),
+            "non_main_headings_excluded": [
+                title for title in heading_titles if title not in main_candidates
+            ],
+        }
+    )
+
+    gt_subsection_titles = _ground_truth_subsection_titles(ground_truth)
+    gt_subsection_normalized = {
+        title: _normalize_subsection_title(title)
+        for title in gt_subsection_titles
+    }
+    subsection_candidates = [
+        title
+        for title in heading_titles
+        if title not in main_candidates
+        and (
+            LETTERED_SUBSECTION_RE.match(title) is not None
+            or _normalize_subsection_title(title)
+            in set(gt_subsection_normalized.values())
+        )
+    ]
+    for title, normalized in gt_subsection_normalized.items():
+        if any(
+            _normalize_subsection_title(candidate) == normalized
+            for candidate in subsection_candidates
+        ):
+            continue
+        if any(
+            text.casefold().startswith(f"{title}:".casefold())
+            for text in body_texts
+        ):
+            subsection_candidates.append(title)
+    predicted_subsection_normalized = {
+        _normalize_subsection_title(title): title
+        for title in subsection_candidates
+    }
+    matched_subsections = [
+        title
+        for title, normalized in gt_subsection_normalized.items()
+        if normalized in predicted_subsection_normalized
+    ]
+    subsection_metric = calculate_metrics(
+        len(gt_subsection_titles),
+        len(subsection_candidates),
+        len(matched_subsections),
+    )
+    subsection_metric.update(
+        {
+            "matched_titles": matched_subsections,
+            "missing_titles": [
+                title
+                for title in gt_subsection_titles
+                if title not in matched_subsections
+            ],
+            "extra_titles": [
+                title
+                for title in subsection_candidates
+                if _normalize_subsection_title(title)
+                not in set(gt_subsection_normalized.values())
+            ],
+        }
+    )
+    section_metric["subsections"] = subsection_metric
+    section_metric["experimental_subsections"] = {
+        "ground_truth_count": len(gt_subsection_titles),
+        "matched_count": len(matched_subsections),
+        "matched_titles": matched_subsections,
+        "missing_titles": subsection_metric["missing_titles"],
+    }
+    return section_metric
+
+
+def _table_metric(
+    ground_truth_tables: list[dict[str, Any]],
+    predicted_count: int,
+    true_positive: int,
+    review: dict[str, Any],
+) -> dict[str, Any]:
+    metric = calculate_metrics(
+        len(ground_truth_tables), predicted_count, true_positive
+    )
+    metric.update(
+        {
+            "precision_policy": (
+                "not_applicable_no_predictions"
+                if predicted_count == 0 and ground_truth_tables
+                else "numeric"
+            ),
+            "true_negative_no_table": (
+                not ground_truth_tables and predicted_count == 0
+            ),
+            "supplementary_references_excluded": True,
+            "error_cases": list(
+                review.get("tables", {}).get("error_cases", [])
+            ),
+        }
+    )
+    return metric
+
+
 def _review_metric(
     review_section: dict[str, Any],
     raw_blocks: list[dict[str, Any]],
     raw_type: str,
-) -> tuple[dict[str, int | float], list[dict[str, Any]]]:
+) -> tuple[dict[str, int | float | None], list[dict[str, Any]]]:
     reviewed = review_section.get("predictions", [])
     actual = [block for block in raw_blocks if block["type"] == raw_type]
     actual_locators = {(block["page"], block["index"]) for block in actual}
@@ -231,54 +402,18 @@ def _evaluate_adapter_layer(
         }
     )
 
-    gt_sections = ground_truth.get("sections", [])
-    gt_main_titles = {
-        str(item["title"]): _normalize_title(str(item["title"]))
-        for item in gt_sections
-    }
-    predicted_titles = [section.content.strip() for section in document.sections]
-    predicted_normalized = {_normalize_title(title): title for title in predicted_titles}
-    matched_titles = [
-        title for title, normalized in gt_main_titles.items()
-        if normalized in predicted_normalized
-    ]
-    main_normalized = set(gt_main_titles.values())
-    section_metric = calculate_metrics(
-        len(gt_main_titles), len(predicted_titles), len(matched_titles)
+    section_metric = _evaluate_sections(
+        ground_truth,
+        [section.content.strip() for section in document.sections],
+        [block.content.strip() for block in document.text_blocks],
     )
-    section_metric.update(
-        {
-            "matched_titles": matched_titles,
-            "missing_titles": [title for title in gt_main_titles if title not in matched_titles],
-            "extra_titles": [title for title in predicted_titles if _normalize_title(title) not in main_normalized],
-        }
-    )
-    gt_subsections = [
-        str(subsection["title"])
-        for section in gt_sections
-        for subsection in section.get("subsections", [])
-    ]
-    matched_subsections = [
-        title for title in gt_subsections
-        if any(
-            block.content.casefold().startswith(f"{title}:".casefold())
-            for block in document.text_blocks
-        )
-    ]
-    section_metric["experimental_subsections"] = {
-        "ground_truth_count": len(gt_subsections),
-        "matched_count": len(matched_subsections),
-        "matched_titles": matched_subsections,
-        "missing_titles": [title for title in gt_subsections if title not in matched_subsections],
-    }
 
     gt_tables = ground_truth.get("tables", [])
-    table_metric = calculate_metrics(len(gt_tables), len(document.tables), 0)
-    table_metric.update(
-        {
-            "true_negative_no_table": not gt_tables and not document.tables,
-            "supplementary_references_excluded": True,
-        }
+    table_metric = _table_metric(
+        gt_tables,
+        len(document.tables),
+        0,
+        review,
     )
     return {
         "status": "EVALUATED",
@@ -376,55 +511,37 @@ def evaluate_benchmark(
         }
     )
 
-    gt_sections = ground_truth.get("sections", [])
-    gt_main_titles = {str(item["title"]): _normalize_title(str(item["title"])) for item in gt_sections}
     title_blocks = [block for block in blocks if block["type"] == "paragraph_title"]
     predicted_titles = [block["text"].strip() for block in title_blocks]
-    predicted_normalized = {_normalize_title(title): title for title in predicted_titles}
-    matched_titles = [
-        title for title, normalized in gt_main_titles.items() if normalized in predicted_normalized
-    ]
-    missing_titles = [title for title in gt_main_titles if title not in matched_titles]
-    main_normalized = set(gt_main_titles.values())
-    extra_titles = [title for title in predicted_titles if _normalize_title(title) not in main_normalized]
-    section_metric = calculate_metrics(
-        len(gt_main_titles), len(predicted_titles), len(matched_titles)
-    )
-    section_metric.update(
-        {
-            "matched_titles": matched_titles,
-            "missing_titles": missing_titles,
-            "extra_titles": extra_titles,
-        }
-    )
-
-    gt_subsections = [
-        str(subsection["title"])
-        for section in gt_sections
-        for subsection in section.get("subsections", [])
-    ]
     text_blocks = [block["text"].strip() for block in blocks if block["type"] == "text"]
-    matched_subsections = [
-        title
-        for title in gt_subsections
-        if any(text.casefold().startswith(f"{title}:".casefold()) for text in text_blocks)
-    ]
-    section_metric["experimental_subsections"] = {
-        "ground_truth_count": len(gt_subsections),
-        "matched_count": len(matched_subsections),
-        "matched_titles": matched_subsections,
-        "missing_titles": [title for title in gt_subsections if title not in matched_subsections],
-    }
+    section_metric = _evaluate_sections(
+        ground_truth, predicted_titles, text_blocks
+    )
 
     gt_tables = ground_truth.get("tables", [])
     predicted_tables = [block for block in blocks if block["type"] == "table"]
-    table_metric = calculate_metrics(len(gt_tables), len(predicted_tables), 0)
-    table_metric.update(
-        {
-            "true_negative_no_table": not gt_tables and not predicted_tables,
-            "supplementary_references_excluded": True,
-        }
+    table_review = review.get("tables", {})
+    table_predictions = table_review.get("predictions", [])
+    actual_table_locators = {
+        (block["page"], block["index"]) for block in predicted_tables
+    }
+    reviewed_table_locators = {
+        (item["page"], item["block_index"])
+        for item in table_predictions
+    }
+    if actual_table_locators != reviewed_table_locators:
+        raise ValueError("Raw table review annotations do not match table blocks")
+    table_true_positive = sum(
+        item.get("classification") == "true_positive"
+        for item in table_predictions
     )
+    table_metric = _table_metric(
+        gt_tables,
+        len(predicted_tables),
+        table_true_positive,
+        review,
+    )
+    table_metric["reviewed_predictions"] = list(table_predictions)
 
     known_errors = list(review.get("known_errors", []))
     detailed_gt_figure_count = len(ground_truth.get("figures", []))
@@ -451,6 +568,7 @@ def evaluate_benchmark(
         "parser_version": str(review.get("parser_version", "unknown")),
         "raw_schema": raw.get("schema"),
         "raw_schema_version": str(raw.get("schema_version")),
+        "raw_fingerprints": dict(review.get("raw_files", {})),
         "evaluation_layer": "Layer A: MinerU Raw Output",
         "inputs": {
             "ground_truth": ground_truth_path.as_posix(),

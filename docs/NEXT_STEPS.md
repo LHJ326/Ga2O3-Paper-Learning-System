@@ -6,18 +6,29 @@ MinerU 4.0.7 `docvortex.middle` schema 2.0 `middle_json` is now the primary inpu
 
 The existing Markdown + legacy Raw Output route remains the fallback. B01 Layer B is reported independently from unchanged Layer A metrics.
 
-## P0 — Manual B02 Ground Truth Annotation
+## Completed — B02 Raw MinerU + Current Adapter v2 Baseline
 
-B02 is registered as a cross-domain Parser / Table stress benchmark, not a
-Ga2O3 Pilot. Its Ground Truth status is `building`, and MinerU has not been run.
+B02 Ground Truth is frozen as `ready_v1`. MinerU 4.0.7 Raw Output and its
+SHA256 fingerprints are frozen, and Layer A / Layer B results are reported
+independently in `docs/B02_BENCHMARK_REPORT.md`.
 
-Complete manual source-PDF annotation of Figures, Equations, Table I, complex
-Table II, boilerplate, and IEEE two-column reading order. Freeze Ground Truth
-before authorizing any B02 parser run or evaluator work.
+Both real B02 Tables have zero structured detections. Table I is
+`TABLE_BODY_MISSING`; Table II is `TABLE_MISCLASSIFIED_AS_IMAGE`. B02 therefore
+proves that Table Vision Fallback is required before Parser v1 freeze.
+
+## P0 — Table Vision Fallback Evaluation
+
+With explicit user approval, define and benchmark an isolated table-capable
+vision fallback such as PaddleOCR-VL or an equivalent parser. Preserve the
+frozen B02 Ground Truth, MinerU Raw Output, Layer A metrics, and current Adapter
+v2 baseline. Do not treat this recommendation as authorization to install or
+implement the fallback.
 
 ## P1 — Parser v1 Freeze
 
-After B02 cross-domain validation, freeze parser interfaces, schema mapping rules, benchmark procedures, and known limitations as Parser v1.
+After B02 table recovery validation, freeze parser interfaces, schema mapping
+rules, benchmark procedures, fallback boundaries, and known limitations as
+Parser v1.
 
 ## P2 — RAG-Anything Integration Pilot
 

@@ -1,0 +1,890 @@
+{
+  "benchmark_id": "B02",
+  "parser": "MinerU",
+  "parser_version": "4.0.7",
+  "raw_schema": "docvortex.middle",
+  "raw_schema_version": "2.0",
+  "raw_fingerprints": {
+    "markdown": {
+      "path": "data/parsed/B02/mineru/raw/markdown/B02.md",
+      "sha256": "BD29EE13FD294D8011F951AEB6FC4B7686ABF1030C396B49CB11FB56D3E2DF29"
+    },
+    "middle_json": {
+      "path": "data/parsed/B02/mineru/raw/middle_json/B02.json",
+      "sha256": "E1A2E3F8E2BD2D295FC95F536BAB69CBA196376D85FF0706212C5A59A78C9E1D"
+    },
+    "zip": {
+      "path": "data/parsed/B02/mineru/raw/zip/B02.zip",
+      "sha256": "A01FAAC480C30811D39B3468525DE6851422644A7EC40D046F3DA5420815B9E3"
+    }
+  },
+  "evaluation_layer": "Layer A: MinerU Raw Output",
+  "inputs": {
+    "ground_truth": "data/benchmark/B02/B02_GROUND_TRUTH.yaml",
+    "middle_json": "data/parsed/B02/mineru/raw/middle_json/B02.json",
+    "review_annotations": "data/benchmark/B02/B02_RAW_REVIEW.yaml"
+  },
+  "metrics": {
+    "pages": {
+      "ground_truth_count": 12,
+      "predicted_count": 12,
+      "tp": 12,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "page_count_match": true,
+      "page_coverage": 1.0,
+      "missing_pages": [],
+      "extra_pages": []
+    },
+    "figures": {
+      "ground_truth_count": 20,
+      "predicted_count": 26,
+      "tp": 20,
+      "fp": 6,
+      "fn": 0,
+      "precision": 0.7692307692307693,
+      "recall": 1.0,
+      "f1": 0.8695652173913044,
+      "raw_block_count": 26,
+      "reviewed_predictions": [
+        {
+          "page": 1,
+          "block_index": 13,
+          "classification": "true_positive",
+          "ground_truth_number": 1
+        },
+        {
+          "page": 2,
+          "block_index": 12,
+          "classification": "true_positive",
+          "ground_truth_number": 2
+        },
+        {
+          "page": 4,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 3
+        },
+        {
+          "page": 4,
+          "block_index": 12,
+          "classification": "true_positive",
+          "ground_truth_number": 4
+        },
+        {
+          "page": 5,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 5
+        },
+        {
+          "page": 5,
+          "block_index": 7,
+          "classification": "true_positive",
+          "ground_truth_number": 6
+        },
+        {
+          "page": 6,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 7
+        },
+        {
+          "page": 6,
+          "block_index": 10,
+          "classification": "true_positive",
+          "ground_truth_number": 8
+        },
+        {
+          "page": 7,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 9
+        },
+        {
+          "page": 7,
+          "block_index": 4,
+          "classification": "true_positive",
+          "ground_truth_number": 10
+        },
+        {
+          "page": 7,
+          "block_index": 12,
+          "classification": "true_positive",
+          "ground_truth_number": 11
+        },
+        {
+          "page": 7,
+          "block_index": 14,
+          "classification": "true_positive",
+          "ground_truth_number": 12
+        },
+        {
+          "page": 8,
+          "block_index": 10,
+          "classification": "true_positive",
+          "ground_truth_number": 13
+        },
+        {
+          "page": 8,
+          "block_index": 12,
+          "classification": "true_positive",
+          "ground_truth_number": 14
+        },
+        {
+          "page": 9,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 15
+        },
+        {
+          "page": 9,
+          "block_index": 9,
+          "classification": "true_positive",
+          "ground_truth_number": 16
+        },
+        {
+          "page": 9,
+          "block_index": 11,
+          "classification": "true_positive",
+          "ground_truth_number": 17
+        },
+        {
+          "page": 10,
+          "block_index": 2,
+          "classification": "true_positive",
+          "ground_truth_number": 18
+        },
+        {
+          "page": 10,
+          "block_index": 4,
+          "classification": "true_positive",
+          "ground_truth_number": 19
+        },
+        {
+          "page": 11,
+          "block_index": 4,
+          "classification": "false_positive",
+          "error_type": "table_misclassified_as_image",
+          "description": "Table II body was emitted as an image block."
+        },
+        {
+          "page": 11,
+          "block_index": 5,
+          "classification": "true_positive",
+          "ground_truth_number": 20
+        },
+        {
+          "page": 12,
+          "block_index": 29,
+          "classification": "false_positive",
+          "error_type": "author_portrait"
+        },
+        {
+          "page": 12,
+          "block_index": 30,
+          "classification": "false_positive",
+          "error_type": "author_portrait"
+        },
+        {
+          "page": 12,
+          "block_index": 31,
+          "classification": "false_positive",
+          "error_type": "author_portrait"
+        },
+        {
+          "page": 12,
+          "block_index": 32,
+          "classification": "false_positive",
+          "error_type": "author_portrait"
+        },
+        {
+          "page": 12,
+          "block_index": 33,
+          "classification": "false_positive",
+          "error_type": "author_portrait"
+        }
+      ]
+    },
+    "equations": {
+      "ground_truth_count": 9,
+      "predicted_count": 10,
+      "tp": 9,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9473684210526316,
+      "raw_block_count": 10,
+      "reviewed_predictions": [
+        {
+          "page": 2,
+          "block_index": 20,
+          "classification": "true_positive",
+          "ground_truth_number": 1
+        },
+        {
+          "page": 2,
+          "block_index": 23,
+          "classification": "true_positive",
+          "ground_truth_number": 2
+        },
+        {
+          "page": 2,
+          "block_index": 25,
+          "classification": "true_positive",
+          "ground_truth_number": 3
+        },
+        {
+          "page": 3,
+          "block_index": 3,
+          "classification": "true_positive",
+          "ground_truth_number": 4
+        },
+        {
+          "page": 3,
+          "block_index": 6,
+          "classification": "true_positive",
+          "ground_truth_number": 5
+        },
+        {
+          "page": 3,
+          "block_index": 18,
+          "classification": "true_positive",
+          "ground_truth_number": 6
+        },
+        {
+          "page": 3,
+          "block_index": 19,
+          "classification": "true_positive",
+          "ground_truth_number": 7
+        },
+        {
+          "page": 3,
+          "block_index": 22,
+          "classification": "true_positive",
+          "ground_truth_number": 8
+        },
+        {
+          "page": 4,
+          "block_index": 5,
+          "classification": "true_positive",
+          "ground_truth_number": 9
+        },
+        {
+          "page": 12,
+          "block_index": 25,
+          "classification": "false_positive",
+          "error_type": "non_scientific_equation",
+          "description": "Page 12 has no scientific equation; this block is a false positive."
+        }
+      ]
+    },
+    "captions": {
+      "ground_truth_count": 20,
+      "predicted_count": 17,
+      "tp": 17,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.85,
+      "f1": 0.9189189189189189,
+      "caption_coverage": 0.85,
+      "matched_figure_numbers": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "detected_figure_numbers": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "unnumbered_caption_count": 0
+    },
+    "sections": {
+      "ground_truth_count": 5,
+      "predicted_count": 5,
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "matched_titles": [
+        "I. INTRODUCTION",
+        "II. BACKGROUND",
+        "III. ANNEALING PROCESSOR",
+        "IV. SIMULATION AND MEASUREMENT RESULTS",
+        "V. CONCLUSION"
+      ],
+      "missing_titles": [],
+      "extra_titles": [],
+      "all_heading_count": 27,
+      "non_main_headings_excluded": [
+        "C",
+        "A. Ising Model",
+        "B. Prior Works of the CMOS Annealing Processor",
+        "C. Max-Cut Problem and Image Segmentation",
+        "Fig. 3. Proposed annealing processor and its PE architecture.",
+        "A. Full-Chip Architecture",
+        "B. XNOR-Based CIM and Coefficient SRAM Array",
+        "C. Local Energy Computation Sequence Diagram",
+        "D. Coefficient Reuse Strategy",
+        "E. Sparsity-Aware Adder Tree",
+        "F. NPF Approximate Circuit",
+        "G. Embedded Random Number Generator",
+        "A. Test-Chip Measurement Setup",
+        "Fig. 13. Chip micrograph, area, and power consumption.",
+        "TABLE I",
+        "NIST 800-22 RANDOMNESS TEST",
+        "B. Test of the On-Chip Random Numbers",
+        "C. Test of the Max-Cut Problem",
+        "D. Image Segmentation Application",
+        "E. Comparison With Previous Works",
+        "TABLE II",
+        "REFERENCES"
+      ],
+      "subsections": {
+        "ground_truth_count": 15,
+        "predicted_count": 15,
+        "tp": 15,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "matched_titles": [
+          "Ising Model",
+          "Prior Works of the CMOS Annealing Processor",
+          "Max-Cut Problem and Image Segmentation",
+          "Full-Chip Architecture",
+          "XNOR-Based CIM and Coefficient SRAM Array",
+          "Local Energy Computation Sequence Diagram",
+          "Coefficient Reuse Strategy",
+          "Sparsity-Aware Adder Tree",
+          "NPF Approximate Circuit",
+          "Embedded Random Number Generator",
+          "Test-Chip Measurement Setup",
+          "Test of the On-Chip Random Numbers",
+          "Test of the Max-Cut Problem",
+          "Image Segmentation Application",
+          "Comparison With Previous Works"
+        ],
+        "missing_titles": [],
+        "extra_titles": []
+      },
+      "experimental_subsections": {
+        "ground_truth_count": 15,
+        "matched_count": 15,
+        "matched_titles": [
+          "Ising Model",
+          "Prior Works of the CMOS Annealing Processor",
+          "Max-Cut Problem and Image Segmentation",
+          "Full-Chip Architecture",
+          "XNOR-Based CIM and Coefficient SRAM Array",
+          "Local Energy Computation Sequence Diagram",
+          "Coefficient Reuse Strategy",
+          "Sparsity-Aware Adder Tree",
+          "NPF Approximate Circuit",
+          "Embedded Random Number Generator",
+          "Test-Chip Measurement Setup",
+          "Test of the On-Chip Random Numbers",
+          "Test of the Max-Cut Problem",
+          "Image Segmentation Application",
+          "Comparison With Previous Works"
+        ],
+        "missing_titles": []
+      }
+    },
+    "tables": {
+      "ground_truth_count": 2,
+      "predicted_count": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "precision_policy": "not_applicable_no_predictions",
+      "true_negative_no_table": false,
+      "supplementary_references_excluded": true,
+      "error_cases": [
+        {
+          "table_number": "I",
+          "page": 8,
+          "error_type": "TABLE_BODY_MISSING",
+          "raw_evidence": {
+            "label": {
+              "raw_type": "paragraph_title",
+              "block_index": 14
+            },
+            "caption": {
+              "raw_type": "paragraph_title",
+              "block_index": 15
+            }
+          },
+          "description": "The label and caption survived as paragraph titles, but the ten tests, ten P-values, and ten Pass values are absent from structural and text rows."
+        },
+        {
+          "table_number": "II",
+          "page": 11,
+          "error_type": "TABLE_MISCLASSIFIED_AS_IMAGE",
+          "raw_evidence": {
+            "label": {
+              "raw_type": "paragraph_title",
+              "block_index": 2
+            },
+            "caption": {
+              "raw_type": "text",
+              "block_index": 3
+            },
+            "body": {
+              "raw_type": "image",
+              "block_index": 4,
+              "bbox": [
+                0.14,
+                0.103,
+                0.856,
+                0.433
+              ]
+            }
+          },
+          "description": "The full Table II body region was emitted as an image block."
+        }
+      ],
+      "reviewed_predictions": []
+    }
+  },
+  "known_errors": [
+    {
+      "type": "caption_typing_error",
+      "category": "figure_caption",
+      "page": 4,
+      "raw_block_index": 3,
+      "ground_truth_number": 3,
+      "description": "Fig. 3 caption was typed as paragraph_title."
+    },
+    {
+      "type": "caption_missing_or_unattached",
+      "category": "figure_caption",
+      "page": 6,
+      "raw_block_index": 10,
+      "ground_truth_number": 8,
+      "description": "Fig. 8 image has no typed image_caption attachment."
+    },
+    {
+      "type": "caption_typing_error",
+      "category": "figure_caption",
+      "page": 8,
+      "raw_block_index": 11,
+      "ground_truth_number": 13,
+      "description": "Fig. 13 caption was typed as paragraph_title."
+    },
+    {
+      "type": "caption_attachment_error",
+      "category": "figure_caption",
+      "page": 10,
+      "raw_block_index": 4,
+      "description": "Fig. 18 and Fig. 19 captions were attached to one image block."
+    },
+    {
+      "type": "READING_ORDER_ERROR_PAGE_11",
+      "category": "reading_order",
+      "page": 11,
+      "description": "Raw order places Table II, Fig. 20, right-column conclusion continuation, REFERENCES, left-column Section IV.E continuation, then V. CONCLUSION."
+    },
+    {
+      "type": "table_recovery_architectural_finding",
+      "category": "table",
+      "description": "MinerU 4.0.7 produced no table entity for either B02 table in middle_json, model_output, or structured_content. A separate table-capable vision fallback is required before Parser v1 freeze."
+    }
+  ],
+  "layer_b": {
+    "status": "EVALUATED",
+    "evaluation_layer": "Layer B: MinerUAdapter v2 / Unified Document",
+    "document_counts": {
+      "pages": 12,
+      "sections": 27,
+      "text_blocks": 133,
+      "figures": 16,
+      "equations": 10,
+      "tables": 0
+    },
+    "metrics": {
+      "pages": {
+        "ground_truth_count": 12,
+        "predicted_count": 12,
+        "tp": 12,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "page_count_match": true,
+        "page_coverage": 1.0,
+        "missing_pages": [],
+        "extra_pages": []
+      },
+      "figures": {
+        "ground_truth_count": 20,
+        "predicted_count": 16,
+        "tp": 16,
+        "fp": 0,
+        "fn": 4,
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.888888888888889,
+        "adapter_locators": [
+          {
+            "page": 1,
+            "block_index": 13
+          },
+          {
+            "page": 2,
+            "block_index": 12
+          },
+          {
+            "page": 4,
+            "block_index": 12
+          },
+          {
+            "page": 5,
+            "block_index": 2
+          },
+          {
+            "page": 5,
+            "block_index": 7
+          },
+          {
+            "page": 6,
+            "block_index": 2
+          },
+          {
+            "page": 7,
+            "block_index": 2
+          },
+          {
+            "page": 7,
+            "block_index": 4
+          },
+          {
+            "page": 7,
+            "block_index": 12
+          },
+          {
+            "page": 7,
+            "block_index": 14
+          },
+          {
+            "page": 8,
+            "block_index": 12
+          },
+          {
+            "page": 9,
+            "block_index": 2
+          },
+          {
+            "page": 9,
+            "block_index": 9
+          },
+          {
+            "page": 9,
+            "block_index": 11
+          },
+          {
+            "page": 10,
+            "block_index": 4
+          },
+          {
+            "page": 11,
+            "block_index": 5
+          }
+        ]
+      },
+      "equations": {
+        "ground_truth_count": 9,
+        "predicted_count": 10,
+        "tp": 9,
+        "fp": 1,
+        "fn": 0,
+        "precision": 0.9,
+        "recall": 1.0,
+        "f1": 0.9473684210526316,
+        "adapter_locators": [
+          {
+            "page": 2,
+            "block_index": 20
+          },
+          {
+            "page": 2,
+            "block_index": 23
+          },
+          {
+            "page": 2,
+            "block_index": 25
+          },
+          {
+            "page": 3,
+            "block_index": 3
+          },
+          {
+            "page": 3,
+            "block_index": 6
+          },
+          {
+            "page": 3,
+            "block_index": 18
+          },
+          {
+            "page": 3,
+            "block_index": 19
+          },
+          {
+            "page": 3,
+            "block_index": 22
+          },
+          {
+            "page": 4,
+            "block_index": 5
+          },
+          {
+            "page": 12,
+            "block_index": 25
+          }
+        ]
+      },
+      "captions": {
+        "ground_truth_count": 20,
+        "predicted_count": 16,
+        "tp": 16,
+        "fp": 0,
+        "fn": 4,
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.888888888888889,
+        "caption_coverage": 0.8,
+        "matched_figure_numbers": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20
+        ],
+        "detected_figure_numbers": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20
+        ],
+        "unnumbered_caption_count": 0
+      },
+      "sections": {
+        "ground_truth_count": 5,
+        "predicted_count": 5,
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "matched_titles": [
+          "I. INTRODUCTION",
+          "II. BACKGROUND",
+          "III. ANNEALING PROCESSOR",
+          "IV. SIMULATION AND MEASUREMENT RESULTS",
+          "V. CONCLUSION"
+        ],
+        "missing_titles": [],
+        "extra_titles": [],
+        "all_heading_count": 27,
+        "non_main_headings_excluded": [
+          "C",
+          "A. Ising Model",
+          "B. Prior Works of the CMOS Annealing Processor",
+          "C. Max-Cut Problem and Image Segmentation",
+          "Fig. 3. Proposed annealing processor and its PE architecture.",
+          "A. Full-Chip Architecture",
+          "B. XNOR-Based CIM and Coefficient SRAM Array",
+          "C. Local Energy Computation Sequence Diagram",
+          "D. Coefficient Reuse Strategy",
+          "E. Sparsity-Aware Adder Tree",
+          "F. NPF Approximate Circuit",
+          "G. Embedded Random Number Generator",
+          "A. Test-Chip Measurement Setup",
+          "Fig. 13. Chip micrograph, area, and power consumption.",
+          "TABLE I",
+          "NIST 800-22 RANDOMNESS TEST",
+          "B. Test of the On-Chip Random Numbers",
+          "C. Test of the Max-Cut Problem",
+          "D. Image Segmentation Application",
+          "E. Comparison With Previous Works",
+          "TABLE II",
+          "REFERENCES"
+        ],
+        "subsections": {
+          "ground_truth_count": 15,
+          "predicted_count": 15,
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "matched_titles": [
+            "Ising Model",
+            "Prior Works of the CMOS Annealing Processor",
+            "Max-Cut Problem and Image Segmentation",
+            "Full-Chip Architecture",
+            "XNOR-Based CIM and Coefficient SRAM Array",
+            "Local Energy Computation Sequence Diagram",
+            "Coefficient Reuse Strategy",
+            "Sparsity-Aware Adder Tree",
+            "NPF Approximate Circuit",
+            "Embedded Random Number Generator",
+            "Test-Chip Measurement Setup",
+            "Test of the On-Chip Random Numbers",
+            "Test of the Max-Cut Problem",
+            "Image Segmentation Application",
+            "Comparison With Previous Works"
+          ],
+          "missing_titles": [],
+          "extra_titles": []
+        },
+        "experimental_subsections": {
+          "ground_truth_count": 15,
+          "matched_count": 15,
+          "matched_titles": [
+            "Ising Model",
+            "Prior Works of the CMOS Annealing Processor",
+            "Max-Cut Problem and Image Segmentation",
+            "Full-Chip Architecture",
+            "XNOR-Based CIM and Coefficient SRAM Array",
+            "Local Energy Computation Sequence Diagram",
+            "Coefficient Reuse Strategy",
+            "Sparsity-Aware Adder Tree",
+            "NPF Approximate Circuit",
+            "Embedded Random Number Generator",
+            "Test-Chip Measurement Setup",
+            "Test of the On-Chip Random Numbers",
+            "Test of the Max-Cut Problem",
+            "Image Segmentation Application",
+            "Comparison With Previous Works"
+          ],
+          "missing_titles": []
+        }
+      },
+      "tables": {
+        "ground_truth_count": 2,
+        "predicted_count": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 2,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0,
+        "precision_policy": "not_applicable_no_predictions",
+        "true_negative_no_table": false,
+        "supplementary_references_excluded": true,
+        "error_cases": [
+          {
+            "table_number": "I",
+            "page": 8,
+            "error_type": "TABLE_BODY_MISSING",
+            "raw_evidence": {
+              "label": {
+                "raw_type": "paragraph_title",
+                "block_index": 14
+              },
+              "caption": {
+                "raw_type": "paragraph_title",
+                "block_index": 15
+              }
+            },
+            "description": "The label and caption survived as paragraph titles, but the ten tests, ten P-values, and ten Pass values are absent from structural and text rows."
+          },
+          {
+            "table_number": "II",
+            "page": 11,
+            "error_type": "TABLE_MISCLASSIFIED_AS_IMAGE",
+            "raw_evidence": {
+              "label": {
+                "raw_type": "paragraph_title",
+                "block_index": 2
+              },
+              "caption": {
+                "raw_type": "text",
+                "block_index": 3
+              },
+              "body": {
+                "raw_type": "image",
+                "block_index": 4,
+                "bbox": [
+                  0.14,
+                  0.103,
+                  0.856,
+                  0.433
+                ]
+              }
+            },
+            "description": "The full Table II body region was emitted as an image block."
+          }
+        ]
+      }
+    }
+  }
+}

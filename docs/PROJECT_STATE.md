@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 ## Current Phase
 
-Phase 1.5D-3 completed — MinerUAdapter v2 and B01 Layer B benchmark
+Phase B02-RAW-1 completed — B02 Raw MinerU and current Adapter v2 baseline frozen
 
 ## Current Architecture
 
@@ -45,7 +45,9 @@ The existing Markdown/raw-output adapter path remains operational as a fallback.
 - MinerUAdapter v2 implemented with Evidence-preserving `middle_json` conversion
 - B01 Layer B benchmark implemented without changing Layer A
 - B01 machine-readable result and report generated
-- B02 cross-domain Table stress benchmark registered; Ground Truth building
+- B02 cross-domain Table stress benchmark Ground Truth finalized as `ready_v1`
+- B02 MinerU 4.0.7 Raw Output fingerprints frozen and benchmarked
+- B02 Layer A and independent Layer B baseline reports generated
 - RAG-Anything source interface review completed
 
 ## Environment
@@ -132,8 +134,17 @@ Layer B Adapter output:
 - SHA256: `A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF`
 - Layout: IEEE two-column
 - Primary stress targets: Table I and complex multi-column Table II
-- Ground Truth: `building` through independent manual PDF annotation
-- MinerU: not run; no B02 Raw Output exists or has been reviewed
+- Ground Truth: `ready_v1`, frozen before MinerU parsing
+- Raw schema: `docvortex.middle` 2.0; 12 pages
+- Raw Output: `data/parsed/B02/mineru/raw/`
+- Benchmark result: `data/benchmark/B02/B02_BENCHMARK_RESULT.json`
+- Benchmark report: `docs/B02_BENCHMARK_REPORT.md`
+- Layer A: 20/26 scientific Figure detections, 17/20 typed Figure captions,
+  9/10 Equation detections, and 0/2 Table detections
+- Layer B: 12 Pages, 27 heading records, 133 TextBlocks, 16 Figures,
+  10 Equations, and 0 Tables
+- Table failures: `TABLE_BODY_MISSING` (Table I) and
+  `TABLE_MISCLASSIFIED_AS_IMAGE` (Table II)
 
 ## Architectural Findings
 
@@ -144,7 +155,13 @@ MinerUAdapter v2 behavior:
 - Primary input: `middle_json`
 - Fallback: existing Markdown + legacy Raw Output route
 
-The mapping is implemented and covered by the full test suite (66 passed).
+The mapping is implemented and covered by the full test suite.
+
+B02 establishes that MinerU 4.0.7 did not produce a table entity for either
+real body Table across its reviewed structural outputs. A separate Table Vision
+Fallback is required before Parser v1 freeze; PaddleOCR-VL or an equivalent
+table-capable vision parser is a future evaluation candidate, not installed or
+implemented in this phase.
 
 ## RAG-Anything Evaluation
 
@@ -166,7 +183,7 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 1. P001 PDF page 11 reference fragment is misclassified by MinerU as a Formula block.
 2. B01 Equation (2), `Ga(OH)3 → GaOOH + H2O`, is missing from MinerU Raw Equation blocks.
 3. The Advanced Science publisher logo is misclassified as an image on B01 page 1 and as Equations on pages 9 and 10.
-4. B02 provides genuine main-text Tables, but its Ground Truth is still building and parsing has not begun.
+4. B02 Table I body is missing from Raw structural/text rows; Table II is misclassified as an image.
 5. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
 6. An aggregate benchmark pass threshold is not yet defined.
 
@@ -176,12 +193,12 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 
 ## Next Planned Phase
 
-Manual B02 Ground Truth annotation
+Table Vision Fallback evaluation before Parser v1 freeze
 
 Priority sequence:
 
-1. Complete independent manual B02 Figure, Equation, Table, and reading-order annotations.
-2. Review and freeze B02 Ground Truth before any B02 MinerU run.
-3. Parse and evaluate B02 only in a separately authorized phase.
-4. Freeze Parser v1 after cross-domain validation.
+1. Specify an isolated Table Vision Fallback evaluation boundary.
+2. Evaluate PaddleOCR-VL or an equivalent table-capable vision parser only in a separately authorized phase.
+3. Re-run the frozen B02 benchmark without changing Ground Truth or Raw MinerU output.
+4. Freeze Parser v1 after table recovery behavior is validated.
 5. Continue later integration work only with explicit approval.

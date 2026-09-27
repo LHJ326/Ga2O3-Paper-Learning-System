@@ -1,0 +1,4733 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.7"
+    },
+    "document": {
+      "title": "A Compute-in-Memory Annealing Processor With Interaction Coefficient Reuse and Sparse Energy Computation for Solving Combinatorial Optimization Problems",
+      "authors": [
+        "Yifeng Zhou",
+        "Guocheng Su",
+        "Jinrong Zhou",
+        "Lei Liao",
+        "Zhuojun Chen"
+      ],
+      "subject": "IEEE Journal of Solid-State Circuits;2024;59;9;10.1109/JSSC.2024.3376410",
+      "description": "IEEE Journal of Solid-State Circuits;2024;59;9;10.1109/JSSC.2024.3376410",
+      "created_at": "2024-08-09T11:47:34+05:30",
+      "modified_at": "2024-08-25T16:26:57-04:00",
+      "creator_application": "LaTeX with hyperref",
+      "producer_application": "pdfTeX-1.40.24; modified using iText® Core 7.2.4 (AGPL version) ©2000-2022 iText Group NV",
+      "page_count": 12,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "flash",
+      "parse_mode": "txt"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 2,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 3,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 4,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 5,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 6,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 7,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 8,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 9,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 10,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 11,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3094"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "doc_title",
+          "index": 2,
+          "bbox": [
+            0.095,
+            0.077,
+            0.905,
+            0.212
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A Compute-in-Memory Annealing Processor With Interaction Coefficient Reuse and Sparse Energy Computation for Solving Combinatorial Optimization Problems"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.173,
+            0.23,
+            0.826,
+            0.279
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Yifeng Zhou , Graduate Student Member, IEEE, Guocheng Su, Student Member, IEEE, Jinrong Zhou, Student Member, IEEE, Lei Liao , Senior Member, IEEE, and Zhuojun Chen , Senior Member, IEEE"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.079,
+            0.32,
+            0.492,
+            0.609
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Abstract— Since combinatorial optimization problems (COPs) are a class of non-deterministic polynomial-time (NP)-hard problems, it is impracticable to solve them in brute-force searches, which results in high energy consumption and long computation latency. The annealing processors based on the Ising model are naturally oriented to find approximate solutions. However, these processors face the challenges of frequent data movement between computing elements and memory units, resulting in significantly large area and high energy consumption. To address these issues, we present a fully digital annealing processor based on compute-in-memory (CIM) architecture. To enhance area efficiency, a CIM coefficient array is designed with an interaction coefficient reuse strategy. Moreover, a sparsity-aware adder tree is proposed to reduce unnecessary add operations, which can improve the energy efficiency. For searching the lowest energy state of the Ising model, a nonlinear probability flipping (NPF) approximate circuit is designed, which is based on a voting mechanism and on-chip random number generation with low hardware overhead. The proposed annealing processor is fabricated in a 55-nm CMOS process and used to solve the max-cut problem as well as the image segmentation problem. The measured results confirm the high energy efficiency (2.4 fJ at 0.9 V per spin) and the high area efficiency (402 µm",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "2",
+              "styles": [
+                "bold",
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " "
+            },
+            {
+              "type": "text",
+              "content": "per spin).",
+              "styles": [
+                "bold"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.079,
+            0.616,
+            0.492,
+            0.654
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Index Terms— Annealing processors, combinatorial optimization problems (COPs), compute-in-memory (CIM), image segmentation, Ising model, max-cut problem.",
+              "styles": [
+                "bold"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 6,
+          "bbox": [
+            0.22,
+            0.673,
+            0.35,
+            0.684
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "I. INTRODUCTION"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.081,
+            0.692,
+            0.114,
+            0.72
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "C"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.079,
+            0.692,
+            0.493,
+            0.808
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "OMBINATORIAL optimization problems (COPs) are widespread across various applications, such as artificial intelligence [1], materials engineering [2], and data mining [3]. However, the challenges of solving COPs are mainly due Manuscript received 8 July 2023; revised 6 October 2023 and 16 February 2024; accepted 8 March 2024. Date of publication 19 March 2024; date of current version 27 August 2024. This article was approved by Associate Editor Kathryn Wilcox. (Corresponding authors: Zhuojun Chen; Lei Liao.)"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.079,
+            0.807,
+            0.493,
+            0.83
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Yifeng Zhou, Guocheng Su, and Jinrong Zhou are with the School of Physics and Electronics, Hunan University, Changsha 410082, China."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.079,
+            0.83,
+            0.492,
+            0.887
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Lei Liao and Zhuojun Chen are with the College of Semiconductors (College of Integrated Circuits), Hunan University, Changsha 410082, China, and also with the Changsha Semiconductor Technology and Application Innovation Research Institute, Changsha 410082, China (e-mail: liaolei@hnu.edu.cn; zjchen@hnu.edu.cn)."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.078,
+            0.887,
+            0.492,
+            0.91
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Color versions of one or more figures in this article are available at https://doi.org/10.1109/JSSC.2024.3376410."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.089,
+            0.909,
+            0.377,
+            0.921
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Digital Object Identifier 10.1109/JSSC.2024.3376410"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 13,
+          "bbox": [
+            0.52,
+            0.321,
+            0.91,
+            0.543
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 13,
+              "bbox": [
+                0.52,
+                0.321,
+                0.91,
+                0.543
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 14,
+              "bbox": [
+                0.508,
+                0.557,
+                0.839,
+                0.569
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 1. Process of solving COPs by an annealing processor."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.508,
+            0.59,
+            0.922,
+            0.694
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "to their non-deterministic polynomial-time (NP)-hard nature, while computing resources grow exponentially as the problem size increases. For example, a typical COP known as the knapsack problem requires exhaustive computation to collect all possibilities and search for the optimal solution, which usually results in unacceptable computation latency and energy consumption [4]."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.508,
+            0.695,
+            0.921,
+            0.785
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The Ising model describes the phase transition of ferromagnetic systems [5], which is an effective method for solving large-scale COPs. By mapping the real-world COPs to the Ising model combined with simulated annealing algorithm, a set of spins naturally tends to achieve the lowest energy state, which approximates the optimal solution of COPs [6]."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.508,
+            0.786,
+            0.922,
+            0.921
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "D-wave based on quantum technology has been proven to solve COPs [7], and however, the cryogenic operating temperature and immature quantum computing technology severely limit its application. In addition, a coherent Ising machine based on optical oscillators has been proposed [8], [9], but its large optical components limit its flexibility. In contrast, annealing processors based on CMOS technology have the advantages of operating at room temperature and strong scalability. As shown in Fig. 1, the implementation of"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.203,
+            0.928,
+            0.797,
+            0.939
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "0018-9200 © 2024 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 19,
+          "bbox": [
+            0.293,
+            0.939,
+            0.707,
+            0.951
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "See https://www.ieee.org/publications/rights/index.html for more information."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 20,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 1,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.921,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3095"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.079,
+            0.074,
+            0.492,
+            0.102
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "an annealing processor enables the solution of COPs through hardware embedding and ground state search methods."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.078,
+            0.104,
+            0.492,
+            0.239
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "As the cornerstone of annealing processor design, energy minimization search algorithms directly influence the efficiency of solving COPs. Nowadays, several energy minimization search algorithms have been applied to various application scenarios, such as simulated annealing [10] and simulated adiabatic bifurcations [11]. These algorithms have presented excellent performance in tackling COPs, such as the traveling salesman problem (TSP) and the max-cut problem."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.078,
+            0.24,
+            0.492,
+            0.465
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In addition to the use of appropriate energy minimization search algorithms, the exploration of computing architectures is also critical to improving the efficiency of annealing processors. Solving COPs by traditional von Neumann architecture requires frequent data movement between computation elements and memory units, which results in excessive energy consumption and computation latency. Recently, a novel computing paradigm called compute-in-memory (CIM) has been proposed to integrate computation elements and memory units, which is a promising candidate for breaking through the von Neumann bottleneck [12], [13], [14], [15], [16]. Besides, the annealing processor is naturally compatible with the CIM architecture. Once the coefficient transformation and hardware topology mapping are completed, all spin states can be rapidly updated within the annealing processor."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.079,
+            0.467,
+            0.492,
+            0.538
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In this work, we present a digital CIM annealing processor with 900 spins fabricated in a 55-nm CMOS technology. The energy for each spin update is 2.4 fJ when the supply voltage is 0.9 V, and the area of each spin is 402 µm"
+            },
+            {
+              "type": "text",
+              "content": "2",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ". The key contributions of this work are as follows."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.096,
+            0.544,
+            0.492,
+            0.615
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1) The proposed CIM coefficient array can significantly improve the area efficiency through the coefficient reuse strategy. Under the configuration of 25 spins per processing element (PE), 36% of the coefficients can be reused."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.095,
+            0.619,
+            0.492,
+            0.678
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2) We propose a sparsity-aware adder tree that adaptively wakes up during the local search stage, which can reduce unnecessary addition operations and thereby improve the energy efficiency of the overall system."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.095,
+            0.68,
+            0.492,
+            0.766
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3) An approximate circuit based on a voting mechanism is designed for nonlinear probability flipping (NPF), which can avoid the calculation of transcendental functions. Based on this method, the sign bit flipping during the annealing process is determined by both temperature and barrier values."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.095,
+            0.77,
+            0.492,
+            0.829
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "4) An on-chip random number generator is realized with extremely low hardware overhead. Therefore, the coefficient array has three functions: coefficient storage, computation, and random number generation."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.095,
+            0.831,
+            0.492,
+            0.89
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "5) To ensure the randomness of probability flipping for each spin, the annealing algorithm is implemented by a sparsity-aware adder tree, an NPF approximate circuit, and an on-chip random number generator."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.095,
+            0.891,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "6) In addition to solving the max-cut problem, image segmentation is also demonstrated using the proposed CIM annealing processor. When performing image segmentation tasks, the proposed annealing processor can"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 12,
+          "bbox": [
+            0.512,
+            0.068,
+            0.918,
+            0.207
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 12,
+              "bbox": [
+                0.512,
+                0.068,
+                0.918,
+                0.207
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 13,
+              "bbox": [
+                0.508,
+                0.217,
+                0.921,
+                0.24
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 2. (a) Energy profile of annealing algorithm. (b) Probability distribution of +1 spin state in the Gibbs model."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.548,
+            0.267,
+            0.922,
+            0.296
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "provide a clearer edge segmentation result for the target and background."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.508,
+            0.296,
+            0.921,
+            0.386
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The rest of this article is as follows. Section II provides an overview of the background and previous works on Ising annealing processors. Section III outlines the architecture and circuit implementation of the proposed annealing processor. Section IV presents the simulation and measurement results. Finally, Section V concludes this article."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 16,
+          "bbox": [
+            0.651,
+            0.4,
+            0.779,
+            0.411
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "II. BACKGROUND"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 17,
+          "bbox": [
+            0.507,
+            0.419,
+            0.612,
+            0.432
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A. Ising Model"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.508,
+            0.438,
+            0.921,
+            0.479
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In the CMOS annealing processors, spin state update is typically achieved by two main parts: local spin update and NPF."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 19,
+          "bbox": [
+            0.508,
+            0.483,
+            0.921,
+            0.512
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1) Local Spin Update: The Hamiltonian of the Ising model is given by the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 20,
+          "bbox": [
+            0.609,
+            0.518,
+            0.921,
+            0.538
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 21,
+          "bbox": [
+            0.508,
+            0.544,
+            0.922,
+            0.633
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "where H represents the Hamiltonian of a system, σ"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " denotes the target spin, and σ"
+            },
+            {
+              "type": "text",
+              "content": "j",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " denotes the adjacent spin. The spin state can be one of two: +1 for spin up or −1 for spin down. J"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " j represents the interaction coefficient between two adjacent spins. h"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " represents the external magnetic field coefficient applying on the target spin."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 22,
+          "bbox": [
+            0.508,
+            0.634,
+            0.921,
+            0.709
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "There are generally three types of connections between adjacent spins: Lattice (four adjacent spins), Hexagonal (six adjacent spins), and King’s graph (eight adjacent spins). The local energy of each target spin can be expressed by the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 23,
+          "bbox": [
+            0.622,
+            0.714,
+            0.921,
+            0.76
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 24,
+          "bbox": [
+            0.508,
+            0.766,
+            0.921,
+            0.795
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "By computing the local energy, the target spin state is updated iteratively using the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 25,
+          "bbox": [
+            0.597,
+            0.801,
+            0.921,
+            0.854
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 26,
+          "bbox": [
+            0.508,
+            0.861,
+            0.921,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "However, only iterating the spin state using (3) often leads to falling into local minimum energy after a few cycles, which fails to achieve the global optimal solution of the overall system. Therefore, it is necessary to employ an annealing algorithm based on NPF to escape from local minima and subsequently perform spin iterations, as depicted in Fig. 2(a)."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 27,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 2,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3096"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.079,
+            0.074,
+            0.491,
+            0.118
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2) Nonlinear Probability Flipping: Gibbs model [17] is commonly used to describe NPF, as illustrated in the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 3,
+          "bbox": [
+            0.191,
+            0.123,
+            0.491,
+            0.158
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.079,
+            0.163,
+            0.492,
+            0.222
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "where 1E represents the local energy barrier (1E = σ"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "[t] F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " −σ"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "[t +1]F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "), T represents the temperature during annealing, F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " represents the local energy computation results, and P represents the probability of spin state flipping."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.078,
+            0.223,
+            0.492,
+            0.327
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Equation (5) represents the probability of updating the spin state to +1 (P+1), which actually includes two cases. If the previous spin state is +1, the sign bit flipping is disabled during the state update so that P+1 = 1 − P. If the previous spin state is −1, the sign bit flipping is accepted during the state update, and then, P+1 = P. The corresponding probability distribution of (5) is illustrated in Fig. 2(b)"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 6,
+          "bbox": [
+            0.182,
+            0.333,
+            0.491,
+            0.368
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.078,
+            0.373,
+            0.492,
+            0.595
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The next spin state is determined by both the local energy calculation result F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " and the temperature T . When the temperature is high, (F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " /T ) approaches to 0, and the probability of the next spin state being +1 is 0.5, indicating that the state is random. As the temperature gradually decreases, the value of (F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " /T ) is significantly influenced by F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " . Also, a higher probability of +1 for the next spin state is obtained at larger F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " . When the temperature approaches to 0, the value of (F"
+            },
+            {
+              "type": "text",
+              "content": "i",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " /T ) tends toward infinity. The spin state stabilizes at +1 or −1, and the system tends to become stable. By utilizing NPF functions, a system with lower energy state can be obtained. It should be noted that in order to avoid non-convergence of the system energy and compress the search time, NPF is usually performed after the system has fallen into the local minimum state."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 8,
+          "bbox": [
+            0.078,
+            0.615,
+            0.421,
+            0.629
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "B. Prior Works of the CMOS Annealing Processor"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.079,
+            0.634,
+            0.492,
+            0.723
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Dupret et al. [18] proposed a simulated annealing processor using a Lattice graph topology and an analog computation method for local energy calculation. CMOS annealing processors can afford to high topological complexity and large coefficient bit width, which have been demonstrated in [19], [20], [21], and [22]."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.079,
+            0.725,
+            0.492,
+            0.829
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Yamaoka et al. [19] proposed an annealing processor with a topology complexity of the nearest five neighbors (adding a vertical connection relationship based on the Lattice graph) and a coefficient bit width of 2 bits. To enable the on-chip annealing feature, random numbers had to be generated externally or the memory supply voltage had to be lowered to avoid getting stuck at the local minimum state."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.078,
+            0.831,
+            0.492,
+            0.92
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Takemoto et al. [20] implemented an annealing processor design with 3-bit coefficients. However, the coefficients had to be read out from the memory array before the local energy was calculated, which increased the annealing calculation cycle and severely affected the overall energy efficiency of the annealing computation."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.079,
+            0.921,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "To address these issues, several annealing processors based on the CIM architecture were proposed. Xie et al. [21]"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.508,
+            0.074,
+            0.921,
+            0.163
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "developed a CIM annealing processor in the analog domain, where all computations were performed on the bit lines of the memory array. However, the spin states were required to be read out using low-offset sense amplifiers (SAs), and careful design was needed to ensure its robustness to process, voltage, and temperature (PVT) variations."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.508,
+            0.164,
+            0.922,
+            0.299
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Su et al. [22] proposed a digital CIM annealing processor that used registers to store spin states, allowed spin to be updated within a single cycle, and achieved high computation parallelism. However, both of these designs [21], [22] required an external source of random number, which still incurred significant hardware overhead. Furthermore, there was a lack of sparsity strategy for the local energy computation, resulting in redundant calculations and excessive energy consumption."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 15,
+          "bbox": [
+            0.509,
+            0.334,
+            0.821,
+            0.347
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "C. Max-Cut Problem and Image Segmentation"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.508,
+            0.357,
+            0.922,
+            0.447
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The max-cut problem is a typical NP-hard COP that has applications in computer vision [23] and statistical physics [24]. The key to solving this problem is to identify a cut between vertices in a graph so that the sum of weighted edges intersecting with the cut is maximized, and the mapping method to the Ising model has been presented [3]."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.508,
+            0.448,
+            0.922,
+            0.583
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Furthermore, image segmentation is a challenging problem in computer vision. Nowadays, there are many image segmentation algorithms, such as region growing, k-means clustering, and graph cut [25]. Zhang et al. [26] proposed a method to map the image segmentation problem to the Ising model. When demonstrating image segmentation in grayscale images, the main goal is to compute the coefficient J and the local magnetic field coefficient h. Also, the corresponding expressions are presented in the following equations:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 18,
+          "bbox": [
+            0.58,
+            0.597,
+            0.921,
+            0.638
+          ],
+          "content": ""
+        },
+        {
+          "type": "equation",
+          "index": 19,
+          "bbox": [
+            0.584,
+            0.641,
+            0.921,
+            0.656
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 20,
+          "bbox": [
+            0.508,
+            0.673,
+            0.921,
+            0.747
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "where dist"
+            },
+            {
+              "type": "text",
+              "content": "pos",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "(i, j) is the position distance between pixels i and j, dist"
+            },
+            {
+              "type": "text",
+              "content": "pixel",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "(i, j) is the pixel value distance between pixels i and j, and σ is the gray standard deviation. Besides, P(i, θ"
+            },
+            {
+              "type": "text",
+              "content": "fog",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ") and P(i, θ"
+            },
+            {
+              "type": "text",
+              "content": "bkg",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ") represent the probabilities of pixel i being foreground and background, respectively."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 21,
+          "bbox": [
+            0.508,
+            0.748,
+            0.921,
+            0.822
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The k-means clustering algorithm is employed to divide the pixel values into two categories, foreground and background. The standard deviation σ and the mean value µ are calculated for each category to establish a univariate Gaussian model, as illustrated in the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 22,
+          "bbox": [
+            0.587,
+            0.837,
+            0.921,
+            0.877
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 23,
+          "bbox": [
+            0.508,
+            0.891,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "When this mapping method is applied to an RGB threechannel image, the k-means clustering algorithm is utilized to separately classify the RGB channels and establish a trivariate Gaussian model. The probabilities of foreground or"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 24,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 3,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.921,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3097"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.147,
+            0.068,
+            0.853,
+            0.287
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.147,
+                0.068,
+                0.853,
+                0.287
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 3,
+          "bbox": [
+            0.079,
+            0.302,
+            0.417,
+            0.313
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Fig. 3. Proposed annealing processor and its PE architecture."
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.078,
+            0.343,
+            0.456,
+            0.357
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "background are calculated using the following equation:"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 5,
+          "bbox": [
+            0.081,
+            0.363,
+            0.491,
+            0.454
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.079,
+            0.464,
+            0.492,
+            0.506
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Here, the standard deviation σ"
+            },
+            {
+              "type": "text",
+              "content": "1",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "–σ"
+            },
+            {
+              "type": "text",
+              "content": "3",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " and the mean value µ"
+            },
+            {
+              "type": "text",
+              "content": "1",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "– µ"
+            },
+            {
+              "type": "text",
+              "content": "3",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " are calculated by the k-means clustering algorithm for each RGB channel."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.182,
+            0.527,
+            0.389,
+            0.538
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "III. ANNEALING PROCESSOR"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 8,
+          "bbox": [
+            0.078,
+            0.546,
+            0.251,
+            0.56
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A. Full-Chip Architecture"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.078,
+            0.565,
+            0.493,
+            0.79
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The overall architecture of the proposed annealing processor is illustrated in Fig. 3, which is composed of 36 PEs, wordline (WL) and bitline (BL) drivers, and spin state output drivers. For King’s graph connection, each PE can perform spin state annealing computation for 25 spins, resulting in a total of 900 spins at the system level. Each PE consists of a coefficient array, a sparsity-aware adder tree, a spin state storage register array, a random number control circuit, an NPF approximate circuit, an annealing control circuit, and an SRAM read/write peripheral circuit. In addition, adjacent PEs are interconnected through spin state interface circuits to provide the overall King’s graph connection. Multiple top-level PEs enable the processor to meet the requirements of different scale COPs feasibly. Section III provide a comprehensive description of the detailed circuit design."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 10,
+          "bbox": [
+            0.078,
+            0.811,
+            0.413,
+            0.825
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "B. XNOR-Based CIM and Coefficient SRAM Array"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.078,
+            0.83,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "This work employs an approximate computation method based on the logical XNOR operation. When multiplying 2’s complement by −1, the error of the XNOR approximate calculation is 1, and the function of the annealing processor is not affected. Inspired by the previous works [27], [28], [29], the coefficient storage and computation is implemented by an XNOR-based SRAM, which adds four pMOS transistors based on the standard 6T SRAM cell, as illustrated in Fig. 4(a). The"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 12,
+          "bbox": [
+            0.53,
+            0.338,
+            0.899,
+            0.829
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 12,
+              "bbox": [
+                0.53,
+                0.338,
+                0.899,
+                0.829
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 13,
+              "bbox": [
+                0.508,
+                0.832,
+                0.921,
+                0.855
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 4. (a) XNOR-based SRAM schematic and its truth table. (b) Computation flow of one column in the coefficient SRAM array."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.508,
+            0.876,
+            0.921,
+            0.948
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "input signal is applied to the gate of P5 through RWL, and the opposite input signal is applied to the gate of P6 by RWLB. For XNOR operation, the gates of P3 and P4 are controlled through storage nodes Q and QB, and their source nodes are connected to RBL."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "footer",
+          "index": 15,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 4,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3098"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.091,
+            0.068,
+            0.909,
+            0.414
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.091,
+                0.068,
+                0.909,
+                0.414
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 3,
+              "bbox": [
+                0.079,
+                0.425,
+                0.921,
+                0.448
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 5. Coefficient mapping method, schematic and layout of the coefficient array, which includes the UD array, the LD array, the RD array, the LR array, and the local magnetic field coefficient (H) array."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.079,
+            0.468,
+            0.492,
+            0.617
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The computation is performed column by column, and one column in the coefficient array is taken as an example, as shown in Fig. 4(b). First, the complementary input signals are sent to RWL and RWLB. After half of the clock cycle, the RDD signal is driven to high. Meanwhile, the XNOR operation is performed on the stored weights and input signals. Then, the corresponding RBL is driven to high. After obtaining the computation results, the PRE signal is then pulled up to high to discharge the RBL signal and the column is ready to start the next computation cycle."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.078,
+            0.619,
+            0.492,
+            0.859
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In order to avoid redundant coefficient storage and enhance the area efficiency, the King’s graph connection is divided into five parts: left-right (LR), up-down (UD), left diagonal (LD), right diagonal (RD), and local magnetic field coefficient (H), as depicted in Fig. 5. Five arrays are utilized to store 4-bit coefficients as 2’s complement. In this work, for a King’s graph connection with 25 spins, the number of XNOR SRAM cells for the LR array, UD array, LD array, RD array, and H array are 20 × 6, 24 × 5, 24 × 6, 24 × 6, and 20 × 5, respectively. It should be noted that a special design is adopted for the H array. Since the output result of the H array is independent of the adjacent spin states, the RWL and RWLB signals of the H array are connected to power and ground through the tie-high and tie-low cells, respectively. This method effectively integrates all arrays without additional memory overhead."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.079,
+            0.86,
+            0.493,
+            0.947
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Furthermore, to ensure the integrity of inter-PE topology connection, the coefficients of each PE’s edges are stored in both of the adjacent PEs. Inspired by the concept of “ghost cell” [21], the proposed annealing processor has great scalability for different applications by enabling a different number of PEs."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 7,
+          "bbox": [
+            0.511,
+            0.469,
+            0.918,
+            0.58
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 7,
+              "bbox": [
+                0.511,
+                0.469,
+                0.918,
+                0.58
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 8,
+              "bbox": [
+                0.508,
+                0.59,
+                0.921,
+                0.613
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 6. Local energy computation sequence diagram of the proposed annealing processor."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 9,
+          "bbox": [
+            0.509,
+            0.629,
+            0.844,
+            0.643
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "C. Local Energy Computation Sequence Diagram"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.508,
+            0.65,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A total of five spins in one column are updated during each spin update cycle. The coefficients in one column of the UD and H arrays and one column of the odd–even group in the LR, LD, and RD arrays are all read out in one cycle, and then, the spin states are updated. The sequence diagram of the local energy computation in the PE is depicted in Fig. 6. During the initial phase, the PRE signal is held at high, and the RBL signal lines of the XNOR SRAM array are discharged. When the computation process starts, the PRE signal changes to low level. Subsequently, the RDD signal is pulled to high level to perform the XNOR operation. Then, the computation results are forwarded to the sparsity-aware adder tree. After half a clock cycle, the rising edge of the SPIN_CLK signal accomplishes the sampling of five spin states within a column. Finally, the PRE signal returns to high and the RBL signal lines are discharged in preparation for the next cycle of annealing process. The whole array can accomplish spin state update through five identical cycles. The results of the annealing computation are then obtained by the spin state readout circuits. It is worth noting that the register array is"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 11,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 5,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.921,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3099"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.147,
+            0.068,
+            0.853,
+            0.318
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.147,
+                0.068,
+                0.853,
+                0.318
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 3,
+              "bbox": [
+                0.079,
+                0.332,
+                0.502,
+                0.344
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 7. Odd–even grouping reuse strategy for (a) LR array and (b) LD array."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.079,
+            0.373,
+            0.492,
+            0.432
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "designed with a ping-pong buffer to achieve faster annealing convergence. When one array samples the spin states for the current annealing cycle, the other array provides the spin states from the previous annealing cycle."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.078,
+            0.45,
+            0.278,
+            0.464
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "D. Coefficient Reuse Strategy"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.079,
+            0.469,
+            0.492,
+            0.54
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In order to improve the storage efficiency, we propose a coefficient reuse strategy. For the LR array, LD array, and RD array, we adopt an odd–even grouping reuse strategy. For the UD array, we use a UD array coefficient reuse strategy based on XNOR."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.078,
+            0.544,
+            0.493,
+            0.739
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1) Odd–Even Grouping Reuse Strategy: As shown in Fig. 7(a), the coefficients of the LR array, LD array, and RD array are grouped according to the column numbers, ranging from 0 to 5. The odd and even columns are grouped together. Taking the LR array as an example, in the first computation cycle, col⟨0⟩ of the even group is regarded as left connection coefficients, and col⟨1⟩ of the odd group is regarded as right connection coefficients. Thus, the corresponding columns are used to complete the spin state update. In the second computation cycle, col⟨2⟩ of the even group is regarded as right connection coefficients, and col⟨1⟩ of the odd group is regarded as left connection coefficients. By utilizing col⟨1⟩ of the odd group twice, we can reuse the stored coefficients."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.079,
+            0.74,
+            0.492,
+            0.89
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "For the LD array and the RD array, the coefficient reuse strategy is the same, as shown in Fig. 7(b). However, multiplexers are required at the output ports of the RBL signals. It is because the same column serves as the left (right) diagonal coefficients during the first computation cycle. Among 24 RBL signals, the first (last) 20 RBL signals represent the array computation results. However, during the second computation cycle, the same column serves as the right (left) diagonal coefficients, and the last (first) 20 RBL signals represent the array computation results."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.078,
+            0.891,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2) UD Array Coefficient Reuse Strategy: As shown in Fig. 8, in order to reduce the hardware overhead of computing resources, XNOR operations are performed only with up spin connection for the UD array. The computation results of down"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 10,
+          "bbox": [
+            0.571,
+            0.375,
+            0.858,
+            0.536
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 10,
+              "bbox": [
+                0.571,
+                0.375,
+                0.858,
+                0.536
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.508,
+            0.55,
+            0.748,
+            0.562
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Fig. 8. UD array coefficient reuse strategy."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.508,
+            0.577,
+            0.921,
+            0.651
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "spin connection are obtained through XNOR results of the spin states. If the spin states are the same, the array computation results are directly used as the computation results of down spin connection; otherwise, the array computation results are inverted bit by bit."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 13,
+          "bbox": [
+            0.508,
+            0.675,
+            0.711,
+            0.689
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "E. Sparsity-Aware Adder Tree"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.507,
+            0.695,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "After the XNOR operation, the sign bits of some target spins maintain consistent. In this case, it is not necessary to activate the adder tree, which normally contributes to the largest portion of energy consumption in the digital CIM system. In this work, an embedded sparse optimization for the adder tree is proposed based on an adaptive wake-up mechanism, as shown in Fig. 9. It can determine whether to enable the adder tree based on the result of the sign bit judgment. The adder tree is activated only when the sign bits of eight connections in the King’s graph are not equal; otherwise, the decoder circuit provides the final sign result of the local energy computation. However, when probability flipping is performed, regardless of whether the sign bits are the same or not, the adder tree is activated to provide the barrier value. As shown in Fig. 10, when solving a hard max-cut problem, the system energy drops to the local minimum state after six local spin update cycles. At this point,"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 15,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 6,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3100"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.101,
+            0.068,
+            0.47,
+            0.248
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.101,
+                0.068,
+                0.47,
+                0.248
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 3,
+              "bbox": [
+                0.079,
+                0.259,
+                0.491,
+                0.282
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 9. Sparsity-aware adder tree based on an adaptive wake-up mechanism. (a) Adder tree with different sign bits. (b) Adder tree with the same sign bits."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 4,
+          "bbox": [
+            0.162,
+            0.296,
+            0.408,
+            0.455
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 4,
+              "bbox": [
+                0.162,
+                0.296,
+                0.408,
+                0.455
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 5,
+              "bbox": [
+                0.079,
+                0.466,
+                0.492,
+                0.486
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 10. Ising energy profile when solving a hard max-cut problem 1000 times."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.079,
+            0.516,
+            0.492,
+            0.606
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "an NPF circuit should be activated to escape from the local minimum state and continue to search for lower energy states. It indicates that a sparsity-aware adder tree contributes in 6/7 of a complete computational cycle. Therefore, the proposed sparsity-aware adder tree plays a significant role in reducing energy consumption."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.078,
+            0.628,
+            0.271,
+            0.641
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "F. NPF Approximate Circuit"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.079,
+            0.647,
+            0.492,
+            0.703
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "NPF is an effective method to prevent the system from being trapped in local energy minima. The commonly used model for NPF function is Gibbs model, which has been discussed in Section II."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.078,
+            0.707,
+            0.492,
+            0.779
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Implementing NPF with transcendental function calculation requires numerous computing resources. Therefore, we propose an approximate circuit for NPF function based on a voting mechanism. The two main features of the NPF function are as follows."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.096,
+            0.785,
+            0.492,
+            0.875
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1) At the initial stage of the annealing process which has a high temperature, the next spin state is closely related to the calculated local energy. The higher the local calculated energy, the higher the probability of the spin state flipping to the state with the same sign bit of the local energy."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.095,
+            0.876,
+            0.493,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2) As the annealing process progresses, the temperature gradually decreases, and the next spin state becomes closely related to the temperature. In the final stage of the annealing process, the spin state is directly determined by the sign bit of the calculated local energy."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 12,
+          "bbox": [
+            0.511,
+            0.068,
+            0.918,
+            0.205
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 12,
+              "bbox": [
+                0.511,
+                0.068,
+                0.918,
+                0.205
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 13,
+              "bbox": [
+                0.508,
+                0.219,
+                0.7,
+                0.231
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 11. NPF approximate circuit."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 14,
+          "bbox": [
+            0.511,
+            0.248,
+            0.918,
+            0.372
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 14,
+              "bbox": [
+                0.511,
+                0.248,
+                0.918,
+                0.372
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 15,
+              "bbox": [
+                0.508,
+                0.383,
+                0.921,
+                0.406
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 12. (a) Probability of accepting sign bit (P"
+                },
+                {
+                  "type": "text",
+                  "content": "as",
+                  "styles": [
+                    "subscript"
+                  ]
+                },
+                {
+                  "type": "text",
+                  "content": "). (b) Probability distribution of the Gibbs model (Ideal) and the proposed NPF approximate method."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.508,
+            0.438,
+            0.922,
+            0.633
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Based on the above two features, our proposed approximate circuit is shown in Fig. 11. T⟨5:0⟩ comes from the external as an independent control variable. In order to simulate a gradually decreasing temperature, the data flow of T⟨5:0⟩ gradually changed from “111111” to “000011.” In general, the number of ones in T⟨5:0⟩ is reduced by one after completing triple NPF. R⟨6:0⟩ is a random number sequence that bitstreams with a nearly 50% probability of ones, and ADDER⟨6:5⟩ is obtained from the adder tree. Before entering the NPF approximate circuit, the adder result bits ⟨5⟩ and ⟨6⟩ go through a decoder. If the sign bit of the adder tree is 0, the result bits ⟨5⟩ and ⟨6⟩ are not flipped. Conversely, if the sign bit of the adder tree is 1, the result bits ⟨5⟩ and ⟨6⟩ are flipped."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.508,
+            0.634,
+            0.922,
+            0.784
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "After performing AND operations, the results are sent to the voter circuit. The output of the voter circuit serves as the select signal of the spin register. If there are at least four high input signals, the output signal is high; otherwise, the output is low. When the output of the voter is low, the sign bit of the local energy is used as the next spin state. When in high-level state, the inverted sign bit of the local energy is stored in the register array. Due to the complement computation, if the sign bit of local energy is “1,” it represents a negative value, so it is inverted and used as the next spin state."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.508,
+            0.785,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The probability of accepting the sign bit (P"
+            },
+            {
+              "type": "text",
+              "content": "as",
+              "styles": [
+                "subscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ") of the local energy based on the voting mechanism is presented in Fig. 12(a). Here, we take the input T⟨5:0⟩ to be “111111” as an example. When ADDER⟨6:5⟩ is “11,” the sign bit of adder tree result is 1, indicating a relatively low barrier. In this case, the probability that the voter circuit exports “0” is 22/64. Otherwise, the sign bit of adder tree result is 0, indicating a relatively high barrier, and the probability that the voter circuit exports “0” is 42/64. The difference in the probability of the next spin state accepting the sign bit of the local energy is 20/64, and it is because the non-linear probability flipping"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 19,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 7,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.92,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3101"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.078,
+            0.074,
+            0.492,
+            0.223
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "function is more likely to accept the sign bit of the local energy value when the local barrier value is higher. As the annealing process enters into the final stage and T⟨5:0⟩ is less than “000111,” the output result of the voter circuit is always “0,” and the next spin state is directly determined by the sign bit of the local energy. As shown in Fig. 12(b), the proposed approximate method is in agreement with the ideal probability flipping function. This method avoids the implementation of a complex transcendental function circuit, which can significantly reduce computation hardware overhead."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 3,
+          "bbox": [
+            0.079,
+            0.244,
+            0.364,
+            0.255
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "G. Embedded Random Number Generator"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.078,
+            0.263,
+            0.492,
+            0.383
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In previous works, a dedicated RNG is required to generate random numbers for random probability flipping. There are several common approaches for random number generation, such as linear feedback shift register (LFSR) [30] and cellular automata shift register (CASR) [31]. However, these methods occupy a large chip area. In this article, a set of random number sequences with an almost 50% probability of ones is required as the basis for probability flipping."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.079,
+            0.384,
+            0.492,
+            0.669
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The size of transistors in SRAM cell and SA is optimized to meet the requirement of XNOR calculation, coefficient storage, and random number generation through Monte Carlo simulations. When the test chip is powered up, the SRAM cell is initially in a metastable state. At this time, the read operation is performed directly on the coefficient array. The metastable state is amplified by SA and a random number sequence can be generated, which is uniquely dependent on the process variations. Then 22.08-kb random bits are read out from un-touched SRAM arrays to obtain the randomness and stored in the field-programmable gate array (FPGA). Considering that each NPF only requires 35 bits, the number of random bits is sufficient. Thus, we only read the memory array once. Once all random numbers have been read, the coefficients are written into the SRAM array. During testing, we control the FPGA to send the generated random numbers into the chip through an interface circuit (serial-to-parallel data converter). After completing one NPF, a new random number sequence is fed into the voter during the local search phase."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 6,
+          "bbox": [
+            0.116,
+            0.687,
+            0.453,
+            0.698
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IV. SIMULATION AND MEASUREMENT RESULTS"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.078,
+            0.706,
+            0.3,
+            0.72
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A. Test-Chip Measurement Setup"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.078,
+            0.725,
+            0.492,
+            0.875
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The proposed Ising processor is designed and fabricated in a 55-nm CMOS process with one poly and six metal (1P6M) layers. Fig. 13 shows the silicon prototype die micrograph and its performance summary. There are a total of 36 PEs in the test chip, which are arranged in a 2-D array and divided into six groups. Thus, each group has six PEs, and each PE with 25 spins occupies 10 050 µm"
+            },
+            {
+              "type": "text",
+              "content": "2",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ". Furthermore, the core of the annealing processor includes the WL and BL drivers, spin state output drivers, and interface circuits, which are located at the periphery of the PE groups."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.079,
+            0.876,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The test procedure is as follows. First, the COP is mapped to the Ising model using the MATLAB tool, and the mapping approach about image segmentation has been described in detail in Section II. Second, the spin coefficients are fed into the test chip through the FPGA device, which also controls"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 10,
+          "bbox": [
+            0.524,
+            0.068,
+            0.906,
+            0.325
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 10,
+              "bbox": [
+                0.524,
+                0.068,
+                0.906,
+                0.325
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 11,
+          "bbox": [
+            0.508,
+            0.339,
+            0.824,
+            0.351
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Fig. 13. Chip micrograph, area, and power consumption."
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "image",
+          "index": 12,
+          "bbox": [
+            0.515,
+            0.365,
+            0.915,
+            0.486
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 12,
+              "bbox": [
+                0.515,
+                0.365,
+                0.915,
+                0.486
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 13,
+              "bbox": [
+                0.508,
+                0.497,
+                0.917,
+                0.52
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 14. (a) Measured intra-die and inter-die Hamming distances. (b) Measured ACF of the test chips."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 14,
+          "bbox": [
+            0.689,
+            0.538,
+            0.741,
+            0.548
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "TABLE I"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 15,
+          "bbox": [
+            0.618,
+            0.554,
+            0.812,
+            0.563
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "NIST 800-22 RANDOMNESS TEST"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.508,
+            0.685,
+            0.921,
+            0.714
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "the chip to complete the annealing computation. Finally, the spin states after annealing are read out by the FPGA device."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 17,
+          "bbox": [
+            0.508,
+            0.736,
+            0.788,
+            0.75
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "B. Test of the On-Chip Random Numbers"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.508,
+            0.755,
+            0.921,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "To evaluate the on-chip generated random numbers for the proposed voting mechanism, five test chips are measured. The metastable states of the XNOR-based SRAM array are repeatedly read out by an SA to obtain the test data. The randomness of the data is then evaluated through the NIST 800-22 randomness tests, and the results are presented in Table I. Due to the bit length limitations, only ten of the sub-tests are conducted. Also, the result indicates that all ten sub-tests have passed (P > 0.01), demonstrating a good randomness of random numbers. We also evaluate the inter-die and intra-die Hamming distances and the autocorrelation function coefficient (ACF) of the test chips. As depicted in Fig. 14(a), the mean value of inter-die Hamming distance"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 19,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 8,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3102"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.182,
+            0.068,
+            0.818,
+            0.269
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.182,
+                0.068,
+                0.818,
+                0.269
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 3,
+              "bbox": [
+                0.079,
+                0.279,
+                0.921,
+                0.302
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 15. Measured transient spin maps when solving a max-cut problem and the Ising energy profile without probability flipping, (a) for image IEEE and (b) for image HNU."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.079,
+            0.319,
+            0.493,
+            0.484
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "is µ = 0.4979 and the standard deviation is σ = 0.0164, while the mean value of intra-die Hamming distance is µ = 0.0162 and the standard deviation is σ = 0.0170. The ratio of the mean value of inter-die Hamming distance and intra-die Hamming distance is defined as the degree of separation, which is 31× in this work, indicating that the test chips possess high distinguishability. Furthermore, the independence of the test chips is determined by examining the ACF, as illustrated in Fig. 14(b). The independence boundary of the ACF within the 95% confidence interval is ±0.006, further indicating that the test chips exhibit good independence."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.079,
+            0.52,
+            0.297,
+            0.534
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "C. Test of the Max-Cut Problem"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.078,
+            0.544,
+            0.493,
+            0.754
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "To first demonstrate the functionality of the proposed Ising processor, a max-cut problem is mapped and solved without probability flipping. The “IEEE” and “HNU” images, with a pixel size of 28 × 28, are employed as the ground state of the system and the initial spin states are randomly generated. Based on the coefficient mapping method, the 4-bit complement coefficients J at the boundary between the letters and the background are set to 1001 (−7), while the coefficients for the remaining non-boundary regions are set to 0111 (+7). The local magnetic field coefficient h is set to 0. The spin state distribution after different annealing cycles is presented in Fig. 15. The spin states gradually collapse from the initial random distribution to the specified ground state of the system, and the Ising energy profiles are also shown in Fig. 15."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.079,
+            0.755,
+            0.492,
+            0.875
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "With the sparsity-aware strategy, the adder tree adaptively wakes up during the annealing process. Taking the “HNU” image as an example, as shown in Fig. 16, the conventional always-on strategy initially has the same number of add operations with the proposed sparsity-aware strategy. However, at the end of annealing, the number of activated add operation decreases by 75 times compared to that of the always-on strategy, resulting in a significant reduction in energy consumption."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.078,
+            0.876,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "We also evaluate the performance of the proposed approximate circuit with on-chip generated random numbers. A maxcut problem with randomly generated coefficients is solved by the annealing processor one thousand times, and the Ising energy is recorded. As shown in Fig. 17, compared to the local"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 9,
+          "bbox": [
+            0.53,
+            0.321,
+            0.897,
+            0.497
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 9,
+              "bbox": [
+                0.53,
+                0.321,
+                0.897,
+                0.497
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 10,
+              "bbox": [
+                0.508,
+                0.507,
+                0.922,
+                0.53
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 16. Number of enabled add operations versus computation cycle for a max-cut problem."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 11,
+          "bbox": [
+            0.541,
+            0.544,
+            0.889,
+            0.747
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 11,
+              "bbox": [
+                0.541,
+                0.544,
+                0.889,
+                0.747
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 12,
+              "bbox": [
+                0.508,
+                0.751,
+                0.921,
+                0.797
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 17. Ising energy distributions of a max-cut problem based on the proposed NPF approximate circuit with on-chip generated random numbers, the local search algorithm without probability flipping, and the ideal SA algorithm."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.509,
+            0.812,
+            0.921,
+            0.841
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "search algorithm without probability flipping, the use of the approximate circuit can reduce the energy by 5.1%."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 14,
+          "bbox": [
+            0.508,
+            0.856,
+            0.749,
+            0.87
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "D. Image Segmentation Application"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.508,
+            0.876,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "This work further explores the application of the proposed annealing processor in the field of image segmentation. Therefore, the Fashion MNIST dataset [32] is used, which contains 70 000 images of ten different categories provided by the research department of Zalando. The images are 8-bit"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 16,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 9,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.921,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3103"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 2,
+          "bbox": [
+            0.171,
+            0.068,
+            0.829,
+            0.329
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 2,
+              "bbox": [
+                0.171,
+                0.068,
+                0.829,
+                0.329
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 4,
+          "bbox": [
+            0.171,
+            0.364,
+            0.829,
+            0.593
+          ],
+          "content": [
+            {
+              "type": "image_caption",
+              "index": 3,
+              "bbox": [
+                0.079,
+                0.341,
+                0.781,
+                0.352
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 18. Image segmentation and its Ising energy evolution of (a) clothes, (b) pants, and (c) shoes from Fashion MNIST dataset."
+                }
+              ]
+            },
+            {
+              "type": "image_body",
+              "index": 4,
+              "bbox": [
+                0.171,
+                0.364,
+                0.829,
+                0.593
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 5,
+              "bbox": [
+                0.079,
+                0.605,
+                0.627,
+                0.617
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 19. Image segmentation of (a) aircraft, (b) motorcycle, and (c) moon form MSRA-10K dataset."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.079,
+            0.634,
+            0.492,
+            0.663
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "grayscale with a size of 28 × 28. The mapping method to the Ising model has been described in Section II."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.079,
+            0.664,
+            0.492,
+            0.814
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Once the coefficients J and the local magnetic field coefficients h have been calculated and mapped to the 4-bit signed coefficients, image segmentation is conducted using the proposed annealing processor. Fig. 18 presents the image segmentation process of three randomly selected images from three different categories. As the annealing process progresses, the spin states gradually collapse from a random distribution to a distribution where the foreground and background are separated. The corresponding energy profiles are illustrated in Fig. 18."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.079,
+            0.815,
+            0.493,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In addition to the grayscale images in the Fashion MNIST dataset, we also conduct the image segmentation on some images of the MSRA-10K salient object detection dataset [33], which contains RGB three-channel data with pixel size of 320 × 400. In order to perform the image segmentation, 30 annealing iterations are simulated by the proposed annealing processor. Furthermore, the image segmentation results are compared with the results from classical Grabcut [34] algorithm after one iteration performed by the CPU and the"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.508,
+            0.634,
+            0.921,
+            0.693
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ground truth images from the dataset, as shown in Fig. 19. Compared to the segmentation results of Grabcut, the proposed annealing processor can provide higher quality segmentation results based on the edges of the target and background."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.508,
+            0.694,
+            0.922,
+            0.829
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Furthermore, we repeatedly simulate an image segmentation 1000 times on the proposed Ising processor and CPU. Regarding the ground truth as a benchmark, both processors can achieve an average accuracy of 99%. The CPU (Core i7-11800) based Grabcut algorithm for image segmentation takes 160 ms, while the proposed processor only takes 8 µs (operating at 1.2 V and 25 MHz) for 20 iterations. It is demonstrated that the proposed annealing processor provides ∼10"
+            },
+            {
+              "type": "text",
+              "content": "4",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "× speedup."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 11,
+          "bbox": [
+            0.508,
+            0.842,
+            0.756,
+            0.855
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "E. Comparison With Previous Works"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.508,
+            0.861,
+            0.922,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The power consumption when solving a max-cut problem at different frequencies and voltages can be seen in Fig. 20. When the annealing processor operates at a frequency of 64 MHz and a supply voltage of 0.9 V, the measured power consumption per spin is 0.08 µW and the energy per spin is 2.4 fJ. Table II compares the proposed annealing processor"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 13,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 10,
+      "blocks": [
+        {
+          "type": "page_number",
+          "index": 0,
+          "bbox": [
+            0.079,
+            0.038,
+            0.104,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3104"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.506,
+            0.038,
+            0.921,
+            0.048
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IEEE JOURNAL OF SOLID-STATE CIRCUITS, VOL. 59, NO. 9, SEPTEMBER 2024"
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 2,
+          "bbox": [
+            0.472,
+            0.073,
+            0.528,
+            0.082
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "TABLE II"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.286,
+            0.088,
+            0.713,
+            0.098
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "PERFORMANCE COMPARISON WITH STATE-OF-THE-ART ISING PROCESSORS"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 4,
+          "bbox": [
+            0.14,
+            0.103,
+            0.856,
+            0.433
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 4,
+              "bbox": [
+                0.14,
+                0.103,
+                0.856,
+                0.433
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 5,
+          "bbox": [
+            0.14,
+            0.103,
+            0.469,
+            0.64
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 5,
+              "bbox": [
+                0.14,
+                0.103,
+                0.469,
+                0.64
+              ],
+              "content": ""
+            },
+            {
+              "type": "image_caption",
+              "index": 6,
+              "bbox": [
+                0.079,
+                0.646,
+                0.275,
+                0.658
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Fig. 20. Measured power per spin."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.508,
+            0.46,
+            0.922,
+            0.64
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "to reduce unnecessary add operations, which can improve the energy efficiency of the system. Furthermore, on-chip integration of the RNG reduces the complexity of the system by eliminating the need for an external RNG. In order to search for a lower energy state and avoid calculating transcendental function, an approximate circuit is proposed that can achieve energy reduction in solving COPs. Silicon prototype measurement results confirm that the proposed annealing processor achieves 4.2-fJ energy efficiency and 402-µm"
+            },
+            {
+              "type": "text",
+              "content": "2",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " area efficiency. In addition to solving the max-cut problem, we also demonstrate the image segmentation by using the proposed CIM annealing processor."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 8,
+          "bbox": [
+            0.668,
+            0.651,
+            0.761,
+            0.662
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "REFERENCES"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.079,
+            0.674,
+            0.492,
+            0.718
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "with state-of-the-art works. The proposed annealing processor with 4-bit coefficient achieves the lowest area and power consumption compared to previous works."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.078,
+            0.719,
+            0.492,
+            0.869
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Moreover, an on-chip RNG is embedded in the local energy computation array with zero overhead, eliminating the need for a dedicated RNG. This work also develops an annealing method based on the voting mechanism, where the spin state is co-determined by the temperature and the barrier value. Compared to previous works [19], [21], [22], where the spin state is only determined by the temperature, this method can reflect the two characteristics of the annealing algorithm. Furthermore, we discuss the extended application of the proposed annealing processor in image segmentation."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 11,
+          "bbox": [
+            0.225,
+            0.887,
+            0.345,
+            0.898
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "V. CONCLUSION"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.078,
+            0.906,
+            0.492,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "In this work, we propose a digital CIM annealing processor. The chip area is significantly reduced by using a coefficient reuse strategy. Besides, a sparsity-aware adder tree is proposed"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.516,
+            0.67,
+            0.922,
+            0.704
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[1] M. Ohzeki, S. Okada, M. Terabe, and S. Taguchi, “Optimization of neural networks via finite-value quantum fluctuations,” Sci. Rep., vol. 8, no. 1, p. 9950, Jul. 2018."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.516,
+            0.704,
+            0.921,
+            0.739
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[2] L. M. Ghiringhelli, J. Vybiral, S. V. Levchenko, C. Draxl, and M. Scheffler, “Big data of materials science: Critical role of the descriptor,” Phys. Rev. Lett., vol. 114, no. 10, Mar. 2015, Art. no. 105503."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.516,
+            0.739,
+            0.921,
+            0.762
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[3] A. Lucas, “Ising formulations of many NP problem,” Frontiers Phys., vol. 2, p. 5, Feb. 2014."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.516,
+            0.763,
+            0.921,
+            0.786
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[4] I. L. Markov, “Limits on fundamental limits to computation,” Nature, vol. 512, pp. 147–154, Aug. 2014."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.516,
+            0.786,
+            0.92,
+            0.809
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[5] R. E. Peierls, “On Ising’s model of ferromagnetism,” Math. Proc. Cambridge Philos. Soc., vol. 32, no. 3, pp. 477–481, 1936."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.516,
+            0.81,
+            0.919,
+            0.833
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[6] S. Kirkpatrick, C. D. Gelatt, and M. P. Vecchi, “Optimization by simulated annealing,” Science, vol. 220, no. 4598, pp. 671–680, May 1983."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 19,
+          "bbox": [
+            0.516,
+            0.833,
+            0.921,
+            0.856
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[7] M. W. Johnson et al., “Quantum annealing with manufactured spins,” Nature, vol. 473, no. 7346, pp. 194–198, May 2011."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 20,
+          "bbox": [
+            0.516,
+            0.857,
+            0.922,
+            0.891
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[8] Z. Wang, A. Marandi, K. Wen, R. L. Byer, and Y. Yamamoto, “Coherent Ising machine based on degenerate optical parametric oscillators,” Phys. Rev. A, Gen. Phys., vol. 88, no. 6, Dec. 2013, Art. no. 063853."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 21,
+          "bbox": [
+            0.516,
+            0.892,
+            0.921,
+            0.915
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[9] T. Inagaki et al., “A coherent Ising machine for 2000-node optimization problems,” Science, vol. 354, no. 6312, pp. 603–606, Nov. 2016."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 22,
+          "bbox": [
+            0.509,
+            0.915,
+            0.921,
+            0.938
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[10] T. Okuyama, M. Hayashi, and M. Yamaoka, “An Ising computer based on simulated quantum annealing by path integral Monte Carlo method,”"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 23,
+          "bbox": [
+            0.538,
+            0.938,
+            0.921,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "in Proc. IEEE Int. Conf. Rebooting Comput. (ICRC), Nov. 2017, pp. 1–6."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 24,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 11,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.078,
+            0.038,
+            0.748,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ZHOU et al.: CIM ANNEALING PROCESSOR WITH INTERACTION COEFFICIENT REUSE AND SPARSE ENERGY COMPUTATION"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.896,
+            0.038,
+            0.921,
+            0.047
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3105"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.08,
+            0.075,
+            0.492,
+            0.109
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[11] H. Goto, K. Tatsumura, and A. R. Dixon, “Combinatorial optimization by simulating adiabatic bifurcations in nonlinear Hamiltonian systems,” Sci. Adv., vol. 5, no. 4, Apr. 2019, Art. no. eaav2372."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.08,
+            0.112,
+            0.492,
+            0.146
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[12] J. W. Su et al., “A 8-b-precision 6T SRAM computing-in-memory macro using segmented-bitline charge-sharing scheme for AI edge chips,” IEEE J. Solid-State Circuits, vol. 58, no. 3, pp. 877–892, Mar. 2023."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.08,
+            0.148,
+            0.492,
+            0.182
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[13] F. Tu et al., “ReDCIM: Reconfigurable digital computing-in-memory processor with unified FP/INT pipeline for cloud AI acceleration,” IEEE J. Solid-State Circuits, vol. 58, no. 1, pp. 243–255, Jan. 2023."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.08,
+            0.184,
+            0.492,
+            0.218
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[14] X. Yang et al., “An in-memory-computing charge-domain ternary CNN classifier,” IEEE J. Solid-State Circuits, vol. 58, no. 5, pp. 1450–1461, May 2023."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.08,
+            0.22,
+            0.492,
+            0.266
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[15] H. Cai et al., “33.4 A 28 nm 2Mb STT-MRAM computing-in-memory macro with a refined bit-cell and 22.4–41.5TOPS/W for AI inference,” in IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers, Feb. 2023, pp. 500–502."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.08,
+            0.268,
+            0.492,
+            0.314
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[16] J. Yue et al., “A 28 nm 16.9–300TOPS/W computing-in-memory processor supporting floating-point NN inference/training with intensive-CIM sparse-digital architecture,” in IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers, Feb. 2023, pp. 1–3."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.08,
+            0.316,
+            0.491,
+            0.35
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[17] S. Geman and D. Geman, “Stochastic relaxation, Gibbs distributions, and the Bayesian restoration of images,” IEEE Trans. Pattern Anal. Mach. Intell., vol. PAMI-6, no. 6, pp. 721–741, Nov. 1984."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.08,
+            0.352,
+            0.492,
+            0.386
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[18] A. Dupret et al., “An optoelectronic CMOS circuit implementing a simulated annealing algorithm,” IEEE J. Solid-State Circuits, vol. 31, no. 7, pp. 1046–1050, Jul. 1996."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.08,
+            0.388,
+            0.492,
+            0.434
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[19] M. Yamaoka, C. Yoshimura, M. Hayashi, T. Okuyama, H. Aoki, and H. Mizuno, “A 20k-spin Ising chip to solve combinatorial optimization problems with CMOS annealing,” IEEE J. Solid-State Circuits, vol. 51, no. 1, pp. 303–309, Jan. 2016."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.08,
+            0.436,
+            0.492,
+            0.493
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[20] T. Takemoto, M. Hayashi, C. Yoshimura, and M. Yamaoka, “A 2 × 30k-spin multi-chip scalable CMOS annealing processor based on a processing-in-memory approach for solving large-scale combinatorial optimization problems,” IEEE J. Solid-State Circuits, vol. 55, no. 1, pp. 145–156, Jan. 2020."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.08,
+            0.495,
+            0.491,
+            0.541
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[21] S. Xie, S. R. S. Raman, C. Ni, M. Wang, M. Yang, and J. P. Kulkarni, “Ising-CIM: A reconfigurable and scalable compute within memory analog Ising accelerator for solving combinatorial optimization problems,” IEEE J. Solid-State Circuits, vol. 57, no. 11, pp. 3453–3465, Nov. 2022."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.08,
+            0.543,
+            0.491,
+            0.588
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[22] Y. Su, H. Kim, and B. Kim, “CIM-spin: A scalable CMOS annealing processor with digital in-memory spin operators and register spins for combinatorial optimization problems,” IEEE J. Solid-State Circuits, vol. 57, no. 7, pp. 2263–2273, Jul. 2022."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.08,
+            0.59,
+            0.492,
+            0.613
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[23] C. Arora et al., “An efficient graph cut algorithm for computer vision problems,” in Proc. Eur. Conf. Comput. Vis. (ECCV), 2010, pp. 5–11."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.08,
+            0.615,
+            0.491,
+            0.65
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[24] Y. Zhou et al., “Semi-supervised 3D abdominal multi-organ segmentation via deep multi-planar co-training,” in Proc. IEEE Winter Conf. Appl. Comput. Vis. (WACV), 2019, pp. 121–140."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 16,
+          "bbox": [
+            0.08,
+            0.652,
+            0.492,
+            0.695
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[25] S. Minaee, Y. Boykov, F. Porikli, A. Plaza, N. Kehtarnavaz, and D. Terzopoulos, “Image segmentation using deep learning: A survey,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 44, no. 7, pp. 3523–3542, Jul. 2022."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.08,
+            0.698,
+            0.49,
+            0.733
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[26] J. Zhang, S. Chen, and Y. Wang, “Advancing CMOS-type Ising arithmetic unit into the domain of real-world applications,” IEEE Trans. Comput., vol. 67, no. 5, pp. 604–616, May 2018."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 18,
+          "bbox": [
+            0.08,
+            0.735,
+            0.492,
+            0.769
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[27] S. Yin, Z. Jiang, J.-S. Seo, and M. Seok, “XNOR-SRAM: In-memory computing SRAM macro for binary/ternary deep neural networks,” IEEE J. Solid-State Circuits, vol. 55, no. 6, pp. 1733–1743, Jun. 2020."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 19,
+          "bbox": [
+            0.08,
+            0.771,
+            0.492,
+            0.805
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[28] S. Lee and Y. Kim, “Low power ternary XNOR using 10T SRAM for in-memory computing,” in Proc. 19th Int. SoC Design Conf. (ISOCC), Gangneung-si, South Korea, Oct. 2022, pp. 352–353."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 20,
+          "bbox": [
+            0.08,
+            0.807,
+            0.492,
+            0.853
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[29] Z. Chen et al., “PUF-CIM: SRAM-based compute-in-memory with zero bit-error-rate physical unclonable function for lightweight secure edge computing,” IEEE Trans. Very Large Scale Integr. VLSI Syst., vol. 31, no. 8, pp. 1234–1247, Aug. 2023."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 21,
+          "bbox": [
+            0.08,
+            0.855,
+            0.491,
+            0.887
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[30] R. W. Ward and T. Molteno, “Table of linear feedback shift registers,” Dept. Phys., Univ. Otago, Dunedin, New Zealand, Tech. Rep. 2012-1, 2012."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 22,
+          "bbox": [
+            0.08,
+            0.89,
+            0.492,
+            0.925
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[31] K. Cattell and S. Zhang, “Minimal cost one-dimensional linear hybrid cellular automata of degree through 500,” J. Electron. Test., vol. 6, no. 2, pp. 255–258, Apr. 1995."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 23,
+          "bbox": [
+            0.08,
+            0.927,
+            0.491,
+            0.938
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[32] Fashion-MNIST Dataset. Accessed: Aug. 27, 2017. [Online]. Available:"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 24,
+          "bbox": [
+            0.108,
+            0.938,
+            0.369,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "https://github.com/zalandoresearch/fashion-mnist"
+            }
+          ]
+        },
+        {
+          "type": "equation",
+          "index": 25,
+          "bbox": [
+            0.615,
+            0.075,
+            0.921,
+            0.086
+          ],
+          "content": ""
+        },
+        {
+          "type": "text",
+          "index": 26,
+          "bbox": [
+            0.509,
+            0.075,
+            0.917,
+            0.107
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[33] MSRA-10K Available: https://github.com/lartpang/awesome-segmentation-saliency-dataset#msramsra10kmsra-b"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 27,
+          "bbox": [
+            0.509,
+            0.109,
+            0.921,
+            0.143
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[34] C. Rother, V. Kolmogorov, and A. Blake, “GrabCut: Interactive foreground extraction using iterated graph cuts,” Acm Trans. Graph., vol. 23, no. 3, pp. 309–314, 2004."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 28,
+          "bbox": [
+            0.508,
+            0.144,
+            0.922,
+            0.939
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "[35] I. Ahmed, P.-W. Chiu, W. Moy, and C. H. Kim, “A probabilistic compute fabric based on coupled ring oscillators for solving combinatorial optimization problems,” IEEE J. Solid-State Circuits, vol. 56, no. 9, pp. 2870–2880, Sep. 2021. "
+            },
+            {
+              "type": "text",
+              "content": "Yifeng Zhou",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Graduate Student Member, IEEE) received the B.S. degree from the School of Physics and Electronics, Hunan University, Changsha, Hunan, China, in 2021, where he is currently pursuing the Ph.D. degree. His current research interests include non-von Neumann architecture and hardware acceleration for combinational optimization problems. "
+            },
+            {
+              "type": "text",
+              "content": "Guocheng Su",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Student Member, IEEE) received the B.S. degree from the School of Physics and Electronics, Hunan University, Changsha, Hunan, China, in 2022, where he is currently pursuing the M.S. degree. His current research interests include co-optimization of artificial intelligence and hardware acceleration for combinational optimization problems. "
+            },
+            {
+              "type": "text",
+              "content": "Jinrong Zhou",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Student Member, IEEE) received the B.S. degree from the School of Physics and Optoelectronics, Xiangtan University, Xiangtan, Hunan, China, in 2022. He is currently pursuing the M.S. degree with the School of Physics and Electronics, Hunan University, Changsha, Hunan, China. His current research interests include hardwarefriendly neural network design and computing-in-memory circuit design. "
+            },
+            {
+              "type": "text",
+              "content": "Lei Liao",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Senior Member, IEEE) received the B.S. and Ph.D. degrees from Wuhan University, Wuhan, China, in 2004 and 2009, respectively. He was a Post-Doctoral Research Fellow with the University of California at Los Angeles (UCLA), Los Angeles, CA, USA, from 2009 to 2011. From 2011 to 2016, he was a Professor with Wuhan University. He is currently a Professor and the Dean of the College of Semiconductors (College of Integrated Circuits), Hunan University, Changsha, China. His research works appeared in top journals, including Nature, Nature Electronics, Nature Materials, and Nature Communications with more than 16 000 citations. His current research interests include beyond-Moore devices, circuits, and architectures. Dr. Liao is a fellow of the Institution of Engineering and Technology (IET). He has been serving as an Associate Editor for IEEE TRANSACTIONS ON ELECTRON DEVICES, Frontier of Physics, and Solid-State Electronics. He was rewarded as a Highly Cited Researcher by Clarivate in 2019, 2020, and 2022. "
+            },
+            {
+              "type": "text",
+              "content": "Zhuojun Chen",
+              "styles": [
+                "bold"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Senior Member, IEEE) received the Ph.D. degree in integrated circuit design from Shanghai Institute of Microsystem and Information Technology, Chinese Academy of Sciences, Shanghai, China, in 2017. In 2017, he joined Hunan University, Changsha, China, where he was an Assistant Professor at the School of Physics and Electronics. He is currently an Associate Professor at the College of Semi-conductors (College of Integrated Circuits), Hunan University. His current research interests include non-von Neumann architecture, compute-in-memory circuits, hardware security, and rad-hard circuit design."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 29,
+          "bbox": [
+            0.51,
+            0.203,
+            0.627,
+            0.317
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 29,
+              "bbox": [
+                0.51,
+                0.203,
+                0.627,
+                0.317
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 30,
+          "bbox": [
+            0.51,
+            0.329,
+            0.627,
+            0.442
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 30,
+              "bbox": [
+                0.51,
+                0.329,
+                0.627,
+                0.442
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 31,
+          "bbox": [
+            0.51,
+            0.454,
+            0.627,
+            0.567
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 31,
+              "bbox": [
+                0.51,
+                0.454,
+                0.627,
+                0.567
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 32,
+          "bbox": [
+            0.51,
+            0.579,
+            0.627,
+            0.693
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 32,
+              "bbox": [
+                0.51,
+                0.579,
+                0.627,
+                0.693
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 33,
+          "bbox": [
+            0.51,
+            0.793,
+            0.627,
+            0.906
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 33,
+              "bbox": [
+                0.51,
+                0.793,
+                0.627,
+                0.906
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 34,
+          "bbox": [
+            0.518,
+            0.938,
+            0.865,
+            0.95
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Dr. Chen was a recipient of several design and teaching awards."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 35,
+          "bbox": [
+            0.117,
+            0.965,
+            0.879,
+            0.975
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "is_full_document": true,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}
