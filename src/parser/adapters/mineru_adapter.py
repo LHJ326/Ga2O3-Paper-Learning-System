@@ -7,7 +7,15 @@ import re
 from pathlib import Path
 from typing import Any
 
-from ...schema.document import Document, Figure, Metadata, Page, Section, TextBlock
+from ...schema.document import (
+    Document,
+    Equation,
+    Figure,
+    Metadata,
+    Page,
+    Section,
+    TextBlock,
+)
 from .base import ParserAdapter
 
 
@@ -44,6 +52,11 @@ _FIGURE_REFERENCE_TOKEN = re.compile(
     re.IGNORECASE,
 )
 _MARKDOWN_EMPHASIS = re.compile(r"\*\*|__")
+_DISPLAY_MATH = re.compile(
+    r"^(?:\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\])$"
+)
+_EQUATION_TAG = re.compile(r"\\tag\{(?P<number>[^{}]+)\}")
+_TRAILING_EQUATION_NUMBER = re.compile(r"\(\s*(?P<number>\d+[A-Za-z]?)\s*\)\s*(?:\$\$|\\\])?$")
 
 
 class MinerUAdapter(ParserAdapter):
@@ -100,6 +113,14 @@ class MinerUAdapter(ParserAdapter):
             caption_source_file=content_path.relative_to(raw_root).as_posix(),
         )
         self._link_figure_text_evidence(figures, text_blocks)
+        formula_contexts = self._formula_contexts(page_chunks, text_blocks)
+        equations = self._convert_equations(
+            image_manifest,
+            raw_root,
+            provenance,
+            formula_contexts=formula_contexts,
+            text_blocks=text_blocks,
+        )
 
         metadata_content = json.dumps(
             {
@@ -131,6 +152,7 @@ class MinerUAdapter(ParserAdapter):
             pages=pages,
             sections=sections,
             figures=figures,
+            equations=equations,
             text_blocks=text_blocks,
         )
 
@@ -393,6 +415,183 @@ class MinerUAdapter(ParserAdapter):
                 )
             )
         return figures
+
+    @staticmethod
+    def _formula_contexts(
+        page_chunks: list[tuple[int, str]],
+        text_blocks: list[TextBlock],
+    ) -> dict[str, dict[str, object]]:
+        """Collect Formula block type, optional math text, and adjacent text IDs."""
+        text_ids: dict[tuple[int, str], list[str]] = {}
+        for text_block in text_blocks:
+            if text_block.page_number is None:
+                continue
+            text_ids.setdefault(
+                (text_block.page_number, text_block.content), []
+            ).append(text_block.id)
+
+        contexts: dict[str, dict[str, object]] = {}
+        for page_number, page_content in page_chunks:
+            blocks = [
+                block.strip()
+                for block in re.split(r"\n\s*\n", page_content)
+                if block.strip()
+            ]
+            for index, block in enumerate(blocks):
+                image_match = _IMAGE_REFERENCE.fullmatch(block)
+                if (
+                    image_match is None
+                    or image_match.group("block_type").strip() != "Formula block"
+                ):
+                    continue
+
+                neighboring_math = [
+                    blocks[position]
+                    for position in (index - 1, index + 1)
+                    if 0 <= position < len(blocks)
+                    and _DISPLAY_MATH.fullmatch(blocks[position]) is not None
+                ]
+                markdown_math = (
+                    neighboring_math[0] if len(neighboring_math) == 1 else None
+                )
+
+                related_text_block_ids: list[str] = []
+                for direction in (-1, 1):
+                    position = index + direction
+                    while 0 <= position < len(blocks):
+                        candidate = blocks[position]
+                        if _IMAGE_REFERENCE.fullmatch(candidate) is not None:
+                            position += direction
+                            continue
+                        if _HEADING.fullmatch(candidate) is not None:
+                            break
+                        candidate_ids = text_ids.get(
+                            (page_number, candidate), []
+                        )
+                        if len(candidate_ids) == 1:
+                            related_text_block_ids.append(candidate_ids[0])
+                        break
+
+                contexts[image_match.group("locator")] = {
+                    "page": page_number,
+                    "block_type": "Formula block",
+                    "markdown_math": markdown_math,
+                    "related_text_block_ids": list(
+                        dict.fromkeys(related_text_block_ids)
+                    ),
+                }
+        return contexts
+
+    def _convert_equations(
+        self,
+        image_manifest: dict[str, Any],
+        raw_root: Path,
+        provenance: dict[str, str],
+        *,
+        formula_contexts: dict[str, dict[str, object]],
+        text_blocks: list[TextBlock],
+    ) -> list[Equation]:
+        """Convert MinerU Formula block assets without reconstructing math."""
+        images = image_manifest.get("images")
+        if not isinstance(images, list):
+            raise ValueError("image_exports.json must contain an images array.")
+
+        equations: list[Equation] = []
+        for image in images:
+            if not isinstance(image, dict):
+                raise ValueError("Each image manifest entry must be a JSON object.")
+            locator = self._required_string(image, "locator")
+            context = formula_contexts.get(locator)
+            if context is None:
+                continue
+
+            filename = self._required_string(image, "file")
+            locator_match = _LOCATOR_PAGE.search(locator)
+            if locator_match is None:
+                raise ValueError(f"Formula locator has no page number: {locator}")
+            page_number = int(locator_match.group(1))
+            if context.get("page") != page_number:
+                raise ValueError(
+                    f"Formula locator page disagrees with Markdown context: {locator}"
+                )
+            image_path = raw_root / "images" / filename
+            if not image_path.is_file():
+                raise FileNotFoundError(
+                    f"Exported MinerU formula image not found: {image_path}"
+                )
+
+            markdown_math = context.get("markdown_math")
+            if isinstance(markdown_math, str):
+                content = markdown_math
+                representation_type = "markdown_math"
+            else:
+                content = ""
+                representation_type = "image_only"
+
+            equation_number = self._equation_number(content)
+            related_ids = context.get("related_text_block_ids", [])
+            if not isinstance(related_ids, list):
+                raise ValueError("Formula related TextBlock IDs must be a list.")
+
+            equation = Equation(
+                id=f"{provenance['paper_id']}-equation-{len(equations) + 1:03d}",
+                page_number=page_number,
+                content=content,
+                source_reference=json.dumps(
+                    {
+                        **provenance,
+                        "source_file": "json/image_exports.json",
+                        "page": page_number,
+                        "mineru_locator": locator,
+                        "formula_image_path": (
+                            Path("images") / filename
+                        ).as_posix(),
+                        "representation_type": representation_type,
+                        "equation_number": equation_number,
+                        "related_ids": related_ids,
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
+            )
+            equations.append(equation)
+
+        text_blocks_by_id = {text_block.id: text_block for text_block in text_blocks}
+        for equation in equations:
+            equation_source = json.loads(equation.source_reference)
+            for text_block_id in equation_source["related_ids"]:
+                text_block = text_blocks_by_id.get(text_block_id)
+                if text_block is None:
+                    continue
+                text_source = json.loads(text_block.source_reference)
+                if equation.id not in text_source["related_ids"]:
+                    text_source["related_ids"].append(equation.id)
+                text_source.setdefault("equation_references", []).append(
+                    {
+                        "equation_id": equation.id,
+                        "relation": "adjacent_formula_block",
+                        "mineru_locator": equation_source["mineru_locator"],
+                    }
+                )
+                text_block.source_reference = json.dumps(
+                    text_source, ensure_ascii=False, sort_keys=True
+                )
+        return equations
+
+    @staticmethod
+    def _equation_number(content: str) -> str | None:
+        """Extract only an explicit number from available Markdown math."""
+        if not content:
+            return None
+        tag_match = _EQUATION_TAG.search(content)
+        if tag_match is not None:
+            return tag_match.group("number").strip()
+        trailing_match = _TRAILING_EQUATION_NUMBER.search(content)
+        return (
+            trailing_match.group("number")
+            if trailing_match is not None
+            else None
+        )
 
     @staticmethod
     def _detect_figure_references(text: str) -> list[dict[str, object]]:

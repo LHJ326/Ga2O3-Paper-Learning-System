@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 Current Phase:
 
-Phase 1.5D-1B-3D
+Phase 1.5D-1B-3E
 
 Completed:
 
@@ -27,6 +27,7 @@ Completed:
 - Scientific figure asset filtering implemented
 - Figure-to-text evidence chain implemented
 - Supplementary Figure references classified
+- MinerU formula assets mapped to Document.equations
 
 Current Data:
 
@@ -51,11 +52,11 @@ Current Document Statistics:
 - TextBlocks: 214
 - Figures: 6
 - Tables: 0
-- Equations: 0
+- Equations: 6
 
 Current:
 
-- Main, supplementary, and truly unresolved Figure references are distinguished
+- Figure and Equation structural mapping available
 
 Current Recovery Files:
 
@@ -70,12 +71,13 @@ Current Limitations:
 - Scientific Figures require an `Image block` and a conservative same-page adjacent numbered caption
 - 11 non-Figure assets remain only in Raw Output
 - Supplementary Figure references remain unlinked because supplementary Figures are not part of the current Document
-- Equation extraction incomplete
+- Equation text remains unavailable because P001 Formula blocks are image-only
+- One page-11 Formula block appears to be a MinerU reference-fragment misclassification
 - Table extraction incomplete
 - `parse()` / `validate()` remain interface placeholders
 
 Next:
 
-- Equation detection from MinerU formula blocks
-- Table handling
+- Table detection / handling
 - Benchmark evaluation
+- Evaluate Equation text quality

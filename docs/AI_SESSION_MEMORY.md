@@ -123,6 +123,10 @@ Phase 1.5D-1B-3D:
 
 Supplementary Figure reference classification
 
+Phase 1.5D-1B-3E:
+
+Formula asset to Equation mapping
+
 ## 5. Current P001 Status
 
 Paper:
@@ -150,7 +154,7 @@ Current output:
 - Figures with explicit body references: 6
 - Explicit body Figure references: 63 total (40 main, 23 supplementary, 0 truly unresolved)
 - Tables: 0
-- Equations: 0
+- Equations: 6 (all `image_only`; no machine-readable formula text)
 
 ## 6. Important Design Decisions
 
@@ -194,8 +198,8 @@ Phase 1.5D-1B-3
 
 目标：提升 MinerU Adapter。
 
-- Equation 检测
 - Table 支持
+- Equation text quality 评估
 - B01 Benchmark 准备
 
 ## 9. Rules For Future AI

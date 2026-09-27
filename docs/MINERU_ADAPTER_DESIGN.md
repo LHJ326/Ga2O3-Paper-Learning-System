@@ -20,7 +20,8 @@ The method returns the existing `Document` dataclass with:
 - `sections` derived from H1 and H2 Markdown headings;
 - `text_blocks` derived from ordinary page-bounded Markdown paragraphs;
 - `figures` classified from image assets using conservative caption and block-type evidence;
-- empty `tables` and `equations` collections in this first version.
+- `equations` mapped conservatively from MinerU Formula block assets;
+- an empty `tables` collection in this version.
 
 ## Field Mapping
 
@@ -32,6 +33,7 @@ The method returns the existing `Document` dataclass with:
 | `sections` | Markdown H1/H2 headings | One `Section` per heading with its source page. |
 | `text_blocks` | Blank-line-delimited Markdown | Excludes heading-only and image-only paragraphs. IDs are deterministic within conversion order. |
 | `figures` | `image_exports.json` and adjacent Markdown | Creates a Figure only when an `Image block` has an immediately following same-page numbered `Figure` or `Fig.` caption. Formula and insufficient-evidence assets are excluded. |
+| `equations` | Formula block entries in `image_exports.json` and Markdown | Creates one Equation per Formula block, preserving image evidence and using math text only when a directly adjacent Markdown math block exists. |
 
 MinerU Image Asset is not equivalent to Scientific Figure. The classification flow is:
 
@@ -82,6 +84,25 @@ Each detected reference stores:
 
 No Document Schema change was required. These lightweight relationship fields use the existing JSON-encoded extension points, retain the original TextBlock content, and preserve backward compatibility.
 
+## Equation Mapping
+
+```text
+MinerU Formula Asset
+
+↓
+
+Equation classification
+
+├── Markdown math available
+│   → Equation(content + evidence)
+└── Image only
+    → Equation(image evidence only)
+```
+
+For `markdown_math`, the original Markdown math is preserved without normalization or reconstruction. For `image_only`, `Equation.content` is an empty string; the adapter never invents a formula from prose. Equation `source_reference` retains the Formula block locator, page, image path, representation type, optional explicit equation number, and conservatively adjacent TextBlock IDs. Related TextBlocks receive the Equation ID and locator through their existing JSON source-reference extension.
+
+An equation number is stored only when it is present in machine-readable Markdown math as an explicit tag or trailing number. A number visible only inside an image is not transcribed because OCR and P001-specific hardcoding are outside this phase.
+
 Every `source_reference` is a JSON string containing at least:
 
 - `paper_id`
@@ -102,6 +123,8 @@ The locator is `null` when MinerU does not provide block-level identity. Figure 
 - Figure-to-text mapping requires an explicit textual Figure reference; it does not infer semantic relationships.
 - Supplementary Figure references are classified and retained without links because supplementary Figures are not converted in the current dataset.
 - Excluded image assets remain accessible only through Raw Output because the schema has no generic image element.
-- Tables and equations are not extracted because the observed raw output has no explicit table or equation objects.
+- P001 Formula blocks provide no machine-readable math, so all current Equations are `image_only`.
+- MinerU labels one page-11 reference fragment as a Formula block; the adapter preserves that raw classification as an Equation with evidence but flags the classification-quality issue in the P001 report.
+- Tables are not extracted because the observed raw output has no explicit table objects.
 - Markdown heading levels deeper than H2 are not converted to sections.
 - `parse()` and `validate()` remain intentionally unimplemented.
