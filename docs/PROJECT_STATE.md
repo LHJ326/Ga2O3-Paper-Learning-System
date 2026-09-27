@@ -1,164 +1,169 @@
 # Project State
 
-Project:
+## Project
 
 Ga2O3-Paper-Learning-System
 
-Current Phase:
+## Current Phase
 
-Phase 1.5D-2C — B01 Benchmark Evaluator v1 completed
+Phase 1.5D-2C completed — B01 Benchmark Evaluator v1 and milestone archive
 
-Completed:
+## Current Architecture
 
-- Project initialization
-- Python development environment initialized
-- MinerU isolated environment created
-- MinerU 4.0.7 manually installed and verified
-- Parser interface and Document Schema initialized
-- Paper library structure created
-- MinerU raw-output contract defined
-- P001 PDF imported and registered
-- P001 MinerU raw output generated
-- P001 MinerU raw output analyzed
-- MinerUAdapter first conversion implemented
-- Project session handover created
-- AI session memory created
-- P001 Figure-caption mapping implemented
-- Scientific figure asset filtering implemented
-- Figure-to-text evidence chain implemented
+```text
+PDF
+→ MinerU 4.0.7
+→ docvortex.middle 2.0 middle_json (preferred future input)
+→ MinerUAdapter
+→ Unified Document Schema 0.2 + Evidence
+→ future RAGAnythingAdapter
+→ content_list
+→ RAG-Anything / LightRAG
+```
+
+The existing Markdown/raw-output adapter path remains operational as a fallback. MinerUAdapter v2 has not been implemented.
+
+## Completed
+
+- Project and Python environments initialized
+- MinerU 4.0.7 isolated environment installed and frozen
+- Parser interface, adapter boundary, and Raw Output contract defined
+- Paper library structure and stable Paper IDs established
+- P001 imported, parsed, analyzed, and converted through MinerUAdapter v1
+- P001 Figure-caption mapping and Scientific Figure filtering implemented
+- P001 Figure-to-Text evidence relationships implemented
 - Supplementary Figure references classified
-- MinerU formula assets mapped to Document.equations
-- P001 Table detection completed
-- P001 Document integrity validation completed
+- Formula assets mapped to Equations
+- P001 Table detection and Document integrity validation completed
 - Repeated publisher/header/footer boilerplate filtering implemented
 - Document Schema 0.2 stabilized
-- Typed Evidence object added
-- Typed Figure/TextBlock relations added
-- Typed Equation metadata added
-- P001 Adapter / Schema 0.2 reached the current Pilot stable node
-- B01 benchmark readiness and P001/B01 identity separation assessed
-- B01 PDF manually placed by the user
+- Typed `Evidence`, `FigureTextRelation`, and `EquationMetadata` added
 - B01 identity and SHA256 registered
-- B01 Ground Truth scaffold initialized
-- Legacy B01 expected counts marked LEGACY / UNVERIFIED
-- B01 Ground Truth v1 manually established
-- B01 MinerU 4.0.7 Raw Output manually generated
-- B01 Layer A parser benchmark evaluator implemented
-- B01 machine-readable benchmark result generated
-- B01 parser benchmark report generated
+- B01 Ground Truth v1 manually authored
+- B01 MinerU Raw Output manually generated
+- B01 Layer A Benchmark Evaluator v1 implemented
+- B01 machine-readable result and report generated
+- RAG-Anything source interface review completed
 
-Current Data:
+## Environment
 
-P001:
+- OS: Windows 11
+- Python: 3.12.7
+- Main environment: `.venv`
+- MinerU environment: `.venv-mineru`
+- MinerU: 4.0.7
+- GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+- CUDA: 12.6
 
-Role:
+## Document Schema
 
-Pilot / Integration Test Paper
+- Version: 0.2
+- Status: stable for the current Pilot milestone
+- Evidence contract: typed `Evidence` plus backward-compatible `source_reference`
+- Typed relations: `FigureTextRelation`
+- Equation metadata: `EquationMetadata`
 
-PDF:
+## P001 Status
 
-`data/papers/P001.pdf`
-
-Raw Output:
-
-`data/parsed/P001/mineru/raw/`
-
-Document:
-
-Generated through `MinerUAdapter.convert()`
-
-Current Document Statistics:
-
+- Role: Pilot / Integration Test Paper
+- PDF: `data/papers/P001.pdf`
+- Raw Output: `data/parsed/P001/mineru/raw/`
+- Conversion: `MinerUAdapter.convert()`
 - Pages: 12
 - Sections: 10
 - TextBlocks: 156
 - Figures: 6
-- Tables: 0
 - Equations: 6
+- Tables: 0
 - FigureTextRelations: 40
+- Validation: `PASS_WITH_KNOWN_ISSUES`
 
-B01:
+## B01 Status
 
-Role:
+- Role: Primary Parser Benchmark Case
+- Title: Mg-doped α-Ga2O3 Nanorods for the Construction of Photoelectrochemical-Type Self-Powered Solar Blind UV Photodetectors and Underwater Imaging Application
+- Journal: Advanced Science
+- Year: 2025
+- DOI: `10.1002/advs.202413074`
+- PDF: `data/benchmark/B01/B01.pdf`
+- SHA256: `71D5B029EA9928A261DB783597B00F06A48B156122DB69AE3F83D1B8275E9E7E`
+- Ground Truth: `data/benchmark/B01/B01_GROUND_TRUTH.yaml`
+- Raw Middle JSON: `data/parsed/B01/mineru/raw/middle_json/B01.json`
+- Raw schema: `docvortex.middle` 2.0
+- Benchmark result: `data/benchmark/B01/B01_BENCHMARK_RESULT.json`
+- Benchmark report: `docs/B01_BENCHMARK_REPORT.md`
 
-Primary Parser Benchmark Case
+Ground Truth v1 summary:
 
-Title:
+- Pages: 10
+- Main Sections: 4
+- Experimental subsections: 4
+- Scientific Figures: 5
+- Equations: 7
+- Main-text Tables: 0
 
-Mg-doped α-Ga2O3 Nanorods for the Construction of Photoelectrochemical-Type Self-Powered Solar Blind UV Photodetectors and Underwater Imaging Application
+Layer A benchmark metrics:
 
-Journal / Year / DOI:
+| Category | Precision | Recall | F1 | Counts |
+|---|---:|---:|---:|---|
+| Scientific Figures | 83.33% | 100% | 90.91% | TP 5 / FP 1 / FN 0 |
+| Equations | 75% | 85.71% | 80% | TP 6 / FP 2 / FN 1 |
+| Pages | 100% | 100% | 100% | 10/10 |
+| Captions | 100% | 100% | 100% | 5/5 |
+| Main Sections | 44.44% | 100% | 61.54% | 4 matched plus 5 ancillary titles |
+| Main-text Tables | 100% | 100% | 100% | GT 0 / Predicted 0 |
 
-Advanced Science / 2025 / `10.1002/advs.202413074`
+All four Experimental subsections matched. Layer B / Unified Document evaluation is not yet implemented.
 
-PDF:
+## Architectural Findings
 
-`data/benchmark/B01/B01.pdf`
+MinerU 4.0.7 `middle_json` (`docvortex.middle` schema 2.0) exposes typed structures including `header`, `footer`, `page_footnote`, `paragraph_title`, `equation`, `image`, `image_caption`, and `doc_title`.
 
-SHA256:
+Decision for MinerUAdapter v2:
 
-`71D5B029EA9928A261DB783597B00F06A48B156122DB69AE3F83D1B8275E9E7E`
+- Primary input: `middle_json`
+- Fallback: existing Markdown + legacy Raw Output route
 
-Metadata:
+This decision is planned only; no Adapter v2 implementation exists yet.
 
-`data/benchmark/B01/B01_METADATA.yaml`
+## RAG-Anything Evaluation
 
-Ground Truth:
+- Source: `F:\Learning\open-source-research\RAG-Anything`
+- Status: `ADOPT CANDIDATE`
+- License: MIT
+- Python: >= 3.10
+- Confirmed direct pre-parsed `content_list` insertion through `insert_content_list()`
+- Confirmed multimodal item support: text, image, table, equation
+- Confirmed relevant fields: `page_idx`, `img_path`, `image_caption`, `table_caption`, `latex`, `doc_id`
+- Parser support includes MinerU, Docling, and PaddleOCR
+- Backend: LightRAG
+- Not installed, not integrated, and not formally adopted
 
-`data/benchmark/B01/B01_GROUND_TRUTH.yaml`
+RAG-Anything is a future multimodal retrieval/indexing layer, not the project's factual source of truth. Unified Document + Evidence Store remains authoritative.
 
-Benchmark readiness:
+## Known Issues
 
-`LAYER_A_EVALUATED`
+1. P001 PDF page 11 reference fragment is misclassified by MinerU as a Formula block.
+2. B01 Equation (2), `Ga(OH)3 → GaOOH + H2O`, is missing from MinerU Raw Equation blocks.
+3. The Advanced Science publisher logo is misclassified as an image on B01 page 1 and as Equations on pages 9 and 10.
+4. Table parsing has not been stress-tested on a paper containing a genuine main-text Table.
+5. MinerUAdapter v2 is not implemented.
+6. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
+7. Layer B benchmark and aggregate pass threshold are not yet defined.
 
-Ground Truth v1 confirms 10 pages, 4 main sections, 5 Scientific Figures, 7 Equations, and 0 main-text Tables. Layer A evaluates MinerU Raw Output against the manually reviewed evidence. Layer B remains a placeholder.
+## Key Git Commit
 
-Current:
+- `2f39f7962e0e37c4a1c5a431604fcc2a34411aff` — Add B01 parser benchmark evaluator
 
-- B01 PDF manually available and identity fixed
-- B01 Ground Truth v1 available
-- Layer A Raw benchmark completed
-- Figure Raw metrics: TP 5 / FP 1 / FN 0
-- Equation Raw metrics: TP 6 / FP 2 / FN 1
-- Layer B Unified Document benchmark not evaluated
-- P001 and B01 separated by identity, role, and path
+## Next Planned Phase
 
-Current Recovery Files:
+Phase 1.5D-3 — MinerUAdapter v2
 
-- `docs/PROJECT_STATE.md`
-- `docs/SESSION_HANDOVER.md`
-- `docs/AI_SESSION_MEMORY.md`
-- `docs/MINERU_P001_OUTPUT_ANALYSIS.md`
-- `docs/MINERU_ADAPTER_DESIGN.md`
-- `docs/B01_BENCHMARK_READINESS_REPORT.md`
-- `data/benchmark/B01/B01_METADATA.yaml`
-- `data/benchmark/B01/B01_GROUND_TRUTH.yaml`
-- `data/benchmark/B01/B01_RAW_REVIEW.yaml`
-- `data/benchmark/B01/B01_BENCHMARK_RESULT.json`
-- `docs/B01_BENCHMARK_REPORT.md`
+Priority sequence:
 
-Current Limitations:
-
-- Scientific Figures require an `Image block` and a conservative same-page adjacent numbered caption
-- 11 non-Figure assets remain only in Raw Output
-- Supplementary Figure references remain unlinked because supplementary Figures are not part of the current Document
-- Equation text remains unavailable because P001 Formula blocks are image-only
-- One page-11 Formula block appears to be a MinerU reference-fragment misclassification
-- Table extraction incomplete
-- `parse()` / `validate()` remain interface placeholders
-- B01 Ground Truth YAML has detailed Figure records for Figures 1–3 only, while the manually confirmed v1 summary records five Scientific Figures
-- Layer B cannot yet evaluate `docvortex.middle` without a future MinerUAdapter v2 design
-- B01 evaluation has no aggregate passing threshold
-
-Known Issues:
-
-- MinerU classified one page-11 reference fragment as a Formula block; Equation false-positive filtering is deferred to a later phase
-- B01 Raw Equation blocks contain publisher-logo false positives on pages 9 and 10
-- B01 Equation (2) is a Raw false negative on page 2
-
-Next:
-
-- Complete detailed Ground Truth records for B01 Figures 4 and 5 without using parser output
-- Define the benchmark aggregate score / passing threshold
-- Design MinerUAdapter v2 with `middle_json` as the primary input candidate and Markdown as fallback
-- Implement Layer B evaluation only in a later adapter phase
+1. Convert `docvortex.middle` 2.0 to Unified Document while preserving Markdown fallback.
+2. Re-evaluate B01 at the Adapter / Layer B level.
+3. Select 1–2 additional Pilot papers, including at least one genuine main-text Table paper.
+4. Freeze Parser v1.
+5. Create an isolated RAG-Anything environment and implement `RAGAnythingAdapter`.
+6. Continue Translation QA and Knowledge Card work.

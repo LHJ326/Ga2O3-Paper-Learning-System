@@ -3,231 +3,209 @@
 
 ## 1. Project Goal
 
-本项目目标是建立一个长期科研论文 AI 学习系统。
-
-核心流程：
+Build a long-lived AI learning system for Ga2O3 optoelectronic-device research papers:
 
 ```text
-PDF 论文
-
-↓
-
-解析
-
-↓
-
-结构化 Document
-
-↓
-
-Knowledge Card
-
-↓
-
-RAG
-
-↓
-
-AI 科研助手
+PDF
+→ parsing
+→ evidence-preserving Unified Document
+→ Knowledge Card
+→ multimodal RAG
+→ AI research assistant
 ```
 
-重点方向：Ga2O3 光电器件论文学习。
+The project is benchmark-driven: establish independent Ground Truth before judging or optimizing parser output. Important state must live in repository documents, not chat memory.
 
 ## 2. Current Architecture
 
 ```text
 PDF
-
-↓
-
-MinerU 4.0.7
-
-↓
-
-Raw Output
-
-↓
-
-MinerUAdapter
-
-↓
-
-Document Schema
-
-↓
-
-后续 RAG 系统
+→ MinerU 4.0.7
+→ Raw Output
+   ├── primary candidate: docvortex.middle 2.0 middle_json
+   └── fallback: Markdown + legacy Raw Output
+→ MinerUAdapter
+→ Unified Document Schema 0.2
+→ Evidence Store / Knowledge Layer
+→ future RAGAnythingAdapter
+→ content_list
+→ RAG-Anything / LightRAG
 ```
 
-## 3. Current Environment
+Unified Document + Evidence Store is the factual layer. RAG-Anything may index and retrieve multimodal content, but must not replace the evidence model or discard provenance.
 
+## 3. Environment
+
+- Project: `F:\Learning\Ga2O3-Paper-Learning-System`
 - OS: Windows 11
 - Python: 3.12.7
-- GPU: RTX 4060 Laptop GPU
-- CUDA: 12.6
 - Main environment: `.venv`
 - MinerU environment: `.venv-mineru`
-- MinerU version: 4.0.7
+- MinerU: 4.0.7
+- GPU: RTX 4060 Laptop GPU
+- CUDA: 12.6
+
+Do not reinstall environments, rerun completed PDF parsing, or modify Raw Output unless a future task explicitly authorizes it.
 
 ## 4. Completed Milestones
 
-Phase 0:
+- Project/environment initialization
+- Parser interface and adapter architecture
+- Paper library and Raw Output contract
+- P001 import, parsing, Raw analysis, and MinerUAdapter v1 conversion
+- Figure-caption mapping and Scientific Figure filtering
+- Figure-to-Text evidence chain and supplementary-reference classification
+- Equation structural mapping, Table detection, integrity validation, and boilerplate filtering
+- Document Schema 0.2 stabilization with typed `Evidence`, `FigureTextRelation`, and `EquationMetadata`
+- B01 identity registration and independent Ground Truth v1
+- B01 MinerU 4.0.7 Raw parsing by the user
+- Layer A B01 Benchmark Evaluator v1
+- Initial RAG-Anything source/interface review
 
-Project initialization
+## 5. P001 Status
 
-Phase 1:
-
-Environment setup
-
-Phase 1.5C:
-
-MinerU environment
-
-Phase 1.5D:
-
-Paper Library
-
-Phase 1.5D-1B-0:
-
-MinerU Output Contract
-
-Phase 1.5D-1B-1A:
-
-P001 metadata
-
-Phase 1.5D-1B-1B:
-
-P001 MinerU raw parsing
-
-Phase 1.5D-1B-2A:
-
-MinerU output analysis
-
-Phase 1.5D-1B-2B:
-
-MinerUAdapter first conversion
-
-Phase 1.5D-1B-3A:
-
-Figure-caption mapping
-
-Phase 1.5D-1B-3B:
-
-Scientific Figure asset filtering
-
-Phase 1.5D-1B-3C:
-
-Figure-to-text evidence chain
-
-Phase 1.5D-1B-3D:
-
-Supplementary Figure reference classification
-
-Phase 1.5D-1B-3E:
-
-Formula asset to Equation mapping
-
-Phase 1.5D-1B-3F:
-
-P001 Table detection
-
-Phase 1.5D-1B-3G:
-
-P001 Document integrity validation
-
-Phase 1.5D-1B-3H:
-
-Repeated boilerplate TextBlock filtering
-
-Phase 1.5D-1B-4:
-
-Document Schema 0.2 stabilization
-
-## 5. Current P001 Status
-
-Paper:
-
-`P001.pdf`
-
-Location:
-
-`data/papers/P001.pdf`
-
-Raw:
-
-`data/parsed/P001/mineru/raw/`
-
-Conversion:
-
-`MinerUAdapter.convert()`
-
-Current output:
-
+- Role: Pilot / Integration Test Paper
+- PDF: `data/papers/P001.pdf`
+- Raw: `data/parsed/P001/mineru/raw/`
+- Adapter: `MinerUAdapter.convert()` using the current Markdown/legacy route
+- Schema: 0.2
 - Pages: 12
 - Sections: 10
-- TextBlocks: 156 (58 repeated page-decoration blocks filtered from the Document)
+- TextBlocks: 156
 - Figures: 6
-- Figures with explicit body references: 6
-- Explicit body Figure references: 63 total (40 main, 23 supplementary, 0 truly unresolved)
+- Equations: 6, all image-only
 - Tables: 0
-- Equations: 6 (all `image_only`; no machine-readable formula text)
 - FigureTextRelations: 40
-- Schema version: 0.2
+- Validation: `PASS_WITH_KNOWN_ISSUES`
 
-## 6. Important Design Decisions
+Do not rerun MinerU on P001. Known P001 issue: a page-11 reference fragment is misclassified as a Formula block.
 
-1. 不要直接绑定 MinerU 输出。
+## 6. B01 Ground Truth and Benchmark
 
-   必须通过：
+- Role: Primary Parser Benchmark Case
+- PDF: `data/benchmark/B01/B01.pdf`
+- SHA256: `71D5B029EA9928A261DB783597B00F06A48B156122DB69AE3F83D1B8275E9E7E`
+- DOI: `10.1002/advs.202413074`
+- Ground Truth: `data/benchmark/B01/B01_GROUND_TRUTH.yaml`
+- Raw Middle JSON: `data/parsed/B01/mineru/raw/middle_json/B01.json`
+- Result: `data/benchmark/B01/B01_BENCHMARK_RESULT.json`
+- Report: `docs/B01_BENCHMARK_REPORT.md`
 
-   ```text
-   Raw Output
+Ground Truth v1:
 
-   ↓
+- 10 pages
+- 4 main sections
+- 4 Experimental subsections
+- 5 Scientific Figures
+- 7 Equations
+- 0 main-text Tables
 
-   Adapter
+Layer A results:
 
-   ↓
+- Figures: TP 5 / FP 1 / FN 0; precision 83.33%, recall 100%, F1 90.91%
+- Equations: TP 6 / FP 2 / FN 1; precision 75%, recall 85.71%, F1 80%
+- Pages: 10/10, 100% coverage
+- Captions: 5/5, 100% coverage
+- Main sections: 4/4 matched
+- Experimental subsections: 4/4 matched
+- Tables: GT 0 / predicted 0
 
-   Document Schema
-   ```
+Raw errors manually confirmed by the user:
 
-2. 论文原始文件保持不修改。
+- Figure FP: Advanced Science Open Access publisher logo on page 1
+- Equation FPs: publisher logo on pages 9 and 10
+- Equation FN: Equation (2), `Ga(OH)3 → GaOOH + H2O`, on page 2
 
-3. 大型安装、模型下载和 GPU 任务优先人工确认。
+Key commit: `2f39f7962e0e37c4a1c5a431604fcc2a34411aff`.
 
-4. Codex 负责代码、架构和测试。
+## 7. Schema and Adapter Decisions
 
-5. ChatGPT 负责路线规划和架构审核。
+- Schema version 0.2 is stable for the current Pilot node.
+- Keep `source_reference` backward compatible.
+- Preserve typed Evidence and relationships through every conversion.
+- Do not bind project architecture directly to a parser's native schema.
+- MinerUAdapter v2 should use `docvortex.middle` 2.0 `middle_json` as primary input.
+- Retain the existing Markdown route as fallback.
+- Do not implement v2 during archival/recovery tasks.
 
-6. `source_reference` remains the backward-compatible serialized evidence contract; typed `Evidence`, `FigureTextRelation`, and `EquationMetadata` are the stable in-memory interface.
+## 8. RAG-Anything Assessment
 
-## 7. Current Limitations
+- Local source: `F:\Learning\open-source-research\RAG-Anything`
+- Status: `ADOPT CANDIDATE`, not adopted
+- Python >= 3.10
+- MIT License
+- Core dependencies observed: `huggingface_hub`, `lightrag-hku<1.5`, `mineru[core]>=3.4.1`, `tqdm`
+- Supports MinerU, Docling, and PaddleOCR
+- `insert_content_list()` permits direct pre-parsed insertion
+- Standard multimodal items: text, image, table, equation
+- Relevant fields: 0-based `page_idx`, absolute `img_path`, `image_caption`, `table_caption`, `latex`, custom `doc_id`
+- LightRAG backend
 
-- Figure caption 采用保守邻接匹配，仍需 Benchmark 验证
-- 11 个非 Figure 图片资产仅保留在 Raw Output
-- Equation 解析未完善
-- Table 解析未完善
-- Adapter 仍是第一版
+Not yet verified:
 
-## 8. Next Step
+- Installation and dependency compatibility
+- Real B01 insertion
+- Evidence round-trip
+- Citation accuracy
+- Image-only Equation behavior
 
-下一阶段：
+Do not clone/download again and do not modify the external source during project tasks.
 
-Phase 1.5D-1B-3
+## 9. User / Codex Working Agreement
 
-目标：提升 MinerU Adapter。
+User handles:
 
-- Equation false-positive filtering
-- B01 Benchmark 准备
+- large dependency installation
+- open-source clone/download
+- model downloads
+- CUDA / PyTorch / Docker operations
+- large file copying
+- simple commands and tests when requested
 
-## 9. Rules For Future AI
+Codex handles:
 
-未来继续时必须：
+- architecture
+- adapters
+- schema
+- benchmarks
+- integration code
+- automated tests
+- status and handover documentation
 
-1. 先读取 `docs/PROJECT_STATE.md`。
-2. 读取 `docs/AI_SESSION_MEMORY.md`。
-3. 不要重新初始化项目。
-4. 不要重新安装环境。
-5. 不要重新解析 P001。
-6. 先确认当前 Git 状态。
+Preferences:
+
+- If a manual operation can be completed with one copy/paste, provide the full content once.
+- When giving multiple commands, place every command in its own code block.
+- Pause for user confirmation before large downloads, GPU stacks, Docker, or files over 500 MB.
+
+## 10. Known Issues
+
+1. P001 page-11 reference fragment Formula false positive.
+2. B01 Equation (2) Raw false negative.
+3. B01 publisher logo image/Equation false positives.
+4. No stress test yet with a genuine main-text Table.
+5. MinerUAdapter v2 not implemented.
+6. B01 detailed Figure annotations currently cover Figures 1–3 while the confirmed summary contains five.
+7. Layer B benchmark and aggregate pass threshold remain pending.
+
+## 11. Resume Protocol
+
+On every future session:
+
+1. Read `docs/AI_SESSION_MEMORY.md`.
+2. Read `docs/PROJECT_STATE.md`.
+3. Run `git status` before changing anything.
+4. Do not reinitialize the project or reinstall environments.
+5. Do not rerun MinerU on P001 or B01 unless explicitly authorized.
+6. Preserve all PDFs, Ground Truth, Raw Output, and Evidence links.
+
+## 12. Next Priority
+
+Phase 1.5D-3 — MinerUAdapter v2:
+
+```text
+docvortex.middle 2.0
+→ Unified Document Schema 0.2
+```
+
+Then evaluate B01 at Layer B, add 1–2 Pilot papers including a genuine main-text Table case, freeze Parser v1, and only then begin the isolated RAG-Anything integration pilot.
