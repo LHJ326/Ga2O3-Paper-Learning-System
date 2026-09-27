@@ -25,3 +25,32 @@ v1 freeze. MinerU 4.0.7 emitted no table entity for either real body Table.
 
 Next Action: In a separately authorized phase, evaluate PaddleOCR-VL or an
 equivalent table-capable vision parser without changing the frozen baseline.
+
+## Experiment — Lightweight OCR Table Reconstruction
+
+Date: 2026-09-28
+
+Objective: Engineer the user-validated PyMuPDF crop + ordinary PP-OCR result
+path from immutable OCR tokens/bboxes to Unified Tables with Evidence.
+
+Setup: Two manually generated PaddleOCR 3.7.0 JSON artifacts; no OCR runtime
+invocation; B02 Ground Truth and MinerU Raw frozen; Layer A/B historical result
+read-only.
+
+Procedure: Imported JSON only, registered crop-space metadata and checksums,
+implemented conservative normalization, y/x clustering, multiline joining,
+repeated-header multi-block unfolding, empty cells, confidence aggregation,
+footnote separation, Unified Table Evidence, and independent Layer C scoring.
+
+Results: Table detection improved from TP/FP/FN 0/0/2 in Layer A/B to 2/0/0 in
+Layer C. Table I is 10×3 with 30/30 exact core cells. Table II is 14×7 with
+98/98 occupied, 97/98 exact, and 98/98 semantic-normalized core cells; A-D
+markers were recovered. No Ground Truth, MinerU Raw, Adapter logic, or baseline
+result was modified.
+
+Conclusion: Lightweight reconstruction is a viable primary Table fallback
+architecture. Parser v1 freeze still requires runtime crop/OCR integration,
+coordinate transforms, and failure thresholds. PaddleOCR-VL remains optional.
+
+Next Action: Separately authorize Lightweight Table runtime integration; keep
+`Phase OCR-ENV-CLEANUP` deferred.

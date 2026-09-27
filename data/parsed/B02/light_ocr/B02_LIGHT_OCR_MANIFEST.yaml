@@ -1,0 +1,27 @@
+schema: lightweight_ocr.table_recovery_manifest
+schema_version: "1.0"
+paper_id: B02
+source_pdf: data/benchmark/B02/B02.pdf
+coordinate_space: crop_pixels
+coordinate_transform_to_pdf: null
+producer:
+  name: PaddleOCR
+  version: 3.7.0
+  engine: PP-OCR
+  paddlepaddle_version: 3.2.1
+  paddlex_version: 3.7.2
+  execution_mode: user_manual_poc
+tables:
+  - table_id: I
+    page: 8
+    raw_artifact: data/parsed/B02/light_ocr/raw/B02_table_I_ocr.json
+    sha256: 636023CE69A496880C8EECA78EA8EBEB79F4272F6A1609ED967E0BC2F0B35D26
+    table_region: [120, 230, 1140, 525]
+    header_rows: 1
+  - table_id: II
+    page: 11
+    raw_artifact: data/parsed/B02/light_ocr/raw/B02_table_II_ocr.json
+    sha256: 6235429BF7AF302D3C4113C9310FAD06BADB85A84DB9E05D2CEFA9FC904AF2B7
+    table_region: [45, 55, 1960, 1205]
+    header_rows: 1
+    poc_elapsed_ms: 2815

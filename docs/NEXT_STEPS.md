@@ -16,13 +16,26 @@ Both real B02 Tables have zero structured detections. Table I is
 `TABLE_BODY_MISSING`; Table II is `TABLE_MISCLASSIFIED_AS_IMAGE`. B02 therefore
 proves that Table Vision Fallback is required before Parser v1 freeze.
 
-## P0 — Table Vision Fallback Evaluation
+## Completed — Lightweight OCR Table Reconstruction
 
-With explicit user approval, define and benchmark an isolated table-capable
-vision fallback such as PaddleOCR-VL or an equivalent parser. Preserve the
-frozen B02 Ground Truth, MinerU Raw Output, Layer A metrics, and current Adapter
-v2 baseline. Do not treat this recommendation as authorization to install or
-implement the fallback.
+Existing PP-OCR JSON plus bbox is now reconstructed deterministically into
+Unified Tables with cell-level Evidence. B02 Table I and Table II are recovered
+in independent Layer C while frozen Layer A/B remain unchanged. PaddleOCR-VL is
+an optional extreme fallback, not the default route.
+
+## P0 — Lightweight Table Runtime Integration
+
+In a separately authorized phase, add failure detection, probable-region
+localization, PyMuPDF crop generation, isolated ordinary PP-OCR invocation, and
+crop-to-PDF coordinate transforms. Do not install or invoke PaddleOCR-VL by
+default.
+
+## Deferred — Phase OCR-ENV-CLEANUP
+
+Build a minimal ordinary-OCR environment, freeze requirements, revalidate both
+B02 Tables, remove VL-only caches/dependencies, assess the 1.87 GiB source
+checkout, and preserve ordinary OCR components. This is not authorized merely
+by being listed here.
 
 ## P1 — Parser v1 Freeze
 

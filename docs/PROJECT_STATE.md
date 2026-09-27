@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 ## Current Phase
 
-Phase B02-RAW-1 completed — B02 Raw MinerU and current Adapter v2 baseline frozen
+Phase TABLE-LIGHT-1 completed — Lightweight OCR Table reconstruction baseline
 
 ## Current Architecture
 
@@ -48,6 +48,8 @@ The existing Markdown/raw-output adapter path remains operational as a fallback.
 - B02 cross-domain Table stress benchmark Ground Truth finalized as `ready_v1`
 - B02 MinerU 4.0.7 Raw Output fingerprints frozen and benchmarked
 - B02 Layer A and independent Layer B baseline reports generated
+- Lightweight OCR token/bbox model and deterministic spatial Table reconstruction implemented
+- B02 Layer C recovered Table I and Table II without changing Layer A/B
 - RAG-Anything source interface review completed
 
 ## Environment
@@ -145,6 +147,10 @@ Layer B Adapter output:
   10 Equations, and 0 Tables
 - Table failures: `TABLE_BODY_MISSING` (Table I) and
   `TABLE_MISCLASSIFIED_AS_IMAGE` (Table II)
+- Layer C result: `data/benchmark/B02/B02_LIGHTWEIGHT_TABLE_RECOVERY_RESULT.json`
+- Layer C Tables: TP 2 / FP 0 / FN 0; precision/recall/F1 100%
+- Table I: 10×3, 30/30 exact normalized core cells
+- Table II: 14×7, 98/98 occupied, 97/98 exact and 98/98 semantic-normalized core cells
 
 ## Architectural Findings
 
@@ -162,6 +168,10 @@ real body Table across its reviewed structural outputs. A separate Table Vision
 Fallback is required before Parser v1 freeze; PaddleOCR-VL or an equivalent
 table-capable vision parser is a future evaluation candidate, not installed or
 implemented in this phase.
+
+The preferred lightweight fallback is now ordinary PP-OCR on a PyMuPDF crop,
+followed by deterministic spatial reconstruction. PaddleOCR-VL is retained only
+as an optional extreme fallback. Runtime OCR invocation is not implemented.
 
 ## RAG-Anything Evaluation
 
@@ -186,6 +196,7 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 4. B02 Table I body is missing from Raw structural/text rows; Table II is misclassified as an image.
 5. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
 6. An aggregate benchmark pass threshold is not yet defined.
+7. Lightweight reconstruction still needs runtime failure detection, region localization, crop-to-PDF transforms, and ordinary OCR integration.
 
 ## Key Git Commit
 
@@ -193,12 +204,12 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 
 ## Next Planned Phase
 
-Table Vision Fallback evaluation before Parser v1 freeze
+Lightweight Table runtime integration before Parser v1 freeze
 
 Priority sequence:
 
-1. Specify an isolated Table Vision Fallback evaluation boundary.
-2. Evaluate PaddleOCR-VL or an equivalent table-capable vision parser only in a separately authorized phase.
-3. Re-run the frozen B02 benchmark without changing Ground Truth or Raw MinerU output.
-4. Freeze Parser v1 after table recovery behavior is validated.
-5. Continue later integration work only with explicit approval.
+1. Add generic MinerU Table-failure detection and probable-region localization.
+2. Integrate PyMuPDF crop + ordinary PP-OCR through an isolated runtime boundary.
+3. Preserve crop-to-PDF coordinate transforms and evaluate failure thresholds.
+4. Complete separately authorized `Phase OCR-ENV-CLEANUP`.
+5. Freeze Parser v1 only after runtime validation; keep PaddleOCR-VL optional.
