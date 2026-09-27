@@ -2,6 +2,8 @@
 
 This document defines the minimum parser capabilities to evaluate against the B01 Ground Truth. It specifies expected output, not the behavior of any particular parser.
 
+> **Ground Truth status:** The historical numeric expectations in this document predate registration of the current B01 PDF. Values of 4 Figures, 14 subfigures, and 7 Equations are retained as **LEGACY / UNVERIFIED** only. Actual B01 counts must come from independent annotation in `data/benchmark/B01/B01_GROUND_TRUTH.yaml`, never from parser output.
+
 ## Document Level
 
 The parser output must preserve:
@@ -25,7 +27,7 @@ The parser must reconstruct the intended reading order without interleaving unre
 
 ## Figure Requirements
 
-Expected:
+Legacy / unverified historical expectation:
 
 - 4 figures
 - 14 subfigures
@@ -41,7 +43,7 @@ Subfigures must remain associated with their parent figure. Caption-to-figure li
 
 ## Equation Requirements
 
-Expected:
+Legacy / unverified historical expectation:
 
 - 7 equations
 
@@ -90,4 +92,4 @@ Classification must remain connected to the original text block and source locat
 | Important | ★★★★ | Strongly affects integration quality and downstream usability. |
 | Optional | ★★★ | Useful capability that does not replace critical evidence requirements. |
 
-Counts and requirements in this document are acceptance targets. They do not indicate that any candidate parser has passed.
+Capability requirements in this document remain evaluation targets. The legacy numeric counts are not acceptance targets for the registered B01 PDF until replaced by reviewed Ground Truth, and they do not indicate that any candidate parser has passed.

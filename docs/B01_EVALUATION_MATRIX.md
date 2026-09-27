@@ -2,12 +2,14 @@
 
 Weights use the B01 priority scale: 5 = Critical, 4 = Important, and 3 = Optional. Every result must be computed from the unified `Document` output and checked against source references.
 
+> **Numeric Ground Truth warning:** The values 4 Figures, 14 subfigures, and 7 Equations below are **LEGACY / UNVERIFIED** historical design values. They must not be used to score the registered B01 PDF. Verified expected results will be derived only from reviewed manual annotations in `data/benchmark/B01/B01_GROUND_TRUTH.yaml`.
+
 | Capability | Weight | Test Method | Expected Result |
 |---|---:|---|---|
 | Reading order | 5 | Compare extracted paragraph order with B01 text-block Ground Truth across the two-column layout and page transitions. | Correct paragraph sequence with no cross-column interleaving; page and source references retained. |
-| Figure extraction | 5 | Count parent figures and subfigures, then compare exported images, identifiers, and page locations with B01 Figure Ground Truth. | Exactly 4 figures and 14 subfigures, with images, stable ids, and correct page locations. |
+| Figure extraction | 5 | Count parent figures and subfigures, then compare exported images, identifiers, and page locations with B01 Figure Ground Truth. | Reviewed Ground Truth count and identities, with images, stable ids, and correct page locations. Legacy reference only: 4 figures and 14 subfigures (UNVERIFIED). |
 | Caption linkage | 5 | Match each extracted caption to its parent figure and subfigure structure using Ground Truth identifiers and page evidence. | Every expected figure has the correct caption linkage; no caption is attached only by incidental output order. |
-| Equation extraction | 5 | Count equations and compare normalized equation content, location, and linked explanatory text with B01 Equation Ground Truth. | Exactly 7 equations with preserved content and location; variable meanings remain linked when supported by source text. |
+| Equation extraction | 5 | Count equations and compare normalized equation content, location, and linked explanatory text with B01 Equation Ground Truth. | Reviewed Ground Truth count with preserved content and location; variable meanings remain linked when supported by source text. Legacy reference only: 7 equations (UNVERIFIED). |
 | Table extraction | 3 | Compare detected tables, structure, captions, and locations with B01 Ground Truth; also check for false positives. | All Ground Truth tables are represented correctly, or an empty table collection is returned if none exist, without false positives. |
 | OCR capability | 3 | For any B01 region without a usable text layer, compare OCR output with the corresponding Ground Truth text and source location. | Required text is recoverable with traceable page evidence; unsupported OCR is reported explicitly rather than silently dropping content. |
 | Output extensibility | 4 | Convert native parser output through its adapter and validate all unified `Document` collections and shared fields. | Output maps without tool-specific leakage; metadata, pages, sections, figures, tables, equations, and text blocks remain extensible. |

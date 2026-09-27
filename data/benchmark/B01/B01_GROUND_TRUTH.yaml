@@ -1,0 +1,257 @@
+metadata:
+  benchmark_id: B01
+  status: ready_v1
+  identity_record: data/benchmark/B01/B01_METADATA.yaml
+  source_pdf: data/benchmark/B01/B01.pdf
+  annotation_principle: independent_manual_annotation
+
+pages:
+  - page_number: 1
+  - page_number: 2
+  - page_number: 3
+  - page_number: 4
+  - page_number: 5
+  - page_number: 6
+  - page_number: 7
+  - page_number: 8
+  - page_number: 9
+  - page_number: 10
+
+sections:
+  - number: 1
+    title: Introduction
+    start_page: 1
+
+  - number: 2
+    title: Results and Discussion
+    start_page: 2
+
+  - number: 3
+    title: Conclusion
+    start_page: 8
+
+  - number: 4
+    title: Experimental Section
+    start_page: 9
+    subsections:
+      - title: Reagents and Substrate
+        page: 9
+      - title: Preparation and Modulation of Materials
+        page: 9
+      - title: Material Characterization and Performance Tests
+        page: 9
+      - title: Device Preparation and Application Design
+        page: 9
+
+figures:
+  - number: 1
+    page: 3
+    caption: >-
+      a) Schematic diagram of Mg-doped α-Ga2O3 nanorods.
+      b,c) SEM images of α-Ga2O3 and Mg-Ga2O3 nanorods, respectively.
+      d) TEM image of an individual Mg-Ga2O3 nanorod.
+      e) HR-TEM image of the selected region.
+      f) Inverse FFT image of the specific region.
+      g) EDS images of an individual nanorod.
+      h) XRD pattern of α-Ga2O3 and Mg-Ga2O3.
+      i) XPS elemental peak analysis.
+      (i-1) The XPS peak fitting of Ga 2p.
+      (i-2) The XPS peak fitting of O 1s.
+      (i-3) Peak fitting plots of elemental Mg.
+
+  - number: 2
+    page: 4
+    caption: >-
+      a) The XPS peak fitting of Ga 3d core-level spectrum.
+      b) The PL spectra of α-Ga2O3 and Mg-Ga2O3.
+      c) The conventional structure of α-Ga2O3 and the different types of defects.
+      d) The formation energies of defects in Mg-doped α-Ga2O3.
+      The dashed line denotes the calculated bandgap of α-Ga2O3.
+
+  - number: 3
+    page: 5
+    caption: >-
+      a) Spectral response of α-Ga2O3 and Mg-Ga2O3.
+      b) Comparison of I-T curves for two SBPDs at 0 V bias, 254 nm illumination,
+      and varying light intensities.
+      c) Time response comparison of the two SBPDs.
+      d) The responsivity of the two SBPDs as a function of light power density.
+      e) Detectivity comparison of the two SBPDs.
+      f) Photo-dark current ratio under varying light power densities.
+      g) Stability test curve for the Mg-Ga2O3 SBPD.
+      h) Responsivity and time response of Mg-Ga2O3 SBPD in comparison with
+      previously reported works.
+
+  - number: 4
+    page: 7
+    caption: >-
+      a) The schematic diagram of the operating principle of the PEC device.
+      b) The interface of the PEC photodetector fabricated in this work.
+      c) UV-vis absorption spectra of α-Ga2O3 and Mg-Ga2O3 SBPDs.
+      d) Electrochemical impedance spectra (EIS) for α-Ga2O3 and Mg-Ga2O3 SBPDs.
+      e) The equivalent current and corresponding magnified plots.
+      f) The mechanism diagram of α-Ga2O3 and Mg-Ga2O3 SBPDs.
+
+  - number: 5
+    page: 8
+    caption: >-
+      a) The preparation process of the 5 × 5 matrix array.
+      b) The underwater imaging system.
+      c) Average photocurrent under illumination at 500 μW cm−2 (254 nm)
+      and dark current curve for the Mg-Ga2O3 5 × 5 array.
+      d,e) 2D thermal images of “U” and “Z”, respectively.
+
+subfigures:
+  - figure_number: 1
+    top_level: [a, b, c, d, e, f, g, h, i]
+    nested:
+      i: [i-1, i-2, i-3]
+
+  - figure_number: 2
+    top_level: [a, b, c, d]
+
+  - figure_number: 3
+    top_level: [a, b, c, d, e, f, g, h]
+
+  - figure_number: 4
+    top_level: [a, b, c, d, e, f]
+
+  - figure_number: 5
+    top_level: [a, b, c, d, e]
+
+equations:
+  - number: 1
+    page: 2
+    type: reaction
+    transcription: "Ga3+ + 3OH− → Ga(OH)3"
+    transcription_type: normalized_manual
+
+  - number: 2
+    page: 2
+    type: reaction
+    transcription: "Ga(OH)3 → GaOOH + H2O"
+    transcription_type: normalized_manual
+
+  - number: 3
+    page: 2
+    type: reaction
+    transcription: "Mg2+ + 2GaOOH → α-Ga2O3-Mg + H2O"
+    transcription_type: normalized_manual
+
+  - number: 4
+    page: 4
+    type: equation
+    transcription: "Hf(Dq, α-Ga2O3) = Et(Dq, α-Ga2O3) - Et(α-Ga2O3) + ΣΔniμi + q(EVBM + Ef + ΔV) + ΔEq"
+    transcription_type: normalized_manual
+
+  - number: 5
+    page: 6
+    type: equation
+    transcription: "Rλ = (Ip - Id) / (P S)"
+    transcription_type: normalized_manual
+
+  - number: 6
+    page: 6
+    type: equation
+    transcription: "D* = R sqrt(S) / sqrt(2 e Id)"
+    transcription_type: normalized_manual
+
+  - number: 7
+    page: 6
+    type: equation
+    transcription: "PDCR = (Ip - Id) / Id"
+    transcription_type: normalized_manual
+
+tables: []
+
+supplementary_references:
+  - type: figure
+    labels:
+      - S1
+      - S2
+      - S3
+      - S4
+      - S5
+      - S6
+      - S7
+      - S8
+      - S9
+      - S10
+      - S11
+      - S12
+      - S13
+      - S14
+      - S15
+      - S16
+      - S17
+      - S18
+      - S19
+      - S20
+
+  - type: table
+    labels:
+      - S1
+      - S2
+
+boilerplate:
+  - type: repeated_header
+    pattern: "www.advancedsciencenews.com www.advancedscience.com"
+    pages: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  - type: repeated_footer
+    pattern: "Adv. Sci. 2025, 12, 2413074"
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  - type: download_notice
+    pattern: "Downloaded from https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202413074"
+    pages: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+reading_order_notes:
+  - page: 1
+    anchors:
+      - "Title and abstract precede Section 1 Introduction."
+      - "Author affiliations and correspondence blocks are front matter, not Introduction body text."
+
+  - page: 2
+    anchors:
+      - "Introduction continuation precedes Section 2 Results and Discussion."
+      - "Equations/reactions (1), (2), and (3) occur immediately after the opening paragraph of Section 2."
+
+  - page: 3
+    anchors:
+      - "Figure 1 and its caption occur before the body text continuing the Figure 1 discussion."
+      - "Figure 1 caption must remain associated with Figure 1 rather than adjacent body paragraphs."
+
+  - page: 4
+    anchors:
+      - "Figure 2 and its caption occur before the main body discussion."
+      - "Equation (4) is embedded in the Results and Discussion body after discussion of Figure 2a and Figure 2b."
+
+  - page: 5
+    anchors:
+      - "Figure 3 and its caption occur before the body text discussing detector performance."
+
+  - page: 6
+    anchors:
+      - "Page contains continuation of Figure 3 performance discussion."
+      - "Equations (5), (6), and (7) appear in sequence within the body."
+      - "Discussion transitions from Figure 3 to Figure 4 near the end of the page."
+
+  - page: 7
+    anchors:
+      - "Figure 4 and its caption occur before the body text continuing the mechanism discussion."
+
+  - page: 8
+    anchors:
+      - "Figure 5 and its caption occur before its body discussion."
+      - "Section 3 Conclusion begins after the Figure 5 discussion on the same page."
+
+  - page: 9
+    anchors:
+      - "Section 3 Conclusion continues at the top of the page."
+      - "Section 4 Experimental Section follows the conclusion."
+      - "Experimental subsections are followed by Supporting Information, Acknowledgements, Conflict of Interest, Data Availability Statement, Keywords, and reference entries."
+
+  - page: 10
+    anchors:
+      - "References continue through the page after the repeated publisher header."

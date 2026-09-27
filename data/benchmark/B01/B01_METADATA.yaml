@@ -1,0 +1,11 @@
+benchmark_id: B01
+title: >-
+  Mg-doped α-Ga2O3 Nanorods for the Construction of
+  Photoelectrochemical-Type Self-Powered Solar Blind UV Photodetectors
+  and Underwater Imaging Application
+journal: Advanced Science
+year: 2025
+doi: 10.1002/advs.202413074
+pdf_path: data/benchmark/B01/B01.pdf
+sha256: 71D5B029EA9928A261DB783597B00F06A48B156122DB69AE3F83D1B8275E9E7E
+role: Primary Parser Benchmark Case

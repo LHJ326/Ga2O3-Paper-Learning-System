@@ -1,0 +1,94 @@
+benchmark_id: B01
+parser: MinerU
+parser_version: 4.0.7
+raw_schema: docvortex.middle
+raw_schema_version: "2.0"
+
+figures:
+  ground_truth_numbers: [1, 2, 3, 4, 5]
+  predictions:
+    - page: 1
+      block_index: 2
+      classification: false_positive
+      error_type: publisher_logo
+      description: Advanced Science Open Access publisher logo
+    - page: 3
+      block_index: 5
+      classification: true_positive
+      ground_truth_number: 1
+    - page: 4
+      block_index: 5
+      classification: true_positive
+      ground_truth_number: 2
+    - page: 5
+      block_index: 5
+      classification: true_positive
+      ground_truth_number: 3
+    - page: 7
+      block_index: 5
+      classification: true_positive
+      ground_truth_number: 4
+    - page: 8
+      block_index: 5
+      classification: true_positive
+      ground_truth_number: 5
+
+equations:
+  ground_truth_numbers: [1, 2, 3, 4, 5, 6, 7]
+  predictions:
+    - page: 2
+      block_index: 11
+      classification: true_positive
+      ground_truth_number: 1
+    - page: 2
+      block_index: 14
+      classification: true_positive
+      ground_truth_number: 3
+    - page: 4
+      block_index: 11
+      classification: true_positive
+      ground_truth_number: 4
+    - page: 6
+      block_index: 7
+      classification: true_positive
+      ground_truth_number: 5
+    - page: 6
+      block_index: 9
+      classification: true_positive
+      ground_truth_number: 6
+    - page: 6
+      block_index: 11
+      classification: true_positive
+      ground_truth_number: 7
+    - page: 9
+      block_index: 9
+      classification: false_positive
+      error_type: publisher_logo
+      description: Advanced Science Open Access publisher logo
+    - page: 10
+      block_index: 33
+      classification: false_positive
+      error_type: publisher_logo
+      description: Advanced Science Open Access publisher logo
+
+known_errors:
+  - type: false_negative
+    category: equation
+    page: 2
+    ground_truth_number: 2
+    description: Ga(OH)3 → GaOOH + H2O
+  - type: false_positive
+    category: equation
+    page: 9
+    raw_block_index: 9
+    description: Advanced Science Open Access publisher logo
+  - type: false_positive
+    category: equation
+    page: 10
+    raw_block_index: 33
+    description: Advanced Science Open Access publisher logo
+  - type: false_positive
+    category: figure
+    page: 1
+    raw_block_index: 2
+    description: Advanced Science Open Access publisher logo

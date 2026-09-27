@@ -14,7 +14,15 @@ B01_standard_photodetector
 
 Document:
 
-Ga2O3 photodetector paper
+Mg-doped α-Ga2O3 Nanorods for the Construction of Photoelectrochemical-Type Self-Powered Solar Blind UV Photodetectors and Underwater Imaging Application
+
+DOI:
+
+`10.1002/advs.202413074`
+
+Input:
+
+`data/benchmark/B01/B01.pdf`
 
 The exact input file, checksum, page count, and source location must be recorded before execution so every result can be reproduced.
 
@@ -39,7 +47,7 @@ Paragraph sequence must be compared with B01 Ground Truth, including column tran
 
 ### Figure Extraction
 
-Expected:
+Legacy / unverified historical expectation (not valid Ground Truth for the registered PDF):
 
 - 4 figures
 - 14 subfigures
@@ -54,7 +62,7 @@ Figure ids and parent/subfigure relationships must remain traceable through adap
 
 ### Equation Extraction
 
-Expected:
+Legacy / unverified historical expectation (not valid Ground Truth for the registered PDF):
 
 - 7 equations
 

@@ -1,5 +1,13 @@
 benchmark:
   B01:
+    # LEGACY / UNVERIFIED historical design values.
+    # Do not use as Ground Truth for data/benchmark/B01/B01.pdf.
     expected_figures: 4
     expected_subfigures: 14
     expected_equations: 7
+
+legacy_expectation_status:
+  B01:
+    status: LEGACY_UNVERIFIED
+    reason: Counts predate registration of the current B01 PDF and require independent re-annotation.
+    canonical_ground_truth: data/benchmark/B01/B01_GROUND_TRUTH.yaml
