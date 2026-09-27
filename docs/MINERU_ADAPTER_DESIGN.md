@@ -19,7 +19,7 @@ The method returns the existing `Document` dataclass with:
 - `pages` split from MinerU page markers;
 - `sections` derived from H1 and H2 Markdown headings;
 - `text_blocks` derived from ordinary page-bounded Markdown paragraphs;
-- `figures` derived from the image export manifest and enriched with conservative adjacent captions;
+- `figures` classified from image assets using conservative caption and block-type evidence;
 - empty `tables` and `equations` collections in this first version.
 
 ## Field Mapping
@@ -31,9 +31,22 @@ The method returns the existing `Document` dataclass with:
 | `pages` | `<!-- page n of total -->` markers | One `Page` per continuous marker range, retaining page Markdown. |
 | `sections` | Markdown H1/H2 headings | One `Section` per heading with its source page. |
 | `text_blocks` | Blank-line-delimited Markdown | Excludes heading-only and image-only paragraphs. IDs are deterministic within conversion order. |
-| `figures` | `image_exports.json` and adjacent Markdown | Joins locator, page, filename, MIME type, and dimensions; links a caption only when an immediately following same-page block begins with a numbered `Figure` or `Fig.` label. |
+| `figures` | `image_exports.json` and adjacent Markdown | Creates a Figure only when an `Image block` has an immediately following same-page numbered `Figure` or `Fig.` caption. Formula and insufficient-evidence assets are excluded. |
 
-Figure caption data is stored inside the existing JSON-encoded `Figure.content` field. It includes `caption_status`, caption text, detected Figure number, MinerU block type, and a caption source reference. Unmatched assets retain `null` caption fields.
+MinerU Image Asset is not equivalent to Scientific Figure. The classification flow is:
+
+```text
+Raw Image Asset
+
+↓
+
+Classification
+
+├── Scientific Figure → Document.figures
+└── Other Asset → remain only in Raw Output
+```
+
+Accepted Figure caption data is stored inside the existing JSON-encoded `Figure.content` field. It includes `caption_status`, caption text, detected Figure number, MinerU block type, and a caption source reference.
 
 Every `source_reference` is a JSON string containing at least:
 
@@ -52,7 +65,7 @@ The locator is `null` when MinerU does not provide block-level identity. Figure 
 - Text paragraphs and headings have page-level evidence only because Flash output does not provide their block locators.
 - Caption matching is limited to immediately following, same-page, numbered Figure captions.
 - Subfigure grouping and captions separated from their image are not handled.
-- Image assets are not assumed to be scientific figures; the schema currently has no generic image element.
+- Excluded image assets remain accessible only through Raw Output because the schema has no generic image element.
 - Tables and equations are not extracted because the observed raw output has no explicit table or equation objects.
 - Markdown heading levels deeper than H2 are not converted to sections.
 - `parse()` and `validate()` remain intentionally unimplemented.

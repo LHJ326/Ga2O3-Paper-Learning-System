@@ -17,11 +17,11 @@ def _figure_payloads(document: Document) -> list[dict[str, object]]:
     return [json.loads(figure.content) for figure in document.figures]
 
 
-def test_p001_conversion_preserves_figure_count() -> None:
+def test_p001_conversion_keeps_confirmed_scientific_figures() -> None:
     document = _converted_document()
 
     assert isinstance(document, Document)
-    assert len(document.figures) == 17
+    assert len(document.figures) == 6
 
 
 def test_p001_matches_traceable_numbered_captions() -> None:
@@ -54,14 +54,10 @@ def test_p001_matches_traceable_numbered_captions() -> None:
         assert caption_source["relation"] == "same_page_immediately_after_image"
 
 
-def test_unmatched_images_do_not_receive_synthetic_captions() -> None:
+def test_document_figures_do_not_contain_unmatched_assets() -> None:
     payloads = _figure_payloads(_converted_document())
-    unmatched = [
-        payload for payload in payloads if payload["caption_status"] == "unmatched"
-    ]
 
-    assert len(unmatched) == 11
-    for payload in unmatched:
-        assert payload["caption"] is None
-        assert payload["figure_number"] is None
-        assert payload["caption_source_reference"] is None
+    assert payloads
+    assert all(payload["caption_status"] == "matched" for payload in payloads)
+    assert all(payload["caption"] for payload in payloads)
+    assert all(payload["figure_number"] for payload in payloads)

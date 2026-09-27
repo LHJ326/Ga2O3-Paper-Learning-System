@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 Current Phase:
 
-Phase 1.5D-1B-3A
+Phase 1.5D-1B-3B
 
 Completed:
 
@@ -24,6 +24,7 @@ Completed:
 - Project session handover created
 - AI session memory created
 - P001 Figure-caption mapping implemented
+- Scientific figure asset filtering implemented
 
 Current Data:
 
@@ -46,13 +47,13 @@ Current Document Statistics:
 - Pages: 12
 - Sections: 10
 - TextBlocks: 214
-- Figures: 17
+- Figures: 6
 - Tables: 0
 - Equations: 0
 
 Current:
 
-- Figure mapping under validation
+- Figure extraction semantics corrected
 
 Current Recovery Files:
 
@@ -64,15 +65,15 @@ Current Recovery Files:
 
 Current Limitations:
 
-- Figure captions use conservative same-page adjacency matching
-- 11 image assets remain explicitly unmatched
+- Scientific Figures require an `Image block` and a conservative same-page adjacent numbered caption
+- 11 non-Figure assets remain only in Raw Output
 - Equation extraction incomplete
 - Table extraction incomplete
 - `parse()` / `validate()` remain interface placeholders
 
 Next:
 
-- Strengthen evidence chain
-- Equation detection
+- Strengthen Figure evidence chain
+- Detect equations from MinerU formula blocks
 - Table handling
-- Benchmark comparison
+- Benchmark evaluation

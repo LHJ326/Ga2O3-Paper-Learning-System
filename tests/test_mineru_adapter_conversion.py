@@ -25,7 +25,7 @@ def test_convert_returns_document_with_expected_counts() -> None:
     assert isinstance(document, Document)
     assert document.document_id == "P001"
     assert len(document.pages) == 12
-    assert len(document.figures) == 17
+    assert len(document.figures) == 6
     assert document.sections
     assert document.text_blocks
 

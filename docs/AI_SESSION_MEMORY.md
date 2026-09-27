@@ -107,6 +107,14 @@ Phase 1.5D-1B-2B:
 
 MinerUAdapter first conversion
 
+Phase 1.5D-1B-3A:
+
+Figure-caption mapping
+
+Phase 1.5D-1B-3B:
+
+Scientific Figure asset filtering
+
 ## 5. Current P001 Status
 
 Paper:
@@ -130,7 +138,7 @@ Current output:
 - Pages: 12
 - Sections: 10
 - TextBlocks: 214
-- Figures: 17
+- Figures: 6
 - Tables: 0
 - Equations: 0
 
@@ -162,7 +170,8 @@ Current output:
 
 ## 7. Current Limitations
 
-- Figure caption 关联未完善
+- Figure caption 采用保守邻接匹配，仍需 Benchmark 验证
+- 11 个非 Figure 图片资产仅保留在 Raw Output
 - Equation 解析未完善
 - Table 解析未完善
 - Adapter 仍是第一版
@@ -175,8 +184,7 @@ Phase 1.5D-1B-3
 
 目标：提升 MinerU Adapter。
 
-- Figure-caption mapping
-- Evidence chain 增强
+- Figure evidence chain 增强
 - Table 支持
 - Equation 检测
 - B01 Benchmark 准备

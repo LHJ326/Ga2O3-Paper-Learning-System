@@ -307,7 +307,7 @@ class MinerUAdapter(ParserAdapter):
             raise ValueError("image_exports.json must contain an images array.")
 
         figures: list[Figure] = []
-        for index, image in enumerate(images, start=1):
+        for image in images:
             if not isinstance(image, dict):
                 raise ValueError("Each image manifest entry must be a JSON object.")
             locator = self._required_string(image, "locator")
@@ -332,20 +332,24 @@ class MinerUAdapter(ParserAdapter):
             caption_matched = isinstance(caption, str) and isinstance(
                 figure_number, str
             )
-            caption_source_reference = None
-            if caption_matched:
-                caption_source_reference = {
-                    **provenance,
-                    "source_file": caption_source_file,
-                    "page": page_number,
-                    "mineru_locator": None,
-                    "evidence_type": "figure_caption",
-                    "relation": "same_page_immediately_after_image",
-                }
+            is_scientific_figure = (
+                context.get("block_type") == "Image block" and caption_matched
+            )
+            if not is_scientific_figure:
+                continue
+
+            caption_source_reference = {
+                **provenance,
+                "source_file": caption_source_file,
+                "page": page_number,
+                "mineru_locator": None,
+                "evidence_type": "figure_caption",
+                "relation": "same_page_immediately_after_image",
+            }
 
             figures.append(
                 Figure(
-                    id=f"{provenance['paper_id']}-figure-{index:03d}",
+                    id=f"{provenance['paper_id']}-figure-{len(figures) + 1:03d}",
                     page_number=page_number,
                     content=json.dumps(
                         {
@@ -354,13 +358,9 @@ class MinerUAdapter(ParserAdapter):
                             "width": image.get("width"),
                             "height": image.get("height"),
                             "mineru_block_type": context.get("block_type"),
-                            "caption_status": (
-                                "matched" if caption_matched else "unmatched"
-                            ),
-                            "caption": caption if caption_matched else None,
-                            "figure_number": (
-                                figure_number if caption_matched else None
-                            ),
+                            "caption_status": "matched",
+                            "caption": caption,
+                            "figure_number": figure_number,
                             "caption_source_reference": caption_source_reference,
                         },
                         ensure_ascii=False,
