@@ -1,0 +1,21 @@
+benchmark_id: B02
+benchmark_role: cross_domain_parser_table_stress
+title: >-
+  A Compute-in-Memory Annealing Processor With Interaction Coefficient Reuse
+  and Sparse Energy Computation for Solving Combinatorial Optimization Problems
+journal: IEEE Journal of Solid-State Circuits
+year: 2024
+doi: 10.1109/JSSC.2024.3376410
+source_pdf: data/benchmark/B02/B02.pdf
+file_size: 7107290
+sha256: A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF
+domain:
+  - compute_in_memory
+  - annealing_processor
+  - integrated_circuit
+layout: IEEE two-column
+ground_truth_status: building
+is_ga2o3_pilot: false
+registration_note: >-
+  B02 is a cross-domain parser and main-text Table stress benchmark. It is not
+  a Ga2O3 Pilot paper and must not be assigned a P-series Paper ID.

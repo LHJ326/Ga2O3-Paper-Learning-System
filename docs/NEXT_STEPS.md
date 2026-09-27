@@ -6,13 +6,18 @@ MinerU 4.0.7 `docvortex.middle` schema 2.0 `middle_json` is now the primary inpu
 
 The existing Markdown + legacy Raw Output route remains the fallback. B01 Layer B is reported independently from unchanged Layer A metrics.
 
-## P0 — Additional Pilot Papers
+## P0 — Manual B02 Ground Truth Annotation
 
-Select 1–2 further Pilot papers. At least one must contain a genuine main-text Table so Table extraction and evidence mapping can be stress-tested.
+B02 is registered as a cross-domain Parser / Table stress benchmark, not a
+Ga2O3 Pilot. Its Ground Truth status is `building`, and MinerU has not been run.
+
+Complete manual source-PDF annotation of Figures, Equations, Table I, complex
+Table II, boilerplate, and IEEE two-column reading order. Freeze Ground Truth
+before authorizing any B02 parser run or evaluator work.
 
 ## P1 — Parser v1 Freeze
 
-After multi-paper validation, freeze parser interfaces, schema mapping rules, benchmark procedures, and known limitations as Parser v1.
+After B02 cross-domain validation, freeze parser interfaces, schema mapping rules, benchmark procedures, and known limitations as Parser v1.
 
 ## P2 — RAG-Anything Integration Pilot
 

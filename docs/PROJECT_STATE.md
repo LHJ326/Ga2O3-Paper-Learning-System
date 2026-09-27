@@ -45,6 +45,7 @@ The existing Markdown/raw-output adapter path remains operational as a fallback.
 - MinerUAdapter v2 implemented with Evidence-preserving `middle_json` conversion
 - B01 Layer B benchmark implemented without changing Layer A
 - B01 machine-readable result and report generated
+- B02 cross-domain Table stress benchmark registered; Ground Truth building
 - RAG-Anything source interface review completed
 
 ## Environment
@@ -124,6 +125,16 @@ Layer B Adapter output:
 - Equations: TP 6 / FP 0 / FN 1; precision 100%, recall 85.71%, F1 92.31%
 - Captions: 5/5; all four main sections and Experimental subsections matched
 
+## B02 Status
+
+- Role: Cross-domain Parser / Table Stress Benchmark; not a Ga2O3 Pilot
+- PDF: `data/benchmark/B02/B02.pdf`
+- SHA256: `A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF`
+- Layout: IEEE two-column
+- Primary stress targets: Table I and complex multi-column Table II
+- Ground Truth: `building` through independent manual PDF annotation
+- MinerU: not run; no B02 Raw Output exists or has been reviewed
+
 ## Architectural Findings
 
 MinerU 4.0.7 `middle_json` (`docvortex.middle` schema 2.0) exposes typed structures including `header`, `footer`, `page_footnote`, `paragraph_title`, `equation`, `image`, `image_caption`, and `doc_title`.
@@ -155,7 +166,7 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 1. P001 PDF page 11 reference fragment is misclassified by MinerU as a Formula block.
 2. B01 Equation (2), `Ga(OH)3 → GaOOH + H2O`, is missing from MinerU Raw Equation blocks.
 3. The Advanced Science publisher logo is misclassified as an image on B01 page 1 and as Equations on pages 9 and 10.
-4. Table parsing has not been stress-tested on a paper containing a genuine main-text Table.
+4. B02 provides genuine main-text Tables, but its Ground Truth is still building and parsing has not begun.
 5. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
 6. An aggregate benchmark pass threshold is not yet defined.
 
@@ -165,12 +176,12 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 
 ## Next Planned Phase
 
-Additional Pilot validation before Parser v1 freeze
+Manual B02 Ground Truth annotation
 
 Priority sequence:
 
-1. Select 1–2 additional Pilot papers, including at least one genuine main-text Table paper.
-2. Freeze Parser v1.
-3. Validate the already-created isolated RAG-Anything environment only with explicit approval.
-4. Implement `RAGAnythingAdapter` after Parser v1 is frozen.
-5. Continue Translation QA and Knowledge Card work.
+1. Complete independent manual B02 Figure, Equation, Table, and reading-order annotations.
+2. Review and freeze B02 Ground Truth before any B02 MinerU run.
+3. Parse and evaluate B02 only in a separately authorized phase.
+4. Freeze Parser v1 after cross-domain validation.
+5. Continue later integration work only with explicit approval.
