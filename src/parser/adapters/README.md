@@ -20,6 +20,7 @@ Document Schema
 
 ## Supported adapters
 
-- MinerU: first raw-output conversion available
+- MinerU: `docvortex.middle` 2.0 `middle_json` primary conversion, with the
+  preserved Markdown/legacy Raw Output contract as fallback
 - Docling: candidate
 - Marker: candidate

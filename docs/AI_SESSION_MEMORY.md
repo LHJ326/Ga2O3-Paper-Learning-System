@@ -60,6 +60,8 @@ Do not reinstall environments, rerun completed PDF parsing, or modify Raw Output
 - B01 identity registration and independent Ground Truth v1
 - B01 MinerU 4.0.7 Raw parsing by the user
 - Layer A B01 Benchmark Evaluator v1
+- MinerUAdapter v2 with `docvortex.middle` 2.0 primary input and legacy fallback
+- B01 Layer B benchmark: 5 Figures, 6 Equations, and 0 Tables after adapter filtering
 - Initial RAG-Anything source/interface review
 
 ## 5. P001 Status
@@ -124,7 +126,7 @@ Key commit: `2f39f7962e0e37c4a1c5a431604fcc2a34411aff`.
 - Keep `source_reference` backward compatible.
 - Preserve typed Evidence and relationships through every conversion.
 - Do not bind project architecture directly to a parser's native schema.
-- MinerUAdapter v2 should use `docvortex.middle` 2.0 `middle_json` as primary input.
+- MinerUAdapter v2 uses `docvortex.middle` 2.0 `middle_json` as primary input.
 - Retain the existing Markdown route as fallback.
 - Do not implement v2 during archival/recovery tasks.
 
@@ -184,9 +186,8 @@ Preferences:
 2. B01 Equation (2) Raw false negative.
 3. B01 publisher logo image/Equation false positives.
 4. No stress test yet with a genuine main-text Table.
-5. MinerUAdapter v2 not implemented.
-6. B01 detailed Figure annotations currently cover Figures 1–3 while the confirmed summary contains five.
-7. Layer B benchmark and aggregate pass threshold remain pending.
+5. B01 detailed Figure annotations currently cover Figures 1–3 while the confirmed summary contains five.
+6. No aggregate benchmark pass threshold is defined yet.
 
 ## 11. Resume Protocol
 
@@ -201,11 +202,5 @@ On every future session:
 
 ## 12. Next Priority
 
-Phase 1.5D-3 — MinerUAdapter v2:
-
-```text
-docvortex.middle 2.0
-→ Unified Document Schema 0.2
-```
-
-Then evaluate B01 at Layer B, add 1–2 Pilot papers including a genuine main-text Table case, freeze Parser v1, and only then begin the isolated RAG-Anything integration pilot.
+Add 1–2 Pilot papers including a genuine main-text Table case, freeze Parser v1,
+and only then begin the isolated RAG-Anything integration pilot.

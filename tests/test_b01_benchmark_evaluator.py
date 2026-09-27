@@ -69,6 +69,25 @@ def test_metric_calculation_handles_empty_collections() -> None:
     assert metrics["f1"] == 1.0
 
 
-def test_layer_b_is_an_explicit_placeholder(result: dict) -> None:
+def test_layer_b_reports_adapter_output_separately(result: dict) -> None:
     assert result["evaluation_layer"] == "Layer A: MinerU Raw Output"
-    assert result["layer_b"]["status"] == "NOT_EVALUATED"
+    layer_b = result["layer_b"]
+    assert layer_b["status"] == "EVALUATED"
+    assert layer_b["document_counts"] == {
+        "pages": 10,
+        "sections": 9,
+        "text_blocks": 114,
+        "figures": 5,
+        "equations": 6,
+        "tables": 0,
+    }
+    figures = layer_b["metrics"]["figures"]
+    assert (figures["tp"], figures["fp"], figures["fn"]) == (5, 0, 0)
+    assert figures["precision"] == 1.0
+    assert figures["recall"] == 1.0
+    equations = layer_b["metrics"]["equations"]
+    assert (equations["tp"], equations["fp"], equations["fn"]) == (6, 0, 1)
+    assert equations["precision"] == 1.0
+    assert equations["recall"] == pytest.approx(6 / 7)
+    assert layer_b["metrics"]["captions"]["caption_coverage"] == 1.0
+    assert layer_b["metrics"]["tables"]["true_negative_no_table"] is True

@@ -15,7 +15,8 @@ Do not reinitialize the project, reinstall Python/MinerU, rerun P001/B01 parsing
 - Document Schema: 0.2
 - P001 MinerUAdapter v1 conversion: stable Pilot node with known issues
 - B01 Layer A Benchmark Evaluator v1: complete
-- Full test suite at archive time: 62 passed
+- MinerUAdapter v2 and B01 Layer B benchmark: complete
+- Full test suite: 66 passed
 - Key benchmark commit: `2f39f7962e0e37c4a1c5a431604fcc2a34411aff`
 - RAG-Anything: `ADOPT CANDIDATE`, not installed or integrated
 
@@ -47,7 +48,7 @@ The existing Markdown adapter route must remain a fallback. RAG-Anything is an i
 - `src/parser/adapters/mineru_adapter.py`
 - `src/schema/document.py`
 
-## Next Recommended Phase
+## Completed Phase
 
 Phase 1.5D-3 — MinerUAdapter v2
 
@@ -58,7 +59,7 @@ docvortex.middle 2.0
 → Unified Document
 ```
 
-Requirements:
+Implemented guarantees:
 
 - preserve typed Evidence and Raw locators
 - map typed header/footer/title/image/caption/Equation structures conservatively
@@ -66,11 +67,19 @@ Requirements:
 - do not infer missing scientific content
 - use B01 for Layer B evaluation
 
+B01 Adapter output: 10 Pages, 9 Sections, 114 TextBlocks, 5 Figures,
+6 Equations, and 0 Tables. Layer B removes the Raw publisher-logo false
+positives while retaining the Raw Equation (2) false negative.
+
+## Next Recommended Phase
+
+Add 1–2 Pilot papers, including a genuine main-text Table case, then freeze
+Parser v1. Do not begin RAG-Anything integration without explicit approval.
+
 ## Planned Sequence After v2
 
-1. Re-evaluate B01 Adapter / Layer B output.
-2. Add 1–2 additional Pilot papers; at least one must contain a genuine main-text Table.
-3. Freeze Parser v1.
-4. Prepare an isolated RAG-Anything environment with user approval.
-5. Implement `RAGAnythingAdapter` and test Evidence round-trip/citation accuracy.
-6. Continue Translation QA and Knowledge Card work.
+1. Add 1–2 additional Pilot papers; at least one must contain a genuine main-text Table.
+2. Freeze Parser v1.
+3. Validate the existing isolated RAG-Anything environment with user approval.
+4. Implement `RAGAnythingAdapter` and test Evidence round-trip/citation accuracy.
+5. Continue Translation QA and Knowledge Card work.

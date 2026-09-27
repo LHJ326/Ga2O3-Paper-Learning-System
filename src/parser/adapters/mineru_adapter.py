@@ -17,6 +17,7 @@ from ...schema.document import (
     Metadata,
     Page,
     Section,
+    Table,
     TextBlock,
 )
 from .base import ParserAdapter
@@ -79,6 +80,13 @@ class MinerUAdapter(ParserAdapter):
     def convert(self, raw_output: object) -> Document:
         """Convert a MinerU raw-output directory into a Document."""
         raw_root = self._raw_root(raw_output)
+        middle_json_path = self._middle_json_path(raw_root)
+        if middle_json_path is not None:
+            return self._convert_middle_json(raw_root, middle_json_path)
+        return self._convert_legacy(raw_root)
+
+    def _convert_legacy(self, raw_root: Path) -> Document:
+        """Convert the preserved Markdown/legacy raw-output contract."""
         run_metadata = self._load_json(raw_root / "metadata.json")
         content_path = self._content_json_path(raw_root)
         content_payload = self._load_json(content_path)
@@ -192,6 +200,453 @@ class MinerUAdapter(ParserAdapter):
         if not isinstance(payload, dict):
             raise ValueError(f"Expected a JSON object in {path}")
         return payload
+
+    @staticmethod
+    def _middle_json_path(raw_root: Path) -> Path | None:
+        """Return the single preserved docvortex.middle file, when present."""
+        middle_dir = raw_root / "middle_json"
+        if not middle_dir.is_dir():
+            return None
+        candidates = sorted(middle_dir.glob("*.json"))
+        if not candidates:
+            return None
+        if len(candidates) != 1:
+            raise ValueError(
+                "MinerU raw output must contain at most one middle_json file."
+            )
+        return candidates[0]
+
+    def _convert_middle_json(
+        self, raw_root: Path, middle_path: Path
+    ) -> Document:
+        """Convert docvortex.middle 2.0 into Unified Document Schema 0.2."""
+        raw = self._load_json(middle_path)
+        if raw.get("schema") != "docvortex.middle":
+            raise ValueError(
+                f"Unsupported middle_json schema: {raw.get('schema')!r}"
+            )
+        if str(raw.get("schema_version")) != "2.0":
+            raise ValueError(
+                "Unsupported docvortex.middle schema version: "
+                f"{raw.get('schema_version')!r}"
+            )
+
+        raw_pages = raw.get("pages")
+        if not isinstance(raw_pages, list):
+            raise ValueError("docvortex.middle pages must be an array.")
+        page_indices = [
+            page.get("page_idx") if isinstance(page, dict) else None
+            for page in raw_pages
+        ]
+        if page_indices != list(range(len(raw_pages))):
+            raise ValueError(
+                "docvortex.middle page_idx values must be continuous from zero."
+            )
+
+        producer = raw.get("metadata", {}).get("producer", {})
+        if not isinstance(producer, dict):
+            producer = {}
+        parser_name = str(producer.get("name") or "MinerU")
+        parser_version = str(producer.get("version") or "unknown")
+        paper_id = middle_path.stem
+        legacy_metadata_path = raw_root / "metadata.json"
+        if legacy_metadata_path.is_file():
+            legacy_metadata = self._load_json(legacy_metadata_path)
+            candidate_id = legacy_metadata.get("paper_id")
+            if isinstance(candidate_id, str) and candidate_id:
+                paper_id = candidate_id
+        provenance = {
+            "paper_id": paper_id,
+            "parser_name": parser_name,
+            "parser_version": parser_version,
+        }
+        source_file = middle_path.relative_to(raw_root).as_posix()
+
+        records: list[dict[str, Any]] = []
+        pages: list[Page] = []
+        diagnostic_counts: dict[str, int] = {}
+        for page in raw_pages:
+            if not isinstance(page, dict) or not isinstance(page.get("blocks"), list):
+                raise ValueError("Each docvortex.middle page must contain blocks.")
+            page_idx = int(page["page_idx"])
+            page_number = page_idx + 1
+            page_texts: list[str] = []
+            for position, block in enumerate(page["blocks"]):
+                if not isinstance(block, dict):
+                    raise ValueError("Each docvortex.middle block must be an object.")
+                raw_type = str(block.get("type") or "unknown")
+                diagnostic_counts[raw_type] = diagnostic_counts.get(raw_type, 0) + 1
+                text = self._middle_content_text(block.get("content", ""))
+                if text:
+                    page_texts.append(text)
+                records.append(
+                    {
+                        "page_idx": page_idx,
+                        "page_number": page_number,
+                        "position": position,
+                        "block": block,
+                        "type": raw_type,
+                        "text": text,
+                    }
+                )
+            pages.append(
+                Page(
+                    id=f"{paper_id}-page-{page_number:03d}",
+                    page_number=page_number,
+                    content="\n\n".join(page_texts),
+                    source_reference=self._middle_source_reference(
+                        provenance,
+                        source_file=source_file,
+                        page=page_number,
+                        locator=f"/pages/{page_idx}",
+                        raw_type="page",
+                        raw_index=page_idx,
+                        position=None,
+                        bbox=None,
+                    ),
+                )
+            )
+
+        doc_titles = [record["text"] for record in records if record["type"] == "doc_title"]
+        metadata = Metadata(
+            id=f"{paper_id}-metadata",
+            page_number=None,
+            content=json.dumps(
+                {
+                    "document": raw.get("metadata", {}).get("document", {}),
+                    "doc_titles": doc_titles,
+                    "extensions": raw.get("extensions", {}),
+                    "raw_block_counts": diagnostic_counts,
+                    "excluded_text_block_types": [
+                        "header",
+                        "footer",
+                        "page_footnote",
+                    ],
+                    "schema": raw["schema"],
+                    "schema_version": str(raw["schema_version"]),
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+            source_reference=self._middle_source_reference(
+                provenance,
+                source_file=source_file,
+                page=None,
+                locator="/",
+                raw_type="document",
+                raw_index=None,
+                position=None,
+                bbox=None,
+            ),
+        )
+
+        sections: list[Section] = []
+        text_blocks: list[TextBlock] = []
+        text_by_position: dict[tuple[int, int], TextBlock] = {}
+        for record in records:
+            block = record["block"]
+            evidence = self._middle_source_reference(
+                provenance,
+                source_file=source_file,
+                page=record["page_number"],
+                locator=(
+                    f"/pages/{record['page_idx']}/blocks/{record['position']}"
+                ),
+                raw_type=record["type"],
+                raw_index=block.get("index"),
+                position=record["position"],
+                bbox=block.get("bbox"),
+            )
+            if record["type"] == "paragraph_title" and record["text"]:
+                sections.append(
+                    Section(
+                        id=f"{paper_id}-section-{len(sections) + 1:03d}",
+                        page_number=record["page_number"],
+                        content=record["text"],
+                        source_reference=evidence,
+                    )
+                )
+            elif record["type"] == "text" and record["text"]:
+                text_block = TextBlock(
+                    id=f"{paper_id}-text-{len(text_blocks) + 1:04d}",
+                    page_number=record["page_number"],
+                    content=record["text"],
+                    source_reference=evidence,
+                )
+                text_blocks.append(text_block)
+                text_by_position[(record["page_idx"], record["position"])] = text_block
+
+        figures = self._convert_middle_figures(
+            records, provenance, source_file
+        )
+        figure_text_relations = self._link_figure_text_evidence(
+            figures, text_blocks
+        )
+        equations = self._convert_middle_equations(
+            records,
+            provenance,
+            source_file,
+            text_blocks,
+            text_by_position,
+        )
+        tables = self._convert_middle_tables(records, provenance, source_file)
+
+        return Document(
+            document_id=paper_id,
+            metadata=metadata,
+            pages=pages,
+            sections=sections,
+            figures=figures,
+            tables=tables,
+            equations=equations,
+            text_blocks=text_blocks,
+            figure_text_relations=figure_text_relations,
+        )
+
+    @staticmethod
+    def _middle_content_text(value: Any) -> str:
+        """Flatten nested docvortex content without inventing formatting."""
+        if isinstance(value, str):
+            return value
+        if isinstance(value, list):
+            return "".join(MinerUAdapter._middle_content_text(item) for item in value)
+        if isinstance(value, dict):
+            return MinerUAdapter._middle_content_text(value.get("content", ""))
+        return ""
+
+    @staticmethod
+    def _middle_source_reference(
+        provenance: dict[str, str],
+        *,
+        source_file: str,
+        page: int | None,
+        locator: str,
+        raw_type: str,
+        raw_index: object,
+        position: int | None,
+        bbox: object,
+    ) -> str:
+        """Build a parser-independent Evidence bridge with a JSON locator."""
+        return json.dumps(
+            {
+                **provenance,
+                "source_file": source_file,
+                "page": page,
+                "mineru_locator": locator,
+                "json_locator": locator,
+                "raw_block_index": raw_index,
+                "raw_block_position": position,
+                "bbox": bbox,
+                "raw_type": raw_type,
+                "schema": "docvortex.middle",
+                "schema_version": "2.0",
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+
+    def _convert_middle_figures(
+        self,
+        records: list[dict[str, Any]],
+        provenance: dict[str, str],
+        source_file: str,
+    ) -> list[Figure]:
+        """Keep only image blocks carrying a numbered scientific caption."""
+        figures: list[Figure] = []
+        for record in records:
+            if record["type"] != "image":
+                continue
+            block = record["block"]
+            children = block.get("content", [])
+            if not isinstance(children, list):
+                continue
+            caption_position = None
+            caption_block = None
+            for nested_position, child in enumerate(children):
+                if isinstance(child, dict) and child.get("type") == "image_caption":
+                    caption_position = nested_position
+                    caption_block = child
+                    break
+            if caption_block is None or caption_position is None:
+                continue
+            caption = self._middle_content_text(
+                caption_block.get("content", "")
+            ).strip()
+            match = _FIGURE_CAPTION.fullmatch(caption)
+            if match is None:
+                continue
+            locator = f"/pages/{record['page_idx']}/blocks/{record['position']}"
+            caption_locator = f"{locator}/content/{caption_position}"
+            figures.append(
+                Figure(
+                    id=f"{provenance['paper_id']}-figure-{len(figures) + 1:03d}",
+                    page_number=record["page_number"],
+                    content=json.dumps(
+                        {
+                            "image_path": None,
+                            "mineru_block_type": "image",
+                            "caption_status": "matched",
+                            "caption": caption,
+                            "figure_number": match.group("number"),
+                            "caption_source_reference": json.loads(
+                                self._middle_source_reference(
+                                    provenance,
+                                    source_file=source_file,
+                                    page=record["page_number"],
+                                    locator=caption_locator,
+                                    raw_type="image_caption",
+                                    raw_index=caption_block.get("index"),
+                                    position=caption_position,
+                                    bbox=caption_block.get("bbox"),
+                                )
+                            ),
+                        },
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                    source_reference=self._middle_source_reference(
+                        provenance,
+                        source_file=source_file,
+                        page=record["page_number"],
+                        locator=locator,
+                        raw_type="image",
+                        raw_index=block.get("index"),
+                        position=record["position"],
+                        bbox=block.get("bbox"),
+                    ),
+                )
+            )
+        return figures
+
+    @staticmethod
+    def _is_header_decoration(record: dict[str, Any]) -> bool:
+        """Identify empty equation-shaped decoration wholly inside the header."""
+        if record["text"].strip():
+            return False
+        bbox = record["block"].get("bbox")
+        return (
+            isinstance(bbox, list)
+            and len(bbox) == 4
+            and all(isinstance(value, (int, float)) for value in bbox)
+            and float(bbox[3]) <= 0.08
+        )
+
+    def _convert_middle_equations(
+        self,
+        records: list[dict[str, Any]],
+        provenance: dict[str, str],
+        source_file: str,
+        text_blocks: list[TextBlock],
+        text_by_position: dict[tuple[int, int], TextBlock],
+    ) -> list[Equation]:
+        """Convert raw equations while rejecting only header decoration."""
+        equations: list[Equation] = []
+        page_positions: dict[int, list[int]] = {}
+        for page_idx, position in text_by_position:
+            page_positions.setdefault(page_idx, []).append(position)
+
+        for record in records:
+            if record["type"] != "equation" or self._is_header_decoration(record):
+                continue
+            block = record["block"]
+            content = record["text"].strip()
+            positions = sorted(page_positions.get(record["page_idx"], []))
+            before = [p for p in positions if p < record["position"]]
+            after = [p for p in positions if p > record["position"]]
+            neighbors = ([before[-1]] if before else []) + ([after[0]] if after else [])
+            related_ids = [
+                text_by_position[(record["page_idx"], position)].id
+                for position in neighbors
+            ]
+            representation_type = "text" if content else "raw_block_without_content"
+            locator = f"/pages/{record['page_idx']}/blocks/{record['position']}"
+            equation = Equation(
+                id=f"{provenance['paper_id']}-equation-{len(equations) + 1:03d}",
+                page_number=record["page_number"],
+                content=content,
+                source_reference=self._middle_source_reference(
+                    provenance,
+                    source_file=source_file,
+                    page=record["page_number"],
+                    locator=locator,
+                    raw_type="equation",
+                    raw_index=block.get("index"),
+                    position=record["position"],
+                    bbox=block.get("bbox"),
+                ),
+                metadata=EquationMetadata(
+                    representation_type=representation_type,
+                    formula_image_path=None,
+                    equation_number=self._equation_number(content),
+                    related_text_block_ids=tuple(related_ids),
+                ),
+            )
+            source = json.loads(equation.source_reference)
+            source.update(
+                {
+                    "representation_type": representation_type,
+                    "formula_image_path": None,
+                    "equation_number": equation.metadata.equation_number,
+                    "related_ids": related_ids,
+                }
+            )
+            equation.source_reference = json.dumps(
+                source, ensure_ascii=False, sort_keys=True
+            )
+            equations.append(equation)
+
+        text_by_id = {block.id: block for block in text_blocks}
+        for equation in equations:
+            equation_source = json.loads(equation.source_reference)
+            for text_id in equation_source["related_ids"]:
+                text_block = text_by_id[text_id]
+                text_source = json.loads(text_block.source_reference)
+                text_source.setdefault("related_ids", [])
+                if equation.id not in text_source["related_ids"]:
+                    text_source["related_ids"].append(equation.id)
+                text_source.setdefault("equation_references", []).append(
+                    {
+                        "equation_id": equation.id,
+                        "relation": "nearest_same_page_text",
+                        "mineru_locator": equation_source["mineru_locator"],
+                    }
+                )
+                text_block.source_reference = json.dumps(
+                    text_source, ensure_ascii=False, sort_keys=True
+                )
+        return equations
+
+    def _convert_middle_tables(
+        self,
+        records: list[dict[str, Any]],
+        provenance: dict[str, str],
+        source_file: str,
+    ) -> list[Table]:
+        """Map typed table blocks without inferring textual table references."""
+        tables: list[Table] = []
+        for record in records:
+            if record["type"] != "table":
+                continue
+            block = record["block"]
+            locator = f"/pages/{record['page_idx']}/blocks/{record['position']}"
+            tables.append(
+                Table(
+                    id=f"{provenance['paper_id']}-table-{len(tables) + 1:03d}",
+                    page_number=record["page_number"],
+                    content=record["text"],
+                    source_reference=self._middle_source_reference(
+                        provenance,
+                        source_file=source_file,
+                        page=record["page_number"],
+                        locator=locator,
+                        raw_type="table",
+                        raw_index=block.get("index"),
+                        position=record["position"],
+                        bbox=block.get("bbox"),
+                    ),
+                )
+            )
+        return tables
 
     @staticmethod
     def _content_json_path(raw_root: Path) -> Path:

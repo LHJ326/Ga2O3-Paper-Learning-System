@@ -1,7 +1,7 @@
-"""Evaluate parser raw output against independently authored Ground Truth.
+"""Evaluate Raw MinerU and Unified Document output against Ground Truth.
 
-Layer A evaluates MinerU ``docvortex.middle`` output. Layer B is deliberately
-reported as a placeholder until the unified adapter consumes this schema.
+Layer A evaluates MinerU ``docvortex.middle`` output. Layer B independently
+evaluates the Evidence-preserving MinerUAdapter v2 output.
 """
 
 from __future__ import annotations
@@ -13,6 +13,9 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import yaml
+
+from ..parser.adapters import MinerUAdapter
+from ..schema.document import Document, DocumentElement
 
 
 FIGURE_CAPTION_RE = re.compile(r"^\s*(?:figure|fig\.)\s*(\d+)\b", re.IGNORECASE)
@@ -143,6 +146,160 @@ def _review_metric(
         calculate_metrics(len(ground_truth_numbers), len(actual), len(true_positives)),
         reviewed,
     )
+
+
+def _adapter_review_metric(
+    review_section: dict[str, Any], elements: list[DocumentElement]
+) -> dict[str, Any]:
+    reviewed = review_section.get("predictions", [])
+    classifications = {
+        (int(item["page"]), int(item["block_index"])): item.get("classification")
+        for item in reviewed
+    }
+    predicted_locators: list[tuple[int, int]] = []
+    for element in elements:
+        evidence = element.evidence
+        raw_index = evidence.details.get("raw_block_index")
+        if evidence.page is None or not isinstance(raw_index, int):
+            raise ValueError(f"Adapter element lacks a raw block locator: {element.id}")
+        locator = (evidence.page, raw_index)
+        if locator not in classifications:
+            raise ValueError(f"Adapter element has an unreviewed raw locator: {locator}")
+        predicted_locators.append(locator)
+    true_positive = sum(
+        classifications[locator] == "true_positive"
+        for locator in predicted_locators
+    )
+    metric = calculate_metrics(
+        len(review_section.get("ground_truth_numbers", [])),
+        len(elements),
+        true_positive,
+    )
+    metric["adapter_locators"] = [
+        {"page": page, "block_index": block_index}
+        for page, block_index in predicted_locators
+    ]
+    return metric
+
+
+def _evaluate_adapter_layer(
+    ground_truth: dict[str, Any],
+    review: dict[str, Any],
+    document: Document,
+) -> dict[str, Any]:
+    """Evaluate Unified Document output separately from MinerU Raw output."""
+    gt_pages = {int(item["page_number"]) for item in ground_truth.get("pages", [])}
+    predicted_pages = {
+        page.page_number for page in document.pages if page.page_number is not None
+    }
+    page_metric = calculate_metrics(
+        len(gt_pages), len(predicted_pages), len(gt_pages & predicted_pages)
+    )
+    page_metric.update(
+        {
+            "page_count_match": len(gt_pages) == len(predicted_pages),
+            "page_coverage": 1.0 if not gt_pages else len(gt_pages & predicted_pages) / len(gt_pages),
+            "missing_pages": sorted(gt_pages - predicted_pages),
+            "extra_pages": sorted(predicted_pages - gt_pages),
+        }
+    )
+
+    figure_metric = _adapter_review_metric(review["figures"], document.figures)
+    equation_metric = _adapter_review_metric(review["equations"], document.equations)
+
+    figure_numbers = set(review["figures"].get("ground_truth_numbers", []))
+    detected_caption_numbers: list[int] = []
+    unnumbered_caption_count = 0
+    for figure in document.figures:
+        payload = json.loads(figure.content)
+        caption = str(payload.get("caption") or "")
+        match = FIGURE_CAPTION_RE.match(caption)
+        if match:
+            detected_caption_numbers.append(int(match.group(1)))
+        else:
+            unnumbered_caption_count += 1
+    matched_caption_numbers = sorted(figure_numbers & set(detected_caption_numbers))
+    caption_metric = calculate_metrics(
+        len(figure_numbers), len(document.figures), len(matched_caption_numbers)
+    )
+    caption_metric.update(
+        {
+            "caption_coverage": 1.0 if not figure_numbers else len(matched_caption_numbers) / len(figure_numbers),
+            "matched_figure_numbers": matched_caption_numbers,
+            "detected_figure_numbers": detected_caption_numbers,
+            "unnumbered_caption_count": unnumbered_caption_count,
+        }
+    )
+
+    gt_sections = ground_truth.get("sections", [])
+    gt_main_titles = {
+        str(item["title"]): _normalize_title(str(item["title"]))
+        for item in gt_sections
+    }
+    predicted_titles = [section.content.strip() for section in document.sections]
+    predicted_normalized = {_normalize_title(title): title for title in predicted_titles}
+    matched_titles = [
+        title for title, normalized in gt_main_titles.items()
+        if normalized in predicted_normalized
+    ]
+    main_normalized = set(gt_main_titles.values())
+    section_metric = calculate_metrics(
+        len(gt_main_titles), len(predicted_titles), len(matched_titles)
+    )
+    section_metric.update(
+        {
+            "matched_titles": matched_titles,
+            "missing_titles": [title for title in gt_main_titles if title not in matched_titles],
+            "extra_titles": [title for title in predicted_titles if _normalize_title(title) not in main_normalized],
+        }
+    )
+    gt_subsections = [
+        str(subsection["title"])
+        for section in gt_sections
+        for subsection in section.get("subsections", [])
+    ]
+    matched_subsections = [
+        title for title in gt_subsections
+        if any(
+            block.content.casefold().startswith(f"{title}:".casefold())
+            for block in document.text_blocks
+        )
+    ]
+    section_metric["experimental_subsections"] = {
+        "ground_truth_count": len(gt_subsections),
+        "matched_count": len(matched_subsections),
+        "matched_titles": matched_subsections,
+        "missing_titles": [title for title in gt_subsections if title not in matched_subsections],
+    }
+
+    gt_tables = ground_truth.get("tables", [])
+    table_metric = calculate_metrics(len(gt_tables), len(document.tables), 0)
+    table_metric.update(
+        {
+            "true_negative_no_table": not gt_tables and not document.tables,
+            "supplementary_references_excluded": True,
+        }
+    )
+    return {
+        "status": "EVALUATED",
+        "evaluation_layer": "Layer B: MinerUAdapter v2 / Unified Document",
+        "document_counts": {
+            "pages": len(document.pages),
+            "sections": len(document.sections),
+            "text_blocks": len(document.text_blocks),
+            "figures": len(document.figures),
+            "equations": len(document.equations),
+            "tables": len(document.tables),
+        },
+        "metrics": {
+            "pages": page_metric,
+            "figures": figure_metric,
+            "equations": equation_metric,
+            "captions": caption_metric,
+            "sections": section_metric,
+            "tables": table_metric,
+        },
+    }
 
 
 def evaluate_benchmark(
@@ -285,6 +442,9 @@ def evaluate_benchmark(
             }
         )
 
+    adapter_document = MinerUAdapter().convert(middle_json_path.parent.parent)
+    layer_b = _evaluate_adapter_layer(ground_truth, review, adapter_document)
+
     return {
         "benchmark_id": ground_truth.get("metadata", {}).get("benchmark_id", "B01"),
         "parser": review.get("parser", "MinerU"),
@@ -306,13 +466,7 @@ def evaluate_benchmark(
             "tables": table_metric,
         },
         "known_errors": known_errors,
-        "layer_b": {
-            "status": "NOT_EVALUATED",
-            "reason": (
-                "The current MinerUAdapter does not consume docvortex.middle schema 2.0; "
-                "Layer B remains an explicit placeholder to avoid a large adapter refactor."
-            ),
-        },
+        "layer_b": layer_b,
     }
 
 

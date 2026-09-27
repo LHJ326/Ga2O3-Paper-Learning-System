@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 ## Current Phase
 
-Phase 1.5D-2C completed — B01 Benchmark Evaluator v1 and milestone archive
+Phase 1.5D-3 completed — MinerUAdapter v2 and B01 Layer B benchmark
 
 ## Current Architecture
 
@@ -21,7 +21,7 @@ PDF
 → RAG-Anything / LightRAG
 ```
 
-The existing Markdown/raw-output adapter path remains operational as a fallback. MinerUAdapter v2 has not been implemented.
+The existing Markdown/raw-output adapter path remains operational as a fallback.
 
 ## Completed
 
@@ -42,6 +42,8 @@ The existing Markdown/raw-output adapter path remains operational as a fallback.
 - B01 Ground Truth v1 manually authored
 - B01 MinerU Raw Output manually generated
 - B01 Layer A Benchmark Evaluator v1 implemented
+- MinerUAdapter v2 implemented with Evidence-preserving `middle_json` conversion
+- B01 Layer B benchmark implemented without changing Layer A
 - B01 machine-readable result and report generated
 - RAG-Anything source interface review completed
 
@@ -113,18 +115,25 @@ Layer A benchmark metrics:
 | Main Sections | 44.44% | 100% | 61.54% | 4 matched plus 5 ancillary titles |
 | Main-text Tables | 100% | 100% | 100% | GT 0 / Predicted 0 |
 
-All four Experimental subsections matched. Layer B / Unified Document evaluation is not yet implemented.
+All four Experimental subsections matched in both layers.
+
+Layer B Adapter output:
+
+- 10 Pages, 9 Sections, 114 TextBlocks, 5 Figures, 6 Equations, 0 Tables
+- Figures: TP 5 / FP 0 / FN 0; precision/recall/F1 100%
+- Equations: TP 6 / FP 0 / FN 1; precision 100%, recall 85.71%, F1 92.31%
+- Captions: 5/5; all four main sections and Experimental subsections matched
 
 ## Architectural Findings
 
 MinerU 4.0.7 `middle_json` (`docvortex.middle` schema 2.0) exposes typed structures including `header`, `footer`, `page_footnote`, `paragraph_title`, `equation`, `image`, `image_caption`, and `doc_title`.
 
-Decision for MinerUAdapter v2:
+MinerUAdapter v2 behavior:
 
 - Primary input: `middle_json`
 - Fallback: existing Markdown + legacy Raw Output route
 
-This decision is planned only; no Adapter v2 implementation exists yet.
+The mapping is implemented and covered by the full test suite (66 passed).
 
 ## RAG-Anything Evaluation
 
@@ -147,9 +156,8 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 2. B01 Equation (2), `Ga(OH)3 → GaOOH + H2O`, is missing from MinerU Raw Equation blocks.
 3. The Advanced Science publisher logo is misclassified as an image on B01 page 1 and as Equations on pages 9 and 10.
 4. Table parsing has not been stress-tested on a paper containing a genuine main-text Table.
-5. MinerUAdapter v2 is not implemented.
-6. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
-7. Layer B benchmark and aggregate pass threshold are not yet defined.
+5. B01 Ground Truth YAML currently has detailed Figure records for Figures 1–3 while the manually confirmed summary contains five Scientific Figures.
+6. An aggregate benchmark pass threshold is not yet defined.
 
 ## Key Git Commit
 
@@ -157,13 +165,12 @@ RAG-Anything is a future multimodal retrieval/indexing layer, not the project's 
 
 ## Next Planned Phase
 
-Phase 1.5D-3 — MinerUAdapter v2
+Additional Pilot validation before Parser v1 freeze
 
 Priority sequence:
 
-1. Convert `docvortex.middle` 2.0 to Unified Document while preserving Markdown fallback.
-2. Re-evaluate B01 at the Adapter / Layer B level.
-3. Select 1–2 additional Pilot papers, including at least one genuine main-text Table paper.
-4. Freeze Parser v1.
-5. Create an isolated RAG-Anything environment and implement `RAGAnythingAdapter`.
-6. Continue Translation QA and Knowledge Card work.
+1. Select 1–2 additional Pilot papers, including at least one genuine main-text Table paper.
+2. Freeze Parser v1.
+3. Validate the already-created isolated RAG-Anything environment only with explicit approval.
+4. Implement `RAGAnythingAdapter` after Parser v1 is frozen.
+5. Continue Translation QA and Knowledge Card work.

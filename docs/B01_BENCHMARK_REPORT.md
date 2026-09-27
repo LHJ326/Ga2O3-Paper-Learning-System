@@ -12,15 +12,13 @@
 
 ## Evaluation Scope
 
-This v1 report completes Layer A only:
+This report evaluates both parser layers independently:
 
 ```text
 Ground Truth
-    vs
-MinerU 4.0.7 middle_json raw output
+    ├── vs MinerU 4.0.7 middle_json raw output (Layer A)
+    └── vs MinerUAdapter v2 Unified Document output (Layer B)
 ```
-
-Layer B (`Unified Document / Adapter Output`) remains explicitly `NOT_EVALUATED`. The current adapter is not refactored to consume `docvortex.middle` in this phase.
 
 Reviewed raw-block classifications are stored separately in `data/benchmark/B01/B01_RAW_REVIEW.yaml`. They capture the user's manual TP/FP/FN decisions and prevent the evaluator from treating every image or Equation block as scientifically valid.
 
@@ -49,7 +47,7 @@ The current YAML has detailed Figure entries for Figures 1–3 only, while the m
 - Raw Table blocks: 0
 - Raw `paragraph_title` blocks: 9
 
-## Metrics
+## Layer A Metrics — Raw MinerU
 
 | Category | GT | Predicted | TP | FP | FN | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -61,6 +59,21 @@ The current YAML has detailed Figure entries for Figures 1–3 only, while the m
 | Main-text Tables | 0 | 0 | 0 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
 
 For sections, the five additional `paragraph_title` blocks are valid ancillary headings rather than missing main sections: Supporting Information, Acknowledgements, Conflict of Interest, Data Availability Statement, and Keywords. They remain reported as extra relative to the four-item main-section Ground Truth.
+
+## Layer B Metrics — MinerUAdapter v2
+
+Adapter output counts: 10 Pages, 9 Sections, 114 TextBlocks, 5 Figures, 6 Equations, and 0 Tables.
+
+| Category | GT | Predicted | TP | FP | FN | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Pages | 10 | 10 | 10 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
+| Scientific Figures | 5 | 5 | 5 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
+| Equations | 7 | 6 | 6 | 0 | 1 | 1.0000 | 0.8571 | 0.9231 |
+| Figure captions | 5 | 5 | 5 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
+| Main sections | 4 | 9 | 4 | 5 | 0 | 0.4444 | 1.0000 | 0.6154 |
+| Main-text Tables | 0 | 0 | 0 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
+
+The adapter removes the uncaptioned publisher-logo image through the general `image + numbered scientific caption` rule. It removes the two empty Equation blocks wholly inside the page-header region through a general high-confidence decoration rule. It does not reconstruct Equation (2), so the Raw false negative remains a Layer B false negative.
 
 ## Page Results
 
@@ -139,7 +152,7 @@ References to Supplementary Tables S1 and S2 do not create main-text Table entit
 - Ground Truth YAML contains three detailed Figure records, while the manually confirmed v1 summary contains five. The benchmark uses the separate reviewed Raw mapping for the confirmed five-Figure count and leaves Ground Truth unchanged.
 - Raw Equation classification confuses the publisher logo with Equations on pages 9 and 10.
 - Equation (2) is missing from Raw Equation blocks.
-- Layer B is not evaluated because the current MinerUAdapter does not consume `docvortex.middle` schema 2.0.
+- Ground Truth still contains no genuine main-text Table case, so Table mapping needs a later multi-paper stress test.
 
 ## Architectural Finding
 
@@ -154,4 +167,4 @@ MinerU 4.0.7 `middle_json` using `docvortex.middle` schema 2.0 exposes structure
 - `image_caption`
 - `doc_title`
 
-This structure preserves page/block typing and stable Raw locators more directly than Markdown. Therefore, `middle_json` should be the primary input candidate for MinerUAdapter v2. The existing Markdown route should remain as a fallback until a separate adapter phase designs, implements, and benchmarks the migration.
+This structure preserves page/block typing and stable Raw locators more directly than Markdown. MinerUAdapter v2 now uses `middle_json` as its primary input and retains the existing Markdown route as fallback. Unified Document Evidence records the source file, 1-based page, JSON locator, Raw block index and position, bounding box, Raw type, schema/version, and producer identity/version.

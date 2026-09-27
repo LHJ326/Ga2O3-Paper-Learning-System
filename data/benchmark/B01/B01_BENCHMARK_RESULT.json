@@ -243,7 +243,172 @@
     }
   ],
   "layer_b": {
-    "status": "NOT_EVALUATED",
-    "reason": "The current MinerUAdapter does not consume docvortex.middle schema 2.0; Layer B remains an explicit placeholder to avoid a large adapter refactor."
+    "status": "EVALUATED",
+    "evaluation_layer": "Layer B: MinerUAdapter v2 / Unified Document",
+    "document_counts": {
+      "pages": 10,
+      "sections": 9,
+      "text_blocks": 114,
+      "figures": 5,
+      "equations": 6,
+      "tables": 0
+    },
+    "metrics": {
+      "pages": {
+        "ground_truth_count": 10,
+        "predicted_count": 10,
+        "tp": 10,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "page_count_match": true,
+        "page_coverage": 1.0,
+        "missing_pages": [],
+        "extra_pages": []
+      },
+      "figures": {
+        "ground_truth_count": 5,
+        "predicted_count": 5,
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "adapter_locators": [
+          {
+            "page": 3,
+            "block_index": 5
+          },
+          {
+            "page": 4,
+            "block_index": 5
+          },
+          {
+            "page": 5,
+            "block_index": 5
+          },
+          {
+            "page": 7,
+            "block_index": 5
+          },
+          {
+            "page": 8,
+            "block_index": 5
+          }
+        ]
+      },
+      "equations": {
+        "ground_truth_count": 7,
+        "predicted_count": 6,
+        "tp": 6,
+        "fp": 0,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.8571428571428571,
+        "f1": 0.923076923076923,
+        "adapter_locators": [
+          {
+            "page": 2,
+            "block_index": 11
+          },
+          {
+            "page": 2,
+            "block_index": 14
+          },
+          {
+            "page": 4,
+            "block_index": 11
+          },
+          {
+            "page": 6,
+            "block_index": 7
+          },
+          {
+            "page": 6,
+            "block_index": 9
+          },
+          {
+            "page": 6,
+            "block_index": 11
+          }
+        ]
+      },
+      "captions": {
+        "ground_truth_count": 5,
+        "predicted_count": 5,
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "caption_coverage": 1.0,
+        "matched_figure_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "detected_figure_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "unnumbered_caption_count": 0
+      },
+      "sections": {
+        "ground_truth_count": 4,
+        "predicted_count": 9,
+        "tp": 4,
+        "fp": 5,
+        "fn": 0,
+        "precision": 0.4444444444444444,
+        "recall": 1.0,
+        "f1": 0.6153846153846153,
+        "matched_titles": [
+          "Introduction",
+          "Results and Discussion",
+          "Conclusion",
+          "Experimental Section"
+        ],
+        "missing_titles": [],
+        "extra_titles": [
+          "Supporting Information",
+          "Acknowledgements",
+          "Conflict of Interest",
+          "Data Availability Statement",
+          "Keywords"
+        ],
+        "experimental_subsections": {
+          "ground_truth_count": 4,
+          "matched_count": 4,
+          "matched_titles": [
+            "Reagents and Substrate",
+            "Preparation and Modulation of Materials",
+            "Material Characterization and Performance Tests",
+            "Device Preparation and Application Design"
+          ],
+          "missing_titles": []
+        }
+      },
+      "tables": {
+        "ground_truth_count": 0,
+        "predicted_count": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_negative_no_table": true,
+        "supplementary_references_excluded": true
+      }
+    }
   }
 }
