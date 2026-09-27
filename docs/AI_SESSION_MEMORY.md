@@ -115,6 +115,10 @@ Phase 1.5D-1B-3B:
 
 Scientific Figure asset filtering
 
+Phase 1.5D-1B-3C:
+
+Figure-to-text evidence chain
+
 ## 5. Current P001 Status
 
 Paper:
@@ -139,6 +143,8 @@ Current output:
 - Sections: 10
 - TextBlocks: 214
 - Figures: 6
+- Figures with explicit body references: 6
+- Explicit body Figure references: 63 total (40 resolved, 23 supplementary unresolved)
 - Tables: 0
 - Equations: 0
 
@@ -184,9 +190,8 @@ Phase 1.5D-1B-3
 
 目标：提升 MinerU Adapter。
 
-- Figure evidence chain 增强
-- Table 支持
 - Equation 检测
+- Table 支持
 - B01 Benchmark 准备
 
 ## 9. Rules For Future AI

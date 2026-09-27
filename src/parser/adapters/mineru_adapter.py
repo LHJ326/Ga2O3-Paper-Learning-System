@@ -27,6 +27,23 @@ _FIGURE_CAPTION = re.compile(
     re.IGNORECASE,
 )
 _LOCATOR_PAGE = re.compile(r"(?:^|/)page:(\d+)(?:/|$)")
+_SUBFIGURE_BODY = (
+    r"(?:\([a-z](?:\s*[,\-\u2013\u2014]\s*[a-z])*\)"
+    r"|[a-z](?:(?:,[a-z])|(?:\s*[\-\u2013\u2014]\s*[a-z]))*)"
+)
+_FIGURE_REFERENCE_TOKEN_TEXT = rf"S?\d+(?:{_SUBFIGURE_BODY})?(?![a-z])"
+_FIGURE_REFERENCE_GROUP = re.compile(
+    rf"\b(?P<label>Figures?|Figs?\.)\s*"
+    rf"(?P<body>{_FIGURE_REFERENCE_TOKEN_TEXT}"
+    rf"(?:\s*(?:,\s*(?:and\s+)?|and\s+|&\s+)"
+    rf"(?:(?:Figures?|Figs?\.)\s*)?{_FIGURE_REFERENCE_TOKEN_TEXT})*)",
+    re.IGNORECASE,
+)
+_FIGURE_REFERENCE_TOKEN = re.compile(
+    rf"(?P<number>S?\d+)(?P<subfigure>{_SUBFIGURE_BODY})?(?![a-z])",
+    re.IGNORECASE,
+)
+_MARKDOWN_EMPHASIS = re.compile(r"\*\*|__")
 
 
 class MinerUAdapter(ParserAdapter):
@@ -82,6 +99,7 @@ class MinerUAdapter(ParserAdapter):
             image_contexts=image_contexts,
             caption_source_file=content_path.relative_to(raw_root).as_posix(),
         )
+        self._link_figure_text_evidence(figures, text_blocks)
 
         metadata_content = json.dumps(
             {
@@ -375,6 +393,113 @@ class MinerUAdapter(ParserAdapter):
                 )
             )
         return figures
+
+    @staticmethod
+    def _detect_figure_references(text: str) -> list[dict[str, object]]:
+        """Return normalized explicit Figure/Fig. references from body text."""
+        normalized_text = _MARKDOWN_EMPHASIS.sub("", text)
+        references: list[dict[str, object]] = []
+        for group_match in _FIGURE_REFERENCE_GROUP.finditer(normalized_text):
+            body = group_match.group("body")
+            for token_match in _FIGURE_REFERENCE_TOKEN.finditer(body):
+                raw_number = token_match.group("number")
+                supplementary = raw_number.upper().startswith("S")
+                figure_number = raw_number[1:] if supplementary else raw_number
+                subfigure = token_match.group("subfigure")
+                if subfigure:
+                    subfigure = (
+                        subfigure.strip("()")
+                        .replace(" ", "")
+                        .replace("\u2013", "-")
+                        .replace("\u2014", "-")
+                        .lower()
+                    )
+                references.append(
+                    {
+                        "reference_text": token_match.group(0),
+                        "figure_number": figure_number,
+                        "subfigure_hint": subfigure,
+                        "supplementary": supplementary,
+                    }
+                )
+        return references
+
+    def _link_figure_text_evidence(
+        self,
+        figures: list[Figure],
+        text_blocks: list[TextBlock],
+    ) -> None:
+        """Create conservative bidirectional links from explicit text references."""
+        figures_by_number: dict[str, tuple[Figure, dict[str, object]]] = {}
+        for figure in figures:
+            payload = json.loads(figure.content)
+            figure_number = str(payload["figure_number"])
+            payload["related_text_block_ids"] = []
+            payload["textual_references"] = []
+            figure.content = json.dumps(
+                payload, ensure_ascii=False, sort_keys=True
+            )
+
+            source = json.loads(figure.source_reference)
+            source["related_ids"] = []
+            figure.source_reference = json.dumps(
+                source, ensure_ascii=False, sort_keys=True
+            )
+            figures_by_number[figure_number] = (figure, payload)
+
+        for text_block in text_blocks:
+            text_source = json.loads(text_block.source_reference)
+            text_source["related_ids"] = []
+            text_source["figure_references"] = []
+
+            # A figure caption is evidence for the Figure itself, not a body citation.
+            if _FIGURE_CAPTION.fullmatch(text_block.content.strip()) is None:
+                detected = self._detect_figure_references(text_block.content)
+                for reference in detected:
+                    figure_entry = figures_by_number.get(
+                        str(reference["figure_number"])
+                    )
+                    resolved = (
+                        not bool(reference["supplementary"])
+                        and figure_entry is not None
+                    )
+                    text_reference = {
+                        **reference,
+                        "status": "resolved" if resolved else "unresolved",
+                        "figure_id": figure_entry[0].id if resolved else None,
+                    }
+                    text_source["figure_references"].append(text_reference)
+                    if not resolved or figure_entry is None:
+                        continue
+
+                    figure, figure_payload = figure_entry
+                    if figure.id not in text_source["related_ids"]:
+                        text_source["related_ids"].append(figure.id)
+                    if text_block.id not in figure_payload["related_text_block_ids"]:
+                        figure_payload["related_text_block_ids"].append(text_block.id)
+                    figure_payload["textual_references"].append(
+                        {
+                            "text_block_id": text_block.id,
+                            "text_block_page": text_block.page_number,
+                            "reference_text": reference["reference_text"],
+                            "figure_number": reference["figure_number"],
+                            "subfigure_hint": reference["subfigure_hint"],
+                        }
+                    )
+
+            text_block.source_reference = json.dumps(
+                text_source, ensure_ascii=False, sort_keys=True
+            )
+
+        for figure, payload in figures_by_number.values():
+            figure.content = json.dumps(
+                payload, ensure_ascii=False, sort_keys=True
+            )
+            source = json.loads(figure.source_reference)
+            source["related_ids"] = list(payload["related_text_block_ids"])
+            figure.source_reference = json.dumps(
+                source, ensure_ascii=False, sort_keys=True
+            )
 
     @staticmethod
     def _source_reference(
