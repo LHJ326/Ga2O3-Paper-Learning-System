@@ -19,6 +19,7 @@ def test_document_can_be_instantiated() -> None:
     assert document.tables == []
     assert document.equations == []
     assert document.text_blocks == []
+    assert document.figure_text_relations == []
 
 
 def test_figure_can_be_created() -> None:
@@ -33,6 +34,7 @@ def test_figure_can_be_created() -> None:
     assert figure.page_number == 3
     assert figure.content == "Figure 1. Device architecture."
     assert figure.source_reference == "example.pdf#page=3&figure=1"
+    assert figure.evidence.source_file == "example.pdf#page=3&figure=1"
 
 
 def test_text_block_can_be_created() -> None:
@@ -47,3 +49,6 @@ def test_text_block_can_be_created() -> None:
     assert text_block.page_number == 2
     assert text_block.content.startswith("The responsivity")
     assert text_block.source_reference == "example.pdf#page=2&block=1"
+    assert text_block.evidence.details["legacy_source_reference"] == (
+        "example.pdf#page=2&block=1"
+    )

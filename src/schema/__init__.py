@@ -3,8 +3,11 @@
 from .document import (
     Document,
     DocumentElement,
+    EquationMetadata,
+    Evidence,
     Equation,
     Figure,
+    FigureTextRelation,
     Metadata,
     Page,
     Section,
@@ -15,8 +18,11 @@ from .document import (
 __all__ = [
     "Document",
     "DocumentElement",
+    "EquationMetadata",
+    "Evidence",
     "Equation",
     "Figure",
+    "FigureTextRelation",
     "Metadata",
     "Page",
     "Section",

@@ -1,5 +1,5 @@
 document_schema:
-  version: "0.1"
+  version: "0.2"
   document:
     identifier: document_id
     fields:
@@ -10,6 +10,7 @@ document_schema:
       tables: list[Table]
       equations: list[Equation]
       text_blocks: list[TextBlock]
+      figure_text_relations: list[FigureTextRelation]
   objects:
     - Metadata
     - Page
@@ -18,10 +19,37 @@ document_schema:
     - Table
     - Equation
     - TextBlock
+    - Evidence
+    - FigureTextRelation
+    - EquationMetadata
   shared_object_fields:
     id: string
     page_number: integer_or_null
     content: string
     source_reference: string
   evidence_chain:
-    requirement: "Every extracted object must retain a source_reference."
+    requirement: "Every extracted object must retain source_reference and expose typed Evidence."
+    fields:
+      paper_id: string_or_null
+      parser_name: string_or_null
+      parser_version: string_or_null
+      source_file: string
+      page: integer_or_null
+      mineru_locator: string_or_null
+      details: mapping
+  figure_text_relation:
+    fields:
+      id: string
+      figure_id: string
+      text_block_id: string
+      relation_type: string
+      reference_text: string
+      normalized_reference: string
+      subfigure_hint: string_or_null
+      evidence: Evidence
+  equation_metadata:
+    fields:
+      representation_type: string
+      formula_image_path: string_or_null
+      equation_number: string_or_null
+      related_text_block_ids: list[string]

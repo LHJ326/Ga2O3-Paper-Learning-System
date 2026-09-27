@@ -10,7 +10,10 @@ from typing import Any
 from ...schema.document import (
     Document,
     Equation,
+    EquationMetadata,
+    Evidence,
     Figure,
+    FigureTextRelation,
     Metadata,
     Page,
     Section,
@@ -34,6 +37,11 @@ _FIGURE_CAPTION = re.compile(
     r"(?:\s*[.:]\s*|\s+)(?P<description>\S[\s\S]*)$",
     re.IGNORECASE,
 )
+_TABLE_CAPTION = re.compile(
+    r"^(?:Table)\s+(?:S?\d+|[IVXLCDM]+)(?:\s*[.:]\s*|\s+)\S[\s\S]*$",
+    re.IGNORECASE,
+)
+_REFERENCE_ENTRY = re.compile(r"^\[\d+\]\s+")
 _LOCATOR_PAGE = re.compile(r"(?:^|/)page:(\d+)(?:/|$)")
 _SUBFIGURE_BODY = (
     r"(?:\([a-z](?:\s*[,\-\u2013\u2014]\s*[a-z])*\)"
@@ -101,7 +109,7 @@ class MinerUAdapter(ParserAdapter):
         sections = self._convert_sections(
             page_chunks, content_path, raw_root, provenance
         )
-        text_blocks = self._convert_text_blocks(
+        text_blocks, boilerplate_diagnostics = self._convert_text_blocks(
             page_chunks, content_path, raw_root, provenance
         )
         image_contexts = self._image_contexts(page_chunks)
@@ -112,7 +120,9 @@ class MinerUAdapter(ParserAdapter):
             image_contexts=image_contexts,
             caption_source_file=content_path.relative_to(raw_root).as_posix(),
         )
-        self._link_figure_text_evidence(figures, text_blocks)
+        figure_text_relations = self._link_figure_text_evidence(
+            figures, text_blocks
+        )
         formula_contexts = self._formula_contexts(page_chunks, text_blocks)
         equations = self._convert_equations(
             image_manifest,
@@ -130,6 +140,7 @@ class MinerUAdapter(ParserAdapter):
                 "parser_tier": run_metadata.get("parser_tier"),
                 "checksum": run_metadata.get("checksum"),
                 "parse": parse_info,
+                "boilerplate_filter": boilerplate_diagnostics,
             },
             ensure_ascii=False,
             sort_keys=True,
@@ -154,6 +165,7 @@ class MinerUAdapter(ParserAdapter):
             figures=figures,
             equations=equations,
             text_blocks=text_blocks,
+            figure_text_relations=figure_text_relations,
         )
 
     def validate(self, document: Document) -> bool:
@@ -273,30 +285,155 @@ class MinerUAdapter(ParserAdapter):
         content_path: Path,
         raw_root: Path,
         provenance: dict[str, str],
-    ) -> list[TextBlock]:
+    ) -> tuple[list[TextBlock], dict[str, object]]:
         source_file = content_path.relative_to(raw_root).as_posix()
-        text_blocks: list[TextBlock] = []
+        candidates: list[dict[str, object]] = []
         for page_number, page_content in page_chunks:
-            for paragraph in re.split(r"\n\s*\n", page_content):
-                paragraph = paragraph.strip()
-                if not paragraph or _HEADING.fullmatch(paragraph):
+            page_blocks = [
+                block.strip()
+                for block in re.split(r"\n\s*\n", page_content)
+                if block.strip()
+            ]
+            for position, paragraph in enumerate(page_blocks):
+                if _HEADING.fullmatch(paragraph):
                     continue
                 if _IMAGE_PARAGRAPH.fullmatch(paragraph):
                     continue
-                text_blocks.append(
-                    TextBlock(
-                        id=f"{provenance['paper_id']}-text-{len(text_blocks) + 1:04d}",
-                        page_number=page_number,
-                        content=paragraph,
-                        source_reference=self._source_reference(
-                            provenance,
-                            source_file=source_file,
-                            page=page_number,
-                            mineru_locator=None,
-                        ),
+
+                adjacent_formula = any(
+                    0 <= neighbor < len(page_blocks)
+                    and (
+                        match := _IMAGE_REFERENCE.fullmatch(
+                            page_blocks[neighbor]
+                        )
                     )
+                    is not None
+                    and match.group("block_type").strip() == "Formula block"
+                    for neighbor in (position - 1, position + 1)
                 )
-        return text_blocks
+                text_block = TextBlock(
+                    # IDs use the raw TextBlock sequence and therefore remain
+                    # stable when a high-confidence block is later filtered.
+                    id=f"{provenance['paper_id']}-text-{len(candidates) + 1:04d}",
+                    page_number=page_number,
+                    content=paragraph,
+                    source_reference=self._source_reference(
+                        provenance,
+                        source_file=source_file,
+                        page=page_number,
+                        mineru_locator=None,
+                    ),
+                )
+                candidates.append(
+                    {
+                        "element": text_block,
+                        "position": position,
+                        "page_block_count": len(page_blocks),
+                        "protected": bool(
+                            _FIGURE_CAPTION.fullmatch(paragraph)
+                            or _TABLE_CAPTION.fullmatch(paragraph)
+                            or _REFERENCE_ENTRY.match(paragraph)
+                            or adjacent_formula
+                        ),
+                    }
+                )
+
+        return self._filter_repeated_boilerplate(
+            candidates,
+            page_count=len(page_chunks),
+        )
+
+    @staticmethod
+    def _filter_repeated_boilerplate(
+        candidates: list[dict[str, object]],
+        *,
+        page_count: int,
+    ) -> tuple[list[TextBlock], dict[str, object]]:
+        """Remove only high-confidence repeated decoration at page edges."""
+        groups: dict[str, list[dict[str, object]]] = {}
+        for candidate in candidates:
+            element = candidate["element"]
+            if not isinstance(element, TextBlock):
+                raise TypeError("TextBlock candidate must contain a TextBlock.")
+            groups.setdefault(element.content, []).append(candidate)
+
+        filtered_texts: dict[str, dict[str, object]] = {}
+        minimum_short_decoration_pages = max(3, (page_count + 1) // 2)
+        for text, occurrences in groups.items():
+            pages = sorted(
+                {
+                    element.page_number
+                    for occurrence in occurrences
+                    if isinstance(
+                        element := occurrence["element"], TextBlock
+                    )
+                    and element.page_number is not None
+                }
+            )
+            if len(pages) < 3 or any(
+                bool(occurrence["protected"]) for occurrence in occurrences
+            ):
+                continue
+
+            at_page_edge = all(
+                int(occurrence["position"]) < 5
+                or int(occurrence["position"])
+                >= int(occurrence["page_block_count"]) - 4
+                for occurrence in occurrences
+            )
+            if not at_page_edge:
+                continue
+
+            lowered = text.casefold()
+            if "downloaded from" in lowered and (
+                "terms and conditions" in lowered
+                or "rules of use" in lowered
+            ):
+                reason = "repeated_page_edge_download_notice"
+            elif "©" in text or "copyright" in lowered:
+                reason = "repeated_page_edge_copyright_notice"
+            elif (
+                "http://" in lowered
+                or "https://" in lowered
+                or "www." in lowered
+            ) and len(text) <= 200:
+                reason = "repeated_page_edge_url_banner"
+            elif (
+                len(text) <= 120
+                and len(pages) >= minimum_short_decoration_pages
+            ):
+                reason = "repeated_page_edge_short_decoration"
+            else:
+                continue
+
+            filtered_texts[text] = {
+                "filtered_text": text,
+                "pages": pages,
+                "occurrence_count": len(occurrences),
+                "filter_reason": reason,
+            }
+
+        retained = [
+            candidate["element"]
+            for candidate in candidates
+            if isinstance(candidate["element"], TextBlock)
+            and candidate["element"].content not in filtered_texts
+        ]
+        groups_diagnostic = sorted(
+            filtered_texts.values(),
+            key=lambda group: (
+                -int(group["occurrence_count"]),
+                str(group["filtered_text"]),
+            ),
+        )
+        diagnostics: dict[str, object] = {
+            "before_text_blocks": len(candidates),
+            "after_text_blocks": len(retained),
+            "filtered_count": len(candidates) - len(retained),
+            "boilerplate_group_count": len(groups_diagnostic),
+            "groups": groups_diagnostic,
+        }
+        return retained, diagnostics
 
     @staticmethod
     def _image_contexts(
@@ -553,6 +690,16 @@ class MinerUAdapter(ParserAdapter):
                     ensure_ascii=False,
                     sort_keys=True,
                 ),
+                metadata=EquationMetadata(
+                    representation_type=representation_type,
+                    formula_image_path=(
+                        Path("images") / filename
+                    ).as_posix(),
+                    equation_number=equation_number,
+                    related_text_block_ids=tuple(
+                        str(text_block_id) for text_block_id in related_ids
+                    ),
+                ),
             )
             equations.append(equation)
 
@@ -636,8 +783,9 @@ class MinerUAdapter(ParserAdapter):
         self,
         figures: list[Figure],
         text_blocks: list[TextBlock],
-    ) -> None:
+    ) -> list[FigureTextRelation]:
         """Create conservative bidirectional links from explicit text references."""
+        relations: list[FigureTextRelation] = []
         figures_by_number: dict[str, tuple[Figure, dict[str, object]]] = {}
         for figure in figures:
             payload = json.loads(figure.content)
@@ -656,6 +804,7 @@ class MinerUAdapter(ParserAdapter):
             figures_by_number[figure_number] = (figure, payload)
 
         for text_block in text_blocks:
+            text_evidence = text_block.evidence
             text_source = json.loads(text_block.source_reference)
             text_source["related_ids"] = []
             text_source["figure_references"] = []
@@ -705,6 +854,40 @@ class MinerUAdapter(ParserAdapter):
                             "subfigure_hint": reference["subfigure_hint"],
                         }
                     )
+                    relations.append(
+                        FigureTextRelation(
+                            id=(
+                                f"{figure.id}-text-relation-"
+                                f"{len(relations) + 1:04d}"
+                            ),
+                            figure_id=figure.id,
+                            text_block_id=text_block.id,
+                            relation_type="explicit_figure_reference",
+                            reference_text=str(reference["reference_text"]),
+                            normalized_reference=str(
+                                reference["normalized_reference"]
+                            ),
+                            subfigure_hint=(
+                                str(reference["subfigure_hint"])
+                                if reference["subfigure_hint"] is not None
+                                else None
+                            ),
+                            evidence=Evidence(
+                                paper_id=text_evidence.paper_id,
+                                parser_name=text_evidence.parser_name,
+                                parser_version=text_evidence.parser_version,
+                                source_file=text_evidence.source_file,
+                                page=text_evidence.page,
+                                mineru_locator=text_evidence.mineru_locator,
+                                details={
+                                    "reference_type": "main_figure",
+                                    "relation_type": (
+                                        "explicit_figure_reference"
+                                    ),
+                                },
+                            ),
+                        )
+                    )
 
             text_block.source_reference = json.dumps(
                 text_source, ensure_ascii=False, sort_keys=True
@@ -719,6 +902,7 @@ class MinerUAdapter(ParserAdapter):
             figure.source_reference = json.dumps(
                 source, ensure_ascii=False, sort_keys=True
             )
+        return relations
 
     @staticmethod
     def _source_reference(

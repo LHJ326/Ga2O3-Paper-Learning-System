@@ -127,6 +127,22 @@ Phase 1.5D-1B-3E:
 
 Formula asset to Equation mapping
 
+Phase 1.5D-1B-3F:
+
+P001 Table detection
+
+Phase 1.5D-1B-3G:
+
+P001 Document integrity validation
+
+Phase 1.5D-1B-3H:
+
+Repeated boilerplate TextBlock filtering
+
+Phase 1.5D-1B-4:
+
+Document Schema 0.2 stabilization
+
 ## 5. Current P001 Status
 
 Paper:
@@ -149,12 +165,14 @@ Current output:
 
 - Pages: 12
 - Sections: 10
-- TextBlocks: 214
+- TextBlocks: 156 (58 repeated page-decoration blocks filtered from the Document)
 - Figures: 6
 - Figures with explicit body references: 6
 - Explicit body Figure references: 63 total (40 main, 23 supplementary, 0 truly unresolved)
 - Tables: 0
 - Equations: 6 (all `image_only`; no machine-readable formula text)
+- FigureTextRelations: 40
+- Schema version: 0.2
 
 ## 6. Important Design Decisions
 
@@ -182,6 +200,8 @@ Current output:
 
 5. ChatGPT 负责路线规划和架构审核。
 
+6. `source_reference` remains the backward-compatible serialized evidence contract; typed `Evidence`, `FigureTextRelation`, and `EquationMetadata` are the stable in-memory interface.
+
 ## 7. Current Limitations
 
 - Figure caption 采用保守邻接匹配，仍需 Benchmark 验证
@@ -198,8 +218,7 @@ Phase 1.5D-1B-3
 
 目标：提升 MinerU Adapter。
 
-- Table 支持
-- Equation text quality 评估
+- Equation false-positive filtering
 - B01 Benchmark 准备
 
 ## 9. Rules For Future AI

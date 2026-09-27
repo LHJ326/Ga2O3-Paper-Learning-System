@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 Current Phase:
 
-Phase 1.5D-1B-3E
+Phase 1.5D-1B-4
 
 Completed:
 
@@ -28,6 +28,13 @@ Completed:
 - Figure-to-text evidence chain implemented
 - Supplementary Figure references classified
 - MinerU formula assets mapped to Document.equations
+- P001 Table detection completed
+- P001 Document integrity validation completed
+- Repeated publisher/header/footer boilerplate filtering implemented
+- Document Schema 0.2 stabilized
+- Typed Evidence object added
+- Typed Figure/TextBlock relations added
+- Typed Equation metadata added
 
 Current Data:
 
@@ -49,14 +56,18 @@ Current Document Statistics:
 
 - Pages: 12
 - Sections: 10
-- TextBlocks: 214
+- TextBlocks: 156
 - Figures: 6
 - Tables: 0
 - Equations: 6
+- FigureTextRelations: 40
 
 Current:
 
-- Figure and Equation structural mapping available
+- Figure / Equation / Table structure mapping available
+- Validation status: PASS_WITH_KNOWN_ISSUES
+- High-confidence repeated page boilerplate excluded from final TextBlocks
+- Stable typed Schema available with backward-compatible source references
 
 Current Recovery Files:
 
@@ -76,8 +87,11 @@ Current Limitations:
 - Table extraction incomplete
 - `parse()` / `validate()` remain interface placeholders
 
+Known Issues:
+
+- MinerU classified one page-11 reference fragment as a Formula block; Equation false-positive filtering is deferred to a later phase
+
 Next:
 
-- Table detection / handling
+- Equation false-positive filtering
 - Benchmark evaluation
-- Evaluate Equation text quality

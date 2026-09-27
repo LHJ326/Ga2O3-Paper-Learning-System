@@ -11,6 +11,17 @@
 
 The adapter reads these files but does not modify them or invoke MinerU.
 
+## Stable Document Schema Boundary
+
+Schema version `0.2` adds typed standard-library dataclasses without removing the existing string and JSON contracts:
+
+- `Evidence` dynamically decodes each element's current `source_reference` and retains parser-specific fields in `details`;
+- `FigureTextRelation` represents each resolved explicit Figure citation as a Document-level relation;
+- `EquationMetadata` exposes representation type, formula image path, optional equation number, and related TextBlock IDs;
+- `Document.figure_text_relations` stores typed relations while existing bidirectional JSON fields remain available for compatibility.
+
+`DocumentElement.evidence` is a computed property rather than duplicated mutable state. Existing Adapter updates to `source_reference` therefore cannot leave a stale Evidence object.
+
 ## Output Structure
 
 The method returns the existing `Document` dataclass with:
@@ -73,6 +84,7 @@ The relationship is bidirectional:
 - `Figure.source_reference.related_ids` mirrors the related TextBlock IDs;
 - `TextBlock.source_reference.related_ids` lists resolved Figure IDs;
 - `TextBlock.source_reference.figure_references` records main, supplementary, and truly unresolved detections.
+- `Document.figure_text_relations` contains one typed relation per resolved explicit citation occurrence.
 
 Each detected reference stores:
 
