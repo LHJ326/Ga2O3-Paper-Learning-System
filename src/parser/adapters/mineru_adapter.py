@@ -17,6 +17,15 @@ _IMAGE_PARAGRAPH = re.compile(
     r"^(?:!\[[^\]]*\]\(doc:[^)]+\)\s*)+$",
     re.DOTALL,
 )
+_IMAGE_REFERENCE = re.compile(
+    r"^!\[(?P<block_type>[^\]]*)\]\((?P<locator>doc:[^)]+)\)$",
+    re.DOTALL,
+)
+_FIGURE_CAPTION = re.compile(
+    r"^(?:Figure|Fig\.)\s+(?P<number>\d+[A-Za-z]?)"
+    r"(?:\s*[.:]\s*|\s+)(?P<description>\S[\s\S]*)$",
+    re.IGNORECASE,
+)
 _LOCATOR_PAGE = re.compile(r"(?:^|/)page:(\d+)(?:/|$)")
 
 
@@ -65,7 +74,14 @@ class MinerUAdapter(ParserAdapter):
         text_blocks = self._convert_text_blocks(
             page_chunks, content_path, raw_root, provenance
         )
-        figures = self._convert_figures(image_manifest, raw_root, provenance)
+        image_contexts = self._image_contexts(page_chunks)
+        figures = self._convert_figures(
+            image_manifest,
+            raw_root,
+            provenance,
+            image_contexts=image_contexts,
+            caption_source_file=content_path.relative_to(raw_root).as_posix(),
+        )
 
         metadata_content = json.dumps(
             {
@@ -242,11 +258,49 @@ class MinerUAdapter(ParserAdapter):
                 )
         return text_blocks
 
+    @staticmethod
+    def _image_contexts(
+        page_chunks: list[tuple[int, str]],
+    ) -> dict[str, dict[str, object]]:
+        """Collect image labels and conservative adjacent-caption matches."""
+        contexts: dict[str, dict[str, object]] = {}
+        for page_number, page_content in page_chunks:
+            blocks = [
+                block.strip()
+                for block in re.split(r"\n\s*\n", page_content)
+                if block.strip()
+            ]
+            for index, block in enumerate(blocks):
+                image_match = _IMAGE_REFERENCE.fullmatch(block)
+                if image_match is None:
+                    continue
+
+                locator = image_match.group("locator")
+                context: dict[str, object] = {
+                    "page": page_number,
+                    "block_type": image_match.group("block_type").strip(),
+                    "caption": None,
+                    "figure_number": None,
+                }
+
+                if index + 1 < len(blocks):
+                    caption_candidate = blocks[index + 1]
+                    caption_match = _FIGURE_CAPTION.fullmatch(caption_candidate)
+                    if caption_match is not None:
+                        context["caption"] = caption_candidate
+                        context["figure_number"] = caption_match.group("number")
+
+                contexts[locator] = context
+        return contexts
+
     def _convert_figures(
         self,
         image_manifest: dict[str, Any],
         raw_root: Path,
         provenance: dict[str, str],
+        *,
+        image_contexts: dict[str, dict[str, object]],
+        caption_source_file: str,
     ) -> list[Figure]:
         images = image_manifest.get("images")
         if not isinstance(images, list):
@@ -266,6 +320,29 @@ class MinerUAdapter(ParserAdapter):
             if not image_path.is_file():
                 raise FileNotFoundError(f"Exported MinerU image not found: {image_path}")
 
+            context = image_contexts.get(locator, {})
+            context_page = context.get("page")
+            if context_page is not None and context_page != page_number:
+                raise ValueError(
+                    f"Image locator page disagrees with Markdown context: {locator}"
+                )
+
+            caption = context.get("caption")
+            figure_number = context.get("figure_number")
+            caption_matched = isinstance(caption, str) and isinstance(
+                figure_number, str
+            )
+            caption_source_reference = None
+            if caption_matched:
+                caption_source_reference = {
+                    **provenance,
+                    "source_file": caption_source_file,
+                    "page": page_number,
+                    "mineru_locator": None,
+                    "evidence_type": "figure_caption",
+                    "relation": "same_page_immediately_after_image",
+                }
+
             figures.append(
                 Figure(
                     id=f"{provenance['paper_id']}-figure-{index:03d}",
@@ -276,6 +353,15 @@ class MinerUAdapter(ParserAdapter):
                             "mime_type": image.get("mime_type"),
                             "width": image.get("width"),
                             "height": image.get("height"),
+                            "mineru_block_type": context.get("block_type"),
+                            "caption_status": (
+                                "matched" if caption_matched else "unmatched"
+                            ),
+                            "caption": caption if caption_matched else None,
+                            "figure_number": (
+                                figure_number if caption_matched else None
+                            ),
+                            "caption_source_reference": caption_source_reference,
                         },
                         ensure_ascii=False,
                         sort_keys=True,

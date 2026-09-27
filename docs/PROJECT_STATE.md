@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 Current Phase:
 
-Phase 1.5D-1B-2B completed
+Phase 1.5D-1B-3A
 
 Completed:
 
@@ -23,6 +23,7 @@ Completed:
 - MinerUAdapter first conversion implemented
 - Project session handover created
 - AI session memory created
+- P001 Figure-caption mapping implemented
 
 Current Data:
 
@@ -49,6 +50,10 @@ Current Document Statistics:
 - Tables: 0
 - Equations: 0
 
+Current:
+
+- Figure mapping under validation
+
 Current Recovery Files:
 
 - `docs/PROJECT_STATE.md`
@@ -59,19 +64,15 @@ Current Recovery Files:
 
 Current Limitations:
 
-- Figure caption association incomplete
+- Figure captions use conservative same-page adjacency matching
+- 11 image assets remain explicitly unmatched
 - Equation extraction incomplete
 - Table extraction incomplete
 - `parse()` / `validate()` remain interface placeholders
 
-Next Planned Phase:
+Next:
 
-Phase 1.5D-1B-3
-
-Improve MinerU Adapter:
-
-- Figure-caption linking
-- Better evidence chain
-- Table handling
+- Strengthen evidence chain
 - Equation detection
-- B01 benchmark preparation
+- Table handling
+- Benchmark comparison
