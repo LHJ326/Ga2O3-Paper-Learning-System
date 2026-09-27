@@ -6,9 +6,9 @@
 - Figures with explicit body references: 6
 - Figures without explicit body references: 0
 - Explicit body Figure reference occurrences: 63
-- Resolved primary-Figure reference occurrences: 40
-- Unresolved Figure reference occurrences: 23
-- Unresolved-reference class: supplementary Figures not present in the current Document
+- Main Figure reference occurrences: 40
+- Supplementary Figure reference occurrences: 23
+- Truly unresolved Figure reference occurrences: 0
 
 Caption TextBlocks are excluded from body-reference counts. Repeated explicit references remain separate occurrences, while related TextBlock IDs are unique per Figure.
 
@@ -60,9 +60,15 @@ Caption TextBlocks are excluded from body-reference counts. Repeated explicit re
 - Related TextBlocks: `P001-text-0100`, `P001-text-0102`, `P001-text-0103`, `P001-text-0111`
 - Detected textual references: `Figure 6a` (2 occurrences), `Figure 6b`, `Figure 6c`, `Figure 6d`, `Figure 6e`
 
-## Unresolved References
+## Supplementary Reference Classification
 
-The 23 unresolved occurrences are explicit supplementary-Figure references (`Figure S1` through `Figure S15`, including subfigure forms). They are preserved with normalized numbers and subfigure hints but are not linked because no corresponding supplementary Figure objects exist in the current Document. No missing primary Figure number and no ambiguous primary-Figure reference were detected.
+All 23 non-main occurrences are explicit supplementary-Figure references. P001 uses the singular `Figure S...` form, normally accompanied by `(Supporting Information)`. Observed normalized forms are:
+
+- Whole supplementary Figures: `Figure S1`, `Figure S3`, `Figure S5` through `Figure S7`, and `Figure S9` through `Figure S15`;
+- Supplementary subfigures: `Figure S2a`, `Figure S2b`, `Figure S2c`, `Figure S2f`, `Figure S4a`, and `Figure S8a` through `Figure S8d`;
+- Supplementary subfigure range: `Figure S4b-d`, represented in the source as `Figure S4b–d`.
+
+No `Fig. S...`, plural `Figs.`, or cross-Figure range such as `S3-S5` occurs in P001. The references are classified as `supplementary_figure`, remain unlinked, and do not create `Document.figures`. No missing primary Figure number and no truly unresolved reference was detected.
 
 ## Evidence Rules
 
@@ -71,5 +77,6 @@ The 23 unresolved occurrences are explicit supplementary-Figure references (`Fig
 - Primary Figure numbers are normalized before lookup.
 - Subfigure notation is retained as a hint and never creates an independent Figure.
 - Captions are not counted as body citations.
-- Missing and supplementary targets remain unresolved; no Figure is fabricated.
+- Supplementary targets are classified separately from truly unresolved targets; neither creates a Figure.
+- Each detection preserves `reference_type`, `normalized_reference`, and `subfigure_hint`.
 - Every linked Figure and TextBlock retains parser, source file, page, and MinerU locator fields where available.

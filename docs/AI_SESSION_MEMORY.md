@@ -119,6 +119,10 @@ Phase 1.5D-1B-3C:
 
 Figure-to-text evidence chain
 
+Phase 1.5D-1B-3D:
+
+Supplementary Figure reference classification
+
 ## 5. Current P001 Status
 
 Paper:
@@ -144,7 +148,7 @@ Current output:
 - TextBlocks: 214
 - Figures: 6
 - Figures with explicit body references: 6
-- Explicit body Figure references: 63 total (40 resolved, 23 supplementary unresolved)
+- Explicit body Figure references: 63 total (40 main, 23 supplementary, 0 truly unresolved)
 - Tables: 0
 - Equations: 0
 

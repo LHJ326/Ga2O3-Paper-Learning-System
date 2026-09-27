@@ -50,7 +50,7 @@ Accepted Figure caption data is stored inside the existing JSON-encoded `Figure.
 
 ## Figure Evidence Mapping
 
-The adapter recognizes explicit body references using reusable `Figure`, `Figures`, `Fig.`, and `Figs.` patterns. It normalizes the primary Figure number before matching and retains subfigure notation such as `a`, `(a)`, `e,f`, or `b-d` as `subfigure_hint` evidence. Supplementary references such as `Figure S4b-d` are recorded as unresolved and do not create new Figures.
+The adapter recognizes explicit body references using reusable `Figure`, `Figures`, `Fig.`, and `Figs.` patterns. It normalizes the Figure reference before matching and retains subfigure notation such as `a`, `(a)`, `e,f`, or `b-d` as `subfigure_hint` evidence. Supplementary references such as `Figure S4b-d` are classified as `supplementary_figure`; they remain unlinked and do not create new Figures.
 
 ```text
 Markdown TextBlock
@@ -70,7 +70,15 @@ The relationship is bidirectional:
 - `Figure.content.textual_references` retains each detected occurrence and its subfigure hint;
 - `Figure.source_reference.related_ids` mirrors the related TextBlock IDs;
 - `TextBlock.source_reference.related_ids` lists resolved Figure IDs;
-- `TextBlock.source_reference.figure_references` records resolved and unresolved detections.
+- `TextBlock.source_reference.figure_references` records main, supplementary, and truly unresolved detections.
+
+Each detected reference stores:
+
+- `reference_type`: `main_figure`, `supplementary_figure`, or `unresolved`;
+- `normalized_reference`: a stable form such as `Figure 2a` or `Figure S4b-d`;
+- `subfigure_hint`: the normalized subfigure or range when present;
+- `status`: `resolved`, `supplementary`, or `unresolved`;
+- `figure_id`: populated only for a resolved main Figure.
 
 No Document Schema change was required. These lightweight relationship fields use the existing JSON-encoded extension points, retain the original TextBlock content, and preserve backward compatibility.
 
@@ -92,7 +100,7 @@ The locator is `null` when MinerU does not provide block-level identity. Figure 
 - Caption matching is limited to immediately following, same-page, numbered Figure captions.
 - Subfigure grouping and captions separated from their image are not handled.
 - Figure-to-text mapping requires an explicit textual Figure reference; it does not infer semantic relationships.
-- Supplementary Figure references are retained as unresolved because supplementary Figures are not converted in the current dataset.
+- Supplementary Figure references are classified and retained without links because supplementary Figures are not converted in the current dataset.
 - Excluded image assets remain accessible only through Raw Output because the schema has no generic image element.
 - Tables and equations are not extracted because the observed raw output has no explicit table or equation objects.
 - Markdown heading levels deeper than H2 are not converted to sections.

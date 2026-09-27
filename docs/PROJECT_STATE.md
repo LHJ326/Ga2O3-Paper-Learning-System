@@ -6,7 +6,7 @@ Ga2O3-Paper-Learning-System
 
 Current Phase:
 
-Phase 1.5D-1B-3C
+Phase 1.5D-1B-3D
 
 Completed:
 
@@ -26,6 +26,7 @@ Completed:
 - P001 Figure-caption mapping implemented
 - Scientific figure asset filtering implemented
 - Figure-to-text evidence chain implemented
+- Supplementary Figure references classified
 
 Current Data:
 
@@ -54,7 +55,7 @@ Current Document Statistics:
 
 Current:
 
-- Figure extraction and citation linkage available
+- Main, supplementary, and truly unresolved Figure references are distinguished
 
 Current Recovery Files:
 
@@ -68,7 +69,7 @@ Current Limitations:
 
 - Scientific Figures require an `Image block` and a conservative same-page adjacent numbered caption
 - 11 non-Figure assets remain only in Raw Output
-- Supplementary Figure references remain unresolved because supplementary Figures are not part of the current Document
+- Supplementary Figure references remain unlinked because supplementary Figures are not part of the current Document
 - Equation extraction incomplete
 - Table extraction incomplete
 - `parse()` / `validate()` remain interface placeholders

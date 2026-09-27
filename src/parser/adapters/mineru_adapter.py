@@ -414,9 +414,18 @@ class MinerUAdapter(ParserAdapter):
                         .replace("\u2014", "-")
                         .lower()
                     )
+                reference_type = (
+                    "supplementary_figure" if supplementary else "main_figure"
+                )
+                normalized_reference = (
+                    f"Figure {'S' if supplementary else ''}{figure_number}"
+                    f"{subfigure or ''}"
+                )
                 references.append(
                     {
                         "reference_text": token_match.group(0),
+                        "reference_type": reference_type,
+                        "normalized_reference": normalized_reference,
                         "figure_number": figure_number,
                         "subfigure_hint": subfigure,
                         "supplementary": supplementary,
@@ -459,13 +468,20 @@ class MinerUAdapter(ParserAdapter):
                     figure_entry = figures_by_number.get(
                         str(reference["figure_number"])
                     )
-                    resolved = (
-                        not bool(reference["supplementary"])
-                        and figure_entry is not None
-                    )
+                    if bool(reference["supplementary"]):
+                        status = "supplementary"
+                        reference_type = "supplementary_figure"
+                    elif figure_entry is not None:
+                        status = "resolved"
+                        reference_type = "main_figure"
+                    else:
+                        status = "unresolved"
+                        reference_type = "unresolved"
+                    resolved = status == "resolved"
                     text_reference = {
                         **reference,
-                        "status": "resolved" if resolved else "unresolved",
+                        "reference_type": reference_type,
+                        "status": status,
                         "figure_id": figure_entry[0].id if resolved else None,
                     }
                     text_source["figure_references"].append(text_reference)
@@ -482,6 +498,10 @@ class MinerUAdapter(ParserAdapter):
                             "text_block_id": text_block.id,
                             "text_block_page": text_block.page_number,
                             "reference_text": reference["reference_text"],
+                            "reference_type": reference["reference_type"],
+                            "normalized_reference": reference[
+                                "normalized_reference"
+                            ],
                             "figure_number": reference["figure_number"],
                             "subfigure_hint": reference["subfigure_hint"],
                         }
