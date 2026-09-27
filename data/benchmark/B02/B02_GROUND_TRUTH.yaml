@@ -1,12 +1,18 @@
 metadata:
   benchmark_id: B02
-  status: building
+  status: ready_v1
   benchmark_role: cross_domain_parser_table_stress
   identity_record: data/benchmark/B02/B02_METADATA.yaml
   source_pdf: data/benchmark/B02/B02.pdf
   annotation_principle: independent_manual_annotation_from_source_pdf
   is_ga2o3_pilot: false
   parser_output_consulted: false
+  manual_review_required: false
+  manual_review_status: confirmed
+  draft_stage: finalized_manual_review
+  notes:
+    - Manual review confirmed against the source PDF.
+    - Ground Truth finalized as ready_v1 after explicit user confirmation.
 
 pages:
   - page_number: 1
@@ -24,20 +30,29 @@ pages:
 
 sections:
   - number: I
-    title: Introduction
+    title: I. INTRODUCTION
     start_page: 1
   - number: II
-    title: Background
+    title: II. BACKGROUND
     start_page: 2
   - number: III
-    title: Annealing Processor
+    title: III. ANNEALING PROCESSOR
     start_page: 4
   - number: IV
-    title: Simulation and Measurement Results
+    title: IV. SIMULATION AND MEASUREMENT RESULTS
     start_page: 8
   - number: V
-    title: Conclusion
+    title: V. CONCLUSION
     start_page: 11
+
+back_matter:
+  - type: references
+    start_page: 11
+    continues_pages: [12]
+    counted_as_main_section: false
+  - type: author_biographies
+    pages: [12]
+    counted_as_main_section: false
 
 subsections:
   - parent_section: II
@@ -101,38 +116,217 @@ subsections:
     title: Comparison With Previous Works
     page: 10
 
+nested_headings:
+  - parent_section: II
+    parent_subsection: A
+    label: "1)"
+    title: Local Spin Update
+    page: 2
+  - parent_section: II
+    parent_subsection: A
+    label: "2)"
+    title: Nonlinear Probability Flipping
+    page: 3
+  - parent_section: III
+    parent_subsection: D
+    label: "1)"
+    title: Odd-Even Grouping Reuse Strategy
+    page: 6
+  - parent_section: III
+    parent_subsection: D
+    label: "2)"
+    title: UD Array Coefficient Reuse Strategy
+    page: 6
+
 figures:
-  - {number: 1, page: 1, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 2, page: 2, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 3, page: 4, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 4, page: 4, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 5, page: 5, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 6, page: 5, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 7, page: 6, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 8, page: 6, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 9, page: 7, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 10, page: 7, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 11, page: 7, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 12, page: 7, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 13, page: 8, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 14, page: 8, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 15, page: 9, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 16, page: 9, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 17, page: 9, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 18, page: 10, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 19, page: 10, caption: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 20, page: 11, caption: TODO_MANUAL_TRANSCRIPTION}
+  - number: 1
+    page: 1
+    caption: Process of solving COPs by an annealing processor.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 2
+    page: 2
+    caption: >-
+      (a) Energy profile of annealing algorithm. (b) Probability distribution
+      of +1 spin state in the Gibbs model.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 3
+    page: 4
+    caption: Proposed annealing processor and its PE architecture.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 4
+    page: 4
+    caption: >-
+      (a) XNOR-based SRAM schematic and its truth table. (b) Computation flow
+      of one column in the coefficient SRAM array.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 5
+    page: 5
+    caption: >-
+      Coefficient mapping method, schematic and layout of the coefficient array,
+      which includes the UD array, the LD array, the RD array, the LR array, and
+      the local magnetic field coefficient (H) array.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 6
+    page: 5
+    caption: >-
+      Local energy computation sequence diagram of the proposed annealing
+      processor.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 7
+    page: 6
+    caption: Odd-even grouping reuse strategy for (a) LR array and (b) LD array.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 8
+    page: 6
+    caption: UD array coefficient reuse strategy.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 9
+    page: 7
+    caption: >-
+      Sparsity-aware adder tree based on an adaptive wake-up mechanism.
+      (a) Adder tree with different sign bits. (b) Adder tree with the same sign bits.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 10
+    page: 7
+    caption: Ising energy profile when solving a hard max-cut problem 1000 times.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 11
+    page: 7
+    caption: NPF approximate circuit.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 12
+    page: 7
+    caption: >-
+      (a) Probability of accepting sign bit (P_as). (b) Probability distribution
+      of the Gibbs model (Ideal) and the proposed NPF approximate method.
+    subfigures: [a, b]
+    notes:
+      - P_as represents P with subscript as in the source PDF.
+    needs_manual_confirmation: false
+  - number: 13
+    page: 8
+    caption: Chip micrograph, area, and power consumption.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 14
+    page: 8
+    caption: >-
+      (a) Measured intra-die and inter-die Hamming distances. (b) Measured ACF
+      of the test chips.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 15
+    page: 9
+    caption: >-
+      Measured transient spin maps when solving a max-cut problem and the Ising
+      energy profile without probability flipping, (a) for image IEEE and
+      (b) for image HNU.
+    subfigures: [a, b]
+    needs_manual_confirmation: false
+  - number: 16
+    page: 9
+    caption: >-
+      Number of enabled add operations versus computation cycle for a max-cut
+      problem.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 17
+    page: 9
+    caption: >-
+      Ising energy distributions of a max-cut problem based on the proposed NPF
+      approximate circuit with on-chip generated random numbers, the local search
+      algorithm without probability flipping, and the ideal SA algorithm.
+    subfigures: []
+    needs_manual_confirmation: false
+  - number: 18
+    page: 10
+    caption: >-
+      Image segmentation and its Ising energy evolution of (a) clothes,
+      (b) pants, and (c) shoes from Fashion MNIST dataset.
+    subfigures: [a, b, c]
+    needs_manual_confirmation: false
+  - number: 19
+    page: 10
+    caption: >-
+      Image segmentation of (a) aircraft, (b) motorcycle, and (c) moon form
+      MSRA-10K dataset.
+    subfigures: [a, b, c]
+    notes:
+      - The source PDF prints "form MSRA-10K dataset"; the draft preserves it.
+    needs_manual_confirmation: false
+  - number: 20
+    page: 11
+    caption: Measured power per spin.
+    subfigures: []
+    needs_manual_confirmation: false
 
 equations:
-  - {number: 1, page: 2, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 2, page: 2, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 3, page: 2, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 4, page: 3, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 5, page: 3, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 6, page: 3, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 7, page: 3, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 8, page: 3, transcription: TODO_MANUAL_TRANSCRIPTION}
-  - {number: 9, page: 4, transcription: TODO_MANUAL_TRANSCRIPTION}
+  - number: 1
+    page: 2
+    transcription: H = -Σ J_ij σ_i σ_j - Σ h_i σ_i
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 2
+    page: 2
+    transcription: F_i = -(Σ_j J_ij σ_j + h_i)
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 3
+    page: 2
+    transcription: >-
+      σ_(i+1) = {-1 if H_i > 0; +1 if H_i < 0; +1/-1 if H_i = 0}
+    transcription_type: manual_transcription_normalized
+    notes:
+      - The source PDF uses H_i in all three conditions; do not normalize it to F_i.
+    needs_manual_confirmation: false
+  - number: 4
+    page: 3
+    transcription: P(ΔE/T) = 1 / (1 + exp(ΔE/T))
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 5
+    page: 3
+    transcription: P_(+1)(F_i/T) = 1 / (1 + exp(-2F_i/T))
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 6
+    page: 3
+    transcription: >-
+      J_ij = [1 / dist_pos(i,j)] × exp[-dist_pixel(i,j)^2 / (2σ^2)]
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 7
+    page: 3
+    transcription: h_i = -P(i, θ_fog) + P(i, θ_bkg)
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 8
+    page: 3
+    transcription: >-
+      P(i, θ_x) = [1 / (σ sqrt(2π))] × exp[-(i-μ)^2 / (2σ^2)]
+    transcription_type: manual_transcription_normalized
+    needs_manual_confirmation: false
+  - number: 9
+    page: 4
+    transcription: >-
+      P(i, θ_x) = [1 / ((sqrt(2π))^3 σ1 σ2 σ3)] ×
+      exp[-((i-μ1)^2/(4σ1^2) + (i-μ2)^2/(4σ2^2) +
+      (i-μ3)^2/(4σ3^2))]
+    transcription_type: manual_transcription_normalized
+    notes:
+      - Manual review confirmed denominator exponent, grouping, and all three 4σ_k^2 terms against the source PDF.
+    needs_manual_confirmation: false
 
 tables:
   - table_number: I
@@ -156,13 +350,30 @@ tables:
       - FFT
       - NOT
       - Serial
-      - AppEn
+      - AppEN
     expected_rows: 5
     expected_columns: 6
+    expected_logical_rows: 10
+    expected_logical_columns: 3
+    logical_column_headers: [Test, P-value, "Pass?"]
+    logical_rows:
+      - {test: Frequency, p_value: 0.8343, pass: "Yes"}
+      - {test: BF, p_value: 0.7399, pass: "Yes"}
+      - {test: Runs, p_value: 0.0909, pass: "Yes"}
+      - {test: LRO, p_value: 0.1626, pass: "Yes"}
+      - {test: CumSums, p_value: 0.1223, pass: "Yes"}
+      - {test: Rank, p_value: 0.6257, pass: "Yes"}
+      - {test: FFT, p_value: 0.5341, pass: "Yes"}
+      - {test: NOT, p_value: 0.7399, pass: "Yes"}
+      - {test: Serial, p_value: 0.8343, pass: "Yes"}
+      - {test: AppEN, p_value: 0.1388, pass: "Yes"}
     footnotes: []
     notes:
       - Five physical rows contain two side-by-side groups, representing ten tests.
-      - TODO_MANUAL_VERIFY_ALL_P_VALUES_AND_PASS_RESULTS
+      - Semantic representation contains ten independent tests and preserves abbreviations.
+      - Do not expand BF, LRO, NOT, or AppEN using external knowledge.
+      - All values and Pass results were manually confirmed against the source PDF.
+    needs_manual_confirmation: false
 
   - table_number: II
     page: 11
@@ -170,11 +381,11 @@ tables:
     caption: PERFORMANCE COMPARISON WITH STATE-OF-THE-ART ISING PROCESSORS
     column_headers:
       - Design Parameters
-      - D-Wave [7]
-      - JSSC '16 [19]
-      - JSSC '21 [35]
-      - JSSC '22 [21]
-      - JSSC '22 [22]
+      - D-Wave[7]
+      - JSSC'16[19]
+      - JSSC'21[35]
+      - JSSC'22[21]
+      - JSSC'22[22]
       - This Work
     row_labels:
       - Technology
@@ -193,14 +404,90 @@ tables:
       - Application
     expected_rows: 14
     expected_columns: 7
+    expected_parameter_rows: 14
+    expected_data_columns: 6
+    comparison_columns:
+      - D-Wave[7]
+      - JSSC'16[19]
+      - JSSC'21[35]
+      - JSSC'22[21]
+      - JSSC'22[22]
+      - This Work
+    rows:
+      - parameter: Technology
+        values:
+          - Superconductor
+          - 65nm CMOS
+          - 65nm CMOS
+          - 65nm CMOS
+          - 65nm CMOS
+          - 55nm CMOS
+      - parameter: Temperature
+        values:
+          - Ultra-Low Temp. (15mK)
+          - Room Temp. (300K)
+          - Room Temp. (300K)
+          - Room Temp. (300K)
+          - Room Temp. (300K)
+          - Room Temp. (300K)
+      - parameter: Spin Numbers
+        values: [128-2K, 20K, 560, 6.4K, 480, 900]
+      - parameter: Spin Type
+        values: [Qubit, SRAM, Oscillator, DRAM, Register, Register]
+      - parameter: Core Freq.
+        values: [N/A, 100MHz, 118MHz, N/A, 0.5~200MHz, 2~100MHz]
+      - parameter: Core Supply
+        values: [N/A, 1.1V, 1.0V, 0.9~1.2V, 0.5~1.2V, 0.9~1.2V]
+      - parameter: On Chip RNG
+        values: [N/A, "No", "No", "No", "No", "Yes"]
+      - parameter: Coeffi. Bit-Width
+        values: [N/A, 2bit, 2bit, 1~4bit, 4bit, 4bit]
+      - parameter: Graph Model (#Neighbors)
+        values:
+          - Chimera (6×Spins)
+          - 2×2D Lattice (5×Spins)
+          - Hexagonal (6×Spins)
+          - King's Graph (8×Spins)
+          - King's Graph (8×Spins)
+          - King's Graph (8×Spins)
+      - parameter: Spin Area (Norm. Area A)
+        values:
+          - 13,888µm²
+          - 289µm² (1.55x)
+          - 946µm² (2.13x)
+          - 216µm² B (1.54x)
+          - 832µm² (1.49x)
+          - 402µm² (1x)
+      - parameter: Power/Spin
+        values: [12.2W, 2.83µW, 41µW, 0.11µW, 0.18µW C, 0.08µW D]
+      - parameter: Energy/Spin
+        values: [High, 28.3fJ, 347.4fJ, 16.6fJ, 2.85fJ C, 2.4fJ D]
+      - parameter: Update Cycles
+        values: [N/A, N/A, 1 cycle, 4 cycles, 1 cycle, 2 cycles]
+      - parameter: Application
+        values:
+          - N/A
+          - Max-cut
+          - Max-cut
+          - Max-cut
+          - Max-cut
+          - Max-cut & Image Segmentation
     footnotes:
-      - "A: Normalized area formula; TODO_MANUAL_TRANSCRIPTION"
-      - "B: Coefficient bit-width note; TODO_MANUAL_TRANSCRIPTION"
-      - "C: Measurement condition; TODO_MANUAL_TRANSCRIPTION"
-      - "D: Measurement condition; TODO_MANUAL_TRANSCRIPTION"
+      - marker: A
+        text: >-
+          Normalized area = (Ising PE area) / [(spin numbers)·(number of
+          neighbor coefficients)·(coefficients bit-width)·(feature size)^2]
+      - marker: B
+        text: Coefficient bit-width=2bit.
+      - marker: C
+        text: Measured at 0.6V, 64MHz.
+      - marker: D
+        text: Measured at 0.9V, 64MHz.
     notes:
       - Core Table stress target with a multi-column previous-work comparison.
-      - TODO_MANUAL_TRANSCRIBE_AND_VERIFY_ALL_CELLS_UNITS_BRACKETS_AND_FOOTNOTES
+      - Preserve N/A, ranges, units, parentheses, normalized values, and footnote markers.
+      - All 84 core data positions and four footnotes were manually confirmed against the source PDF.
+    needs_manual_confirmation: false
 
 boilerplate_patterns:
   - type: journal_running_header
@@ -212,25 +499,116 @@ boilerplate_patterns:
   - type: authorized_licensed_use_notice
     pattern: "Authorized licensed use limited to: HUNAN UNIVERSITY. Downloaded on September 11,2025 at 07:42:29 UTC from IEEE Xplore. Restrictions apply."
     pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  - type: printed_journal_page_number
+    pattern: "3094-3105"
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  - type: copyright_permission_notice
+    pattern: "0018-9200 © 2024 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission."
+    pages: [1]
+  - type: front_matter
+    includes:
+      - manuscript history
+      - author affiliations
+      - corresponding authors
+      - DOI
+    pages: [1]
+    excluded_from_scientific_elements: true
 
 reading_order_notes:
   - page: 1
+    sequence:
+      - Title
+      - Authors
+      - Abstract
+      - Index Terms
+      - I. Introduction
+      - Figure 1 and caption
+      - Introduction continuation
     notes:
-      - Title, authors, abstract, and Index Terms precede Section I.
-      - Figure 1 occupies the upper right column while Introduction flows across columns.
+      - Manuscript metadata and affiliations are front matter.
+      - Copyright and download notices are boilerplate.
+  - page: 2
+    sequence:
+      - Introduction continuation
+      - Figure 2 and caption
+      - II. Background
+      - A. Ising Model
+      - 1) Local Spin Update
+      - Equations (1)-(3)
+  - page: 3
+    sequence:
+      - 2) Nonlinear Probability Flipping
+      - Equations (4)-(5)
+      - B. Prior Works of the CMOS Annealing Processor
+      - C. Max-Cut Problem and Image Segmentation
+      - Equations (6)-(8)
+  - page: 4
+    sequence:
+      - Equation (9)
+      - III. Annealing Processor
+      - A. Full-Chip Architecture
+      - Figure 3 and caption
+      - B. XNOR-Based CIM and Coefficient SRAM Array
+      - Figure 4 and caption
+  - page: 5
+    sequence:
+      - Figure 5 and caption
+      - Related body text
+      - Figure 6 and caption
+      - C. Local Energy Computation Sequence Diagram
+  - page: 6
+    sequence:
+      - Figure 7 and caption
+      - D. Coefficient Reuse Strategy
+      - Nested coefficient reuse strategies
+      - Figure 8 and caption
+      - E. Sparsity-Aware Adder Tree
+  - page: 7
+    sequence:
+      - Figures 9-10 and captions
+      - F. NPF Approximate Circuit
+      - Figures 11-12 and captions
+      - Related body text
   - page: 8
+    sequence:
+      - Section III.G continuation
+      - IV. Simulation and Measurement Results
+      - A. Test-Chip Measurement Setup
+      - Figures 13-14 and captions
+      - Table I
+      - B. Test of the On-Chip Random Numbers
     notes:
-      - Section III.G continues in the left column while Figures 13 and 14 occupy the right upper area.
-      - Section IV.A begins in the lower left; Table I appears in the right column before Section IV.B.
-      - Manual annotation must preserve logical column order rather than pure vertical coordinates.
+      - This is a priority reading-order stress page.
+      - Logical order cannot be derived from simple horizontal coordinates.
+  - page: 9
+    sequence:
+      - Section IV.B continuation
+      - C. Test of the Max-Cut Problem
+      - Figure 15 and caption
+      - Figures 16-17 and captions
+      - D. Image Segmentation Application begins
+  - page: 10
+    sequence:
+      - Section IV.D continuation
+      - Figures 18-19 and captions
+      - E. Comparison With Previous Works
+      - Discussion introducing Figure 20 and Table II
   - page: 11
+    sequence:
+      - Table II
+      - Figure 20 and caption
+      - Section IV.E continuation
+      - V. Conclusion
+      - Conclusion continuation
+      - References begin
     notes:
-      - Table II spans the full page width at the top.
-      - Section IV.E continues below the table and transitions to Section V Conclusion.
-      - Conclusion text continues into the right column before References.
+      - Table II spans the page width and is a priority reading-order stress target.
   - page: 12
+    sequence:
+      - References continuation
+      - Author biographies
     notes:
-      - References continue before author biographies; biographies are back matter.
+      - Author biographies are back matter, not scientific main-body sections.
 
 known_layout_features:
   - IEEE two-column body layout on US Letter pages
@@ -242,9 +620,27 @@ known_layout_features:
   - Repeated authorized licensed use footer notice
   - References and author biographies in two columns
 
-annotation_todos:
-  - Manually transcribe and verify every Figure caption from the original PDF.
-  - Manually transcribe and verify Equations (1)-(9), including symbols and subscripts.
-  - Verify every Table I value and pass result.
-  - Transcribe every Table II cell, unit, normalized/bracketed value, and footnote.
-  - Review page-level two-column reading order and add anchors for all ambiguous regions.
+stress_features:
+  - IEEE two-column article
+  - Dense numbered Equations
+  - Nested numbered headings
+  - Scientific and multi-panel Figures
+  - Small paired-layout Table I
+  - Complex wide Table II with footnotes
+  - Repeated journal headers and printed journal page numbers
+  - Repeated authorized-use download notice
+  - Front matter on page 1
+  - References and biographies on page 12
+  - Full-width cross-column Table on page 11
+
+manual_review_record:
+  - Figure 1-20 captions confirmed.
+  - Equations (1)-(9) confirmed.
+  - Table I values confirmed.
+  - Table II 84 core cells confirmed.
+  - Table II footnotes A-D confirmed.
+  - Reading order pages 1, 8, 11, and 12 confirmed.
+  - AppEn corrected to AppEN.
+  - Table II header formatting normalized.
+  - Confirmed against source PDF.
+  - MinerU/parser output not consulted.
