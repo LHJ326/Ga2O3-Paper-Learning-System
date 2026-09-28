@@ -1,0 +1,20 @@
+schema_version: "1.0"
+domain_id: semiconductor.ga2o3.photodetector.mechanism
+page_numbering: one_based
+missing_value: null
+
+observation_contract:
+  required_fields: [value, evidence_id, page, source_type, confidence, review_status]
+  confidence_range: [0.0, 1.0]
+  allowed_review_status: [unreviewed, review_required]
+  prohibit_external_knowledge: true
+
+fields:
+  photogeneration: {description: Explicitly stated photocarrier generation process.}
+  carrier_transport: {description: Explicit carrier motion, tunneling, trapping, or transfer.}
+  recombination: {description: Explicit carrier recombination process.}
+  defect_mechanism: {description: Explicit role of defects, vacancies, or traps.}
+  interface_effect: {description: Explicit interface-induced electronic or optical effect.}
+  band_alignment: {description: Explicit band alignment, offset, or band-diagram interpretation.}
+  gain_mechanism: {description: Explicit physical origin of photoconductive or optical gain.}
+  device_working_principle: {description: Explicit operating sequence or physical device principle.}

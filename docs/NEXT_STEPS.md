@@ -1,5 +1,17 @@
 # Next Steps
 
+## Completed — Phase 4.4.3-B3 Mechanism Extraction (Review Required)
+
+P001 Mechanism extraction completed from 23 selected Evidence records in 6
+bounded DeepSeek calls. The run used 66,423 input characters and saved
+`mechanism.yaml`, prompt/response JSONL, and `mechanism_extraction_run.yaml`
+under `data/papers/P001/knowledge/`.
+
+Before downstream use, review observations whose `review_status` is
+`review_required`. `gain_mechanism` remains null because the run did not produce
+a supported value. Do not begin batch processing, RAG, Vector Database,
+Embedding, or Agent work without separate authorization.
+
 ## Completed — Phase 4.4.3-B2 Performance Extraction (Review Required)
 
 P001 now has a separately validated Performance artifact generated from 20

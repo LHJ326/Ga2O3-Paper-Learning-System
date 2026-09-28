@@ -2,6 +2,30 @@
 
 from .extractor import ExtractionContext, KnowledgeDraft, KnowledgeExtractor
 from .llm_extractor import KnowledgeResponseError, LLMKnowledgeExtractor
+from .mechanism_extractor import (
+    MechanismChunk,
+    MechanismChunkLimitError,
+    MechanismEvidenceSelector,
+    MechanismExtractionError,
+    MechanismExtractor,
+    MechanismPromptBuilder,
+    MechanismResponseParser,
+    PreparedMechanismExtraction,
+)
+from .mechanism_pipeline import MechanismExtractionPipeline, MechanismPipelineResult
+from .mechanism_schema import (
+    MechanismDraft,
+    MechanismSchema,
+    MechanismSchemaError,
+    load_mechanism_schema,
+)
+from .mechanism_validator import (
+    MechanismValidationError,
+    MechanismValidationIssue,
+    MechanismValidationResult,
+    MechanismValidator,
+)
+from .mechanism_writer import MechanismWriter
 from .material_device_extraction import (
     ChunkLimitError,
     MaterialDeviceChunk,
@@ -111,6 +135,23 @@ __all__ = [
     "KnowledgeValidator",
     "KnowledgeWriter",
     "LLMKnowledgeExtractor",
+    "MechanismChunk",
+    "MechanismChunkLimitError",
+    "MechanismDraft",
+    "MechanismEvidenceSelector",
+    "MechanismExtractionError",
+    "MechanismExtractionPipeline",
+    "MechanismExtractor",
+    "MechanismPipelineResult",
+    "MechanismPromptBuilder",
+    "MechanismResponseParser",
+    "MechanismSchema",
+    "MechanismSchemaError",
+    "MechanismValidationError",
+    "MechanismValidationIssue",
+    "MechanismValidationResult",
+    "MechanismValidator",
+    "MechanismWriter",
     "LLMParameterExtractor",
     "ChunkLimitError",
     "MaterialDeviceChunk",
@@ -125,6 +166,7 @@ __all__ = [
     "MaterialDeviceValidator",
     "P001MaterialDeviceExtractor",
     "PreparedMaterialDeviceExtraction",
+    "PreparedMechanismExtraction",
     "PromptEvidence",
     "ParameterCheck",
     "ParameterDraft",
@@ -178,6 +220,7 @@ __all__ = [
     "check_summary_structure",
     "load_knowledge_schema",
     "load_material_device_schema",
+    "load_mechanism_schema",
     "load_parameter_schema",
     "load_performance_schema",
 ]

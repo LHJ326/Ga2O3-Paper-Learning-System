@@ -1,5 +1,22 @@
 # Project State
 
+## Phase 4.4.3-B3 Mechanism Extraction Completed — Review Required
+
+P001 Mechanism extraction now uses a dedicated schema, task-specific Evidence
+selector, bounded prompt chunks, strict locator validation, and atomic knowledge
+writing. The real run selected 23 Unified Document Evidence records, produced 6
+prompts (66,423 input characters), and made 6 successful DeepSeek calls.
+
+Seven of eight mechanism fields were populated; `gain_mechanism` remains null.
+All populated observations contain Evidence ID, 1-based page, source element
+type, confidence, and review status. Evidence closure is 100%. The overall run
+is `review_required` because several model observations explicitly requested
+review; no extracted content was silently corrected or deleted.
+
+The validated artifact is `data/papers/P001/knowledge/mechanism.yaml`, with
+prompt, response, and run provenance beside it. No MinerU, parser, metadata,
+ingestion, Summary, Material/Device, or Performance process was rerun.
+
 ## Phase 4.4.3-B2 Performance Extraction Completed — Review Required
 
 P001 Performance extraction uses a separate task schema and Evidence selector.

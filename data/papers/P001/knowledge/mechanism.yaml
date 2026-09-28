@@ -1,0 +1,736 @@
+schema_version: '1.0'
+paper_id: P001
+domain_id: semiconductor.ga2o3.photodetector.mechanism
+mechanisms:
+  photogeneration:
+  - value: β-Ga2O3 can excite photogenerated carriers under deep-ultraviolet (DUV)
+      radiation.
+    evidence_id: E00026
+    page: 2
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: MoS2 channel uniquely generates a substantial quantity of photogenerated
+      carriers under 405 nm.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: Upon exposure to 254 nm light, the wide-bandgap β-Ga2O3 exhibits a significant
+      response to UV light under 254 nm illumination, which results in a significant
+      enhancement of photogenerated carriers.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: When the visible light pulse is applied, only the MoS2 channel excites
+      electrons from the valence band.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: DUV light (254 nm) with pulse widths of 1 s is used for programming, which
+      could excite electrons from the valence bands of both β-Ga2O3 and MoS2, leading
+      to the generation of electron-hole pairs.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  carrier_transport:
+  - value: The insulating dielectric layer in the dark blocks the carriers trapped
+      in the FG.
+    evidence_id: E00026
+    page: 2
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  - value: Reduction of dielectric layer losses due to the avoidance of tunneling
+      mechanism.
+    evidence_id: E00027
+    page: 2
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  - value: Thermal electron emission is identified as a predominant mechanism contributing
+      to the transport current when Vb is below 10.2 V.
+    evidence_id: E00038
+    page: 4
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: F-N tunneling is identified as a predominant mechanism contributing to
+      the transport current when Vb is above 10.2 V.
+    evidence_id: E00038
+    page: 4
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The transfer curve hysteresis is predominantly attributed to the capture
+      and release of charges within the MLG layer.
+    evidence_id: E00037
+    page: 4
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  - value: When a +40 V gate voltage is applied, electrons will tunnel through β-Ga2O3
+      and transfer to the graphene FG.
+    evidence_id: E00048
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: When a −40 V gate voltage is used to erase, the electrons in graphene will
+      be transferred to the MoS2 channel.
+    evidence_id: E00048
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The MoS2 channel uniquely generates a substantial quantity of photogenerated
+      carriers under 405 nm, however, the Igs remain unaffected as these carriers
+      are incapable of tunneling through the β-Ga2O3 dielectric layer.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: At the control of Vcg = −5 V, the photogenerated electrons within the β-Ga2O3
+      layer are transferred to the conduction band of MoS2.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: In the realm of non-volatile memory devices, the tunneling effect predominates
+      as the mechanism for device programming.
+    evidence_id: E00050
+    page: 6
+    source_type: TextBlock
+    confidence: 0.8
+    review_status: review_required
+  - value: The application of an initial erasing pulse at −30 V for 0.01 s facilitates
+      the transfer of electrons from graphene to the MoS2 channel, preventing their
+      subsequent tunneling back.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The photogenerated electrons cannot transit into the floating gate due
+      to the absence of an internal electric field.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The photosensitive dielectric layer of β-Ga2O3 fundamentally limits electron
+      tunneling under visible light illumination.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: When the visible light pulse is applied, only the MoS2 channel excites
+      electrons from the valence band, and these photogenerated electrons cannot tunnel
+      through β-Ga2O3.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: Upon application of an electrical pulse with a voltage of −30 V for 0.01
+      s, electrons initially tunnel through β-Ga2O3 and migrate to the MoS2 channel,
+      completing the erasing operation.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  - value: only the carriers originating from β-Ga2O3 are capable of transiting into
+      either channel or FG.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  - value: carriers originating from MoS2 encounter significant challenges in penetrating
+      the dielectric layer.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: a significant accumulation of holes occurs in the graphene
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  recombination:
+  - value: Within the graphene FG, the electrons will be neutralized with holes, effectively
+      reducing the gate voltage.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  - value: in the MoS2 channel, the holes will recombine with the electrons, reducing
+      the lifetime of the majority carriers.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  defect_mechanism:
+  - value: Charge traps present at the MoS2 channel-β-Ga2O3 dielectric layer interface.
+    evidence_id: E00038
+    page: 4
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: Charge-trapping mechanism.
+    evidence_id: E00042
+    page: 6
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  interface_effect:
+  - value: The degree of hysteresis can be attributed to the charge traps present
+      at the MoS2 channel-β-Ga2O3 dielectric layer interface.
+    evidence_id: E00038
+    page: 4
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  - value: In dark conditions, the β-Ga2O3 functions as a high-κ dielectric layer
+      with minimal leakage current, allowing for precise regulation of the channel’s
+      carrier density and surface potential through the application of Vcg.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: review_required
+  band_alignment:
+  - value: High potential barrier between the FG layer of MLG and the dielectric layer
+      of β-Ga2O3.
+    evidence_id: E00037
+    page: 4
+    source_type: TextBlock
+    confidence: 0.85
+    review_status: review_required
+  - value: The schematic energy-band diagrams of the optoelectronic behavior are illustrated
+      in Figure S8b.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: review_required
+  - value: The schematic energy-band diagrams of initial electrical erasing are illustrated
+      in Figure 4b, providing a detailed visual representation of the device’s operation
+      and energy states.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: review_required
+  - value: The schematic energy-band diagrams of electrical erasing and 405 nm light
+      programming are illustrated in Figure 4c.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: review_required
+  - value: elevated potential barrier between the FG layer and the dielectric layer
+    evidence_id: E00055
+    page: 7
+    source_type: TextBlock
+    confidence: 0.92
+    review_status: unreviewed
+  gain_mechanism: null
+  device_working_principle:
+  - value: 'β-Ga2O3 functions as a photosensitive dielectric: in the dark it acts
+      as an insulating dielectric layer blocking carriers trapped in the floating
+      gate; under DUV radiation it excites photogenerated carriers.'
+    evidence_id: E00026
+    page: 2
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The physical mechanism of the optical FG memory includes electrical erasing,
+      optical programming operations under 405 nm illumination at 0 V, and DUV light
+      programming operations under 254 nm illumination at 0 V; initial erasing by
+      a −30 V/0.01 s electrical pulse and optical programming by a 405 nm/1 s light
+      pulse; initial erasing by a −30 V/0.01 s electrical pulse and DUV light programming
+      by a 254 nm/1 s optical pulse.
+    evidence_id: E00040
+    page: 5
+    source_type: TextBlock
+    confidence: 0.9
+    review_status: unreviewed
+  - value: Initially, when a +40 V gate voltage is applied, electrons will tunnel
+      through β-Ga2O3 and transfer to the graphene FG. Subsequently, when the gate
+      voltage is eliminated to read the state-0 current, the substantial electron
+      accumulation in the graphene FG is interpreted by the MoS2 channel as a negative
+      gate voltage, consequently driving the MoS2 channel into off-state. What’s more,
+      when a −40 V gate voltage is used to erase, the electrons in graphene will be
+      transferred to the MoS2 channel, thereby forcing the MoS2 channel into an on-state.
+      Thus, the MoS2/β-Ga2O3/MLG FG memory is capable of realizing two-level non-volatile
+      storage by electrostatic control.
+    evidence_id: E00048
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: In dark conditions, the β-Ga2O3 functions as a high-κ dielectric layer
+      with minimal leakage current, allowing for precise regulation of the channel’s
+      carrier density and surface potential through the application of Vcg. The MoS2
+      channel uniquely generates a substantial quantity of photogenerated carriers
+      under 405 nm, however, the Igs remain unaffected as these carriers are incapable
+      of tunneling through the β-Ga2O3 dielectric layer. Conversely, upon exposure
+      to 254 nm light, the wide-bandgap β-Ga2O3 exhibits a significant response to
+      UV light under 254 nm illumination, which results in a significant enhancement
+      of photogenerated carriers. At the control of Vcg = −5 V, the photogenerated
+      electrons within the β-Ga2O3 layer are transferred to the conduction band of
+      MoS2, leading to a marked response in Igs. Consequently, the unique photosensitive
+      characteristics of the high-κ dielectric β-Ga2O3 introduce a novel optoelectronic
+      mechanism within FG memory devices.
+    evidence_id: E00049
+    page: 6
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: The application of an initial erasing pulse at −30 V for 0.01 s facilitates
+      the transfer of electrons from graphene to the MoS2 channel, preventing their
+      subsequent tunneling back and thereby generating an internal electric field
+      between the MoS2 channel and the graphene floating gate layer. As illustrated
+      in Figure S9 (Supporting Information), the photogenerated electrons cannot transit
+      into the floating gate due to the absence of an internal electric field, hence
+      the programming operation cannot be realized solely by applying 254 nm light
+      pulses. When the visible light pulse is applied, only the MoS2 channel excites
+      electrons from the valence band, and these photogenerated electrons cannot tunnel
+      through β-Ga2O3, leading to a noticeable increase in output current instead
+      of a decrease during programming. In Figure 4f, the device is successfully programmed
+      by 254 nm/1 s light pulse, with reading states measured at Vbg = 0V and Vds
+      = 1 V. The capability for multilevel storage within the FG memory is demonstrated
+      by augmenting the quantity of light pulses.
+    evidence_id: E00053
+    page: 7
+    source_type: TextBlock
+    confidence: 0.95
+    review_status: unreviewed
+  - value: Upon application of an electrical pulse with a voltage of −30 V for 0.01
+      s, electrons initially tunnel through β-Ga2O3 and migrate to the MoS2 channel,
+      completing the erasing operation. Subsequently, following the removal of the
+      gate voltage, a significant accumulation of holes occurs in the graphene, which
+      the MoS2 channel interprets as a positive gate voltage, thereby maintaining
+      an on-state. Subsequently, DUV light (254 nm) with pulse widths of 1 s is used
+      for programming, which could excite electrons from the valence bands of both
+      β-Ga2O3 and MoS2, leading to the generation of electron-hole pairs. However,
+      only the carriers originating from β-Ga2O3 are capable of transiting into either
+      channel or FG. Within the graphene FG, the electrons will be neutralized with
+      holes, effectively reducing the gate voltage, whereas in the MoS2 channel, the
+      holes will recombine with the electrons, reducing the lifetime of the majority
+      carriers. Consequently, the FG memory achieves programming operation through
+      the 254 nm light pulse, whereas carriers originating from MoS2 encounter significant
+      challenges in penetrating the dielectric layer.
+    evidence_id: E00054
+    page: 7
+    source_type: TextBlock
+    confidence: 0.98
+    review_status: unreviewed
+  - value: Initial erasing operation by a −30 V/0.01 s electrical pulse and optical
+      programming operation by 405 nm/1 s light pulse; initial erasing operation by
+      a −30 V/0.01 s electrical pulse and DUV light programming operation by 254 nm/1
+      s optical pulse.
+    evidence_id: E00170
+    page: 5
+    source_type: Figure
+    confidence: 0.95
+    review_status: unreviewed
+evidence_index:
+- evidence_id: E00026
+  page: 2
+  element_id: P001-text-0022
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-001", "figure_number":
+    "1", "normalized_reference": "Figure 1a", "reference_text": "1a", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "a", "supplementary": false},
+    {"figure_id": "P001-figure-001", "figure_number": "1", "normalized_reference":
+    "Figure 1b", "reference_text": "1b", "reference_type": "main_figure", "status":
+    "resolved", "subfigure_hint": "b", "supplementary": false}], "mineru_locator":
+    null, "page": 2, "paper_id": "P001", "parser_name": "MinerU", "parser_version":
+    "4.0.7", "related_ids": ["P001-figure-001"], "source_file": "json/P001_content.json"}'
+  quote: To solve the above problems and explore novel energyefficient 2D FG memory
+    with high performance, a novel energyefficient DUV light programming FG memory
+    based on ultrathin MoS<sub>2</sub>/𝛽-phase Gallium oxide (𝛽-Ga<sub>2</sub>O<sub>3</sub>)/Multilayer
+    graphene (MLG) is proposed based on our previous works.<sup>[36–38]</sup> To depict
+    the schematics of the human visual system vividly, the working process including
+    information reception and information processing is shown in **Figure 1**a. Unlike
+    present FG memory used in neuromorphic systems, ultra-wide bandgap (4.9 eV) 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    with a high dielectric constant (ɛ = 10) and a high breakdown field (8 MV cm−1)[39–42]
+    can function as a photosensitive dielectric in our device (Figure 1b), which not
+    only could be functioned as an insulating dielectric layer in the dark blocking
+    the carriers trapped in the FG but also excite photogenerated carriers under the
+    deep-ultraviolet (DUV) radiation.<sup>[43–48]</sup> In addition, because the stratospheric
+    ozone layer surrounding the earth absorbs high-energy ultraviolet radiation, our
+    optoelectrical memory operating in the DUV solarblind region (220-280 nm) could
+    avoid interference from solar radiation.<sup>[49–51]</sup>
+- evidence_id: E00049
+  page: 6
+  element_id: P001-text-0065
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": null, "figure_number": "8",
+    "normalized_reference": "Figure S8a", "reference_text": "S8a", "reference_type":
+    "supplementary_figure", "status": "supplementary", "subfigure_hint": "a", "supplementary":
+    true}, {"figure_id": null, "figure_number": "8", "normalized_reference": "Figure
+    S8c", "reference_text": "S8c", "reference_type": "supplementary_figure", "status":
+    "supplementary", "subfigure_hint": "c", "supplementary": true}, {"figure_id":
+    null, "figure_number": "8", "normalized_reference": "Figure S8d", "reference_text":
+    "S8d", "reference_type": "supplementary_figure", "status": "supplementary", "subfigure_hint":
+    "d", "supplementary": true}, {"figure_id": null, "figure_number": "8", "normalized_reference":
+    "Figure S8b", "reference_text": "S8b", "reference_type": "supplementary_figure",
+    "status": "supplementary", "subfigure_hint": "b", "supplementary": true}], "mineru_locator":
+    null, "page": 6, "paper_id": "P001", "parser_name": "MinerU", "parser_version":
+    "4.0.7", "related_ids": [], "source_file": "json/P001_content.json"}'
+  quote: Apart from its competitive performance of electrical memory devices, 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    can also function as a photosensitive high-𝜅 dielectric layer, due to the combination
+    of high dielectric constant and excellent optoelectronic properties. The photoresponse
+    characteristics of a MoS<sub>2</sub> FET and a MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG
+    memory device were investigated under the dual influence of electrical pulsing
+    and photonic irradiation, with 𝛽-Ga<sub>2</sub>O<sub>3</sub> serving as the photosensitive
+    high-𝜅 dielectric layer. The schematic illustration of MoS<sub>2</sub> FET with
+    𝛽-Ga<sub>2</sub>O<sub>3</sub> is shown in Figure S8a (Supporting Information).
+    And time-resolved I<sub>gs</sub> curves of the MoS<sub>2</sub> FET at V<sub>b</sub>
+    =−5 V under 405 nm are shown in Figure S8c (Supporting Information). Notably,
+    the I<sub>gs</sub> remains at a minimal level of ∼10−14 A under visible light,
+    which underscores the significant applicability of 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    for high-𝜅 dielectric applications. Additionally, as depicted in Figure S8d, the
+    obvious photoresponse of I<sub>gs</sub> to 254 nm light on/off switching cycles
+    underscores the inherent UV-sensitive characteristic of the 𝛽- Ga<sub>2</sub>O<sub>3</sub>
+    at V<sub>cg</sub> =−5 V under 254 nm, indicating its significant potential as
+    an efficient photosensitive dielectric. Furthermore, the schematic energy-band
+    diagrams of the optoelectronic behavior are illustrated in Figure S8b. In dark
+    conditions, the 𝛽-Ga<sub>2</sub>O<sub>3</sub> functions as a high-𝜅 dielectric
+    layer with minimal leakage current, allowing for precise regulation of the channel’s
+    carrier density and surface potential through the application of V<sub>cg</sub>.<sup>[69]</sup>
+    The MoS<sub>2</sub> channel uniquely generates a substantial quantity of photogenerated
+    carriers under 405 nm, however, the I<sub>gs</sub> remain unaffected as these
+    carriers are incapable of tunneling through the 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    dielectric layer. Conversely, upon exposure to 254 nm light, the wide-bandgap
+    𝛽-Ga<sub>2</sub>O<sub>3</sub> exhibits a significant response to UV light under
+    254 nm illumination, which results in a significant enhancement of photogenerated
+    carriers. At the control of V<sub>cg</sub> =−5 V, the photogenerated electrons
+    within the 𝛽- Ga<sub>2</sub>O<sub>3</sub> layer are transferred to the conduction
+    band of MoS<sub>2</sub>, leading to a marked response in I<sub>gs</sub>. Consequently,
+    the unique photosensitive characteristics of the high-𝜅 dielectric 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    introduce a novel optoelectronic mechanism within FG memory devices.
+- evidence_id: E00053
+  page: 7
+  element_id: P001-text-0074
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-004", "figure_number":
+    "4", "normalized_reference": "Figure 4b", "reference_text": "4b", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "b", "supplementary": false},
+    {"figure_id": null, "figure_number": "9", "normalized_reference": "Figure S9",
+    "reference_text": "S9", "reference_type": "supplementary_figure", "status": "supplementary",
+    "subfigure_hint": null, "supplementary": true}, {"figure_id": "P001-figure-004",
+    "figure_number": "4", "normalized_reference": "Figure 4e", "reference_text": "4e",
+    "reference_type": "main_figure", "status": "resolved", "subfigure_hint": "e",
+    "supplementary": false}, {"figure_id": null, "figure_number": "10", "normalized_reference":
+    "Figure S10", "reference_text": "S10", "reference_type": "supplementary_figure",
+    "status": "supplementary", "subfigure_hint": null, "supplementary": true}, {"figure_id":
+    "P001-figure-004", "figure_number": "4", "normalized_reference": "Figure 4c",
+    "reference_text": "4c", "reference_type": "main_figure", "status": "resolved",
+    "subfigure_hint": "c", "supplementary": false}, {"figure_id": "P001-figure-004",
+    "figure_number": "4", "normalized_reference": "Figure 4f", "reference_text": "4f",
+    "reference_type": "main_figure", "status": "resolved", "subfigure_hint": "f",
+    "supplementary": false}], "mineru_locator": null, "page": 7, "paper_id": "P001",
+    "parser_name": "MinerU", "parser_version": "4.0.7", "related_ids": ["P001-figure-004"],
+    "source_file": "json/P001_content.json"}'
+  quote: Furthermore, the schematic energy-band diagrams of initial electrical erasing
+    are illustrated in Figure 4b, providing a detailed visual representation of the
+    device’s operation and energy states. The application of an initial erasing pulse
+    at −30 V for 0.01 s facilitates the transfer of electrons from graphene to the
+    MoS<sub>2</sub> channel, preventing their subsequent tunneling back and thereby
+    generating an internal electric field between the MoS<sub>2</sub> channel and
+    the graphene floating gate layer. As illustrated in Figure S9 (Supporting Information),
+    the photogenerated electrons cannot transit into the floating gate due to the
+    absence of an internal electric field, hence the programming operation cannot
+    be realized solely by applying 254 nm light pulses. Additionally, Figure 4e and
+    Figure S10 (Supporting Information) demonstrate the programming operation using
+    1 s pulses of 405, 635, and 520 nm respectively. And it reveals that the photosensitive
+    dielectric layer of 𝛽-Ga<sub>2</sub>O<sub>3</sub> fundamentally limits electron
+    tunneling under visible light illumination, which will not be affected by the
+    disturbance of visible light. The schematic energy-band diagrams of electrical
+    erasing and 405 nm light programming are illustrated in Figure 4c. When the visible
+    light pulse is applied, only the MoS<sub>2</sub> channel excites electrons from
+    the valence band, and these photogenerated electrons cannot tunnel through 𝛽-Ga<sub>2</sub>O<sub>3</sub>,
+    leading to a noticeable increase in output current instead of a decrease during
+    programming. In Figure 4f, the device is successfully programmed by 254 nm/1 s
+    light pulse, with reading states measured at V<sub>bg</sub> = 0V and V<sub>ds</sub>
+    = 1 V. The capability for multilevel storage within the FG memory is demonstrated
+    by augmenting the quantity of light pulses.
+- evidence_id: E00054
+  page: 7
+  element_id: P001-text-0075
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-004", "figure_number":
+    "4", "normalized_reference": "Figure 4d", "reference_text": "4d", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "d", "supplementary": false},
+    {"figure_id": null, "figure_number": "11", "normalized_reference": "Figure S11",
+    "reference_text": "S11", "reference_type": "supplementary_figure", "status": "supplementary",
+    "subfigure_hint": null, "supplementary": true}, {"figure_id": null, "figure_number":
+    "12", "normalized_reference": "Figure S12", "reference_text": "S12", "reference_type":
+    "supplementary_figure", "status": "supplementary", "subfigure_hint": null, "supplementary":
+    true}], "mineru_locator": null, "page": 7, "paper_id": "P001", "parser_name":
+    "MinerU", "parser_version": "4.0.7", "related_ids": ["P001-figure-004"], "source_file":
+    "json/P001_content.json"}'
+  quote: The schematic energy-band diagrams of electrical erasing and DUV light programming
+    are visualized in Figure 4d. Upon application of an electrical pulse with a voltage
+    of −30 V for 0.01 s, electrons initially tunnel through 𝛽-Ga<sub>2</sub>O<sub>3</sub>
+    and migrate to the MoS<sub>2</sub> channel, completing the erasing operation.
+    Subsequently, following the removal of the gate voltage, a significant accumulation
+    of holes occurs in the graphene, which the MoS<sub>2</sub> channel interprets
+    as a positive gate voltage, thereby maintaining an on-state. Subsequently, DUV
+    light (254 nm) with pulse widths of 1 s is used for programming, which could excite
+    electrons from the valence bands of both 𝛽-Ga<sub>2</sub>O<sub>3</sub> and MoS<sub>2</sub>,
+    leading to the generation of electron-hole pairs. However, it is noted that only
+    the carriers originating from 𝛽-Ga<sub>2</sub>O<sub>3</sub> are capable of transiting
+    into either channel or FG. Within the graphene FG, the electrons will be neutralized
+    with holes, effectively reducing the gate voltage, whereas in the MoS<sub>2</sub>
+    channel, the holes will recombine with the electrons, reducing the lifetime of
+    the majority carriers. Consequently, the FG memory achieves programming operation
+    through the 254 nm light pulse, whereas carriers originating from MoS<sub>2</sub>
+    encounter significant challenges in penetrating the dielectric layer. The comparative
+    influence of optical depression pulses with pulse widths of 2 and 0.5 s on the
+    output current is illustrated in Figure S11 (Supporting Information). The degree
+    of programming is indicated to increase with the duration of light exposure. In
+    Figure S12 (Supporting Information), additional samples with the different thickness
+    of 𝛽-Ga<sub>2</sub>O<sub>3</sub> layer exhibited excellently programmed ability
+    under the pulse light of 254 nm, thereby providing further corroboration of the
+    photosensitive mechanism to the 𝛽-Ga<sub>2</sub>O<sub>3</sub> dielectric layer.<sup>[41,72]</sup>
+    And it can be known
+- evidence_id: E00027
+  page: 2
+  element_id: P001-text-0023
+  element_type: TextBlock
+  source_reference: '{"figure_references": [], "mineru_locator": null, "page": 2,
+    "paper_id": "P001", "parser_name": "MinerU", "parser_version": "4.0.7", "related_ids":
+    [], "source_file": "json/P001_content.json"}'
+  quote: Therefore, the device shows excellent storage performance under electrical
+    pulse, including a big current switching ratio of more than 10<sup>6</sup>, large
+    storage window ratio of 78.44%, excellent retention surpassing 10<sup>3</sup>
+    s, and endurance exceeding 1000 programming/erasing cycles only with a low programming/erasing
+    (P/E) voltage of ±40 V in a small equivalent electric field intensity of 7.94
+    MV cm−1.[52–56] Furthermore, the device was capable of achieving multilevel storage
+    only by controlling the pulse DUV light (254 nm) with a low power of 254.4 pJ
+    (0 V). And the number (3.25 × 10<sup>8</sup>) of photons per programming operation
+    is much smaller than that of most present works.[32–34,5<sup>3</sup>,5<sup>4</sup>,5<sup>7</sup>,5<sup>8</sup>]
+    The distinctive mechanism indicates that our MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory
+    device holds great potential for optical memory, benefiting from strong anti-interference
+    performance and reduction of dielectric layer losses due to the avoidance of tunneling
+    mechanism. Finally, the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device also demonstrates
+    significant synaptic properties under photoelectric hybrid modulation, including
+    synaptic short-term plasticity, pairpulse facilitation (PPF), and synaptic long-term
+    plasticity. The VGG-8 model based on MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device
+    achieves 91.07% recognition accuracy on CIFAR-10 dataset images. This work offers
+    a new scheme for constructing an ultrathin neuromorphic storage and computing
+    integrated system by using a DUV photosensitive dielectric.
+- evidence_id: E00038
+  page: 4
+  element_id: P001-text-0044
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": null, "figure_number": "4",
+    "normalized_reference": "Figure S4b-d", "reference_text": "S4b–d", "reference_type":
+    "supplementary_figure", "status": "supplementary", "subfigure_hint": "b-d", "supplementary":
+    true}, {"figure_id": "P001-figure-003", "figure_number": "3", "normalized_reference":
+    "Figure 3c", "reference_text": "3c", "reference_type": "main_figure", "status":
+    "resolved", "subfigure_hint": "c", "supplementary": false}], "mineru_locator":
+    null, "page": 4, "paper_id": "P001", "parser_name": "MinerU", "parser_version":
+    "4.0.7", "related_ids": ["P001-figure-003"], "source_file": "json/P001_content.json"}'
+  quote: gree of hysteresis, which can be attributed to the charge traps present at
+    the MoS<sub>2</sub> channel-𝛽-Ga<sub>2</sub>O<sub>3</sub> dielectric layer interface
+    and the adsorption/desorption of oxygen and water in the ambient environment.<sup>[64–67]</sup>
+    In order to analyze the transport mechanism of MoS2/𝛽-Ga2O<sub>3</sub>/MLG device,
+    the I<sub>gs</sub> across the dielectric layer are measured, and the results are
+    displayed in Figure S4b–d (Supporting Information). When V<sub>b</sub> is below
+    and above 10.2 V, thermal electron emission and F-N tunneling are identified as
+    the predominant mechanisms contributing to the transport current, respectively.
+    The memory window (ΔV<sub>T</sub>), defined as the difference in V<sub>T</sub>
+    between the on and off states, is plotted as a function of V<sub>bg</sub>,max
+    in Figure 3c, and the data indicates a linear increase in ΔV<sub>T</sub> with
+    V<sub>bg</sub>,max, which is a trend that is consistent
+- evidence_id: E00037
+  page: 4
+  element_id: P001-text-0043
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-004", "figure_number":
+    "4", "normalized_reference": "Figure 4g,h", "reference_text": "4g,h", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "g,h", "supplementary":
+    false}, {"figure_id": null, "figure_number": "4", "normalized_reference": "Figure
+    S4a", "reference_text": "S4a", "reference_type": "supplementary_figure", "status":
+    "supplementary", "subfigure_hint": "a", "supplementary": true}], "mineru_locator":
+    null, "page": 4, "paper_id": "P001", "parser_name": "MinerU", "parser_version":
+    "4.0.7", "related_ids": ["P001-figure-004"], "source_file": "json/P001_content.json"}'
+  quote: ±50, and ±60 V at V<sub>ds</sub> = 1 V. It is simple to observe that the
+    off-state drain current (I<sub>ds</sub>) is ≈10−11 A, while the on-state I<sub>ds</sub>
+    is close to 10<sup>−5</sup> A. Consequently, due to the high potential barrier
+    between the FG layer of MLG and the dielectric layer of 𝛽- Ga<sub>2</sub>O<sub>3</sub>,
+    coupled with the superb insulating properties of 𝛽-Ga<sub>2</sub>O<sub>3</sub>,
+    the device exhibits a substantial on/off current ratio exceeding 10<sup>6</sup>,
+    which highlights its **Figure 4**g,h prominent ability to differentiate between
+    two storage states. And the transfer curves exhibit the evident I<sub>ds</sub>
+    hysteresis, predominantly attributed to the capture and release of charges within
+    the MLG layer. And a comparative analysis of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FET
+    transfer properties under identical conditions is presented in Figure S4a (Supporting
+    Information). The transfer curve shows a slight de-
+- evidence_id: E00048
+  page: 6
+  element_id: P001-text-0064
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-003", "figure_number":
+    "3", "normalized_reference": "Figure 3j", "reference_text": "3j", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "j", "supplementary": false}],
+    "mineru_locator": null, "page": 6, "paper_id": "P001", "parser_name": "MinerU",
+    "parser_version": "4.0.7", "related_ids": ["P001-figure-003"], "source_file":
+    "json/P001_content.json"}'
+  quote: processes are illustrated in Figure 3j. Initially, when a +40 V gate voltage
+    is applied, electrons will tunnel through 𝛽-Ga<sub>2</sub>O<sub>3</sub> and transfer
+    to the graphene FG. Subsequently, when the gate voltage is eliminated to read
+    the state-0 current, the substantial electron accumulation in the graphene FG
+    is interpreted by the MoS<sub>2</sub> channel as a negative gate voltage, consequently
+    driving the MoS<sub>2</sub> channel into off-state. What’s more, when a −40 V
+    gate voltage is used to erase, the electrons in graphene will be transferred to
+    the MoS<sub>2</sub> channel, thereby forcing the MoS<sub>2</sub> channel into
+    an on-state. Thus, the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory is capable of realizing
+    two-level non-volatile storage by electrostatic control.
+- evidence_id: E00050
+  page: 6
+  element_id: P001-text-0066
+  element_type: TextBlock
+  source_reference: '{"figure_references": [], "mineru_locator": null, "page": 6,
+    "paper_id": "P001", "parser_name": "MinerU", "parser_version": "4.0.7", "related_ids":
+    [], "source_file": "json/P001_content.json"}'
+  quote: In the realm of non-volatile memory devices, the tunneling effect predominates
+    as the mechanism for device programming. However, the endurance of such devices
+    is often compromised following repeated cycles of erasure and programming. Storage
+    mechanisms that eschew tunneling may provide a viable solution to this durability
+    conundrum.<sup>[70,71]</sup>
+- evidence_id: E00042
+  page: 6
+  element_id: P001-text-0058
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-003", "figure_number":
+    "3", "normalized_reference": "Figure 3d", "reference_text": "3d", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "d", "supplementary": false}],
+    "mineru_locator": null, "page": 6, "paper_id": "P001", "parser_name": "MinerU",
+    "parser_version": "4.0.7", "related_ids": ["P001-figure-003"], "source_file":
+    "json/P001_content.json"}'
+  quote: with the charge-trapping mechanism, thereby corroborating the device’s operational
+    dynamics. When V<sub>bg</sub>,max = 60 V, the device exhibits a vast memory window
+    of 94.13 V. As shown in Figure 3d, the ratio of the memory window range and the
+    sweeping voltage range (W.R./S.R.) is also positively correlated with V<sub>bg</sub>,max,
+    reaching 78.44% when V<sub>bg</sub>,max = 60 V was applied. And the ratio is as
+    much as that of a similar device.<sup>[12,30,35]</sup>
+- evidence_id: E00055
+  page: 7
+  element_id: P001-text-0076
+  element_type: TextBlock
+  source_reference: '{"figure_references": [{"figure_id": "P001-figure-004", "figure_number":
+    "4", "normalized_reference": "Figure 4g,h", "reference_text": "4g,h", "reference_type":
+    "main_figure", "status": "resolved", "subfigure_hint": "g,h", "supplementary":
+    false}], "mineru_locator": null, "page": 7, "paper_id": "P001", "parser_name":
+    "MinerU", "parser_version": "4.0.7", "related_ids": ["P001-figure-004"], "source_file":
+    "json/P001_content.json"}'
+  quote: that a thicker dielectric layer demands a higher pulse voltage to attain
+    the same current level, leading to increased power consumption. Furthermore, it
+    can be found that in Table S1 (Supporting Information), the MoS2/𝛽-Ga2O<sub>3</sub>/MLG
+    FG memory is capable of achieving multilevel storage only by controlling the pulse
+    DUV light (254 nm) with a low power of 254.4 pJ. Owing to the elevated potential
+    barrier between the FG layer and the dielectric layer, coupled with the exceptional
+    insulating characteristics of 𝛽-Ga<sub>2</sub>O<sub>3</sub>. As shown in Figure
+    4g,h, the device exhibits an excellent current switching ratio of 10<sup>6</sup>
+    only at a low programming/erasing voltage of ±40 V in a small equivalent electric
+    field intensity of 7.94 MV cm−1,[34,73,74] meanwhile displaying a tiny photons
+    number of 3.25 × 10<sup>8</sup>, which is much smaller than that of most present
+    works as well.<sup>[32,33,53,54]</sup>
+- evidence_id: E00040
+  page: 5
+  element_id: P001-text-0051
+  element_type: TextBlock
+  source_reference: '{"figure_references": [], "mineru_locator": null, "page": 5,
+    "paper_id": "P001", "parser_name": "MinerU", "parser_version": "4.0.7", "related_ids":
+    [], "source_file": "json/P001_content.json"}'
+  quote: Figure 4. The physical mechanism of the optical FG memory and comparison
+    of nonvolatile electrical/optoelectrical 2D FG memory devices. a) Schematic diagram
+    of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device under 254 nm light illumination.
+    b) Schematic energy-band diagrams of the FG memory device for electrical erasing.
+    c) Schematic energy-band diagrams of the FG memory device for optical programming
+    operations under 405 nm illumination at 0 V. d) Schematic energy-band diagrams
+    of the FG memory device for DUV light programming operations under 254 nm illumination
+    at 0 V. e) Initial erasing operation by a −30 V/0.01 s electrical pulse and optical
+    programming operation by 405 nm/1 s light pulse. f) Initial erasing operation
+    by a −30 V/0.01 s electrical pulse and DUV light programming operation by 254
+    nm/1 s optical pulse. g) Comparison of photon number and operating wavelength
+    of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device and other reported optoelectrical
+    FG memory devices. The star shape represents pure light control, while the square
+    shape represents simultaneous control of both light and electricity. h) Comparison
+    of electrical switching ratio and P/E voltage of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG
+    FG memory device and other reported FG memory devices. The star shape represents
+    pure light control, the square shape represents simultaneous control of both light
+    and electricity, and the triangle shape represents pure electric control.
+- evidence_id: E00170
+  page: 5
+  element_id: P001-figure-004
+  element_type: Figure
+  source_reference: '{"mineru_locator": "doc:468f0b8/tier:flash/page:5/block:6", "page":
+    5, "paper_id": "P001", "parser_name": "MinerU", "parser_version": "4.0.7", "related_ids":
+    ["P001-text-0043", "P001-text-0067", "P001-text-0074", "P001-text-0075", "P001-text-0076"],
+    "source_file": "json/image_exports.json"}'
+  quote: '{"caption": "Figure 4. The physical mechanism of the optical FG memory and
+    comparison of nonvolatile electrical/optoelectrical 2D FG memory devices. a) Schematic
+    diagram of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device under 254 nm light
+    illumination. b) Schematic energy-band diagrams of the FG memory device for electrical
+    erasing. c) Schematic energy-band diagrams of the FG memory device for optical
+    programming operations under 405 nm illumination at 0 V. d) Schematic energy-band
+    diagrams of the FG memory device for DUV light programming operations under 254
+    nm illumination at 0 V. e) Initial erasing operation by a −30 V/0.01 s electrical
+    pulse and optical programming operation by 405 nm/1 s light pulse. f) Initial
+    erasing operation by a −30 V/0.01 s electrical pulse and DUV light programming
+    operation by 254 nm/1 s optical pulse. g) Comparison of photon number and operating
+    wavelength of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG FG memory device and other reported
+    optoelectrical FG memory devices. The star shape represents pure light control,
+    while the square shape represents simultaneous control of both light and electricity.
+    h) Comparison of electrical switching ratio and P/E voltage of the MoS2/𝛽-Ga2O<sub>3</sub>/MLG
+    FG memory device and other reported FG memory devices. The star shape represents
+    pure light control, the square shape represents simultaneous control of both light
+    and electricity, and the triangle shape represents pure electric control.", "caption_source_reference":
+    {"evidence_type": "figure_caption", "mineru_locator": null, "page": 5, "paper_id":
+    "P001", "parser_name": "MinerU", "parser_version": "4.0.7", "relation": "same_page_immediately_after_image",
+    "source_file": "json/P001_content.json"}, "caption_status": "matched", "figure_number":
+    "4", "height": 1605, "image_path": "images/page_005_block_006.jpg", "mime_type":
+    "image/jpeg", "mineru_block_type": "Image block", "related_text_block_ids": ["P001-text-0043",
+    "P001-text-0067", "P001-text-0074", "P001-text-0075", "P001-text-0076"], "textual_references":
+    [{"figure_number": "4", "normalized_reference": "Figure 4g,h", "reference_text":
+    "4g,h", "reference_type": "main_figure", "subfigure_hint": "g,h", "text_block_id":
+    "P001-text-0043", "text_block_page": 4}, {"figure_number": "4", "normalized_reference":
+    "Figure 4a", "reference_text": "4a", "reference_type": "main_figure", "subfigure_hint":
+    "a", "text_block_id": "P001-text-0067", "text_block_page": 6}, {"figure_number":
+    "4", "normalized_reference": "Figure 4b", "reference_text": "4b", "reference_type":
+    "main_figure", "subfigure_hint": "b", "text_block_id": "P001-text-0074", "text_block_page":
+    7}, {"figure_number": "4", "normalized_reference": "Figure 4e", "reference_text":
+    "4e", "reference_type": "main_figure", "subfigure_hint": "e", "text_block_id":
+    "P001-text-0074", "text_block_page": 7}, {"figure_number": "4", "normalized_reference":
+    "Figure 4c", "reference_text": "4c", "reference_type": "main_figure", "subfigure_hint":
+    "c", "text_block_id": "P001-text-0074", "text_block_page": 7}, {"figure_number":
+    "4", "normalized_reference": "Figure 4f", "reference_text": "4f", "reference_type":
+    "main_figure", "subfigure_hint": "f", "text_block_id": "P001-text-0074", "text_block_page":
+    7}, {"figure_number": "4", "normalized_reference": "Figure 4d", "reference_text":
+    "4d", "reference_type": "main_figure", "subfigure_hint": "d", "text_block_id":
+    "P001-text-0075", "text_block_page": 7}, {"figure_number": "4", "normalized_reference":
+    "Figure 4g,h", "reference_text": "4g,h", "reference_type": "main_figure", "subfigure_hint":
+    "g,h", "text_block_id": "P001-text-0076", "text_block_page": 7}], "width": 1027}'

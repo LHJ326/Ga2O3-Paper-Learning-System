@@ -1,0 +1,16 @@
+paper_id: P001
+task: mechanism_only
+status: review_required
+api_calls: 6
+selected_evidence_count: 23
+chunk_count: 6
+max_prompt_chars: 13277
+input_chars: 66423
+estimated_input_tokens: 19927
+estimated_input_cost_usd_off_peak: 0.00298905
+estimated_input_cost_usd_peak: 0.0059781
+output_chars: 17118
+extracted_field_count: 7
+null_field_count: 1
+evidence_coverage: 1.0
+review_required: true
