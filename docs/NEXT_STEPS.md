@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 4.4.4 Paper Object Finalization
+
+P001 now has one validated `paper_object.yaml` containing paper identity, source
+paths, the complete Summary/Parameters/Performance/Mechanism payloads, a unified
+33-record Evidence index, and aggregate validation status. Evidence coverage is
+100%; `authors` and `doi` intentionally remain null because existing metadata
+does not supply them.
+
+Before any downstream indexing, review the 8 retained warnings and decide
+whether the corresponding source knowledge observations should remain as-is.
+This milestone does not authorize batch processing, RAG, Vector Database,
+Embedding, or Agent integration.
+
 ## Completed — Phase 4.4.3-B3 Mechanism Extraction (Review Required)
 
 P001 Mechanism extraction completed from 23 selected Evidence records in 6

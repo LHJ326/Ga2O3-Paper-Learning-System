@@ -1,0 +1,18 @@
+schema_version: "1.0"
+object_type: scientific_paper
+sections:
+  paper_identity:
+    required: [paper_id, title, authors, year, journal, doi]
+    nullable: [title, authors, year, journal, doi]
+  source:
+    required: [pdf_path, parsed_path, evidence_index]
+    nullable: [pdf_path, parsed_path]
+  knowledge:
+    required: [summary, parameters, performance, mechanism]
+  validation:
+    required: [evidence_coverage, warnings, review_status]
+evidence_contract:
+  required: [evidence_id, page, element_type, source_reference, quote]
+  page_numbering: one_based
+  references_must_resolve: true
+review_status_values: [passed, review_required]

@@ -1,5 +1,21 @@
 # Project State
 
+## Phase 4.4.4 Paper Object Finalization Completed
+
+P001 Summary, Material/Device Parameters, Performance, Mechanism, Evidence, and
+Validation are now assembled into the standard
+`data/papers/P001/paper_object.yaml` artifact. The object embeds each source
+knowledge artifact without rewriting extracted values and exposes a unified,
+deduplicated Evidence index containing 33 traceable records. All 33 referenced
+Evidence IDs resolve with 1-based page, source element type, source locator, and
+quote, yielding 100% Evidence coverage.
+
+Paper identity is loaded only from existing metadata. Missing `authors` and
+`doi` remain null. The aggregate review status is `review_required`, preserving
+8 existing Summary, Performance, and Mechanism warnings. The builder does not
+call an LLM, rerun MinerU, infer missing bibliographic fields, or alter any
+upstream knowledge artifact.
+
 ## Phase 4.4.3-B3 Mechanism Extraction Completed — Review Required
 
 P001 Mechanism extraction now uses a dedicated schema, task-specific Evidence
