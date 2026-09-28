@@ -1,5 +1,22 @@
 # Project State
 
+## Phase 4.4.3-B1 Material + Device Extraction Completed
+
+P001 Material/Device extraction now uses the reviewed task-specific Evidence
+Selector as its only model input. The bounded run selected 23 Unified Document
+Evidence records, produced 4 prompts (55,267 total input characters), and made
+4 successful DeepSeek calls. The model output contained 9 populated
+Material/Device fields; all 9 closed against existing 1-based Evidence records,
+with no unsupported fields or validation warnings.
+
+The validated knowledge artifact is
+`data/papers/P001/knowledge/device_parameters.yaml`. Prompt, response, and run
+provenance are stored beside it as `device_extraction_prompts.jsonl`,
+`device_extraction_responses.jsonl`, and `device_extraction_run.yaml`.
+Performance, mechanism, and comparison groups remain null. No Summary or
+MinerU rerun occurred, and parser, metadata, ingestion, benchmark, and table
+recovery components were unchanged.
+
 ## Phase 4.4.3-A Parameter Extraction Framework Completed
 
 The Ga2O3 photodetector knowledge layer now has a dedicated Parameter Schema

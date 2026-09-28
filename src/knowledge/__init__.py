@@ -2,6 +2,24 @@
 
 from .extractor import ExtractionContext, KnowledgeDraft, KnowledgeExtractor
 from .llm_extractor import KnowledgeResponseError, LLMKnowledgeExtractor
+from .material_device_extraction import (
+    ChunkLimitError,
+    MaterialDeviceChunk,
+    MaterialDeviceChunker,
+    MaterialDeviceEvidenceFilter,
+    MaterialDeviceExtractionError,
+    MaterialDeviceExtractionResult,
+    MaterialDevicePromptBuilder,
+    MaterialDeviceResponseParser,
+    P001MaterialDeviceExtractor,
+    PreparedMaterialDeviceExtraction,
+)
+from .material_device_schema import (
+    MaterialDeviceSchema,
+    MaterialDeviceSchemaError,
+    load_material_device_schema,
+)
+from .material_device_validator import MaterialDeviceValidator
 from .pipeline import KnowledgeExtractionPipeline
 from .parameter_extractor import (
     LLMParameterExtractor,
@@ -69,6 +87,19 @@ __all__ = [
     "KnowledgeWriter",
     "LLMKnowledgeExtractor",
     "LLMParameterExtractor",
+    "ChunkLimitError",
+    "MaterialDeviceChunk",
+    "MaterialDeviceChunker",
+    "MaterialDeviceEvidenceFilter",
+    "MaterialDeviceExtractionError",
+    "MaterialDeviceExtractionResult",
+    "MaterialDevicePromptBuilder",
+    "MaterialDeviceResponseParser",
+    "MaterialDeviceSchema",
+    "MaterialDeviceSchemaError",
+    "MaterialDeviceValidator",
+    "P001MaterialDeviceExtractor",
+    "PreparedMaterialDeviceExtraction",
     "PromptEvidence",
     "ParameterCheck",
     "ParameterDraft",
@@ -102,5 +133,6 @@ __all__ = [
     "check_parameter_ranges",
     "check_summary_structure",
     "load_knowledge_schema",
+    "load_material_device_schema",
     "load_parameter_schema",
 ]

@@ -1,0 +1,27 @@
+paper_id: P001
+task: material_device_only
+status: success
+api_calls: 4
+selected_evidence_count: 23
+chunk_count: 4
+max_prompt_chars: 14180
+input_chars: 55267
+output_chars: 7893
+extracted_field_count: 9
+null_field_count: 0
+extracted_fields:
+- material.semiconductor
+- material.crystal_phase
+- material.doping
+- material.defect
+- material.composite_material
+- device.structure
+- device.electrode
+- device.substrate
+- device.fabrication_method
+null_fields: []
+evidence_supported_fields: 9
+unsupported_fields: 0
+evidence_coverage: 1.0
+warnings: []
+review_required: false

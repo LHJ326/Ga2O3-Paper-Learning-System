@@ -1,0 +1,49 @@
+schema_version: "1.0"
+domain_id: semiconductor.ga2o3.material_device
+output_schema: semiconductor.ga2o3.photodetector.parameters
+page_numbering: one_based
+missing_value: null
+
+sections:
+  material:
+    semiconductor:
+      label: semiconductor material
+      description: Semiconductor materials explicitly identified by the paper.
+    crystal_phase:
+      label: crystal phase
+      description: Explicit phase, polymorph, orientation, or crystallinity.
+    doping:
+      label: doping
+      description: Explicit dopant, concentration, method, and reported role.
+    composite_material:
+      label: heterostructure
+      description: Explicit heterostructure, composite, or stacked material system.
+
+  device:
+    structure:
+      label: device structure
+      description: Explicit device type, architecture, geometry, and active layers.
+      supported_attributes:
+        - device_type
+        - architecture
+        - active_layer
+    substrate:
+      label: substrate
+      description: Explicit substrate material, orientation, and interface details.
+    electrode:
+      label: electrode
+      description: Explicit electrode materials, contacts, and geometry.
+    fabrication_method:
+      label: fabrication related information
+      description: Explicit exfoliation, transfer, growth, deposition, lithography, or annealing steps.
+
+evidence_contract:
+  required_per_populated_entry:
+    - evidence_refs
+  required_per_evidence_record:
+    - evidence_id
+    - page
+    - element_type
+    - source_reference
+    - quote
+  prohibit_external_knowledge: true

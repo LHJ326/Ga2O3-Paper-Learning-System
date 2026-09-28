@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 4.4.3-B1 Material + Device Extraction
+
+P001 now has an Evidence-closed Material/Device knowledge artifact generated
+from 23 selected records in 4 bounded DeepSeek calls. The run used 55,267 input
+characters, retained full prompt/response provenance, and wrote
+`data/papers/P001/knowledge/device_parameters.yaml` only after schema, type,
+page, source-element, and Evidence-reference validation.
+
+Any Performance Extraction must use a separately reviewed task-specific
+selector and schema. It must not reuse Material/Device outputs as factual input,
+and Mechanism Extraction, batch processing, RAG, Vector Database, Embedding,
+and Agent work remain out of scope until separately authorized.
+
 ## Completed — Phase 4.4.3-A Parameter Extraction Framework
 
 A schema-driven, model-neutral Parameter Extraction boundary is ready for
