@@ -1,5 +1,23 @@
 # Project State
 
+## Phase 4.4.2-D1.5 Summary Knowledge Validator Completed
+
+The existing PDF → Unified Document → DeepSeek Summary → Knowledge flow now
+has a deterministic post-generation quality layer. It validates the required
+scientific-summary structure, closes every Summary claim against prompt
+Evidence with page and source-element locators, and emits warnings for broadly
+implausible Ga2O3 photodetector parameters without rewriting extracted facts.
+
+Validation artifacts are written beside each paper's existing knowledge:
+`quality_report.yaml` provides the decision summary and
+`validation_log.json` retains detailed checks. P001 is the first real case.
+Its current report intentionally requires review because the Summary lacks
+separate Material/System, Device Structure, and Mechanism sections; this result
+does not trigger another LLM call or alter `summary.md`.
+
+This phase does not introduce RAG, Vector Database, Embedding, Agent, parser,
+metadata, ingestion, MinerU Adapter, or table-recovery changes.
+
 ## Phase 4.4.2-A Knowledge Extraction Framework Completed
 
 The project now has a model-independent knowledge engineering boundary under

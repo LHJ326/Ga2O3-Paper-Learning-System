@@ -4,6 +4,19 @@ from .extractor import ExtractionContext, KnowledgeDraft, KnowledgeExtractor
 from .llm_extractor import KnowledgeResponseError, LLMKnowledgeExtractor
 from .pipeline import KnowledgeExtractionPipeline
 from .prompt_builder import KnowledgePromptBuilder, PromptEvidence
+from .quality import (
+    EvidenceCheck,
+    ParameterCheck,
+    ParameterWarning,
+    QualityInputError,
+    StructureCheck,
+    SummaryQualityAnalyzer,
+    SummaryQualityReport,
+    check_evidence_coverage,
+    check_parameter_ranges,
+    check_summary_structure,
+)
+from .report import QualityReportWriter
 from .schema import KnowledgeSchema, SchemaLoadError, load_knowledge_schema
 from .strategy import (
     EvidenceChunk,
@@ -16,6 +29,7 @@ from .strategy_extractor import StrategyKnowledgeExtractor, StrategyPromptBuilde
 from .validator import (
     KnowledgeValidationError,
     KnowledgeValidator,
+    SummaryKnowledgeValidator,
     ValidationIssue,
     ValidationResult,
 )
@@ -26,6 +40,7 @@ __all__ = [
     "ExtractionTask",
     "EvidenceChunk",
     "EvidenceChunker",
+    "EvidenceCheck",
     "KnowledgeDraft",
     "KnowledgeExtractor",
     "KnowledgeExtractionPipeline",
@@ -37,12 +52,23 @@ __all__ = [
     "KnowledgeWriter",
     "LLMKnowledgeExtractor",
     "PromptEvidence",
+    "ParameterCheck",
+    "ParameterWarning",
     "PromptStrategy",
     "PromptStrategyRegistry",
+    "QualityInputError",
+    "QualityReportWriter",
     "SchemaLoadError",
     "StrategyKnowledgeExtractor",
     "StrategyPromptBuilder",
+    "StructureCheck",
+    "SummaryKnowledgeValidator",
+    "SummaryQualityAnalyzer",
+    "SummaryQualityReport",
     "ValidationIssue",
     "ValidationResult",
+    "check_evidence_coverage",
+    "check_parameter_ranges",
+    "check_summary_structure",
     "load_knowledge_schema",
 ]

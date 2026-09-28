@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Iterable
 
 from .extractor import KnowledgeDraft
+from .quality import SummaryQualityAnalyzer, SummaryQualityReport
+from .report import QualityReportWriter
 from .schema import CORE_FIELDS, KnowledgeSchema
 
 
@@ -182,3 +185,30 @@ class KnowledgeValidator:
         elif isinstance(value, list):
             for position, nested in enumerate(value):
                 self._validate_nested_refs(nested, f"{path}[{position}]", evidence_ids, issues)
+
+
+class SummaryKnowledgeValidator:
+    """Validate an existing paper summary and write its quality artifacts."""
+
+    def __init__(
+        self,
+        *,
+        papers_root: str | Path = "data/papers",
+        analyzer: SummaryQualityAnalyzer | None = None,
+        writer: QualityReportWriter | None = None,
+    ) -> None:
+        self.papers_root = Path(papers_root)
+        self.analyzer = analyzer or SummaryQualityAnalyzer()
+        self.writer = writer or QualityReportWriter()
+
+    def validate(self, paper_id: str) -> SummaryQualityReport:
+        knowledge_path = self.papers_root / paper_id / "knowledge"
+        return self.analyzer.analyze(paper_id=paper_id, knowledge_path=knowledge_path)
+
+    def validate_and_write(self, paper_id: str) -> tuple[SummaryQualityReport, dict[str, Path]]:
+        report = self.validate(paper_id)
+        paths = self.writer.write(
+            report,
+            knowledge_path=self.papers_root / paper_id / "knowledge",
+        )
+        return report, paths

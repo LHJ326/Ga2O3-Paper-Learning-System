@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 4.4.2-D1.5 Summary Knowledge Validator
+
+Summary Knowledge validation now runs locally after extraction. It reports
+seven-section structural completeness, Evidence coverage down to page and
+source element/reference, and warning-only plausibility checks for wavelength,
+responsivity, detectivity, response time, and on/off ratio.
+
+Before multi-paper processing, review P001's missing Material/System, Device
+Structure, and Mechanism sections and decide whether the Summary rendering
+contract should make those headings mandatory. Do not begin batch extraction,
+RAG, Vector Database, Embedding, or Agent work until that review is explicitly
+authorized.
+
 ## Completed — Phase 4.4.2-A Knowledge Extraction Framework
 
 Schema loading, a provider-neutral extractor interface, strict Core/Domain and

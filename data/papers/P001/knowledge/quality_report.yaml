@@ -1,0 +1,16 @@
+paper_id: P001
+structure_score: 57.14
+evidence_score: 100.0
+parameter_check:
+  status: pass
+  warnings: []
+overall_status: review_required
+review_required: true
+missing_sections:
+- Material/System
+- Device Structure
+- Mechanism
+claim_counts:
+  total: 38
+  supported: 38
+  unsupported: 0

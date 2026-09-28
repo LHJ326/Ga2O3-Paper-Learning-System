@@ -1,0 +1,44 @@
+{
+  "validation_schema_version": "1.0",
+  "paper_id": "P001",
+  "structure": {
+    "required_sections": [
+      "Research Objective",
+      "Material/System",
+      "Device Structure",
+      "Mechanism",
+      "Performance",
+      "Innovation",
+      "Limitation"
+    ],
+    "present_sections": [
+      "Research Objective",
+      "Performance",
+      "Innovation",
+      "Limitation"
+    ],
+    "missing_sections": [
+      "Material/System",
+      "Device Structure",
+      "Mechanism"
+    ],
+    "score": 57.14
+  },
+  "evidence": {
+    "total_claims": 38,
+    "supported_claims": 38,
+    "unsupported_claims": 0,
+    "coverage": 100.0,
+    "unsupported_details": [],
+    "prompt_records": 36,
+    "response_records": 36
+  },
+  "parameter_check": {
+    "status": "pass",
+    "warnings": []
+  },
+  "overall_status": "review_required",
+  "review_required": true,
+  "structure_score": 57.14,
+  "evidence_score": 100.0
+}
