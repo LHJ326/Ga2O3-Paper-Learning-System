@@ -3,6 +3,23 @@
 from .extractor import ExtractionContext, KnowledgeDraft, KnowledgeExtractor
 from .llm_extractor import KnowledgeResponseError, LLMKnowledgeExtractor
 from .pipeline import KnowledgeExtractionPipeline
+from .parameter_extractor import (
+    LLMParameterExtractor,
+    ParameterDraft,
+    ParameterExtractionContext,
+    ParameterExtractor,
+    ParameterPromptBuilder,
+    ParameterResponseError,
+)
+from .parameter_pipeline import ParameterExtractionPipeline
+from .parameter_schema import ParameterSchema, ParameterSchemaError, load_parameter_schema
+from .parameter_validator import (
+    ParameterValidationError,
+    ParameterValidationIssue,
+    ParameterValidationResult,
+    ParameterValidator,
+)
+from .parameter_writer import ParameterWriter
 from .prompt_builder import KnowledgePromptBuilder, PromptEvidence
 from .quality import (
     EvidenceCheck,
@@ -51,9 +68,23 @@ __all__ = [
     "KnowledgeValidator",
     "KnowledgeWriter",
     "LLMKnowledgeExtractor",
+    "LLMParameterExtractor",
     "PromptEvidence",
     "ParameterCheck",
+    "ParameterDraft",
+    "ParameterExtractionContext",
+    "ParameterExtractionPipeline",
+    "ParameterExtractor",
+    "ParameterPromptBuilder",
+    "ParameterResponseError",
+    "ParameterSchema",
+    "ParameterSchemaError",
+    "ParameterValidationError",
+    "ParameterValidationIssue",
+    "ParameterValidationResult",
+    "ParameterValidator",
     "ParameterWarning",
+    "ParameterWriter",
     "PromptStrategy",
     "PromptStrategyRegistry",
     "QualityInputError",
@@ -71,4 +102,5 @@ __all__ = [
     "check_parameter_ranges",
     "check_summary_structure",
     "load_knowledge_schema",
+    "load_parameter_schema",
 ]

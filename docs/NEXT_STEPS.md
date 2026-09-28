@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 4.4.3-A Parameter Extraction Framework
+
+A schema-driven, model-neutral Parameter Extraction boundary is ready for
+Ga2O3 photodetector papers. It preserves nulls for unsupported fields, requires
+closed Evidence references with 1-based pages and source locators, checks
+measurement-unit consistency, and writes only validated
+`device_parameters.yaml` artifacts.
+
+The next separately authorized step is Phase 4.4.3-B real Parameter Extraction.
+It must begin with one explicitly selected paper and a reviewed Evidence-input
+strategy. This framework milestone does not authorize a DeepSeek call, batch
+processing, RAG, Vector Database, Embedding, or Agent work.
+
 ## Completed — Phase 4.4.2-D1.5 Summary Knowledge Validator
 
 Summary Knowledge validation now runs locally after extraction. It reports

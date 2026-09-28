@@ -1,0 +1,80 @@
+schema_version: "1.0"
+domain_id: semiconductor.ga2o3.photodetector.parameters
+name: Ga2O3 Photodetector Parameters
+
+value_contract:
+  allowed_types:
+    - null
+    - list
+    - structured
+  evidence_field: evidence_refs
+  page_numbering: one_based
+  missing_value: null
+
+sections:
+  material:
+    semiconductor:
+      description: Reported semiconductor composition or material system.
+    crystal_phase:
+      description: Ga2O3 polymorph, orientation, and crystallinity.
+    doping:
+      description: Dopant species, concentration, method, and stated role.
+    defect:
+      description: Explicitly reported defects, traps, or vacancies.
+    composite_material:
+      description: Heterostructure, composite, or auxiliary active materials.
+
+  device:
+    structure:
+      description: Device architecture, junction, geometry, and active layers.
+    electrode:
+      description: Electrode materials, work functions, and contact geometry.
+    substrate:
+      description: Substrate material, orientation, and interface information.
+    fabrication_method:
+      description: Explicit fabrication, growth, deposition, and annealing steps.
+
+  performance:
+    detection_wavelength:
+      description: Detection wavelength, range, or spectral peak.
+      measurement: true
+    responsivity:
+      description: Responsivity with unit and measurement conditions.
+      measurement: true
+    detectivity:
+      description: Specific detectivity with unit and conditions.
+      measurement: true
+    quantum_efficiency:
+      description: External or internal quantum efficiency.
+      measurement: true
+    response_time:
+      description: Rise or response time with conditions.
+      measurement: true
+    recovery_time:
+      description: Fall, decay, or recovery time with conditions.
+      measurement: true
+    on_off_ratio:
+      description: Photocurrent-to-dark-current or on/off ratio.
+      measurement: true
+    dark_current:
+      description: Dark current with bias and measurement conditions.
+      measurement: true
+    photocurrent:
+      description: Photocurrent with illumination and bias conditions.
+      measurement: true
+
+  mechanism:
+    photo_generation:
+      description: Explicit photo-generation mechanism.
+    carrier_transport:
+      description: Explicit carrier transport, junction, or barrier mechanism.
+    defect_effect:
+      description: Explicit role of defects or traps in photoresponse.
+    enhancement_mechanism:
+      description: Explicit reason for enhanced device performance.
+
+  comparison:
+    baseline:
+      description: Evidence-linked comparison baseline.
+    improvement_reason:
+      description: Explicitly stated reason for improvement over the baseline.

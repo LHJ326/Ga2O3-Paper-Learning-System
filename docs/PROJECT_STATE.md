@@ -1,5 +1,21 @@
 # Project State
 
+## Phase 4.4.3-A Parameter Extraction Framework Completed
+
+The Ga2O3 photodetector knowledge layer now has a dedicated Parameter Schema
+covering material, device, performance, mechanism, and comparison fields. Every
+field is nullable and may otherwise contain a structured object or a list of
+structured observations, so absent paper data is never fabricated.
+
+The model-neutral framework provides schema loading, a parameter-only Prompt
+Builder and extractor interface, strict Paper ID/Evidence/page/unit validation,
+validated YAML writing, and extraction-pipeline orchestration. Tests use only
+`MockLLMAdapter`; no real paper parameters or model calls were produced.
+
+This phase does not change parser, metadata, ingestion, MinerU Adapter, or table
+recovery code and does not introduce RAG, Vector Database, Embedding, or Agent
+components.
+
 ## Phase 4.4.2-D1.5 Summary Knowledge Validator Completed
 
 The existing PDF → Unified Document → DeepSeek Summary → Knowledge flow now
