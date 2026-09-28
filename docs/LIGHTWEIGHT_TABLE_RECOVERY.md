@@ -131,3 +131,36 @@ thresholds remain outside this phase.
 - retain every component required by ordinary OCR.
 
 No cleanup is performed in this phase.
+
+## TABLE-LIGHT-2 Runtime Integration
+
+The default path is now implemented as MinerU structural output → generic
+failure detection → PDF-space localization → PyMuPDF localized crop → external
+ordinary PP-OCR → deterministic cache → existing spatial reconstruction →
+Unified Table and Evidence. The main environment never imports PaddleOCR or
+PaddlePaddle. `TABLE_OCR_EXECUTABLE` or explicit runtime configuration selects
+the external interpreter; unavailable and failed runtimes return explicit
+nonfatal states.
+
+Detection supports common Roman and Arabic table designators, suppresses
+fallback when a valid native table exists, and records `TABLE_BODY_MISSING` or
+`TABLE_MISCLASSIFIED_AS_IMAGE`. Localization prefers nearby uncaptioned image
+geometry and otherwise derives a conservative column crop and structural lower
+boundary. No Ground Truth, paper ID, page number, or cell value participates.
+
+Runtime manifests record PDF/crop/OCR hashes, 1-based page, PDF bboxes, DPI,
+actual x/y render scales, backend settings, command metadata, source anchors,
+and raw JSON. OCR tokens and Unified Table cells retain both crop-pixel and
+PDF-space bboxes. Cache identity is deterministic and excludes absolute paths.
+Large reproducible crop PNGs are ignored by Git.
+
+The B02 smoke test found two candidates and called ordinary PP-OCR twice. The
+second identical run yielded two cache hits and no OCR calls. Runtime structure
+was Table I 10×3 and Table II 14×7, with table detection TP/FP/FN 2/0/0. Text
+quality from automatic crops was Table I 29/30 exact and Table II 85/98 exact,
+86/98 semantic. Frozen TABLE-LIGHT-1 fixtures remain unchanged at 30/30 and
+97/98 exact, 98/98 semantic. The gap is a known runtime-tuning issue and is not
+repaired using Ground Truth.
+
+PaddleOCR-VL remains an optional extreme fallback only. `OCR-ENV-CLEANUP`
+remains the next separately authorized environment phase and was not executed.

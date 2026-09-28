@@ -126,6 +126,7 @@ class SpatialTableReconstructor:
             rows=table_cells,
             footnotes=footnotes,
             producer=dict(spec.producer),
+            runtime_evidence=dict(spec.runtime_evidence),
         )
 
     @staticmethod
@@ -249,6 +250,13 @@ class SpatialTableReconstructor:
                         ),
                         bbox=BoundingBox.union(
                             [token.bbox for token in ordered]
+                        ),
+                        pdf_bbox=BoundingBox.union(
+                            [
+                                token.pdf_bbox
+                                for token in ordered
+                                if token.pdf_bbox is not None
+                            ]
                         ),
                     )
                 )

@@ -16,6 +16,29 @@ from .normalizer import (
     split_footnote_suffix,
 )
 from .spatial_reconstructor import SpatialTableReconstructor
+from .detection import (
+    FallbackStatus,
+    SourceAnchor,
+    TableFailureDetector,
+    TableFallbackCandidate,
+    TriggerReason,
+)
+from .runtime import (
+    CoordinateTransform,
+    FallbackRunRecord,
+    FallbackRunResult,
+    LocalizedTableRegion,
+    OCRProviderResult,
+    PaddleOCRCLIProvider,
+    PyMuPDFCropRenderer,
+    RenderedCrop,
+    TableFallbackCoordinator,
+    TableOCRCache,
+    TableOCRProvider,
+    TableRegionLocator,
+    sha256_file,
+    load_runtime_recovery_specs,
+)
 
 __all__ = [
     "BoundingBox",
@@ -30,4 +53,23 @@ __all__ = [
     "normalize_footnote_suffix_spacing",
     "normalize_ocr_text",
     "split_footnote_suffix",
+    "CoordinateTransform",
+    "FallbackRunRecord",
+    "FallbackRunResult",
+    "FallbackStatus",
+    "LocalizedTableRegion",
+    "OCRProviderResult",
+    "PaddleOCRCLIProvider",
+    "PyMuPDFCropRenderer",
+    "RenderedCrop",
+    "SourceAnchor",
+    "TableFailureDetector",
+    "TableFallbackCandidate",
+    "TableFallbackCoordinator",
+    "TableOCRCache",
+    "TableOCRProvider",
+    "TableRegionLocator",
+    "TriggerReason",
+    "sha256_file",
+    "load_runtime_recovery_specs",
 ]

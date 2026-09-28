@@ -16,6 +16,7 @@ from ..parser.table_recovery import (
     SpatialTableReconstructor,
     load_ocr_tokens,
     load_recovery_manifest,
+    load_runtime_recovery_specs,
     normalize_ocr_text,
 )
 
@@ -156,6 +157,8 @@ def evaluate_table_recovery(
     ground_truth_path: str | Path,
     baseline_result_path: str | Path,
     recovery_manifest_path: str | Path,
+    *,
+    runtime_manifest_dir: str | Path | None = None,
 ) -> dict[str, Any]:
     """Evaluate Layer C while preserving the frozen Layer A/B payloads."""
     ground_truth_path = Path(ground_truth_path)
@@ -163,7 +166,12 @@ def evaluate_table_recovery(
     recovery_manifest_path = Path(recovery_manifest_path)
     ground_truth = _read_mapping(ground_truth_path)
     baseline = _read_mapping(baseline_result_path)
-    paper_id, specs = load_recovery_manifest(recovery_manifest_path)
+    if runtime_manifest_dir is None:
+        paper_id, specs = load_recovery_manifest(recovery_manifest_path)
+        artifact_source = "frozen_fixture"
+    else:
+        paper_id, specs = load_runtime_recovery_specs(runtime_manifest_dir)
+        artifact_source = "runtime_cache"
     reconstructor = SpatialTableReconstructor()
     recovered = [
         reconstructor.reconstruct(load_ocr_tokens(spec), spec)
@@ -200,6 +208,7 @@ def evaluate_table_recovery(
         "evaluation_layer": "Layer C: Lightweight OCR Table Recovery",
         "method": "PyMuPDF crop + PP-OCR result + deterministic spatial reconstruction",
         "runtime_ocr_invoked": False,
+        "artifact_source": artifact_source,
         "tables": detection,
         "structure": {
             "per_table": per_table,
@@ -230,6 +239,10 @@ def evaluate_table_recovery(
         "inputs": {
             "ground_truth": ground_truth_path.as_posix(),
             "recovery_manifest": recovery_manifest_path.as_posix(),
+            "runtime_manifest_dir": (
+                Path(runtime_manifest_dir).as_posix()
+                if runtime_manifest_dir is not None else None
+            ),
         },
         "layer_a": {
             "evaluation_layer": baseline["evaluation_layer"],

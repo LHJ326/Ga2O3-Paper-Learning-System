@@ -19,3 +19,6 @@ __pycache__/
 # Generated outputs
 outputs/*
 !outputs/.gitkeep
+
+# Reproducible runtime table crops can be large; manifests retain their hashes.
+data/parsed/*/light_ocr/runtime_raw/**/crop.png

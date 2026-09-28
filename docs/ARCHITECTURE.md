@@ -1,5 +1,18 @@
 # Architecture
 
+## TABLE-LIGHT-2 Runtime Boundary
+
+The lightweight table fallback is now MinerU structural output → generic
+failure detector → PDF-space region locator → PyMuPDF localized crop → external
+ordinary PP-OCR provider → hashed raw-artifact cache → existing deterministic
+spatial reconstruction → Unified Table and Evidence.
+
+Core Parser knows only the provider contract and never imports PaddleOCR or
+PaddlePaddle. The measured render transform is the sole bridge from crop-pixel
+bbox to PDF coordinates. PaddleOCR-VL remains optional extreme fallback only.
+Runtime integration does not authorize `OCR-ENV-CLEANUP`, Parser v1 freeze, or
+RAG work.
+
 Zotero/PDF/RIS
 
 ↓

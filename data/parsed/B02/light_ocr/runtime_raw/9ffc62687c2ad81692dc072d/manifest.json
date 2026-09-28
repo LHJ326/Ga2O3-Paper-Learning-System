@@ -1,0 +1,121 @@
+{
+  "cache_key": "9ffc62687c2ad81692dc072d",
+  "coordinate_transform": {
+    "crop_pdf_bbox": [
+      73.44000000000001,
+      41.976,
+      536.112,
+      358.77599999999995
+    ],
+    "pixel_height": 1269,
+    "pixel_width": 1852,
+    "scale_x": 4.002835702182107,
+    "scale_y": 4.005681818181818
+  },
+  "created_utc_epoch": 1790560254,
+  "crop_image": "crop.png",
+  "crop_image_sha256": "48F240B27256D36C126C765CD879AB092DFBBA4FD3A3ED022DD60FC720271C5F",
+  "crop_pdf_bbox": [
+    73.44000000000001,
+    41.976,
+    536.112,
+    358.77599999999995
+  ],
+  "dpi": 288,
+  "elapsed_seconds": 5.489084100001492,
+  "ocr_artifact": "ocr.json",
+  "ocr_backend": {
+    "backend": "ordinary_paddleocr_external",
+    "backend_version": "3.7.0",
+    "device": "gpu:0",
+    "document_unwarping": false,
+    "language": "en",
+    "orientation_classification": false,
+    "provider_version": "1",
+    "textline_orientation": false
+  },
+  "ocr_json_sha256": "BF3E9960B4ECB7DDB0AFAFFD45C10762879677AD00212C9E0F3E507C0A626721",
+  "page": 11,
+  "paper_id": "B02",
+  "runtime_command": {
+    "arguments": [
+      "--device",
+      "gpu:0",
+      "--language",
+      "en"
+    ],
+    "executable": "python.exe",
+    "worker": "paddleocr_table_worker.py"
+  },
+  "runtime_evidence": {
+    "coordinate_transform": {
+      "crop_pdf_bbox": [
+        73.44000000000001,
+        41.976,
+        536.112,
+        358.77599999999995
+      ],
+      "pixel_height": 1269,
+      "pixel_width": 1852,
+      "scale_x": 4.002835702182107,
+      "scale_y": 4.005681818181818
+    },
+    "crop_artifact": "data/parsed/B02/light_ocr/runtime_raw/9ffc62687c2ad81692dc072d/crop.png",
+    "crop_image_sha256": "48F240B27256D36C126C765CD879AB092DFBBA4FD3A3ED022DD60FC720271C5F",
+    "localization_method": "nearby_uncaptioned_image_union",
+    "middle_json": "data/parsed/B02/mineru/raw/middle_json/B02.json",
+    "source_anchors": [
+      {
+        "bbox": [
+          0.472,
+          0.073,
+          0.528,
+          0.082
+        ],
+        "block_index": 2,
+        "raw_type": "paragraph_title",
+        "text": "TABLE II"
+      },
+      {
+        "bbox": [
+          0.286,
+          0.088,
+          0.713,
+          0.098
+        ],
+        "block_index": 3,
+        "raw_type": "text",
+        "text": "PERFORMANCE COMPARISON WITH STATE-OF-THE-ART ISING PROCESSORS"
+      },
+      {
+        "bbox": [
+          0.14,
+          0.103,
+          0.856,
+          0.433
+        ],
+        "block_index": 4,
+        "raw_type": "image",
+        "text": ""
+      }
+    ],
+    "source_pdf": "data/benchmark/B02/B02.pdf",
+    "source_pdf_sha256": "A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF",
+    "trigger_reason": "TABLE_MISCLASSIFIED_AS_IMAGE"
+  },
+  "source_pdf": "data/benchmark/B02/B02.pdf",
+  "source_pdf_sha256": "A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF",
+  "table_id": "II",
+  "table_pdf_bbox": [
+    85.68,
+    81.576,
+    523.872,
+    342.936
+  ],
+  "table_region_crop_pixels": [
+    48.99470899470897,
+    158.62499999999997,
+    1803.0052910052907,
+    1205.55
+  ]
+}

@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — TABLE-LIGHT-2 Runtime Integration
+
+Generic failure detection, region localization, PyMuPDF cropping, isolated
+ordinary PP-OCR invocation, raw-artifact caching, measured coordinate transforms,
+Unified Evidence, runtime Layer C evaluation, and B02 smoke validation are now
+implemented. Frozen fixture reconstruction remains available independently.
+
+The next phase is `OCR-ENV-CLEANUP`: establish the minimal ordinary PP-OCR
+environment, identify required packages/models, freeze requirements, reproduce
+from a fresh environment, remove VL-only models/dependencies and unused caches,
+decide whether the 1.87 GiB checkout is required, retain ordinary OCR, and record
+final disk footprint. Do not start it without explicit authorization.
+
 ## Completed — MinerUAdapter v2 and B01 Layer B
 
 MinerU 4.0.7 `docvortex.middle` schema 2.0 `middle_json` is now the primary input and converts to Unified Document Schema 0.2 with Evidence preservation.

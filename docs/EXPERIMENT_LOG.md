@@ -1,5 +1,28 @@
 # Experiment Log
 
+## Experiment — TABLE-LIGHT-2 Runtime Integration
+
+Date: 2026-09-28
+
+Objective: Remove manual crop/OCR steps while preserving the existing
+TABLE-LIGHT-1 deterministic reconstruction and frozen benchmark layers.
+
+Procedure: Detected structural table failures from DocVortex middle JSON,
+localized two bounded PDF regions without GT, rendered at 288 DPI, invoked the
+existing external ordinary PaddleOCR environment via subprocess, hashed and
+cached raw results, applied measured crop-to-PDF transforms, reconstructed, and
+evaluated a separate runtime Layer C. A second run verified cache reuse.
+
+Results: two candidates, two localized regions, two initial OCR calls, then two
+cache hits and zero repeat calls. Table I reconstructed as 10×3 and Table II as
+14×7. Detection TP/FP/FN was 2/0/0. Runtime exact/semantic cells were 29/30 for
+Table I and 85/98 exact, 86/98 semantic for Table II. Frozen fixture scores and
+Layer A/B stayed unchanged.
+
+Conclusion: the runtime architecture is complete and Evidence reaches original
+PDF coordinates. Automatic crop/OCR text quality is the remaining known issue;
+PaddleOCR-VL remains optional extreme fallback. `OCR-ENV-CLEANUP` was not run.
+
 ## Experiment — B02 Raw MinerU + Current Adapter v2 Baseline
 
 Date: 2026-09-28

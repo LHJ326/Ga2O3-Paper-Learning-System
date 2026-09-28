@@ -1,5 +1,16 @@
 # Project State
 
+## TABLE-LIGHT-2 Completed — Lightweight Table Fallback Runtime
+
+The default fallback now detects missing/misclassified MinerU tables, derives
+localized PDF regions, renders with PyMuPDF, invokes configurable external
+ordinary PP-OCR, caches raw artifacts, maps crop coordinates back to PDF space,
+and reuses TABLE-LIGHT-1 reconstruction. B02 automatically produced Table I
+10×3 and Table II 14×7. Runtime Layer C table detection is TP/FP/FN 2/0/0;
+frozen Layer A/B and TABLE-LIGHT-1 fixtures are unchanged. Automatic-crop text
+accuracy (29/30; 85/98 exact and 86/98 semantic) remains a known tuning issue.
+`OCR-ENV-CLEANUP` is next but not started.
+
 ## Project
 
 Ga2O3-Paper-Learning-System

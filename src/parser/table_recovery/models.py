@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from statistics import mean
 from typing import Any, Callable
@@ -79,6 +79,7 @@ class OCRToken:
     page: int
     source: str
     coordinate_space: str
+    pdf_bbox: BoundingBox | None = None
 
     @classmethod
     def create(
@@ -91,6 +92,7 @@ class OCRToken:
         page: int,
         source: str,
         coordinate_space: str,
+        pdf_bbox: list[float] | tuple[float, ...] | None = None,
         normalizer: Callable[[str], str] = normalize_ocr_text,
     ) -> OCRToken:
         if not 0.0 <= float(confidence) <= 1.0:
@@ -104,6 +106,11 @@ class OCRToken:
             page=int(page),
             source=str(source),
             coordinate_space=str(coordinate_space),
+            pdf_bbox=(
+                BoundingBox.from_sequence(pdf_bbox)
+                if pdf_bbox is not None
+                else None
+            ),
         )
 
 
@@ -116,6 +123,7 @@ class TableCell:
     token_indices: tuple[int, ...]
     confidence: float | None
     bbox: BoundingBox | None
+    pdf_bbox: BoundingBox | None = None
 
     @property
     def occupied(self) -> bool:
@@ -135,6 +143,8 @@ class TableCell:
                 "page": page,
                 "coordinate_space": coordinate_space,
                 "bbox": self.bbox.to_list() if self.bbox else None,
+                "crop_bbox": self.bbox.to_list() if self.bbox else None,
+                "pdf_bbox": self.pdf_bbox.to_list() if self.pdf_bbox else None,
                 "token_indices": list(self.token_indices),
                 "token_locators": [
                     f"rec_texts[{index}]" for index in self.token_indices
@@ -162,6 +172,7 @@ class ReconstructedTable:
     rows: tuple[tuple[TableCell, ...], ...]
     footnotes: tuple[TableFootnote, ...]
     producer: dict[str, Any]
+    runtime_evidence: dict[str, Any] = field(default_factory=dict)
 
     @property
     def column_count(self) -> int:
@@ -238,6 +249,7 @@ class ReconstructedTable:
                     f"rec_texts[{index}]" for index in token_indices
                 ],
                 "ocr_confidence_summary": self.confidence_summary,
+                "runtime_evidence": dict(self.runtime_evidence),
             },
         )
         return Table(
@@ -258,6 +270,7 @@ class TableRecoverySpec:
     coordinate_space: str
     header_rows: int
     producer: dict[str, Any]
+    runtime_evidence: dict[str, Any] = field(default_factory=dict)
 
 
 def load_ocr_tokens(spec: TableRecoverySpec) -> list[OCRToken]:
@@ -274,6 +287,21 @@ def load_ocr_tokens(spec: TableRecoverySpec) -> list[OCRToken]:
     digest = hashlib.sha256(spec.raw_artifact.read_bytes()).hexdigest().upper()
     if digest != spec.sha256.upper():
         raise ValueError(f"OCR artifact checksum mismatch: {spec.raw_artifact}")
+    transform = spec.runtime_evidence.get("coordinate_transform", {})
+    crop_pdf_bbox = transform.get("crop_pdf_bbox")
+    scale_x = transform.get("scale_x")
+    scale_y = transform.get("scale_y")
+
+    def to_pdf_bbox(box: list[float] | tuple[float, ...]) -> list[float] | None:
+        if crop_pdf_bbox is None or not scale_x or not scale_y:
+            return None
+        return [
+            float(crop_pdf_bbox[0]) + float(box[0]) / float(scale_x),
+            float(crop_pdf_bbox[1]) + float(box[1]) / float(scale_y),
+            float(crop_pdf_bbox[0]) + float(box[2]) / float(scale_x),
+            float(crop_pdf_bbox[1]) + float(box[3]) / float(scale_y),
+        ]
+
     return [
         OCRToken.create(
             index=index,
@@ -283,6 +311,7 @@ def load_ocr_tokens(spec: TableRecoverySpec) -> list[OCRToken]:
             page=spec.page,
             source=spec.raw_artifact.as_posix(),
             coordinate_space=spec.coordinate_space,
+            pdf_bbox=to_pdf_bbox(box),
         )
         for index, (text, score, box) in enumerate(zip(texts, scores, boxes))
     ]
@@ -317,6 +346,7 @@ def load_recovery_manifest(
                 coordinate_space=coordinate_space,
                 header_rows=int(item.get("header_rows", 1)),
                 producer=producer,
+                runtime_evidence=dict(item.get("runtime_evidence", {})),
             )
         )
     return str(payload["paper_id"]), specs

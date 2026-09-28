@@ -1,0 +1,110 @@
+{
+  "cache_key": "d6a8ebafc4c4fb2c9ad26020",
+  "coordinate_transform": {
+    "crop_pdf_bbox": [
+      287.64,
+      410.25600000000003,
+      599.76,
+      590.832
+    ],
+    "pixel_height": 723,
+    "pixel_width": 1250,
+    "scale_x": 4.004869921824939,
+    "scale_y": 4.003854332801702
+  },
+  "created_utc_epoch": 1790560248,
+  "crop_image": "crop.png",
+  "crop_image_sha256": "B561C56FF741BF705A9ED5E10DBE6B9618BDCA44FB96CED0A3CCAF39D091BDA8",
+  "crop_pdf_bbox": [
+    287.64,
+    410.25600000000003,
+    599.76,
+    590.832
+  ],
+  "dpi": 288,
+  "elapsed_seconds": 8.24655579996761,
+  "ocr_artifact": "ocr.json",
+  "ocr_backend": {
+    "backend": "ordinary_paddleocr_external",
+    "backend_version": "3.7.0",
+    "device": "gpu:0",
+    "document_unwarping": false,
+    "language": "en",
+    "orientation_classification": false,
+    "provider_version": "1",
+    "textline_orientation": false
+  },
+  "ocr_json_sha256": "3284E310B6E258F125F5DD7B980A2FCA03E9009BE2FB17325DD5A928DE289C9E",
+  "page": 8,
+  "paper_id": "B02",
+  "runtime_command": {
+    "arguments": [
+      "--device",
+      "gpu:0",
+      "--language",
+      "en"
+    ],
+    "executable": "python.exe",
+    "worker": "paddleocr_table_worker.py"
+  },
+  "runtime_evidence": {
+    "coordinate_transform": {
+      "crop_pdf_bbox": [
+        287.64,
+        410.25600000000003,
+        599.76,
+        590.832
+      ],
+      "pixel_height": 723,
+      "pixel_width": 1250,
+      "scale_x": 4.004869921824939,
+      "scale_y": 4.003854332801702
+    },
+    "crop_artifact": "data/parsed/B02/light_ocr/runtime_raw/d6a8ebafc4c4fb2c9ad26020/crop.png",
+    "crop_image_sha256": "B561C56FF741BF705A9ED5E10DBE6B9618BDCA44FB96CED0A3CCAF39D091BDA8",
+    "localization_method": "conservative_right_column",
+    "middle_json": "data/parsed/B02/mineru/raw/middle_json/B02.json",
+    "source_anchors": [
+      {
+        "bbox": [
+          0.689,
+          0.538,
+          0.741,
+          0.548
+        ],
+        "block_index": 14,
+        "raw_type": "paragraph_title",
+        "text": "TABLE I"
+      },
+      {
+        "bbox": [
+          0.618,
+          0.554,
+          0.812,
+          0.563
+        ],
+        "block_index": 15,
+        "raw_type": "paragraph_title",
+        "text": "NIST 800-22 RANDOMNESS TEST"
+      }
+    ],
+    "source_pdf": "data/benchmark/B02/B02.pdf",
+    "source_pdf_sha256": "A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF",
+    "trigger_reason": "TABLE_BODY_MISSING"
+  },
+  "source_pdf": "data/benchmark/B02/B02.pdf",
+  "source_pdf_sha256": "A03C9B451F0E8358048567679DE83BB90ADB136EC72D01D1256C124FA3EAD7DF",
+  "table_id": "I",
+  "table_pdf_bbox": [
+    299.88,
+    450.64799999999997,
+    587.52,
+    574.992
+  ],
+  "table_region_crop_pixels": [
+    49.019607843137294,
+    161.7236842105261,
+    1200.9803921568628,
+    659.5789473684209
+  ]
+}

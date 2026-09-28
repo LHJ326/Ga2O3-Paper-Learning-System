@@ -1,6 +1,18 @@
 # Ga2O3 Paper Learning System
 # AI Session Memory
 
+## TABLE-LIGHT-2 Milestone
+
+- Generic trigger reasons: `TABLE_BODY_MISSING`, `TABLE_MISCLASSIFIED_AS_IMAGE`.
+- B02 automatic regions: page 8 right-column crop and page 11 uncaptioned-image union.
+- External ordinary PP-OCR was invoked only for the two regions; no MinerU rerun.
+- Runtime artifacts: `data/parsed/B02/light_ocr/runtime_raw/`; deterministic rerun hit both caches.
+- Runtime reconstruction: Table I 10×3; Table II 14×7; detection 2/0/0.
+- Crop-pixel and PDF-space bboxes are both retained in token/cell Evidence.
+- Frozen A/B results, Ground Truth, MinerU Raw, and TABLE-LIGHT-1 fixtures were not modified.
+- Known issue: runtime crop OCR text is below frozen PoC quality; do not GT-correct it.
+- Next authorized candidate is `OCR-ENV-CLEANUP`; it has not been executed.
+
 ## 1. Project Goal
 
 Build a long-lived AI learning system for Ga2O3 optoelectronic-device research papers:
