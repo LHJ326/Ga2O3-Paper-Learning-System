@@ -1,5 +1,16 @@
 # Project State
 
+## Phase 4 Completed
+
+Phase 4 has completed the P001 single-paper knowledge-engineering loop from
+parsed PDF Evidence through validated Summary, Parameters, Performance,
+Mechanism, and final Paper Object generation. The canonical phase summary is
+`docs/PHASE4_FINAL_REPORT.md`; the finalized object is
+`data/papers/P001/paper_object.yaml` with 100% Evidence coverage.
+
+The next planned stage is Phase 5 — Multi-Paper Knowledge System. Phase 5 has
+not started.
+
 ## Phase 4.4.4 Paper Object Finalization Completed
 
 P001 Summary, Material/Device Parameters, Performance, Mechanism, Evidence, and

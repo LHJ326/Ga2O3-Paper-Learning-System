@@ -1,5 +1,16 @@
 # Next Steps
 
+## Next Phase — Phase 5 Multi-Paper Knowledge System
+
+Phase 4 is complete. Its final architecture, test baseline, Git milestones,
+P001 artifacts, and validation status are recorded in
+`docs/PHASE4_FINAL_REPORT.md`.
+
+Phase 5 is planned to scale the reliable Paper Object boundary across multiple
+papers and later prepare Embedding, Vector Database, RAG, cross-paper
+comparison, and an AI Research Assistant. This entry records direction only;
+Phase 5 implementation has not started and requires separate authorization.
+
 ## Completed — Phase 4.4.4 Paper Object Finalization
 
 P001 now has one validated `paper_object.yaml` containing paper identity, source
