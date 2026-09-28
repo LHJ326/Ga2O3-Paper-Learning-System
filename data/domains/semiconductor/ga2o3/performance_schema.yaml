@@ -1,0 +1,35 @@
+schema_version: "1.0"
+domain_id: semiconductor.ga2o3.photodetector.performance
+page_numbering: one_based
+missing_value: null
+
+observation_contract:
+  required_fields:
+    - value
+    - unit
+    - evidence_id
+    - page
+    - source_type
+  numeric_values_require_unit: true
+  prohibit_external_knowledge: true
+
+groups:
+  optical_performance:
+    detection_wavelength: {label: detection wavelength}
+    responsivity: {label: responsivity}
+    detectivity: {label: detectivity}
+    external_quantum_efficiency: {label: external quantum efficiency}
+    spectral_response_range: {label: spectral response range}
+  electrical_performance:
+    photocurrent: {label: photocurrent}
+    dark_current: {label: dark current}
+    on_off_ratio: {label: on/off ratio}
+    bias_voltage: {label: bias voltage}
+  dynamic_performance:
+    rise_time: {label: rise time}
+    decay_time: {label: decay time}
+    response_time: {label: response time}
+  stability:
+    operation_time: {label: operation time}
+    cycle_stability: {label: cycle stability}
+    environmental_stability: {label: environmental stability}

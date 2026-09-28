@@ -38,6 +38,31 @@ from .parameter_validator import (
     ParameterValidator,
 )
 from .parameter_writer import ParameterWriter
+from .performance_extractor import (
+    PerformanceChunk,
+    PerformanceChunkLimitError,
+    PerformanceEvidenceSelector,
+    PerformanceExtractionError,
+    PerformanceExtractor,
+    PerformancePromptBuilder,
+    PerformanceResponseParser,
+    PreparedPerformanceExtraction,
+)
+from .performance_pipeline import PerformanceExtractionPipeline, PerformancePipelineResult
+from .performance_schema import (
+    PerformanceDraft,
+    PerformanceSchema,
+    PerformanceSchemaError,
+    load_performance_schema,
+)
+from .performance_validator import (
+    PerformanceValidationError,
+    PerformanceValidationIssue,
+    PerformanceValidationResult,
+    PerformanceValidationWarning,
+    PerformanceValidator,
+)
+from .performance_writer import PerformanceWriter
 from .prompt_builder import KnowledgePromptBuilder, PromptEvidence
 from .quality import (
     EvidenceCheck,
@@ -116,6 +141,25 @@ __all__ = [
     "ParameterValidator",
     "ParameterWarning",
     "ParameterWriter",
+    "PerformanceChunk",
+    "PerformanceChunkLimitError",
+    "PerformanceDraft",
+    "PerformanceEvidenceSelector",
+    "PerformanceExtractionError",
+    "PerformanceExtractionPipeline",
+    "PerformanceExtractor",
+    "PerformancePipelineResult",
+    "PerformancePromptBuilder",
+    "PerformanceResponseParser",
+    "PerformanceSchema",
+    "PerformanceSchemaError",
+    "PerformanceValidationError",
+    "PerformanceValidationIssue",
+    "PerformanceValidationResult",
+    "PerformanceValidationWarning",
+    "PerformanceValidator",
+    "PerformanceWriter",
+    "PreparedPerformanceExtraction",
     "PromptStrategy",
     "PromptStrategyRegistry",
     "QualityInputError",
@@ -135,4 +179,5 @@ __all__ = [
     "load_knowledge_schema",
     "load_material_device_schema",
     "load_parameter_schema",
+    "load_performance_schema",
 ]

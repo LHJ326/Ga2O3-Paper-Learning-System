@@ -1,5 +1,23 @@
 # Project State
 
+## Phase 4.4.3-B2 Performance Extraction Completed — Review Required
+
+P001 Performance extraction uses a separate task schema and Evidence selector.
+The bounded run selected 20 Unified Document Evidence records, produced 5
+prompts (63,061 input characters), and made 5 successful DeepSeek calls. It
+wrote `data/papers/P001/knowledge/performance.yaml` plus JSONL prompt/response
+provenance and `performance_extraction_run.yaml`.
+
+Six of fifteen performance fields were populated and all structural records
+passed type, unit, 1-based page, source-element, and Evidence-closure checks.
+A non-destructive semantic keyword check marked the run `review_required`:
+`on_off_ratio` value `81%` cites E00169, whose nearby value context describes
+W.R./S.R. rather than an unambiguous on/off or switching ratio. The model result
+and raw response were preserved without deletion or automatic correction.
+
+No parser, MinerU Adapter, metadata, ingestion, Evidence-base, Material/Device,
+Summary, or Mechanism extraction behavior was changed.
+
 ## Phase 4.4.3-B1 Material + Device Extraction Completed
 
 P001 Material/Device extraction now uses the reviewed task-specific Evidence

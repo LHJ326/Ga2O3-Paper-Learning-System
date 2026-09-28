@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 4.4.3-B2 Performance Extraction (Review Required)
+
+P001 now has a separately validated Performance artifact generated from 20
+selected Evidence records in 5 bounded DeepSeek calls. The run used 63,061
+input characters and saved `performance.yaml`, prompt/response JSONL, and a run
+manifest under `data/papers/P001/knowledge/`.
+
+Before using the extracted performance values downstream, review the single
+semantic warning for `on_off_ratio` / E00169. The validator intentionally keeps
+the original model output and reports the conflict instead of rewriting it.
+Mechanism Extraction must wait for separate authorization; batch processing,
+RAG, Vector Database, Embedding, and Agent work remain out of scope.
+
 ## Completed — Phase 4.4.3-B1 Material + Device Extraction
 
 P001 now has an Evidence-closed Material/Device knowledge artifact generated
