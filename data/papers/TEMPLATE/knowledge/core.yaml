@@ -1,0 +1,17 @@
+schema_version: "1.0"
+
+paper_identity:
+  paper_id: null
+  title: null
+  doi: null
+  metadata_path: null
+
+research_problem: []
+methodology: []
+results: []
+innovation: []
+limitations: []
+
+evidence_traceability:
+  source_document: null
+  evidence_index: []

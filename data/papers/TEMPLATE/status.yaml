@@ -1,0 +1,9 @@
+# Copy this directory only when importing a real paper, then assign its stable ID.
+paper_id: null
+
+imported: false
+metadata_ready: false
+parsed: false
+figures_processed: false
+tables_processed: false
+knowledge_ready: false

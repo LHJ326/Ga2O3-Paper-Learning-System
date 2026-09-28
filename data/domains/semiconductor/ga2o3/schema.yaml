@@ -1,0 +1,41 @@
+schema_version: "1.0"
+domain_id: semiconductor.ga2o3.photodetector
+name: Ga2O3 Photodetector
+extends: core_knowledge
+
+field_definitions:
+  material:
+    type: structured
+    description: Ga2O3 composition, morphology, dimensions, and material form.
+  crystal_phase:
+    type: structured
+    description: Reported Ga2O3 polymorph, orientation, and crystallinity.
+  doping:
+    type: structured
+    description: Dopant species, concentration, method, and stated role.
+  substrate:
+    type: structured
+    description: Substrate material, orientation, and interface information.
+  device_structure:
+    type: structured
+    description: Device architecture, contacts, geometry, and active layers.
+  fabrication:
+    type: list
+    description: Ordered growth, deposition, lithography, annealing, and processing steps.
+  optical_performance:
+    type: measurements
+    description: Responsivity, detectivity, EQE, wavelength range, rise/fall time, and test conditions.
+  electrical_performance:
+    type: measurements
+    description: Dark current, photocurrent, on/off ratio, bias, noise, and stability.
+  mechanism:
+    type: claims
+    description: Proposed photoresponse, transport, gain, defect, or junction mechanisms.
+  comparison:
+    type: list
+    description: Evidence-linked comparison with baselines or prior devices.
+
+evidence_contract:
+  reference_field: evidence_refs
+  target: core.evidence_traceability.evidence_index
+  page_numbering: one_based

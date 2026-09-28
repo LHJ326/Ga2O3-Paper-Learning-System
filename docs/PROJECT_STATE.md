@@ -1,5 +1,166 @@
 # Project State
 
+## Phase 4.4.2-A Knowledge Extraction Framework Completed
+
+The project now has a model-independent knowledge engineering boundary under
+`src/knowledge/`:
+
+- Schema Loader combines the Core template with an optional Domain Extension.
+- `KnowledgeExtractor` defines an abstract input/output contract without a
+  provider implementation or API dependency.
+- `KnowledgeValidator` validates required Core fields, Domain field types,
+  Paper ID consistency, 1-based Evidence records, and closed evidence references.
+- `KnowledgeWriter` validates before writing `core.yaml`, `domain.yaml`,
+  `summary.md`, `key_points.md`, and `device_parameters.yaml` inside an existing
+  Paper Object.
+- Versioned prompt contracts cover summaries, device parameters, and mechanisms
+  but are not connected to a model runtime.
+
+This is an engineering framework only. It does not call an LLM, generate
+knowledge for an actual paper, update `knowledge_ready`, or connect Embedding,
+RAG, Vector Database, or Agent components.
+
+## Phase 4.4.1 Knowledge Schema Design Completed
+
+The research knowledge layer now follows a Core Schema + Domain Extension
+architecture. The Core Schema defines paper identity, research problem,
+methodology, results, innovation, limitations, and evidence traceability for any
+scientific paper. Domain-specific vocabulary remains outside Core.
+
+The first Domain Extension is
+`data/domains/semiconductor/ga2o3/schema.yaml`, defining evidence-linked fields
+for material, crystal phase, doping, substrate, device structure, fabrication,
+optical performance, electrical performance, mechanism, and comparison.
+
+Each new Paper Object now includes knowledge templates for structured Core and
+Domain YAML plus human-readable summary and key-point views. This phase defines
+schemas and empty templates only; it does not generate knowledge, call an LLM,
+or connect Embedding, RAG, Vector Database, or Agent components.
+
+## Phase 4.3 Batch Paper Ingestion Completed
+
+The project now scans a local PDF directory in deterministic filename order,
+allocates collision-free P-series IDs across the Registry, legacy flat PDFs,
+and Paper Object directories, and creates one standard object per imported PDF:
+
+```text
+PDF input directory
+→ scan PDFs
+→ allocate paper_id
+→ data/papers/<paper_id>/{source,metadata,parsed,assets,knowledge}
+→ status.yaml
+→ registry.yaml
+→ optional same-stem RIS/BibTeX metadata import
+```
+
+PDFs are copied rather than moved. A same-stem `.ris` or `.bib` file is
+preserved under the object's `metadata/` directory and normalized through the
+Phase 4.2 pipeline into `data/metadata/<paper_id>.yaml`. Successful metadata
+import synchronizes both Registry and object status. Ambiguous dual sidecars are
+rejected before an object is created.
+
+The command-line entry point is `python -m src.ingestion <PDF_DIRECTORY>`.
+This ingestion phase does not invoke MinerU, parse PDFs, or enter RAG,
+Embedding, Vector Database, or Agent work.
+
+## Phase 4.2 Metadata Pipeline Completed
+
+The project now imports one `.bib` or `.ris` bibliographic record into the
+canonical `data/metadata/<paper_id>.yaml` schema. BibTeX uses the lightweight
+`bibtexparser==2.0.1` dependency; RIS uses a small project-owned line parser.
+
+Canonical fields are `paper_id`, `title`, `authors`, `year`, `journal`, `doi`,
+`keywords`, and `citation`. Unknown optional values remain null or empty rather
+than being fabricated. Import requires an existing Registry record and, on
+success, updates `metadata_path` and changes
+`processing_status.metadata_ready` from false to true while preserving other
+lifecycle flags. Legacy scalar Registry status values are upgraded when that
+record is imported.
+
+The metadata schema is documented in `docs/METADATA_SCHEMA.md`. This phase does
+not modify PDF parsing, benchmarks, MinerUAdapter, table recovery, or any RAG,
+Embedding, Vector Database, or Agent layer.
+
+## Phase 4.1.5 Paper Object Schema Completed
+
+The standard directory contract for one newly imported paper is now defined by
+`data/papers/TEMPLATE/`:
+
+```text
+data/papers/<paper_id>/
+├── status.yaml
+├── source/
+├── metadata/
+├── parsed/
+├── assets/
+└── knowledge/
+```
+
+- `source/` contains the project-controlled source PDF and explicitly imported
+  source records.
+- `metadata/` contains normalized bibliographic metadata and provenance.
+- `parsed/` contains parser outputs associated with the paper object.
+- `assets/` contains derived figures, table crops, and other traceable assets.
+- `knowledge/` is reserved for structured Knowledge Cards and related factual
+  artifacts; it is not a Vector Database or embedding store.
+- `status.yaml` identifies the paper and records each Registry lifecycle stage
+  as an explicit boolean.
+
+The template contains no paper identity or fabricated metadata. Existing P001,
+B01, B02, benchmark, metadata, and parsed paths remain unchanged and compatible;
+their migration is not part of this architecture-only phase.
+
+## Phase 4.1 Paper Registry Started
+
+Phase 4.1 establishes the management layer for batch paper processing. The
+initial Registry is `data/papers/registry.yaml`; it defines the canonical paper
+record fields and ordered processing lifecycle without inventing records for
+papers that have not been explicitly imported.
+
+The current storage layout must remain backward compatible:
+
+- `P001` is a regular library paper with its PDF in `data/papers`, metadata in
+  `data/metadata`, and parser output in `data/parsed/P001`.
+- `P002` does not currently exist and is not created by this phase.
+- `B01` and `B02` are benchmark identities, with PDFs and benchmark metadata in
+  `data/benchmark/<ID>` and parser outputs in `data/parsed/<ID>`.
+- Existing benchmark, metadata, PDF, and parsed paths are not moved. Registry
+  paths are references to those assets, not a replacement storage hierarchy.
+
+This phase is limited to the reliable knowledge-structure foundation. It does
+not introduce RAG-Anything, a Vector Database, Embedding, or Agent behavior.
+
+## Phase 3.5 OCR-ENV-CLEANUP Completed
+
+OCR runtime separation and cleanup are complete.
+
+- The former `F:\Learning\open-source-research\PaddleOCR` source checkout was
+  removed because it is no longer a runtime dependency.
+- The independent ordinary OCR runtime is retained at
+  `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`.
+- Removed PaddleX models: `PaddleOCR-VL-1.6`, `PP-DocLayoutV3`,
+  `PP-LCNet_x1_0_doc_ori`, `PP-LCNet_x1_0_textline_ori`, and `UVDoc`.
+- Retained lightweight fallback models: `PP-OCRv6_medium_det` and
+  `PP-OCRv6_medium_rec`.
+- Python: 3.12.7.
+- Main project environment: `.venv`.
+- Full test status: 112 passed.
+
+The current default architecture is:
+
+```text
+PDF
+→ MinerU
+→ Unified Document Schema
+→ Table Recovery
+→ Knowledge Layer
+```
+
+When MinerU table extraction fails, generic failure detection invokes the
+independent ordinary PaddleOCR runtime for lightweight OCR fallback and then
+performs deterministic table reconstruction. PaddleOCR-VL remains an optional
+extreme fallback only and is not a default dependency.
+
 ## TABLE-LIGHT-2 Completed — Lightweight Table Fallback Runtime
 
 The default fallback now detects missing/misclassified MinerU tables, derives
@@ -17,7 +178,7 @@ Ga2O3-Paper-Learning-System
 
 ## Current Phase
 
-Phase TABLE-LIGHT-1 completed — Lightweight OCR Table reconstruction baseline
+Phase 4.4.2-A Knowledge Extraction Framework completed
 
 ## Current Architecture
 

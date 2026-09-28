@@ -12,8 +12,11 @@ dependencies = [
     "rich",
     "pytest",
     "pymupdf",
+    "bibtexparser==2.0.1",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+
+pythonpath = ["."]

@@ -3,6 +3,12 @@
 .venv-mineru/
 __pycache__/
 *.py[cod]
+.pytest_cache/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
 
 # IDE files
 .idea/

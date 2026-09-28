@@ -1,0 +1,33 @@
+registry_version: "1.0"
+
+# Paper records are added only after a real paper has been explicitly imported.
+paper_record_fields:
+  - paper_id
+  - title
+  - authors
+  - year
+  - journal
+  - DOI
+  - source_pdf
+  - metadata_path
+  - parsed_path
+  - processing_status
+
+# Ordered lifecycle values for one paper record's processing_status field.
+processing_status_values:
+  - imported
+  - metadata_ready
+  - parsed
+  - figures_processed
+  - tables_processed
+  - knowledge_ready
+
+processing_status_template:
+  imported: false
+  metadata_ready: false
+  parsed: false
+  figures_processed: false
+  tables_processed: false
+  knowledge_ready: false
+
+papers: []

@@ -1,5 +1,29 @@
 # Python Environment
 
+## Current Environment Layout
+
+### Main Project
+
+- Python: 3.12.7
+- Main venv: `Ga2O3-Paper-Learning-System/.venv`
+
+### MinerU
+
+MinerU continues to use its existing independent environment. It is isolated
+from both the main project environment and the OCR runtime.
+
+### OCR Runtime
+
+- Location: `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`
+- Purpose: ordinary PaddleOCR lightweight fallback for localized table crops
+- Required models: `PP-OCRv6_medium_det`, `PP-OCRv6_medium_rec`
+- PaddleOCR-VL: optional extreme fallback only; not installed as a default
+  runtime dependency
+
+### GPU
+
+- NVIDIA GeForce RTX 4060 Laptop GPU
+
 ## Environment configuration
 
 The project uses a local virtual environment at `.venv`. Create it from the project root with:
