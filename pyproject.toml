@@ -13,6 +13,7 @@ dependencies = [
     "pytest",
     "pymupdf",
     "bibtexparser==2.0.1",
+    "python-dotenv",
 ]
 
 [tool.pytest.ini_options]

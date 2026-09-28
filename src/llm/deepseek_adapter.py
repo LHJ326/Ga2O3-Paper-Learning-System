@@ -9,7 +9,12 @@ from typing import Any, TypeAlias
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from dotenv import load_dotenv
+
 from .base import ChatMessage, LLMAdapter
+
+
+load_dotenv()
 
 
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
@@ -85,7 +90,7 @@ class DeepSeekLLMAdapter(LLMAdapter):
     def chat(self, messages: Sequence[ChatMessage]) -> str:
         """Return the assistant content for an ordered message sequence."""
         normalized = self._normalize_messages(messages)
-        api_key = os.environ.get(DEEPSEEK_API_KEY_ENV, "").strip()
+        api_key = os.getenv("DEEPSEEK_API_KEY", "").strip()
         if not api_key:
             raise DeepSeekConfigurationError(
                 f"environment variable {DEEPSEEK_API_KEY_ENV} is not set"
