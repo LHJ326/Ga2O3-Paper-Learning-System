@@ -1,5 +1,23 @@
 # Project State
 
+## Phase 5.5 Evidence-Aware RAG Query Layer Completed
+
+The first retrieval-only query layer is available under `src/rag/`. Natural
+language questions pass through an injected query encoder to the existing
+FAISS `VectorStore`, and every result is returned as a structured record with
+`paper_id`, `chunk_id`, similarity, Evidence IDs, and source Paper Object path.
+No generated answer is produced.
+
+The P001 dry-run queried all 149 in-memory mock-vector index entries with
+`top_k=5` and wrote `data/papers/P001/rag_report.yaml`. It made zero LLM calls,
+left Registry `rag_status` pending, and did not persist an index. Because both
+document and query vectors are deterministic mock data, the run validates
+wiring, schema, and Evidence traceability only; its ranking has no semantic
+quality claim.
+
+No ingestion, metadata, knowledge, Paper Object, Embedding, or Vector Store
+implementation was modified.
+
 ## Phase 5.4 Vector Store Integration Completed
 
 The project now has a local FAISS integration under `src/vectorstore/` with a

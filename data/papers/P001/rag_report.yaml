@@ -1,0 +1,42 @@
+paper_id: P001
+mode: dry_run
+backend: faiss.IndexFlatIP
+vector_source: deterministic_mock
+llm_generation: false
+llm_api_calls: 0
+registry_rag_status: pending
+query: What material and device structure are reported for P001?
+top_k: 5
+results:
+- paper_id: P001
+  chunk_id: P001-mechanism-0029
+  similarity: 0.64371276
+  evidence_ids:
+  - E00049
+  source: data/papers/P001/paper_object.yaml
+- paper_id: P001
+  chunk_id: P001-summary-0034
+  similarity: 0.5137105
+  evidence_ids:
+  - E00046
+  source: data/papers/P001/paper_object.yaml
+- paper_id: P001
+  chunk_id: P001-parameters-0012
+  similarity: 0.4997313
+  evidence_ids:
+  - E00076
+  - E00168
+  source: data/papers/P001/paper_object.yaml
+- paper_id: P001
+  chunk_id: P001-summary-0011
+  similarity: 0.49310949
+  evidence_ids:
+  - E00024
+  - E00026
+  source: data/papers/P001/paper_object.yaml
+- paper_id: P001
+  chunk_id: P001-summary-0005
+  similarity: 0.44966981
+  evidence_ids:
+  - E00013
+  source: data/papers/P001/paper_object.yaml

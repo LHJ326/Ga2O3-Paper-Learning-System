@@ -1,5 +1,19 @@
 # Next Steps
 
+## Completed — Phase 5.5 Evidence-Aware Retrieval
+
+The project now accepts a natural-language question and returns structured
+FAISS retrieval results with Paper ID, Chunk ID, similarity, Evidence IDs, and
+source location. The P001 dry-run used `top_k=5` and saved
+`data/papers/P001/rag_report.yaml`; it did not call an LLM or generate an
+answer.
+
+The current deterministic mock vectors are suitable only for interface and
+traceability validation. Do not interpret their ranking as semantic retrieval
+quality. A later authorized phase must connect a real, versioned Embedding
+adapter, build a persisted index, and define retrieval evaluation before
+advancing Registry `embedding_status`, `vectorstore_status`, or `rag_status`.
+
 ## Completed — Phase 5.4 Local Vector Store Layer
 
 A local FAISS boundary now supports validated addition, cosine search, atomic
