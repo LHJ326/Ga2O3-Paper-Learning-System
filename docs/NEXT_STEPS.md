@@ -1,5 +1,19 @@
 # Next Steps
 
+## Completed — Phase 6.3 Git History Cleanup
+
+A verified offline bundle protects the original `master` history. Three paper
+PDFs and two MinerU ZIP archives were removed from every reachable commit with
+`git-filter-repo`; post-rewrite scans also confirm that `.env` was never present.
+The working dataset remains locally available through ignored files, and the
+testable source/fixture tree is preserved.
+
+The next step is not Phase 7. Review
+`docs/GIT_HISTORY_CLEANUP_REPORT.md`, decide whether the rewritten history is
+accepted, and only then coordinate a public remote force-push and `v0.1.0` tag.
+Anyone with an older clone must re-clone after that push. No remote operation or
+release tag is authorized by this entry.
+
 ## Completed — Phase 6.2 Release Preparation (Publication Blocked)
 
 MIT licensing, README disclosure, packaging metadata, architecture alignment,

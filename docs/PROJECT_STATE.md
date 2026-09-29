@@ -1,5 +1,22 @@
 # Project State
 
+## Phase 6.3 Git History Cleanup Completed
+
+The public-release history was rewritten from the verified original `master`
+tip `e368b619b7f9221f70e881de6b727ef4e1377ffb`. A complete offline bundle was
+created and verified before the rewrite. Exact-path filtering removed three
+paper PDFs and two MinerU ZIP archives from every reachable commit while local
+copies remained available and hash-identical.
+
+The packed repository decreased from 25.46 MiB to 4.76 MiB. Post-rewrite scans
+find no reachable PDF, ZIP, or `.env` path. Evidence-bearing JSON/YAML and parsed
+image fixtures were retained. Archive ignore rules prevent the local MinerU ZIP
+inputs from being recommitted. Full details and the recovery location are in
+`docs/GIT_HISTORY_CLEANUP_REPORT.md`.
+
+Phase 7 has not started. The next release action is an explicit review of the
+rewritten commit graph followed by a coordinated public push/tag decision.
+
 ## Release Resource Cleanup Completed — History Rewrite Pending
 
 The release cleanup removed the independent ordinary-OCR virtual environment

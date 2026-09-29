@@ -2,9 +2,10 @@
 
 ## Status
 
-History cleanup is required before this repository is made public. This file is
-an assessment and execution plan only. No commit IDs, refs, tags, or remote
-branches were rewritten during Phase 6.2 or the release resource cleanup.
+Executed locally in Phase 6.3 after explicit approval. The original history is
+preserved in a verified offline bundle, and no remote was configured or pushed.
+See `docs/GIT_HISTORY_CLEANUP_REPORT.md` for the exact paths, original commits,
+size change, backup location, and verification results.
 
 ## Audit Findings
 

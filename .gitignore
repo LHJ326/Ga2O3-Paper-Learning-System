@@ -40,6 +40,12 @@ outputs/*
 
 # User-provided papers and local vector databases
 *.pdf
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
 *.faiss
 *.faiss.meta.json
 *.index
