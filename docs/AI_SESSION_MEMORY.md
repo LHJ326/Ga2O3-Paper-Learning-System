@@ -48,7 +48,7 @@ Unified Document + Evidence Store is the factual layer. RAG-Anything may index a
 
 ## 3. Environment
 
-- Project: `F:\Learning\Ga2O3-Paper-Learning-System`
+- Project: `<PROJECT_ROOT>`
 - OS: Windows 11
 - Python: 3.12.7
 - Main environment: `.venv`
@@ -144,7 +144,7 @@ Key commit: `2f39f7962e0e37c4a1c5a431604fcc2a34411aff`.
 
 ## 8. RAG-Anything Assessment
 
-- Local source: `F:\Learning\open-source-research\RAG-Anything`
+- Local source: `<EXTERNAL_RESEARCH_ROOT>\RAG-Anything`
 - Status: `ADOPT CANDIDATE`, not adopted
 - Python >= 3.10
 - MIT License

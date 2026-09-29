@@ -15,13 +15,13 @@ tables:
   - table_id: I
     page: 8
     raw_artifact: data/parsed/B02/light_ocr/raw/B02_table_I_ocr.json
-    sha256: 636023CE69A496880C8EECA78EA8EBEB79F4272F6A1609ED967E0BC2F0B35D26
+    sha256: EF349BA42A71651F8CFB968A0C9962E27C992C84D4C508928AB48539ADD7A018
     table_region: [120, 230, 1140, 525]
     header_rows: 1
   - table_id: II
     page: 11
     raw_artifact: data/parsed/B02/light_ocr/raw/B02_table_II_ocr.json
-    sha256: 6235429BF7AF302D3C4113C9310FAD06BADB85A84DB9E05D2CEFA9FC904AF2B7
+    sha256: 3F5B71A7BE4A06B09523B3272B8C3F38CA5EA433702B9725AA896856F767F11D
     table_region: [45, 55, 1960, 1205]
     header_rows: 1
     poc_elapsed_ms: 2815

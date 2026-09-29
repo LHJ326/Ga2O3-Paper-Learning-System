@@ -6,7 +6,7 @@ Archive filename:
 
 Absolute path:
 
-`F:\Learning\project-archives\Ga2O3-Paper-Learning-System_20260928_013653.zip`
+`<LOCAL_ARCHIVE_ROOT>\Ga2O3-Paper-Learning-System_20260928_013653.zip`
 
 Timestamp:
 

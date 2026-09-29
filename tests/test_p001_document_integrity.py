@@ -8,7 +8,7 @@ from src.parser.adapters import MinerUAdapter
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 P001_RAW_OUTPUT = PROJECT_ROOT / "data" / "parsed" / "P001" / "mineru" / "raw"
-RAW_OUTPUT_SHA256 = "284c94c19cb634a3c17b592137a482603f213248b9178d6c6a7a1fd827358bb8"
+RAW_OUTPUT_SHA256 = "f1f3ee5dc80f7886e98c429baa474fdf54fb4363e17e7041a3d3c2e8c817299b"
 REQUIRED_EVIDENCE = {
     "paper_id",
     "parser_name",

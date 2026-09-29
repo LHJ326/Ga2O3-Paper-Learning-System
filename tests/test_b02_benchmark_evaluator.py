@@ -32,6 +32,10 @@ def test_b02_frozen_raw_hashes() -> None:
         ),
     }
     for path, digest in expected.items():
+        if path.suffix == ".zip" and not path.exists():
+            # Public clones intentionally exclude third-party MinerU archives.
+            # A locally supplied frozen archive is still hash-checked below.
+            continue
         assert hashlib.sha256(path.read_bytes()).hexdigest().upper() == digest
 
 

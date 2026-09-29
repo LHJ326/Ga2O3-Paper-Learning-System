@@ -24,7 +24,7 @@ GPU (8 GB), the manually tested single-page cost was unacceptable.
 
 Before this phase, the user manually validated ordinary PaddleOCR in:
 
-`F:\Learning\open-source-research\PaddleOCR\.venv-paddleocr`
+`<EXTERNAL_RESEARCH_ROOT>\PaddleOCR\.venv-paddleocr`
 
 Recorded versions are PaddlePaddle GPU 3.2.1, PaddleOCR 3.7.0, and PaddleX
 3.7.2. The user also manually created PyMuPDF crops and OCR results for B02

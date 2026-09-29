@@ -4,7 +4,7 @@
 
 External source:
 
-`D:\杂\A科研\传感器`
+`<LOCAL_PAPER_LIBRARY>`
 
 Purpose:
 

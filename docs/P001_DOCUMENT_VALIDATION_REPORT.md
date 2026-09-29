@@ -65,7 +65,7 @@ All repeated TextBlocks are publisher or download boilerplate: journal-site link
 ## Raw Output Snapshot
 
 - Files: 24
-- Deterministic SHA-256: `284c94c19cb634a3c17b592137a482603f213248b9178d6c6a7a1fd827358bb8`
+- Deterministic SHA-256: `f1f3ee5dc80f7886e98c429baa474fdf54fb4363e17e7041a3d3c2e8c817299b`
 - Git status under `data/parsed/P001/mineru/raw/`: unchanged
 
 ## Known Issues

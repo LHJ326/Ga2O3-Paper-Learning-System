@@ -84,7 +84,7 @@ Keep MinerU dependencies isolated.
 
 Preparation result:
 
-- Environment path: `F:\Learning\Ga2O3-Paper-Learning-System\.venv-mineru`
+- Environment path: `<PROJECT_ROOT>\.venv-mineru`
 - Initial pip version: 24.2
 - Isolation check: `sys.prefix` points to `.venv-mineru`; `sys.base_prefix` points to the system Python
 - Installed MinerU packages: none

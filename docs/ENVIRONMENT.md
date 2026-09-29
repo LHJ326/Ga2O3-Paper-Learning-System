@@ -14,7 +14,7 @@ from both the main project environment and the OCR runtime.
 
 ### OCR Runtime
 
-- Location: `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`
+- Location: `<EXTERNAL_RESEARCH_ROOT>\ocr-runtime\.venv-ocr`
 - Purpose: ordinary PaddleOCR lightweight fallback for localized table crops
 - Required models: `PP-OCRv6_medium_det`, `PP-OCRv6_medium_rec`
 - PaddleOCR-VL: optional extreme fallback only; not installed as a default

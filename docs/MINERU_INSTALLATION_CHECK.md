@@ -24,7 +24,7 @@ CUDA Toolkit 12.6 (nvcc V12.6.77)
 
 Virtual Environment:
 
-`F:\Learning\Ga2O3-Paper-Learning-System\.venv` (active and isolated from the system Python)
+`<PROJECT_ROOT>\.venv` (active and isolated from the system Python)
 
 Additional capacity observations:
 

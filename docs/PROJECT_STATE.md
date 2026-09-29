@@ -1,5 +1,24 @@
 # Project State
 
+## Phase 6.4 Final Release Check Completed
+
+The rewritten `master` release candidate was cloned with `--no-local` into a
+new temporary directory and installed into a newly created Python 3.12.7
+virtual environment. Editable installation succeeded, `pip check` found no
+broken requirements, and the public clone completed with 205 passed and 3
+intentional external-resource skips. The fully provisioned development
+workspace completed with 208 passed.
+
+The tracked tree contains no `.env`, PDF, ZIP bundle, cache directory, API key,
+credential-shaped token, or repository-specific absolute local path. Frozen
+fixture path metadata was made portable with corresponding integrity hashes;
+scientific payloads and Ground Truth were not changed. README, architecture,
+license, and installation documentation are consistent. The detailed evidence
+is in `docs/RELEASE_CHECK_REPORT.md`.
+
+v0.1.0 is ready for a separately authorized GitHub release operation. No tag
+or push was performed, and Phase 7 has not started.
+
 ## Phase 6.3 Git History Cleanup Completed
 
 The public-release history was rewritten from the verified original `master`
@@ -20,7 +39,7 @@ rewritten commit graph followed by a coordinated public push/tag decision.
 ## Release Resource Cleanup Completed — History Rewrite Pending
 
 The release cleanup removed the independent ordinary-OCR virtual environment
-at `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`, releasing
+at `<EXTERNAL_RESEARCH_ROOT>\ocr-runtime\.venv-ocr`, releasing
 approximately 3.63 GiB. The reproducibility record was preserved as
 `ocr-runtime\requirements-lock.txt` together with its `docs/` directory. The
 main project also removed 21 Python/test/editable-build cache directories
@@ -32,7 +51,7 @@ separate environment, architecture research code, and all documentation were
 preserved. `AI_learning\.venv`, unrelated application Temp directories, and the
 Keil installer were left untouched because they are outside the clearly
 authorized OCR/test cleanup scope. No model-weight files were found outside
-virtual environments and Git internals under `F:\Learning`.
+virtual environments and Git internals under the local research workspace.
 
 The Git audit confirms that the three removed paper PDFs still exist in prior
 commits, totalling 13,625,266 bytes. Large MinerU ZIP and derived parser fixtures
@@ -437,10 +456,10 @@ not introduce RAG-Anything, a Vector Database, Embedding, or Agent behavior.
 
 OCR runtime separation and cleanup are complete.
 
-- The former `F:\Learning\open-source-research\PaddleOCR` source checkout was
+- The former `<EXTERNAL_RESEARCH_ROOT>\PaddleOCR` source checkout was
   removed because it is no longer a runtime dependency.
 - The independent ordinary OCR runtime is retained at
-  `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`.
+  `<EXTERNAL_RESEARCH_ROOT>\ocr-runtime\.venv-ocr`.
 - Removed PaddleX models: `PaddleOCR-VL-1.6`, `PP-DocLayoutV3`,
   `PP-LCNet_x1_0_doc_ori`, `PP-LCNet_x1_0_textline_ori`, and `UVDoc`.
 - Retained lightweight fallback models: `PP-OCRv6_medium_det` and
@@ -650,7 +669,7 @@ as an optional extreme fallback. Runtime OCR invocation is not implemented.
 
 ## RAG-Anything Evaluation
 
-- Source: `F:\Learning\open-source-research\RAG-Anything`
+- Source: `<EXTERNAL_RESEARCH_ROOT>\RAG-Anything`
 - Status: `ADOPT CANDIDATE`
 - License: MIT
 - Python: >= 3.10

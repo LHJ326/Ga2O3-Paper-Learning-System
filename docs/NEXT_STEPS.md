@@ -1,5 +1,16 @@
 # Next Steps
 
+## Completed — Phase 6.4 Final Release Check
+
+An isolated `--no-local` clone, new Python 3.12.7 virtual environment, editable
+install, dependency check, full public-clone test suite, secret/path scan, and
+release-document review all pass. See `docs/RELEASE_CHECK_REPORT.md`.
+
+The repository is ready to enter the GitHub v0.1.0 release operation only after
+explicit authorization. The next operation may configure or verify the remote,
+push the rewritten history, create the release tag, and publish release notes;
+none of those actions occurred in Phase 6.4. Do not begin Phase 7 implicitly.
+
 ## Completed — Phase 6.3 Git History Cleanup
 
 A verified offline bundle protects the original `master` history. Three paper

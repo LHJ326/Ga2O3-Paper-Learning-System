@@ -4,7 +4,7 @@
 
 Source:
 
-`F:\Learning\open-source-research\RAG-Anything`
+`<EXTERNAL_RESEARCH_ROOT>\RAG-Anything`
 
 Status:
 

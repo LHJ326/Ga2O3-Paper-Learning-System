@@ -4,7 +4,8 @@
 
 This record verifies the documented first-time installation workflow from an
 isolated clone. The test does not reuse the project's existing virtual
-environment, source PDFs, `.env`, MinerU environment, or FAISS index.
+environment, source PDFs, MinerU ZIP archives, `.env`, MinerU environment, or
+FAISS index.
 
 ## Test Environment
 

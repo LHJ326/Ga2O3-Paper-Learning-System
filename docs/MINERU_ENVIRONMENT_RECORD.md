@@ -16,7 +16,7 @@ Environment:
 
 Path:
 
-`F:\Learning\Ga2O3-Paper-Learning-System\.venv-mineru`
+`<PROJECT_ROOT>\.venv-mineru`
 
 OS:
 

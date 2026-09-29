@@ -7,10 +7,10 @@
 - Original worktree status: clean
 - Original packed repository size: 25.46 MiB (`914` packed objects)
 - Complete backup bundle:
-  `F:\Learning\Git-History-Backups\Ga2O3-Paper-Learning-System\before-phase-6.3-e368b619-20260929.bundle`
+  `<PRIVATE_BACKUP_ROOT>\before-phase-6.3-e368b619-20260929.bundle`
 - Bundle verification: complete history, `master` and `HEAD` present
 - Local ZIP backup:
-  `F:\Learning\Git-History-Backups\Ga2O3-Paper-Learning-System\local-assets-before-phase-6.3`
+  `<PRIVATE_BACKUP_ROOT>\local-assets-before-phase-6.3`
 
 No history-changing command was run until the original ref, clean status, and
 verified bundle were recorded.

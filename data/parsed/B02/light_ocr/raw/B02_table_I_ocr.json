@@ -1,5 +1,5 @@
 {
-    "input_path": "F:\\Learning\\table-ocr-poc\\B02\\B02_page8_table1_wide.png",
+    "input_path": "<LOCAL_OCR_INPUT>/B02_page8_table1_wide.png",
     "page_index": null,
     "model_settings": {
         "use_doc_preprocessor": true,
