@@ -108,6 +108,12 @@ Run the test suite:
 python -m pytest -q
 ```
 
+Public clones do not contain source PDFs or the external MinerU virtual
+environment. Three environment-specific checks are therefore skipped
+automatically; the remaining suite runs without those private/local assets.
+Frozen parser fixtures use repository line-ending rules so checksum tests are
+consistent on Windows and POSIX checkouts.
+
 MinerU and the optional ordinary PaddleOCR fallback use separately managed
 runtimes and are not installed by this package. The repository can consume
 existing parser outputs without rerunning MinerU.

@@ -1,5 +1,17 @@
 # Next Steps
 
+## Completed — Phase 6.1 Clean Installation Verification
+
+The v0.1.0 README workflow was reproduced in an isolated clone with a new
+Python 3.12.7 virtual environment. Editable installation, dependency checks,
+package imports, and the public-clone test suite all pass. See
+`docs/INSTALL_TEST.md` for commands, versions, results, and the three expected
+external-asset skips.
+
+The next release action remains an explicit license decision and final Git
+history review before remote publication or creation of a `v0.1.0` tag. Do not
+enter Phase 7 without separate authorization.
+
 ## Completed — Phase 6.0 v0.1.0 Release Preparation
 
 Public README and architecture documentation now describe the evidence-first

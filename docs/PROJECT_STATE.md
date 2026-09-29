@@ -1,5 +1,22 @@
 # Project State
 
+## Phase 6.1 Repository Sanity Check Completed
+
+An isolated local clone was tested as a first-time public user environment with
+Python 3.12.7 and a newly created `.venv`. The documented pip upgrade and
+`pip install -e .` completed successfully; the editable 0.1.0 package built,
+all architecture packages imported, and `pip check` reported no broken
+requirements.
+
+The public-clone suite completed with 205 passed and 3 intentionally skipped
+environment-specific checks. The fully provisioned development workspace still
+passes all 208 tests. Cross-platform Git attributes now preserve frozen parser
+fixture checksums, and missing public-excluded PDFs/MinerU environment cause
+targeted skips instead of false installation failures. Full details are in
+`docs/INSTALL_TEST.md`.
+
+No production pipeline or model integration changed.
+
 ## Phase 6.0 v0.1.0 Release Preparation Completed
 
 The repository now has public-facing v0.1.0 documentation covering project

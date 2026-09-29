@@ -1,0 +1,7 @@
+# Keep source and documentation on LF while reproducing frozen parser artifacts
+# with the byte-level line endings recorded by their checksum manifests.
+* text=auto eol=lf
+data/parsed/**/mineru/raw/json/*.json text eol=crlf
+data/parsed/**/mineru/raw/markdown/*.md text eol=crlf
+data/parsed/**/light_ocr/**/*.json text eol=crlf
+data/parsed/**/mineru/raw/middle_json/*.json -text

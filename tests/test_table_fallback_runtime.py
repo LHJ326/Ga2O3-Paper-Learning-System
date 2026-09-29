@@ -277,6 +277,10 @@ def test_runtime_layer_c_preserves_layer_a_and_b():
 
 
 def test_cache_hit_skips_ocr_provider_call():
+    source_pdf = ROOT / "data" / "benchmark" / "B02" / "B02.pdf"
+    if not source_pdf.is_file():
+        pytest.skip("B02 source PDF is not included in public clones")
+
     class NoCallProvider:
         cache_identity = {
             "backend": "ordinary_paddleocr_external",
@@ -295,7 +299,7 @@ def test_cache_hit_skips_ocr_provider_call():
         provider=NoCallProvider(), cache=TableOCRCache(B02_RUNTIME)
     ).run(
         paper_id="B02",
-        pdf_path=ROOT / "data" / "benchmark" / "B02" / "B02.pdf",
+        pdf_path=source_pdf,
         middle_json_path=B02_MIDDLE,
     )
     assert len(result.records) == 2
