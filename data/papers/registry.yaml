@@ -1,4 +1,4 @@
-registry_version: "1.0"
+registry_version: "2.0"
 
 # Paper records are added only after a real paper has been explicitly imported.
 paper_record_fields:
@@ -12,6 +12,25 @@ paper_record_fields:
   - metadata_path
   - parsed_path
   - processing_status
+  - metadata_status
+  - knowledge_status
+  - object_status
+  - embedding_status
+  - rag_status
+
+lifecycle_status_values:
+  - pending
+  - in_progress
+  - completed
+  - failed
+  - skipped
+
+lifecycle_status_template:
+  metadata_status: pending
+  knowledge_status: pending
+  object_status: pending
+  embedding_status: pending
+  rag_status: pending
 
 # Ordered lifecycle values for one paper record's processing_status field.
 processing_status_values:
@@ -30,4 +49,19 @@ processing_status_template:
   tables_processed: false
   knowledge_ready: false
 
-papers: []
+papers:
+  - paper_id: P001
+    title: Energy-Efficient DUV Light Programming Nonvolatile Memory Based on MoS2-Ga2O3 MLG
+    authors: null
+    year: 2025
+    journal: Advanced Functional Materials
+    DOI: null
+    source_pdf: data/papers/P001.pdf
+    metadata_path: data/metadata/P001.yaml
+    parsed_path: data/parsed/P001/mineru/raw
+    processing_status: completed
+    metadata_status: completed
+    knowledge_status: completed
+    object_status: completed
+    embedding_status: pending
+    rag_status: pending

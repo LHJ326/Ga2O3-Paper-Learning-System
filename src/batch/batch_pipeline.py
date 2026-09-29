@@ -15,6 +15,7 @@ from src.paper_object import (
     load_paper_object_schema,
 )
 from src.paper_object.schema import PROJECT_ROOT
+from src.registry import LIFECYCLE_FIELDS, RegistryManager
 
 from .scanner import PaperCandidate, PaperScanner
 from .status_tracker import PaperProcessingState, PaperStatusTracker
@@ -39,6 +40,7 @@ class BatchPaperObjectPipeline:
         scanner: PaperScanner | None = None,
         status_tracker: PaperStatusTracker | None = None,
         knowledge_executor: KnowledgeExecutor | None = None,
+        registry_manager: RegistryManager | None = None,
     ) -> None:
         self.project_root = Path(project_root)
         papers_root = self.project_root / "data" / "papers"
@@ -47,6 +49,10 @@ class BatchPaperObjectPipeline:
             metadata_root=self.project_root / "data" / "metadata"
         )
         self.knowledge_executor = knowledge_executor
+        registry_path = papers_root / "registry.yaml"
+        self.registry_manager = registry_manager
+        if self.registry_manager is None and registry_path.is_file():
+            self.registry_manager = RegistryManager(registry_path)
 
     def run(
         self,
@@ -73,6 +79,14 @@ class BatchPaperObjectPipeline:
             "completed": sum(item["state"] == "completed" for item in records),
             "pending": sum(item["state"] == "pending" for item in records),
             "failed": sum(item["state"] == "failed" for item in records),
+            "completed_stages": {
+                stage: sum(stage in item.get("completed_stages", []) for item in records)
+                for stage in LIFECYCLE_FIELDS
+            },
+            "pending_stages": {
+                stage: sum(stage in item.get("pending_stages", []) for item in records)
+                for stage in LIFECYCLE_FIELDS
+            },
             "papers": records,
         }
         output = Path(report_path) if report_path else (
@@ -82,31 +96,69 @@ class BatchPaperObjectPipeline:
         return BatchPipelineResult(output, report)
 
     def _process(self, candidate: PaperCandidate, *, dry_run: bool) -> dict[str, Any]:
-        state = self.status_tracker.inspect(candidate)
+        state, lifecycle, tracked = self._resolve_state(candidate)
         actions: list[str] = []
         if not state.metadata_ready:
-            return self._record(state, "pending", actions, "metadata_not_ready")
+            return self._record(state, lifecycle, tracked, "pending", actions, "metadata_not_ready")
         if not state.knowledge_ready:
             actions.append("run_knowledge_pipeline")
             if dry_run or self.knowledge_executor is None:
                 reason = "dry_run" if dry_run else "knowledge_executor_not_configured"
-                return self._record(state, "pending", actions, reason)
+                return self._record(state, lifecycle, tracked, "pending", actions, reason)
             self.knowledge_executor(candidate)
             state = self.status_tracker.inspect(candidate)
+            if state.knowledge_ready and tracked and self.registry_manager is not None:
+                self.registry_manager.update_status(candidate.paper_id, "knowledge_status", "completed")
+            state, lifecycle, tracked = self._resolve_state(candidate)
             if not state.knowledge_ready:
-                return self._record(state, "pending", actions, "knowledge_still_incomplete")
+                return self._record(
+                    state, lifecycle, tracked, "pending", actions, "knowledge_still_incomplete"
+                )
         if not state.paper_object_ready:
             actions.append("build_paper_object")
             if dry_run:
-                return self._record(state, "pending", actions, "dry_run")
+                return self._record(state, lifecycle, tracked, "pending", actions, "dry_run")
             self._build_object(candidate.paper_id)
             state = self.status_tracker.inspect(candidate)
+            if state.paper_object_ready and tracked and self.registry_manager is not None:
+                self.registry_manager.update_status(candidate.paper_id, "object_status", "completed")
+            state, lifecycle, tracked = self._resolve_state(candidate)
         return self._record(
             state,
+            lifecycle,
+            tracked,
             "completed" if state.paper_object_ready else "pending",
             actions,
             None if state.paper_object_ready else "paper_object_missing",
         )
+
+    def _resolve_state(
+        self, candidate: PaperCandidate
+    ) -> tuple[PaperProcessingState, dict[str, str], bool]:
+        artifact_state = self.status_tracker.inspect(candidate)
+        paper = (
+            self.registry_manager.get_paper(candidate.paper_id)
+            if self.registry_manager is not None else None
+        )
+        if paper is None:
+            lifecycle = {
+                "metadata_status": "completed" if artifact_state.metadata_ready else "pending",
+                "knowledge_status": "completed" if artifact_state.knowledge_ready else "pending",
+                "object_status": "completed" if artifact_state.paper_object_ready else "pending",
+                "embedding_status": "pending",
+                "rag_status": "pending",
+            }
+            return artifact_state, lifecycle, False
+        lifecycle = {stage: paper[stage] for stage in LIFECYCLE_FIELDS}
+        effective = PaperProcessingState(
+            artifact_state.paper_id,
+            lifecycle["metadata_status"] == "completed" and artifact_state.metadata_ready,
+            lifecycle["knowledge_status"] == "completed" and artifact_state.knowledge_ready,
+            lifecycle["object_status"] == "completed" and artifact_state.paper_object_ready,
+            artifact_state.status_path,
+            artifact_state.missing_knowledge_files,
+        )
+        return effective, lifecycle, True
 
     def _build_object(self, paper_id: str) -> Path:
         schema = load_paper_object_schema()
@@ -121,6 +173,8 @@ class BatchPaperObjectPipeline:
     @staticmethod
     def _record(
         state: PaperProcessingState,
+        lifecycle: dict[str, str],
+        registry_tracked: bool,
         outcome: str,
         actions: list[str],
         reason: str | None,
@@ -128,10 +182,18 @@ class BatchPaperObjectPipeline:
         return {
             "paper_id": state.paper_id,
             "state": outcome,
+            "registry_tracked": registry_tracked,
             "metadata_ready": state.metadata_ready,
             "knowledge_ready": state.knowledge_ready,
             "paper_object_ready": state.paper_object_ready,
             "missing_knowledge_files": list(state.missing_knowledge_files),
+            "completed_stages": [
+                stage for stage in LIFECYCLE_FIELDS if lifecycle[stage] == "completed"
+            ],
+            "pending_stages": [
+                stage for stage in LIFECYCLE_FIELDS if lifecycle[stage] != "completed"
+            ],
+            "lifecycle": lifecycle,
             "actions": actions,
             "reason": reason,
         }

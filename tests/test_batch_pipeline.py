@@ -3,6 +3,7 @@ from pathlib import Path
 import yaml
 
 from src.batch import BatchPaperObjectPipeline, PaperScanner
+from src.registry import RegistryManager
 
 
 KNOWLEDGE_FILES = (
@@ -79,7 +80,38 @@ def test_existing_paper_object_is_completed_and_reported(tmp_path: Path) -> None
     assert result.report["completed"] == 1
     assert result.report["pending"] == 0
     assert result.report["failed"] == 0
+    assert saved["completed_stages"]["object_status"] == 1
+    assert saved["pending_stages"]["embedding_status"] == 1
+    assert saved["papers"][0]["completed_stages"] == [
+        "metadata_status", "knowledge_status", "object_status"
+    ]
     assert saved == result.report
+
+
+def test_registry_status_controls_next_batch_task(tmp_path: Path) -> None:
+    _paper(tmp_path, "P001", metadata=True, knowledge=True, paper_object=True)
+    registry_path = tmp_path / "data" / "papers" / "registry.yaml"
+    registry_path.write_text(yaml.safe_dump({
+        "registry_version": "2.0",
+        "lifecycle_status_values": [
+            "pending", "in_progress", "completed", "failed", "skipped"
+        ],
+        "papers": [{
+            "paper_id": "P001", "title": None, "authors": None, "year": None,
+            "journal": None, "DOI": None, "source_pdf": None,
+            "metadata_path": None, "parsed_path": None,
+            "processing_status": "completed", "metadata_status": "pending",
+            "knowledge_status": "completed", "object_status": "completed",
+            "embedding_status": "pending", "rag_status": "pending",
+        }],
+    }, sort_keys=False), encoding="utf-8")
+    result = BatchPaperObjectPipeline(
+        project_root=tmp_path, registry_manager=RegistryManager(registry_path)
+    ).run()
+    record = result.report["papers"][0]
+    assert record["registry_tracked"] is True
+    assert record["reason"] == "metadata_not_ready"
+    assert record["actions"] == []
 
 
 def test_injected_executor_can_advance_knowledge_without_model_coupling(

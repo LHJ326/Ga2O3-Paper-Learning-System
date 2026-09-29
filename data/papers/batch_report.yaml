@@ -3,12 +3,38 @@ total_papers: 1
 completed: 1
 pending: 0
 failed: 0
+completed_stages:
+  metadata_status: 1
+  knowledge_status: 1
+  object_status: 1
+  embedding_status: 0
+  rag_status: 0
+pending_stages:
+  metadata_status: 0
+  knowledge_status: 0
+  object_status: 0
+  embedding_status: 1
+  rag_status: 1
 papers:
 - paper_id: P001
   state: completed
+  registry_tracked: true
   metadata_ready: true
   knowledge_ready: true
   paper_object_ready: true
   missing_knowledge_files: []
+  completed_stages:
+  - metadata_status
+  - knowledge_status
+  - object_status
+  pending_stages:
+  - embedding_status
+  - rag_status
+  lifecycle:
+    metadata_status: completed
+    knowledge_status: completed
+    object_status: completed
+    embedding_status: pending
+    rag_status: pending
   actions: []
   reason: null

@@ -1,5 +1,17 @@
 # Next Steps
 
+## Completed — Phase 5.2 Paper Registry Upgrade
+
+Registry v2 now tracks five lifecycle stages for each paper and supports
+validated status updates, pending-task discovery, and completed-paper queries.
+The batch dry-run reads these states and reports both completed and pending
+stages. For P001, metadata, knowledge, and Paper Object stages are complete;
+Embedding and RAG remain pending.
+
+Pending lifecycle status is informational and does not authorize automatic
+Embedding, Vector Database, RAG, model calls, or Agent work. Any such stage
+requires a separately reviewed implementation and explicit authorization.
+
 ## Completed — Phase 5.1 Batch Paper Object Pipeline
 
 P-series discovery, readiness tracking, dry-run planning, optional executor

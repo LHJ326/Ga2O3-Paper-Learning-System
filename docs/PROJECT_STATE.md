@@ -1,5 +1,21 @@
 # Project State
 
+## Phase 5.2 Paper Registry Upgrade Completed
+
+The Paper Registry is upgraded to version 2.0 with explicit lifecycle fields:
+`metadata_status`, `knowledge_status`, `object_status`, `embedding_status`, and
+`rag_status`. `RegistryManager` provides validated loading, atomic status
+updates, pending-task queries, and stage-specific completed-paper queries.
+
+The Batch Paper Object Pipeline now consults Registry state before selecting
+the next task while preserving its legacy artifact/status fallback for
+unregistered papers. Reports include per-paper and aggregate completed/pending
+stage counts. P001 is registered from existing facts with metadata, knowledge,
+and object stages completed; embedding and RAG remain pending.
+
+No Paper Object content or knowledge extraction logic was changed, and the
+pipeline remains dry-run by default with no automatic DeepSeek call.
+
 ## Phase 5.1 Batch Paper Object Pipeline Completed
 
 The project now has a dry-run-first batch coordinator under `src/batch/`.
