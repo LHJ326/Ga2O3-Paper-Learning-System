@@ -1,0 +1,48 @@
+rules_version: "1.0"
+profile_id: semiconductor.ga2o3.photodetector
+
+policies:
+  mutate_extracted_values: false
+  unsupported_generation: warning
+  warning_status: review_required
+  page_numbering: one_based
+  require_known_schema_fields: true
+
+evidence:
+  required_for_non_null: true
+  required_fields: [evidence_id, page, source_type]
+  locator_fields: [element_type, source_reference]
+  references_must_resolve: true
+
+summary:
+  required_sections:
+    Research Objective: [research objective]
+    Material/System: [material/system, material system, materials and system]
+    Device Structure: [device structure, device architecture]
+    Mechanism: [mechanism, working mechanism]
+    Performance: [performance, experimental results, device performance]
+    Innovation: [innovation, core innovations]
+    Limitation: [limitation, limitations, reported limitations]
+
+measurements:
+  numeric_values_require_unit: true
+  plausibility_warnings:
+    wavelength: {canonical_unit: nm, min: 100, max: 5000}
+    responsivity: {canonical_unit: A/W, min: 0, max: 100000000}
+    detectivity: {canonical_unit: Jones, min: 0, max: 100000000000000000000}
+    on_off_ratio: {min: 1, max: 1000000000000000}
+    response_time: {canonical_unit: s, min_exclusive: 0, max: 1000000, accepted_units: [ns, us, ms, s]}
+
+performance_semantic_consistency:
+  action_on_mismatch: warning
+  preserve_original_result: true
+  fields:
+    on_off_ratio: [on/off ratio, on off ratio, switching ratio]
+    responsivity: [responsivity, a/w]
+    detectivity: [detectivity, jones]
+    response_time: [response time, rise time, decay time, fall time, temporal response]
+
+mechanism:
+  required_fields: [value, evidence_id, page, source_type, confidence, review_status]
+  confidence_range: [0.0, 1.0]
+  allowed_review_status: [unreviewed, review_required]

@@ -1,0 +1,6 @@
+catalog_version: "1.0"
+profiles:
+  - profile_id: semiconductor.ga2o3.photodetector
+    profile_version: "1.0.0"
+    manifest_path: semiconductor/profile.yaml
+    status: stable

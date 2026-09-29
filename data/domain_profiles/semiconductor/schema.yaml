@@ -1,0 +1,209 @@
+schema_version: "1.0"
+profile_id: semiconductor.ga2o3.photodetector
+
+compatibility:
+  paper_object_schema_version: "1.0"
+  knowledge_keys: [summary, parameters, performance, mechanism]
+  missing_value: null
+  preserve_unknown_completion: false
+
+domain:
+  schema_version: "1.0"
+  domain_id: semiconductor.ga2o3.photodetector
+  name: Ga2O3 Photodetector
+  extends: core_knowledge
+  field_definitions:
+    material:
+      type: structured
+      description: Ga2O3 composition, morphology, dimensions, and material form.
+    crystal_phase:
+      type: structured
+      description: Reported Ga2O3 polymorph, orientation, and crystallinity.
+    doping:
+      type: structured
+      description: Dopant species, concentration, method, and stated role.
+    substrate:
+      type: structured
+      description: Substrate material, orientation, and interface information.
+    device_structure:
+      type: structured
+      description: Device architecture, contacts, geometry, and active layers.
+    fabrication:
+      type: list
+      description: Ordered growth, deposition, lithography, annealing, and processing steps.
+    optical_performance:
+      type: measurements
+      description: Responsivity, detectivity, EQE, wavelength range, rise/fall time, and test conditions.
+    electrical_performance:
+      type: measurements
+      description: Dark current, photocurrent, on/off ratio, bias, noise, and stability.
+    mechanism:
+      type: claims
+      description: Proposed photoresponse, transport, gain, defect, or junction mechanisms.
+    comparison:
+      type: list
+      description: Evidence-linked comparison with baselines or prior devices.
+
+parameters:
+  schema_version: "1.0"
+  domain_id: semiconductor.ga2o3.photodetector.parameters
+  value_contract:
+    allowed_types: [null, list, structured]
+    evidence_field: evidence_refs
+    page_numbering: one_based
+    missing_value: null
+  sections:
+    material:
+      semiconductor:
+        description: Reported semiconductor composition or material system.
+      crystal_phase:
+        description: Ga2O3 polymorph, orientation, and crystallinity.
+      doping:
+        description: Dopant species, concentration, method, and stated role.
+      defect:
+        description: Explicitly reported defects, traps, or vacancies.
+      composite_material:
+        description: Heterostructure, composite, or auxiliary active materials.
+    device:
+      structure:
+        description: Device architecture, junction, geometry, and active layers.
+      electrode:
+        description: Electrode materials, work functions, and contact geometry.
+      substrate:
+        description: Substrate material, orientation, and interface information.
+      fabrication_method:
+        description: Explicit fabrication, growth, deposition, and annealing steps.
+    performance:
+      detection_wavelength:
+        description: Detection wavelength, range, or spectral peak.
+        measurement: true
+      responsivity:
+        description: Responsivity with unit and measurement conditions.
+        measurement: true
+      detectivity:
+        description: Specific detectivity with unit and conditions.
+        measurement: true
+      quantum_efficiency:
+        description: External or internal quantum efficiency.
+        measurement: true
+      response_time:
+        description: Rise or response time with conditions.
+        measurement: true
+      recovery_time:
+        description: Fall, decay, or recovery time with conditions.
+        measurement: true
+      on_off_ratio:
+        description: Photocurrent-to-dark-current or on/off ratio.
+        measurement: true
+      dark_current:
+        description: Dark current with bias and measurement conditions.
+        measurement: true
+      photocurrent:
+        description: Photocurrent with illumination and bias conditions.
+        measurement: true
+    mechanism:
+      photo_generation:
+        description: Explicit photo-generation mechanism.
+      carrier_transport:
+        description: Explicit carrier transport, junction, or barrier mechanism.
+      defect_effect:
+        description: Explicit role of defects or traps in photoresponse.
+      enhancement_mechanism:
+        description: Explicit reason for enhanced device performance.
+    comparison:
+      baseline:
+        description: Evidence-linked comparison baseline.
+      improvement_reason:
+        description: Explicitly stated reason for improvement over the baseline.
+
+material_device:
+  schema_version: "1.0"
+  domain_id: semiconductor.ga2o3.material_device
+  output_schema: semiconductor.ga2o3.photodetector.parameters
+  page_numbering: one_based
+  missing_value: null
+  sections:
+    material:
+      semiconductor:
+        label: semiconductor material
+        description: Semiconductor materials explicitly identified by the paper.
+      crystal_phase:
+        label: crystal phase
+        description: Explicit phase, polymorph, orientation, or crystallinity.
+      doping:
+        label: doping
+        description: Explicit dopant, concentration, method, and reported role.
+      composite_material:
+        label: heterostructure
+        description: Explicit heterostructure, composite, or stacked material system.
+    device:
+      structure:
+        label: device structure
+        description: Explicit device type, architecture, geometry, and active layers.
+        supported_attributes: [device_type, architecture, active_layer]
+      substrate:
+        label: substrate
+        description: Explicit substrate material, orientation, and interface details.
+      electrode:
+        label: electrode
+        description: Explicit electrode materials, contacts, and geometry.
+      fabrication_method:
+        label: fabrication related information
+        description: Explicit exfoliation, transfer, growth, deposition, lithography, or annealing steps.
+
+performance:
+  schema_version: "1.0"
+  domain_id: semiconductor.ga2o3.photodetector.performance
+  page_numbering: one_based
+  missing_value: null
+  observation_contract:
+    required_fields: [value, unit, evidence_id, page, source_type]
+    numeric_values_require_unit: true
+    prohibit_external_knowledge: true
+  groups:
+    optical_performance:
+      detection_wavelength: {label: detection wavelength}
+      responsivity: {label: responsivity}
+      detectivity: {label: detectivity}
+      external_quantum_efficiency: {label: external quantum efficiency}
+      spectral_response_range: {label: spectral response range}
+    electrical_performance:
+      photocurrent: {label: photocurrent}
+      dark_current: {label: dark current}
+      on_off_ratio: {label: on/off ratio}
+      bias_voltage: {label: bias voltage}
+    dynamic_performance:
+      rise_time: {label: rise time}
+      decay_time: {label: decay time}
+      response_time: {label: response time}
+    stability:
+      operation_time: {label: operation time}
+      cycle_stability: {label: cycle stability}
+      environmental_stability: {label: environmental stability}
+
+mechanism:
+  schema_version: "1.0"
+  domain_id: semiconductor.ga2o3.photodetector.mechanism
+  page_numbering: one_based
+  missing_value: null
+  observation_contract:
+    required_fields: [value, evidence_id, page, source_type, confidence, review_status]
+    confidence_range: [0.0, 1.0]
+    allowed_review_status: [unreviewed, review_required]
+    prohibit_external_knowledge: true
+  fields:
+    photogeneration: {description: Explicitly stated photocarrier generation process.}
+    carrier_transport: {description: Explicit carrier motion, tunneling, trapping, or transfer.}
+    recombination: {description: Explicit carrier recombination process.}
+    defect_mechanism: {description: Explicit role of defects, vacancies, or traps.}
+    interface_effect: {description: Explicit interface-induced electronic or optical effect.}
+    band_alignment: {description: Explicit band alignment, offset, or band-diagram interpretation.}
+    gain_mechanism: {description: Explicit physical origin of photoconductive or optical gain.}
+    device_working_principle: {description: Explicit operating sequence or physical device principle.}
+
+evidence_contract:
+  reference_field: evidence_refs
+  target: core.evidence_traceability.evidence_index
+  page_numbering: one_based
+  required_per_evidence_record: [evidence_id, page, element_type, source_reference, quote]
+  prohibit_external_knowledge: true

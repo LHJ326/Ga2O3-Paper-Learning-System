@@ -1,0 +1,127 @@
+rules_version: "1.0"
+profile_id: semiconductor.ga2o3.photodetector
+
+policies:
+  evidence_only: true
+  prohibit_external_knowledge: true
+  unknown_value: null
+  page_numbering: one_based
+  preserve_evidence_references: true
+
+compatibility:
+  paper_object_knowledge_keys: [summary, parameters, performance, mechanism]
+  legacy_artifacts:
+    summary: summary.md
+    parameters: device_parameters.yaml
+    performance: performance.yaml
+    mechanism: mechanism.yaml
+
+chunking:
+  max_content_chars: 12000
+  max_prompt_chars: 18000
+  max_chunks: 8
+
+tasks:
+  summary:
+    element_types: [Section, TextBlock, Figure, Table, Equation]
+    output_sections:
+      - Research Objective
+      - Material/System
+      - Device Structure
+      - Mechanism
+      - Performance
+      - Innovation
+      - Limitation
+  parameter:
+    element_types: [Section, TextBlock, Figure, Table]
+    keywords:
+      - responsivity
+      - detectivity
+      - quantum efficiency
+      - eqe
+      - dark current
+      - photocurrent
+      - rise time
+      - decay time
+      - wavelength
+      - bias
+      - doping
+      - substrate
+      - electrode
+      - fabrication
+      - device structure
+      - crystal phase
+      - ga2o3
+  material_device:
+    element_types: [Section, TextBlock, Figure, Table]
+    minimum_score: 10
+    max_selected_evidence: 30
+    preferred_sections: [material, fabrication, device structure, experimental]
+    low_priority_sections: [introduction, discussion, conclusion]
+    include_keywords:
+      ga2o3: 3
+      beta-ga2o3: 4
+      mos2: 4
+      mlg: 4
+      graphene: 4
+      semiconductor: 2
+      dielectric: 3
+      heterostructure: 4
+      doping: 3
+      defect: 2
+      substrate: 3
+      structure: 3
+      architecture: 3
+      electrode: 3
+      gate: 2
+      floating gate: 5
+      fabrication: 4
+      thickness: 3
+    exclude_keywords: [responsivity, detectivity, response time, photocurrent, performance, stability]
+    figure_required_keywords: [schematic, structure, fabrication, cross section, architecture, electrode, substrate, heterostructure, layer structure]
+  performance:
+    element_types: [Section, TextBlock, Figure, Table]
+    minimum_score: 7
+    max_selected_evidence: 30
+    include_keywords:
+      responsivity: 8
+      detectivity: 8
+      eqe: 8
+      external quantum efficiency: 8
+      response time: 7
+      rise time: 7
+      decay time: 7
+      photocurrent: 7
+      dark current: 7
+      on/off ratio: 6
+      wavelength: 5
+      spectral response: 7
+      stability: 6
+      bias voltage: 5
+      a/w: 7
+      jones: 7
+    low_priority_keywords: [fabrication, mechanical exfoliation, photoresist, lithography, introduction, background]
+    figure_bonus: 5
+  mechanism:
+    element_types: [Section, TextBlock, Figure, Equation]
+    minimum_score: 6
+    max_selected_evidence: 30
+    include_keywords:
+      mechanism: 6
+      photogeneration: 8
+      photogenerated: 7
+      carrier: 4
+      transport: 5
+      tunnel: 6
+      recombination: 8
+      trap: 6
+      defect: 6
+      vacancy: 7
+      interface: 5
+      band alignment: 8
+      energy band: 6
+      barrier: 5
+      gain: 5
+      working principle: 8
+    low_priority_keywords: [responsivity, detectivity, response time, photocurrent, fabrication, mechanical exfoliation, photoresist, lithography]
+    figure_bonus: 4

@@ -1,5 +1,35 @@
 # Project State
 
+## Phase 7.1 Domain Generalization Completed
+
+Phase 7.1 establishes the versioned configuration boundary required to evolve
+the validated Ga2O3 vertical slice into a multi-domain scientific-paper system.
+It adds a safe YAML Domain Profile Loader, a semiconductor compatibility
+profile, a generic extraction Task Adapter and trusted task registry, and an
+explicit Domain Profile catalog/selector.
+
+Profile selection is exact and auditable: an explicit caller configuration has
+priority, followed by an explicitly configured Paper Registry record. Missing
+selection is an error. The selector never infers a field from a title, abstract,
+paper content, keyword, or Paper ID and never falls back implicitly to Ga2O3.
+
+The current semiconductor profile maps every existing Ga2O3 schema, selector,
+validation rule, and legacy artifact name. Evidence-only extraction, one-based
+pages, source locators, null preservation, and the prohibition on unsupported
+completion are retained. Task adapters are available for `summary`,
+`parameter`, `performance`, and `mechanism` without taking over the existing
+production extraction path.
+
+P001 remains a Paper Object 1.0 / v0.1.0 compatibility fixture. No P001
+artifact, parser, extraction pipeline, RAG component, or VectorStore component
+was modified. The completed development suite reports **253 passed**. See
+`docs/PHASE7_1_FINAL_REPORT.md` for the architecture and acceptance record.
+
+The planned next phase is Phase 7.2 cross-domain profile validation. It must be
+separately authorized and should prove the generic boundary with a minimal
+non-semiconductor profile before any production migration or Paper Object 2.0
+work.
+
 ## Phase 6.4 Final Release Check Completed
 
 The rewritten `master` release candidate was cloned with `--no-local` into a

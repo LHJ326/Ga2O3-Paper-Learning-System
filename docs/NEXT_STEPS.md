@@ -1,5 +1,39 @@
 # Next Steps
 
+## Completed — Phase 7.1 Domain Generalization Foundation
+
+The Domain Profile Loader, semiconductor compatibility profile, Generic Task
+Adapter, trusted task registry, Domain Profile catalog, and explicit Registry
+selection mechanism are complete. The profile-owned contracts cover the
+existing summary, parameter, performance, and mechanism tasks while preserving
+Evidence references, one-based pages, null values, review behavior, and legacy
+artifact paths. The full suite passes with **253 tests**.
+
+Selection precedence is now defined for the new architecture boundary:
+
+1. explicit `profile_id` plus pinned `profile_version`;
+2. an explicit `domain_profile` entry in the Paper Registry record;
+3. otherwise fail without guessing or fallback.
+
+The infrastructure is additive and has not been connected to the existing
+production extraction pipelines. P001 v0.1.0 remains unchanged.
+
+## Planned — Phase 7.2 Cross-Domain Profile Validation
+
+Begin only with explicit authorization. The proposed scope is:
+
+1. define one minimal non-semiconductor test profile without speculative
+   production ontology work;
+2. prove the same loader, task registry, adapter, Evidence contract, and
+   selector operate without domain conditionals;
+3. add cross-profile validation and compatibility tests;
+4. specify an additive Registry migration for persisted profile identity;
+5. decide the boundary between the Paper Object 1.0 compatibility view and a
+   future artifact-driven Paper Object version.
+
+Do not migrate P001, modify Parser/RAG/VectorStore, call an LLM, or begin Paper
+Object 2.0 merely because this phase is listed.
+
 ## Completed — Phase 6.4 Final Release Check
 
 An isolated `--no-local` clone, new Python 3.12.7 virtual environment, editable

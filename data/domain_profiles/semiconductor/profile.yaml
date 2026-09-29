@@ -1,0 +1,32 @@
+profile_schema_version: "1.0"
+profile_id: semiconductor.ga2o3.photodetector
+profile_version: "1.0.0"
+name: Ga2O3 Semiconductor Device Profile
+discipline: semiconductor
+status: stable
+
+schema_path: schema.yaml
+extraction_rules_path: extraction_rules.yaml
+validation_rules_path: validation_rules.yaml
+
+compatibility:
+  release_line: v0.1.0
+  paper_object_schema_version: "1.0"
+  legacy_domain_root: data/domains/semiconductor/ga2o3
+  legacy_domain_ids:
+    - semiconductor.ga2o3.photodetector
+    - semiconductor.ga2o3.photodetector.parameters
+    - semiconductor.ga2o3.material_device
+    - semiconductor.ga2o3.photodetector.performance
+    - semiconductor.ga2o3.photodetector.mechanism
+  preserve_legacy_fields: true
+  preserve_legacy_artifact_paths: true
+
+evidence_contract:
+  page_numbering: one_based
+  prohibit_external_knowledge: true
+  required_location_fields:
+    - evidence_id
+    - page
+    - element_type
+    - source_reference
