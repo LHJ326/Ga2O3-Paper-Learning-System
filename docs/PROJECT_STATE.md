@@ -1,5 +1,25 @@
 # Project State
 
+## Phase 5.3 Embedding Layer Completed
+
+The project now has a model-independent embedding foundation under
+`src/embedding/`. `EmbeddingChunk` preserves `chunk_id`, `paper_id`, source
+Paper Object path, Evidence IDs, and text. `PaperObjectChunker` produces
+deterministic chunks only from evidence-linked Summary, Parameter, Performance,
+and Mechanism knowledge already present in a Paper Object; unknown Evidence
+references fail validation instead of being silently indexed.
+
+`EmbeddingAdapter` defines the future `embed(texts) -> vectors` boundary without
+selecting a provider or model. `LocalVectorStore` supports validated vector
+addition, cosine-similarity search, and atomic JSON persistence. No embedding
+API, model, Vector Database, or RAG system is connected.
+
+The P001 dry-run generated `data/papers/P001/embedding_report.yaml`: 149 chunks
+across four knowledge groups, 33 unique Evidence IDs, and 34,729 total text
+characters. Adapter calls and generated vectors are both zero. Registry
+`embedding_status` remains `pending`; the dry-run reads Registry state but does
+not mutate it.
+
 ## Phase 5.2 Paper Registry Upgrade Completed
 
 The Paper Registry is upgraded to version 2.0 with explicit lifecycle fields:

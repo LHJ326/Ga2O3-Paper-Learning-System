@@ -1,5 +1,21 @@
 # Next Steps
 
+## Completed — Phase 5.3 Embedding Foundation
+
+Evidence-linked Paper Object chunking, an abstract embedding adapter, and a
+dependency-free local vector-store interface are now available. The P001
+dry-run produced 149 deterministic chunks referencing all 33 indexed Evidence
+IDs, without calling an API or generating vectors. Its audit report is
+`data/papers/P001/embedding_report.yaml`.
+
+Before selecting a concrete embedding model, review chunk granularity and the
+retained Paper Object warnings, then define model/version metadata, vector
+normalization, persistence compatibility, and lifecycle transition criteria.
+Only a successful future embedding run may advance Registry
+`embedding_status`; this dry-run intentionally leaves it `pending`. Vector
+Database and RAG integration remain outside this phase and require explicit
+authorization.
+
 ## Completed — Phase 5.2 Paper Registry Upgrade
 
 Registry v2 now tracks five lifecycle stages for each paper and supports

@@ -1,0 +1,17 @@
+paper_id: P001
+mode: dry_run
+source_file: data/papers/P001/paper_object.yaml
+registry_embedding_status: pending
+chunk_count: 149
+chunks_by_knowledge_group:
+  summary: 38
+  parameters: 34
+  performance: 36
+  mechanism: 41
+evidence_bound_chunk_count: 149
+unique_evidence_ids: 33
+total_text_chars: 34729
+adapter_calls: 0
+vectors_generated: 0
+vector_store_written: false
+status: ready_for_embedding
