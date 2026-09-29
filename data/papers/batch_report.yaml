@@ -1,0 +1,14 @@
+mode: dry_run
+total_papers: 1
+completed: 1
+pending: 0
+failed: 0
+papers:
+- paper_id: P001
+  state: completed
+  metadata_ready: true
+  knowledge_ready: true
+  paper_object_ready: true
+  missing_knowledge_files: []
+  actions: []
+  reason: null

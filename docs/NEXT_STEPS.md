@@ -1,5 +1,17 @@
 # Next Steps
 
+## Completed — Phase 5.1 Batch Paper Object Pipeline
+
+P-series discovery, readiness tracking, dry-run planning, optional executor
+injection, Paper Object reuse, and aggregate YAML reporting are now available.
+The default path never calls DeepSeek. The current
+`data/papers/batch_report.yaml` records P001 as completed with no pending or
+failed papers.
+
+Any later batch knowledge execution must explicitly configure an executor and
+turn off dry-run. Do not infer that this milestone authorizes automatic API
+calls, Embedding, Vector Database, RAG, cross-paper comparison, or Agent work.
+
 ## Next Phase — Phase 5 Multi-Paper Knowledge System
 
 Phase 4 is complete. Its final architecture, test baseline, Git milestones,

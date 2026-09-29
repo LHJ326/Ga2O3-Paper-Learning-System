@@ -1,5 +1,21 @@
 # Project State
 
+## Phase 5.1 Batch Paper Object Pipeline Completed
+
+The project now has a dry-run-first batch coordinator under `src/batch/`.
+It discovers P-series Paper Object directories and legacy P-series PDF files,
+resolves metadata/knowledge/object readiness, and writes
+`data/papers/batch_report.yaml` with completed, pending, and failed counts.
+
+Metadata-incomplete papers stop before knowledge work. Knowledge-incomplete
+papers receive a planned `run_knowledge_pipeline` action, but no model is called
+unless a caller explicitly injects a knowledge executor and disables dry-run.
+Papers with complete knowledge can reuse the existing `PaperObjectBuilder` when
+execution is explicitly enabled. Existing P001 logic is unchanged.
+
+The first repository dry-run discovered P001 as fully completed:
+`total=1`, `completed=1`, `pending=0`, `failed=0`.
+
 ## Phase 4 Completed
 
 Phase 4 has completed the P001 single-paper knowledge-engineering loop from
