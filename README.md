@@ -192,6 +192,19 @@ LLM API calls and do not mark production Registry stages complete.
 - Items marked `review_required` should be checked against their Evidence before
   downstream use.
 
+## License
+
+The original software and documentation in this repository are released under
+the [MIT License](LICENSE).
+
+This project is a scientific learning and research-engineering tool. Its source
+distribution does not include research-paper PDFs, third-party datasets, or
+model weights. Users must supply only resources they are authorized to use and
+must comply with the licenses and terms of MinerU, PaddleOCR, DeepSeek, FAISS,
+PyMuPDF, and any other external software, service, model, or research content.
+The project license does not grant rights to third-party papers or derived
+third-party content.
+
 ## Roadmap
 
 - Select and version a real embedding backend.

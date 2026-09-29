@@ -1,5 +1,26 @@
 # Next Steps
 
+## Completed — Phase 6.2 Release Preparation (Publication Blocked)
+
+MIT licensing, README disclosure, packaging metadata, architecture alignment,
+ignore coverage, dependency review, and release checks are complete. The
+working tree is ready for a release candidate, but public publication remains
+blocked by three historical PDF blobs and a redistribution review for derived
+MinerU/benchmark fixtures.
+
+Before pushing to a public GitHub repository or creating `v0.1.0`:
+
+1. Back up the current repository and coordinate a history rewrite.
+2. Remove all historical paper PDF blobs from every ref.
+3. Review derived parser ZIP, image, text, and benchmark fixtures for lawful
+   redistribution; remove or replace any that cannot be published.
+4. Rescan secrets and large objects, then repeat the clean-clone install test.
+5. Force-push rewritten refs only after explicit approval and collaborator
+   coordination.
+
+No history rewrite, GitHub push, tag, release, or Phase 7 work is authorized by
+this status entry.
+
 ## Completed — Phase 6.1 Clean Installation Verification
 
 The v0.1.0 README workflow was reproduced in an isolated clone with a new

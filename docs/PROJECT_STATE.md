@@ -1,5 +1,31 @@
 # Project State
 
+## Phase 6.2 Release Preparation Completed — History Cleanup Required
+
+The project now carries the MIT License for original project software and
+documentation, with packaging metadata and README disclosure. The project is
+positioned as a scientific learning tool; current source-tree policy excludes
+paper PDFs, third-party datasets, and model weights, and does not extend MIT
+rights to external research content or tools.
+
+README installation, Python version, editable install, pytest command, and
+external PDF/MinerU requirements were rechecked. Architecture documentation was
+aligned with the current additive `vectorstore_status` boundary. Ignore rules
+cover secrets, PDFs, FAISS/index/database artifacts, Python/test caches,
+editable metadata, and build/dist output.
+
+The current tree contains no tracked PDF, `.env`, FAISS/index, or recognized
+model-weight file. The read-only history audit did find three former PDF blobs
+totalling 13,625,266 bytes, plus large MinerU ZIP/derived research artifacts.
+No history rewrite was performed. Before making the repository public, remove
+the PDF blobs from all refs with an approved history-rewrite procedure, review
+whether derived benchmark/parser fixtures may be redistributed, and rescan the
+rewritten repository. Until then, v0.1.0 is technically prepared but not safe
+to publish as a public GitHub repository.
+
+The API-key-pattern audit found only documented placeholders and test fake-key
+fixtures; no `.env` history or model-weight extensions were found.
+
 ## Phase 6.1 Repository Sanity Check Completed
 
 An isolated local clone was tested as a first-time public user environment with

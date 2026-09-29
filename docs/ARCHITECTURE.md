@@ -117,10 +117,13 @@ validator rejects unresolved Evidence references. Export is atomic YAML.
 
 Locations: `src/registry/`, `src/batch/`
 
-`data/papers/registry.yaml` tracks papers and lifecycle stages, including
-metadata, knowledge, Paper Object, embedding, vector store, and RAG state. The
-batch layer discovers papers, consults Registry state, and reports completed,
-pending, and failed work.
+`data/papers/registry.yaml` records metadata, knowledge, Paper Object,
+embedding, vector-store, and RAG state. RegistryManager currently validates and
+queries metadata, knowledge, Paper Object, embedding, and RAG lifecycle fields;
+`vectorstore_status` is an additive record field read by the Phase 5.4 dry-run
+and is not yet advanced by RegistryManager. The batch layer discovers papers,
+consults its supported Registry state, and reports completed, pending, and
+failed work.
 
 Batch execution defaults to dry-run. Knowledge generation requires an explicit
 executor; no LLM call occurs solely because a Registry stage is pending.
