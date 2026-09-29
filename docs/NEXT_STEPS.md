@@ -1,5 +1,18 @@
 # Next Steps
 
+## Completed — Phase 5.4 Local Vector Store Layer
+
+A local FAISS boundary now supports validated addition, cosine search, atomic
+index/metadata persistence, and lossless loading of Evidence-linked chunks.
+The P001 dry-run built 149 in-memory index entries from deterministic mock
+vectors and wrote `data/papers/P001/vectorstore_report.yaml`. It made no
+Embedding API call and did not persist `data/vectorstore/P001.faiss`.
+
+P001 `vectorstore_status` remains `pending`. A future production indexing phase
+must first select and version a real Embedding adapter, then persist and verify
+the index before advancing `embedding_status` or `vectorstore_status`. This
+milestone does not authorize RAG, retrieval evaluation, or Agent integration.
+
 ## Completed — Phase 5.3 Embedding Foundation
 
 Evidence-linked Paper Object chunking, an abstract embedding adapter, and a

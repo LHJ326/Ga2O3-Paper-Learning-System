@@ -1,5 +1,25 @@
 # Project State
 
+## Phase 5.4 Vector Store Integration Completed
+
+The project now has a local FAISS integration under `src/vectorstore/` with a
+backend-neutral `VectorStore` contract and `add`, `search`, `save`, and `load`
+operations. `FaissStore` uses normalized `faiss.IndexFlatIP` vectors for cosine
+similarity and persists a FAISS index plus JSON metadata containing the complete
+EmbeddingChunk and Evidence references. `IndexManager` coordinates indexing
+without calling or selecting an Embedding API.
+
+The P001 dry-run reused the 149 existing evidence-linked Embedding chunks and
+built an in-memory 16-dimensional FAISS index from deterministic mock vectors.
+The index contained 149 entries; no index was persisted, and no Embedding API
+was called. The planned local path is `data/vectorstore/P001.faiss`, and the
+audit result is `data/papers/P001/vectorstore_report.yaml`.
+
+Registry records now declare additive `vectorstore_status`; P001 remains
+`pending` because a dry-run does not represent a persisted production index.
+The existing Registry implementation and upstream ingestion, metadata,
+knowledge, Paper Object, and Embedding modules were not changed.
+
 ## Phase 5.3 Embedding Layer Completed
 
 The project now has a model-independent embedding foundation under

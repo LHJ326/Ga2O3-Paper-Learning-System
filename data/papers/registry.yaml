@@ -16,6 +16,7 @@ paper_record_fields:
   - knowledge_status
   - object_status
   - embedding_status
+  - vectorstore_status
   - rag_status
 
 lifecycle_status_values:
@@ -30,6 +31,7 @@ lifecycle_status_template:
   knowledge_status: pending
   object_status: pending
   embedding_status: pending
+  vectorstore_status: pending
   rag_status: pending
 
 # Ordered lifecycle values for one paper record's processing_status field.
@@ -64,4 +66,5 @@ papers:
     knowledge_status: completed
     object_status: completed
     embedding_status: pending
+    vectorstore_status: pending
     rag_status: pending

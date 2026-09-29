@@ -1,0 +1,12 @@
+paper_id: P001
+mode: dry_run
+backend: faiss.IndexFlatIP
+vector_source: deterministic_mock
+vector_dimension: 16
+chunk_count: 149
+index_count: 149
+storage_path: data/vectorstore/P001.faiss
+index_saved: false
+embedding_api_calls: 0
+registry_vectorstore_status: pending
+status: ready_for_index_persistence
