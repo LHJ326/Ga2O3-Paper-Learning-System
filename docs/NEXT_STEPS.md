@@ -1,5 +1,19 @@
 # Next Steps
 
+## Completed — Phase 6.0 v0.1.0 Release Preparation
+
+Public README and architecture documentation now describe the evidence-first
+pipeline, installation, safe usage, current mock-vector limitation, and future
+roadmap. Release hygiene excludes secrets, source PDFs, local indexes, and cache
+artifacts from future commits. The repository metadata already declares version
+`0.1.0` and all imported runtime dependencies.
+
+Before publishing a GitHub Release, choose and add an explicit project license,
+review the final public Git history for previously committed copyrighted or
+sensitive content, configure repository metadata, and create the `v0.1.0` tag
+only with separate authorization. Do not treat release preparation as approval
+to add LLM answer generation or begin an autonomous Agent phase.
+
 ## Completed — Phase 5.5 Evidence-Aware Retrieval
 
 The project now accepts a natural-language question and returns structured

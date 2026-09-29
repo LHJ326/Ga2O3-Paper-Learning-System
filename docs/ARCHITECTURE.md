@@ -1,54 +1,186 @@
-# Architecture
+# System Architecture
 
-## TABLE-LIGHT-2 Runtime Boundary
+## Design Principles
 
-The lightweight table fallback is now MinerU structural output → generic
-failure detector → PDF-space region locator → PyMuPDF localized crop → external
-ordinary PP-OCR provider → hashed raw-artifact cache → existing deterministic
-spatial reconstruction → Unified Table and Evidence.
+Ga2O3 Paper Learning System uses an evidence-first, layered architecture. The
+Unified Document and its Evidence records are the factual boundary. Every
+downstream asset must either retain source references or explicitly remain
+null. Components are modular, batch operations are dry-run first, and external
+model calls require explicit execution.
 
-Core Parser knows only the provider contract and never imports PaddleOCR or
-PaddlePaddle. The measured render transform is the sole bridge from crop-pixel
-bbox to PDF coordinates. PaddleOCR-VL remains optional extreme fallback only.
-Runtime integration does not authorize `OCR-ENV-CLEANUP`, Parser v1 freeze, or
-RAG work.
+```text
+Sources
+  -> Ingestion
+  -> Metadata
+  -> Parser / Unified Document / Evidence
+  -> Knowledge
+  -> Paper Object
+  -> Registry
+  -> Embedding
+  -> VectorStore
+  -> RAG Retrieval
+```
 
-Zotero/PDF/RIS
+## Ingestion
 
-↓
+Location: `src/ingestion/`
 
-Parser Layer
+Ingestion scans PDF directories, assigns collision-free P-series IDs, creates
+the standard paper directory layout, copies source assets, links optional
+metadata sidecars, and registers papers. It does not parse PDFs or call an LLM.
 
-├── MinerU 4.0.7 `docvortex.middle` 2.0
+Standard paper layout:
 
-└── Table fallback boundary
-    ├── native structured Table when available
-    └── PyMuPDF crop + ordinary PP-OCR result
-        → deterministic spatial reconstruction
-        → Unified Table + Evidence
-        → optional PaddleOCR-VL extreme fallback only if unresolved
+```text
+data/papers/<paper_id>/
+  source/
+  metadata/
+  parsed/
+  assets/
+  knowledge/
+  status.yaml
+```
 
-↓
+## Metadata
 
-Structured Document Layer
+Location: `src/metadata/`
 
-Unified Document Schema 0.2
+The metadata pipeline accepts RIS and BibTeX, normalizes bibliographic fields,
+writes `data/metadata/<paper_id>.yaml`, and advances the corresponding import
+state. Core fields include title, authors, year, journal, DOI, keywords, and a
+formatted citation. Missing source values are preserved as null rather than
+inferred.
 
-Every recovered Table and cell retains source artifact, page, coordinate-space,
-bbox, token locators, producer/version, and confidence evidence. Crop-space bbox
-must never be represented as PDF-space without an explicit transform.
+## Parser, Unified Document, and Evidence
 
-↓
+Locations: `src/parser/`, `src/schema/`
 
-Knowledge Layer
+MinerU 4.0.7 `docvortex.middle` schema 2.0 is the primary structured parser
+input; Markdown and legacy raw outputs remain fallbacks. The adapter maps text,
+sections, figures, equations, tables, pages, and locators into Unified Document
+Schema 0.2. Project pages are 1-based.
 
-↓
+Headers, footers, and page footnotes are excluded from normal body TextBlocks.
+Scientific figures require both an image and a recognizable scientific caption.
+Parser omissions are not reconstructed from ground truth or domain knowledge.
 
-RAG
+Table recovery follows a separate failure boundary:
 
-↓
+```text
+MinerU table failure
+  -> probable region localization
+  -> PyMuPDF crop
+  -> isolated ordinary PaddleOCR runtime
+  -> deterministic spatial reconstruction
+  -> Unified Table + cell-level Evidence
+```
 
-AI Tutor
+MinerU and PaddleOCR are external runtimes. They are not implicit dependencies
+of the main Python environment.
 
-PaddleOCR-VL is not a default dependency or current runtime path. Runtime OCR
-invocation and `Phase OCR-ENV-CLEANUP` remain separately authorized future work.
+## Knowledge
+
+Location: `src/knowledge/`
+
+The Knowledge layer combines a general research-paper schema with a Ga₂O₃
+domain extension. It provides model-neutral extractors, task-specific prompt
+strategies, validators, and writers for:
+
+- Summary
+- Material and device structure
+- Optical, electrical, dynamic, and stability performance
+- Physical and device mechanisms
+
+Every populated scientific field must retain Evidence references. Validators
+check structure, field types, units, page/source locators, Evidence coverage,
+and selected semantic conflicts. Warnings never silently rewrite model output.
+
+The LLM boundary is defined under `src/llm/`. DeepSeek is the first optional
+adapter; the API key is read only from `DEEPSEEK_API_KEY`. Mock adapters support
+tests without network calls.
+
+## Paper Object
+
+Location: `src/paper_object/`
+
+The Paper Object is the canonical per-paper knowledge asset. It combines:
+
+- Paper identity and source locations
+- Summary, Parameters, Performance, and Mechanism
+- A deduplicated Evidence index
+- Evidence coverage, warnings, and review status
+
+The builder reads existing artifacts and never fills missing knowledge. The
+validator rejects unresolved Evidence references. Export is atomic YAML.
+
+## Registry and Batch Lifecycle
+
+Locations: `src/registry/`, `src/batch/`
+
+`data/papers/registry.yaml` tracks papers and lifecycle stages, including
+metadata, knowledge, Paper Object, embedding, vector store, and RAG state. The
+batch layer discovers papers, consults Registry state, and reports completed,
+pending, and failed work.
+
+Batch execution defaults to dry-run. Knowledge generation requires an explicit
+executor; no LLM call occurs solely because a Registry stage is pending.
+
+## Embedding
+
+Location: `src/embedding/`
+
+`PaperObjectChunker` converts validated Paper Object knowledge into
+deterministic `EmbeddingChunk` records:
+
+```text
+chunk_id
+paper_id
+source_file
+evidence_ids
+text
+```
+
+Only evidence-linked knowledge is eligible. Unknown Evidence IDs fail fast.
+`EmbeddingAdapter` defines `embed(texts) -> vectors` but v0.1.0 does not select
+a production embedding model.
+
+## VectorStore
+
+Location: `src/vectorstore/`
+
+The backend-neutral VectorStore contract supports `add`, `search`, `save`, and
+`load`. The default local backend uses normalized FAISS `IndexFlatIP` vectors
+for cosine similarity. A persisted index is paired with JSON metadata containing
+the complete chunks and Evidence references.
+
+The checked-in P001 vector-store report is a dry-run using deterministic mock
+vectors. No production index is committed.
+
+## RAG Retrieval
+
+Location: `src/rag/`
+
+The current RAG layer is retrieval only. A natural-language question is encoded
+through an injected query encoder, searched against the VectorStore, and
+returned as structured results:
+
+```text
+paper_id
+chunk_id
+similarity
+evidence_ids
+source
+```
+
+There is no LLM answer-generation layer in v0.1.0. Mock-vector rankings validate
+interfaces and traceability only and must not be interpreted as semantic
+retrieval quality.
+
+## Trust and Dependency Boundaries
+
+1. Original PDFs and external parser outputs are user-controlled inputs.
+2. Unified Document + Evidence is the internal factual source layer.
+3. Knowledge and Paper Objects are validated derived assets.
+4. Embeddings and indexes are replaceable retrieval artifacts.
+5. Retrieval results expose Evidence; they are not scientific conclusions.
+6. Human review remains required for warnings and uncertain knowledge.

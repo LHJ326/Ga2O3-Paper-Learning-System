@@ -1,5 +1,22 @@
 # Project State
 
+## Phase 6.0 v0.1.0 Release Preparation Completed
+
+The repository now has public-facing v0.1.0 documentation covering project
+goals, architecture, features, installation, usage, data safety, and roadmap.
+`docs/ARCHITECTURE.md` records the complete Ingestion-to-RAG module boundaries
+and establishes Unified Document + Evidence as the authoritative fact layer.
+
+The release hygiene review confirms `.env`, PDFs, local FAISS/vector database
+files, Python caches, test caches, coverage output, and runtime crops are
+ignored. Previously tracked research PDFs were removed from the Git index while
+being preserved in the local workspace. Runtime imports are represented by
+`pyproject.toml`, its version remains `0.1.0`, and `pip check` reports no broken
+requirements.
+
+This preparation adds no LLM, changes no pipeline behavior, and does not add a
+RAG generation layer.
+
 ## Phase 5.5 Evidence-Aware RAG Query Layer Completed
 
 The first retrieval-only query layer is available under `src/rag/`. Natural
