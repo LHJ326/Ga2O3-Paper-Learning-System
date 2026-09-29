@@ -1,5 +1,28 @@
 # Project State
 
+## Release Resource Cleanup Completed — History Rewrite Pending
+
+The release cleanup removed the independent ordinary-OCR virtual environment
+at `F:\Learning\open-source-research\ocr-runtime\.venv-ocr`, releasing
+approximately 3.63 GiB. The reproducibility record was preserved as
+`ocr-runtime\requirements-lock.txt` together with its `docs/` directory. The
+main project also removed 21 Python/test/editable-build cache directories
+(approximately 1.65 MiB before the final validation run).
+
+The main project, its active `.venv`, RAG-Anything source, RAG-Anything's
+manually created minimal environment, OCR runtime documentation, MinerU's
+separate environment, architecture research code, and all documentation were
+preserved. `AI_learning\.venv`, unrelated application Temp directories, and the
+Keil installer were left untouched because they are outside the clearly
+authorized OCR/test cleanup scope. No model-weight files were found outside
+virtual environments and Git internals under `F:\Learning`.
+
+The Git audit confirms that the three removed paper PDFs still exist in prior
+commits, totalling 13,625,266 bytes. Large MinerU ZIP and derived parser fixtures
+also require redistribution review. No rewrite was performed; the required
+process and publication gate are documented in
+`docs/GIT_HISTORY_CLEANUP_PLAN.md`. Public release remains blocked.
+
 ## Phase 6.2 Release Preparation Completed — History Cleanup Required
 
 The project now carries the MIT License for original project software and
